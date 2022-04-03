@@ -1,0 +1,34 @@
+module.exports = {
+    // 站点配置
+    lang: 'zh-CN',
+    title: 'Eren的个人博客',
+    description: '这是我的第一个 VuePress 站点',
+    // 主题和它的配置
+    theme: '@vuepress/theme-default',
+    themeConfig: {
+        logo: 'https://vuejs.org/images/logo.png',
+        // 侧边栏对象
+        // 不同子路径下的页面会使用不同的侧边栏
+        sidebar: [
+            // SidebarItem
+            {
+                text: 'Vue系列',
+                collapsible: true,
+                sidebarDepth:2,
+                children: [
+                    {
+                        text: 'Vue和React对比',
+                        link: '/vue/character.md',
+                        children: [],
+                    },
+                    {
+                        text: 'Vue中的v-show和v-if的区别',
+                        link: '/vue/showIf.md',
+                        children: [],
+                    },
+
+                ],
+            },
+        ],
+    }
+}
