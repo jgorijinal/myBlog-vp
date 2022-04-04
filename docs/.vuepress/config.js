@@ -26,6 +26,16 @@ module.exports = {
                         link: '/vue/showIf.md',
                         children: [],
                     },
+                    {
+                        text: 'Vue中的computed和watch',
+                        link: '/vue/computedWatch.md',
+                        children: [],
+                    },
+                    {
+                        text: 'Vue组件之间的通信方式',
+                        link: '/vue/communication.md',
+                        children: [],
+                    },
 
                 ],
             },

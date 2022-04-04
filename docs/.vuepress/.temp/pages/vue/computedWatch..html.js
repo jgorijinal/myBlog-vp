@@ -1,22 +1,13 @@
 export const data = {
-  "key": "v-e34766f6",
-  "path": "/category_2/",
-  "title": "category_2",
+  "key": "v-008616ea",
+  "path": "/vue/computedWatch..html",
+  "title": "",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
   "headers": [],
-  "git": {
-    "updatedTime": 1648999095000,
-    "contributors": [
-      {
-        "name": "jgoriginal",
-        "email": "932274204@qq.com",
-        "commits": 1
-      }
-    ]
-  },
-  "filePathRelative": "category_2/README.md"
+  "git": {},
+  "filePathRelative": "vue/computedWatch..md"
 }
 
 if (import.meta.webpackHot) {

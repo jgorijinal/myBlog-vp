@@ -15,6 +15,16 @@ export const themeData = {
           "text": "Vue中的v-show和v-if的区别",
           "link": "/vue/showIf.md",
           "children": []
+        },
+        {
+          "text": "Vue中的computed和watch",
+          "link": "/vue/computedWatch.md",
+          "children": []
+        },
+        {
+          "text": "Vue组件之间的通信方式",
+          "link": "/vue/communication.md",
+          "children": []
         }
       ]
     }

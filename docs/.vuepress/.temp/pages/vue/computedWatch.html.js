@@ -1,35 +1,29 @@
 export const data = {
-  "key": "v-b1db4c9c",
-  "path": "/vue/character.html",
-  "title": "Vue和React对比",
+  "key": "v-5aef15b9",
+  "path": "/vue/computedWatch.html",
+  "title": "computed 和 watch",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
   "headers": [
     {
       "level": 2,
-      "title": "相同点",
-      "slug": "相同点",
+      "title": "1. computed 计算属性",
+      "slug": "_1-computed-计算属性",
       "children": []
     },
     {
       "level": 2,
-      "title": "区别",
-      "slug": "区别",
+      "title": "2. watch 侦听属性",
+      "slug": "_2-watch-侦听属性",
       "children": []
     }
   ],
   "git": {
-    "updatedTime": 1648999095000,
-    "contributors": [
-      {
-        "name": "jgoriginal",
-        "email": "932274204@qq.com",
-        "commits": 1
-      }
-    ]
+    "updatedTime": null,
+    "contributors": []
   },
-  "filePathRelative": "vue/character.md"
+  "filePathRelative": "vue/computedWatch.md"
 }
 
 if (import.meta.webpackHot) {
