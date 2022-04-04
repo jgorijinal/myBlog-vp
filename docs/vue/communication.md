@@ -29,7 +29,7 @@
 ```vue
 <script>
 export default {
-  props: {
+  props: {   //props的类型定义
     name: {
       type: String,    // 接收的类型为字符串  
       default: 'Eren'  // 默认值为 'Eren'
@@ -68,6 +68,8 @@ this.$emit('update:title', newTitle)
     v-bind:title="title"
     v-on:update:title="title = $event"
 ></Children>
+//上面代码用.sync修饰符 , 可缩写为
+<Children  :title.sync="title" ></Children>
 ```
 
 或者 使用回调函数

@@ -13,6 +13,8 @@ export const pagesData = {
   "v-4b0bafb6": () => import(/* webpackChunkName: "v-4b0bafb6" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue/communication.html.js").then(({ data }) => data),
   // path: /vue/computedWatch.html
   "v-5aef15b9": () => import(/* webpackChunkName: "v-5aef15b9" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue/computedWatch.html.js").then(({ data }) => data),
+  // path: /vue/plugin.html
+  "v-33c90264": () => import(/* webpackChunkName: "v-33c90264" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue/plugin.html.js").then(({ data }) => data),
   // path: /vue/showIf.html
   "v-7b5b5cfd": () => import(/* webpackChunkName: "v-7b5b5cfd" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue/showIf.html.js").then(({ data }) => data),
   // path: /404.html

@@ -25,6 +25,11 @@ export const themeData = {
           "text": "Vue组件之间的通信方式",
           "link": "/vue/communication.md",
           "children": []
+        },
+        {
+          "text": "使用Vue中的开发插件",
+          "link": "/vue/plugin.md",
+          "children": []
         }
       ]
     }

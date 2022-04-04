@@ -36,6 +36,11 @@ module.exports = {
                         link: '/vue/communication.md',
                         children: [],
                     },
+                    {
+                        text: '使用Vue中的开发插件',
+                        link: '/vue/plugin.md',
+                        children: [],
+                    },
 
                 ],
             },
