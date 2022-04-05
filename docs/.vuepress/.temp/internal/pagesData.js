@@ -13,10 +13,18 @@ export const pagesData = {
   "v-4b0bafb6": () => import(/* webpackChunkName: "v-4b0bafb6" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue/communication.html.js").then(({ data }) => data),
   // path: /vue/computedWatch.html
   "v-5aef15b9": () => import(/* webpackChunkName: "v-5aef15b9" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue/computedWatch.html.js").then(({ data }) => data),
+  // path: /vue/directives.html
+  "v-d3b8299a": () => import(/* webpackChunkName: "v-d3b8299a" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue/directives.html.js").then(({ data }) => data),
+  // path: /vue/form.html
+  "v-6c4c521a": () => import(/* webpackChunkName: "v-6c4c521a" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue/form.html.js").then(({ data }) => data),
+  // path: /vue/modifier.html
+  "v-5cf855c0": () => import(/* webpackChunkName: "v-5cf855c0" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue/modifier.html.js").then(({ data }) => data),
   // path: /vue/plugin.html
   "v-33c90264": () => import(/* webpackChunkName: "v-33c90264" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue/plugin.html.js").then(({ data }) => data),
   // path: /vue/showIf.html
   "v-7b5b5cfd": () => import(/* webpackChunkName: "v-7b5b5cfd" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue/showIf.html.js").then(({ data }) => data),
+  // path: /vue/slot.html
+  "v-f221a40e": () => import(/* webpackChunkName: "v-f221a40e" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue/slot.html.js").then(({ data }) => data),
   // path: /404.html
   "v-3706649a": () => import(/* webpackChunkName: "v-3706649a" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/404.html.js").then(({ data }) => data),
 }

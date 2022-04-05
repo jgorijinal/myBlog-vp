@@ -8,14 +8,20 @@ export const data = {
   "headers": [
     {
       "level": 2,
-      "title": "v-show与v-if的共同点",
-      "slug": "v-show与v-if的共同点",
+      "title": "1. v-show与v-if的共同点",
+      "slug": "_1-v-show与v-if的共同点",
       "children": []
     },
     {
       "level": 2,
-      "title": "v-show与v-if的区别",
-      "slug": "v-show与v-if的区别",
+      "title": "2. v-show与v-if的区别",
+      "slug": "_2-v-show与v-if的区别",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "3. v-show与v-if的使用场景",
+      "slug": "_3-v-show与v-if的使用场景",
       "children": []
     }
   ],

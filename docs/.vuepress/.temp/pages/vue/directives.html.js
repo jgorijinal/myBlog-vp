@@ -1,22 +1,16 @@
 export const data = {
-  "key": "v-8daa1a0e",
-  "path": "/",
-  "title": "记录开始",
+  "key": "v-d3b8299a",
+  "path": "/vue/directives.html",
+  "title": "",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
   "headers": [],
   "git": {
-    "updatedTime": 1648999095000,
-    "contributors": [
-      {
-        "name": "jgoriginal",
-        "email": "932274204@qq.com",
-        "commits": 1
-      }
-    ]
+    "updatedTime": null,
+    "contributors": []
   },
-  "filePathRelative": "README.md"
+  "filePathRelative": "vue/directives.md"
 }
 
 if (import.meta.webpackHot) {

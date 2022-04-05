@@ -1,7 +1,7 @@
 module.exports = {
     // 站点配置
     lang: 'zh-CN',
-    title: 'Eren的个人博客',
+    title: 'Eren的博客 - 记录优于记忆',
     description: '这是我的第一个 VuePress 站点',
     // 主题和它的配置
     theme: '@vuepress/theme-default',
@@ -37,8 +37,28 @@ module.exports = {
                         children: [],
                     },
                     {
+                        text: 'Vue中常用的修饰符',
+                        link: '/vue/modifier.md',
+                        children: [],
+                    },
+                    {
+                        text: 'Vue中常用的指令',
+                        link: '/vue/directives.md',
+                        children: [],
+                    },
+                    {
                         text: '使用Vue中的开发插件',
                         link: '/vue/plugin.md',
+                        children: [],
+                    },
+                    {
+                        text: 'Vue中的slot插槽',
+                        link: '/vue/slot.md',
+                        children: [],
+                    },
+                    {
+                        text: 'Vue中的表单的基本使用',
+                        link: '/vue/form.md',
                         children: [],
                     },
 

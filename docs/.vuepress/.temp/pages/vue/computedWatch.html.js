@@ -10,7 +10,14 @@ export const data = {
       "level": 2,
       "title": "1. computed 计算属性",
       "slug": "_1-computed-计算属性",
-      "children": []
+      "children": [
+        {
+          "level": 3,
+          "title": "可写的计算属性 getter setter",
+          "slug": "可写的计算属性-getter-setter",
+          "children": []
+        }
+      ]
     },
     {
       "level": 2,

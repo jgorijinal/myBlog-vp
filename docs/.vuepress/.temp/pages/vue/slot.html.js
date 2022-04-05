@@ -1,29 +1,23 @@
 export const data = {
-  "key": "v-33c90264",
-  "path": "/vue/plugin.html",
-  "title": "开发插件",
+  "key": "v-f221a40e",
+  "path": "/vue/slot.html",
+  "title": "Vue中的插槽 - slot",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
   "headers": [
     {
       "level": 2,
-      "title": "Vue 动态创建组件实例",
-      "slug": "vue-动态创建组件实例",
+      "title": "具名插槽",
+      "slug": "具名插槽",
       "children": []
     }
   ],
   "git": {
-    "updatedTime": 1649056921000,
-    "contributors": [
-      {
-        "name": "jgoriginal",
-        "email": "932274204@qq.com",
-        "commits": 1
-      }
-    ]
+    "updatedTime": null,
+    "contributors": []
   },
-  "filePathRelative": "vue/plugin.md"
+  "filePathRelative": "vue/slot.md"
 }
 
 if (import.meta.webpackHot) {

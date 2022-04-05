@@ -27,6 +27,7 @@
 `Children.vue`
 
 ```vue
+
 <script>
 export default {
   props: {   //props的类型定义
@@ -46,6 +47,7 @@ export default {
 `Father.vue`组件
 
 ```vue
+
 <Children name="jack" age="18"></Children>
 ```
 
@@ -64,69 +66,96 @@ this.$emit('update:title', newTitle)
 `Father.vue`组件
 
 ```vue
+
 <Children
     v-bind:title="title"
     v-on:update:title="title = $event"
 ></Children>
 //上面代码用.sync修饰符 , 可缩写为
-<Children  :title.sync="title" ></Children>
+<Children :title.sync="title"></Children>
 ```
 
 或者 使用回调函数
 
 ```vue
+
 <Children
     v-bind:title="title"
     v-on:update:title="changeTitle"
 ></Children>
 ```
+
 ```js
 methods:{
-    changeTitle(title){
-      this.title = title
-   } 
+    changeTitle(title)
+    {
+        this.title = title
+    }
 }
 ```
 
 ## EventBus
+
 * 使用场景：兄弟组件传值
 * 创建一个中央事件总线EventBus
 * 兄弟组件通过$emit触发自定义事件，$emit第二个参数为传递的数值
 * 另一个兄弟组件通过$on监听自定义事件
 
 eventBus.js
+
 ```js
 import Vue from 'vue'
+
 export default new Vue()
 ```
+
 `Children1.vue`
+
 ```js
 import eventBus from 'eventBus.js'
-eventBus.$emit('event',newValue)
+
+eventBus.$emit('event', newValue)
 ```
+
 `Children2.vue`
+
 ```js
 import eventBus from 'eventBus.js'
-eventBus.$on('event',newValue)
+
+eventBus.$on('event', newValue)
 ```
+
 ## provide 与 inject
+
 * 在祖先组件定义provide属性，返回传递的值
 * 在后代组件通过inject接收组件传递过来的值
 
 祖先组件
-```js
-provide(){  
-    return {  
-        foo:'foo'  
-    }  
-}  
+```vue
+<script>
+import Vue from 'vue'
+export default {
+  data() {
+    return {
+      eventBus: new Vue()
+    }
+  },
+  provide(){  //provide选项应该是一个对象或返回一个对象的函数
+    return {
+      eventBus: this.eventBus
+    }
+  }  
+}
+</script>
 ```
+
 后代组件
 ```js
-inject:['foo'] // 获取到祖先组件传递过来的值
+inject:['eventBus'] // 获取到祖先组件传递过来的值
 ```
 
 ### Vuex
+
 适用场景: 复杂关系的组件数据传递
 
 Vuex作用相当于一个用来存储共享变量的容器
@@ -138,6 +167,6 @@ Vuex作用相当于一个用来存储共享变量的容器
 * `Mutation`用于同步提交状态变更 , 是唯一更改 `store` 中状态的方法.
 * `Action`用于异步变更状态 , 用于提交 `mutation` , 而不是直接变更状态.
 * 小插曲: `mutations` 和 `actions`的区别:
-  1. `Action` 提交的是 `mutation`,而不是直接变更状态。
-  2. `Action` 可以包含任意异步操作。`mutation`只支持同步
+    1. `Action` 提交的是 `mutation`,而不是直接变更状态。
+    2. `Action` 可以包含任意异步操作。`mutation`只支持同步
 * `Module`用来给`store`划分模块 , 方便维护代码

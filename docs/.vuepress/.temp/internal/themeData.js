@@ -27,8 +27,28 @@ export const themeData = {
           "children": []
         },
         {
+          "text": "Vue中常用的修饰符",
+          "link": "/vue/modifier.md",
+          "children": []
+        },
+        {
+          "text": "Vue中常用的指令",
+          "link": "/vue/directives.md",
+          "children": []
+        },
+        {
           "text": "使用Vue中的开发插件",
           "link": "/vue/plugin.md",
+          "children": []
+        },
+        {
+          "text": "Vue中的slot插槽",
+          "link": "/vue/slot.md",
+          "children": []
+        },
+        {
+          "text": "Vue中的表单的基本使用",
+          "link": "/vue/form.md",
           "children": []
         }
       ]
