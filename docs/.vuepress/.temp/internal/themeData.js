@@ -42,7 +42,7 @@ export const themeData = {
           "children": []
         },
         {
-          "text": "Vue中的slot插槽",
+          "text": "Vue中的slot插槽的使用",
           "link": "/vue/slot.md",
           "children": []
         },

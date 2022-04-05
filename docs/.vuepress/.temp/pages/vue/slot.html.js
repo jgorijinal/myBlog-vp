@@ -8,14 +8,32 @@ export const data = {
   "headers": [
     {
       "level": 2,
-      "title": "具名插槽",
-      "slug": "具名插槽",
+      "title": "1. 后备内容",
+      "slug": "_1-后备内容",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "2. 具名插槽",
+      "slug": "_2-具名插槽",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "3. 解构插槽 Prop",
+      "slug": "_3-解构插槽-prop",
       "children": []
     }
   ],
   "git": {
-    "updatedTime": null,
-    "contributors": []
+    "updatedTime": 1649168247000,
+    "contributors": [
+      {
+        "name": "jgoriginal",
+        "email": "932274204@qq.com",
+        "commits": 1
+      }
+    ]
   },
   "filePathRelative": "vue/slot.md"
 }
