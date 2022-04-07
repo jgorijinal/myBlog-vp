@@ -1,7 +1,7 @@
 export const data = {
   "key": "v-3f43a2dc",
   "path": "/vue/dynamic.html",
-  "title": "",
+  "title": "动态组件",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
@@ -10,7 +10,7 @@ export const data = {
     "updatedTime": null,
     "contributors": []
   },
-  "filePathRelative": "vue/plugin.md"
+  "filePathRelative": "vue/dynamic.md"
 }
 
 if (import.meta.webpackHot) {

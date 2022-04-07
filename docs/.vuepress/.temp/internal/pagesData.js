@@ -15,6 +15,8 @@ export const pagesData = {
   "v-5aef15b9": () => import(/* webpackChunkName: "v-5aef15b9" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue/computedWatch.html.js").then(({ data }) => data),
   // path: /vue/directives.html
   "v-d3b8299a": () => import(/* webpackChunkName: "v-d3b8299a" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue/directives.html.js").then(({ data }) => data),
+  // path: /vue/dynamic.html
+  "v-3f43a2dc": () => import(/* webpackChunkName: "v-3f43a2dc" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue/dynamic.html.js").then(({ data }) => data),
   // path: /vue/form.html
   "v-6c4c521a": () => import(/* webpackChunkName: "v-6c4c521a" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue/form.html.js").then(({ data }) => data),
   // path: /vue/modifier.html

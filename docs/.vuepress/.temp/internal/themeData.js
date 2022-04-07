@@ -50,6 +50,11 @@ export const themeData = {
           "text": "Vue中的表单的基本使用",
           "link": "/vue/form.md",
           "children": []
+        },
+        {
+          "text": "Vue中的动态组件",
+          "link": "/vue/dynamic.md",
+          "children": []
         }
       ]
     }

@@ -152,7 +152,19 @@ div {
 }
 </style>
 ```
-* 现在用解构插槽 - `Prop` ,  重新实现一下相同的功能
+* 现在用解构插槽 , 重新实现一下相同的功能
+* 但先了解一下基本用法!!:
+```html
+<template v-slot:default="slotProps">
+    {{slotProps.xxx}}
+</template>
+<!--或者 直接使用解析解构!-->
+<template v-slot:default="{ xxx }">
+    {{xxx}}
+</template>
+```
+好 , 现在重新写一下小案例 ! 
+
 父组件:
 ```vue {3-4}
 <template>
@@ -214,4 +226,40 @@ div {
   justify-content: space-between;
 }
 </style>
+```
+## 4. 默认插槽
+父组件
+```vue{2}
+<template>
+  <lesson v-for="lesson of lessons" :key="lesson.id" :lesson="lesson" v-slot="{ id }"> <!-- 使用默认插槽改写-->
+    <!-- <template v-slot:default="{ id }">   --> 
+      <button @click="del( id )">删除</button>
+    <!-- </template> -->
+  </lesson>
+</template>
+
+<script>
+import lesson from "./components/lesson2.vue";
+export default {
+  name: "App",
+  components: {
+    lesson,
+  },
+  data() {
+    return {
+      lessons: [
+        { id: 1, title: "这里是原生js的课程" },
+        { id: 2, title: "这里是Vue的课程" },
+        { id: 3, title: "这里是React的课程" },
+      ],
+    };
+  },
+  methods: {
+    del(id) {
+      const index = this.lessons.findIndex((l) => l.id === id);
+      this.lessons.splice(index, 1);
+    },
+  },
+};
+</script>
 ```

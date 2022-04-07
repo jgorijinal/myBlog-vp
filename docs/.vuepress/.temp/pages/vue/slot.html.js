@@ -23,15 +23,21 @@ export const data = {
       "title": "3. 解构插槽 Prop",
       "slug": "_3-解构插槽-prop",
       "children": []
+    },
+    {
+      "level": 2,
+      "title": "4. 默认插槽",
+      "slug": "_4-默认插槽",
+      "children": []
     }
   ],
   "git": {
-    "updatedTime": 1649168247000,
+    "updatedTime": 1649177580000,
     "contributors": [
       {
         "name": "jgoriginal",
         "email": "932274204@qq.com",
-        "commits": 1
+        "commits": 2
       }
     ]
   },

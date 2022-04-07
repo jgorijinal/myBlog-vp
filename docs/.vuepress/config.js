@@ -62,6 +62,11 @@ module.exports = {
                         link: '/vue/form.md',
                         children: [],
                     },
+                    {
+                        text: 'Vue中的动态组件',
+                        link: '/vue/dynamic.md',
+                        children: [],
+                    },
 
                 ],
             },
