@@ -1,22 +1,16 @@
 export const data = {
-  "key": "v-3f43a2dc",
-  "path": "/vue/dynamic.html",
-  "title": "动态组件",
+  "key": "v-4f57be90",
+  "path": "/vue3/v-model.html",
+  "title": "v-model的使用",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
   "headers": [],
   "git": {
-    "updatedTime": 1649347960000,
-    "contributors": [
-      {
-        "name": "jgoriginal",
-        "email": "932274204@qq.com",
-        "commits": 1
-      }
-    ]
+    "updatedTime": null,
+    "contributors": []
   },
-  "filePathRelative": "vue/dynamic.md"
+  "filePathRelative": "vue3/v-model.md"
 }
 
 if (import.meta.webpackHot) {

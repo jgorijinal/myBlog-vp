@@ -57,6 +57,18 @@ export const themeData = {
           "children": []
         }
       ]
+    },
+    {
+      "text": "Vue3系列",
+      "collapsible": true,
+      "sidebarDepth": 2,
+      "children": [
+        {
+          "text": "Vue3中的v-model的使用",
+          "link": "/vue3/v-model.md",
+          "children": []
+        }
+      ]
     }
   ],
   "locales": {
