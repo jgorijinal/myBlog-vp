@@ -1,29 +1,29 @@
 export const data = {
-  "key": "v-3f43a2dc",
-  "path": "/vue/dynamic.html",
-  "title": "动态组件",
+  "key": "v-9ea8eb9e",
+  "path": "/vue/lifeCycle.html",
+  "title": "Vue中的生命周期",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
   "headers": [
     {
       "level": 2,
-      "title": "keep-alive 缓存组件",
-      "slug": "keep-alive-缓存组件",
+      "title": "一 . 生命周期有哪些",
+      "slug": "一-生命周期有哪些",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "二 . 生命周期具体分析",
+      "slug": "二-生命周期具体分析",
       "children": []
     }
   ],
   "git": {
-    "updatedTime": 1649435921000,
-    "contributors": [
-      {
-        "name": "jgoriginal",
-        "email": "932274204@qq.com",
-        "commits": 2
-      }
-    ]
+    "updatedTime": null,
+    "contributors": []
   },
-  "filePathRelative": "vue/dynamic.md"
+  "filePathRelative": "vue/lifeCycle.md"
 }
 
 if (import.meta.webpackHot) {

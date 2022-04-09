@@ -1,6 +1,6 @@
 # 动态组件
 通过`component`标签 的`is`属性来进行组件的切换
-`is`的属性值决定要显示的组件，所以将`is`的属性值设置为`data`中的值，以便于动态变化
+`is`的属性值决定要显示的组件，所以将`is`的属性值设置为字符串 **被注册的组件名** , 可以为`data`中的值，以便于动态变化
 * 基本用法
 ```html
 <component v-bind:is="currentTabComponent"></component>
@@ -84,4 +84,14 @@ export default {
 </script>
 <style  lang="scss" scoped>
 </style>
+```
+
+## keep-alive 缓存组件
+可以用一个 `<keep-alive>` 元素将其动态组件包裹起来。
+
+```vue
+<!-- 失活的组件将会被缓存！-->
+<keep-alive>
+  <component v-bind:is="currentTabComponent"></component>
+</keep-alive>
 ```

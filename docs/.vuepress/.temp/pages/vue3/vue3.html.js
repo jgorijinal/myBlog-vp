@@ -1,22 +1,16 @@
 export const data = {
-  "key": "v-4f57be90",
-  "path": "/vue3/v-model.html",
-  "title": "v-model 的使用",
+  "key": "v-26626eba",
+  "path": "/vue3/vue3.html",
+  "title": "Vue2到Vue3的变化",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
   "headers": [],
   "git": {
-    "updatedTime": 1649435921000,
-    "contributors": [
-      {
-        "name": "jgoriginal",
-        "email": "932274204@qq.com",
-        "commits": 1
-      }
-    ]
+    "updatedTime": null,
+    "contributors": []
   },
-  "filePathRelative": "vue3/v-model.md"
+  "filePathRelative": "vue3/vue3.md"
 }
 
 if (import.meta.webpackHot) {

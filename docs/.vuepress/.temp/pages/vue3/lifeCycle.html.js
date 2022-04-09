@@ -1,22 +1,23 @@
 export const data = {
-  "key": "v-4f57be90",
-  "path": "/vue3/v-model.html",
-  "title": "v-model 的使用",
+  "key": "v-1d614b18",
+  "path": "/vue3/lifeCycle.html",
+  "title": "Vue3中的生命周期",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
-  "headers": [],
+  "headers": [
+    {
+      "level": 2,
+      "title": "1. beforeCreate 与 created",
+      "slug": "_1-beforecreate-与-created",
+      "children": []
+    }
+  ],
   "git": {
-    "updatedTime": 1649435921000,
-    "contributors": [
-      {
-        "name": "jgoriginal",
-        "email": "932274204@qq.com",
-        "commits": 1
-      }
-    ]
+    "updatedTime": null,
+    "contributors": []
   },
-  "filePathRelative": "vue3/v-model.md"
+  "filePathRelative": "vue3/lifeCycle.md"
 }
 
 if (import.meta.webpackHot) {

@@ -7,8 +7,12 @@ export const pagesData = {
   "v-53d95e5e": () => import(/* webpackChunkName: "v-53d95e5e" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/category_2/child2.html.js").then(({ data }) => data),
   // path: /category_2/
   "v-e34766f6": () => import(/* webpackChunkName: "v-e34766f6" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/category_2/index.html.js").then(({ data }) => data),
+  // path: /vue3/composition.html
+  "v-29530678": () => import(/* webpackChunkName: "v-29530678" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue3/composition.html.js").then(({ data }) => data),
   // path: /vue3/v-model.html
   "v-4f57be90": () => import(/* webpackChunkName: "v-4f57be90" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue3/v-model.html.js").then(({ data }) => data),
+  // path: /vue3/vue3.html
+  "v-26626eba": () => import(/* webpackChunkName: "v-26626eba" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue3/vue3.html.js").then(({ data }) => data),
   // path: /vue/character.html
   "v-b1db4c9c": () => import(/* webpackChunkName: "v-b1db4c9c" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue/character.html.js").then(({ data }) => data),
   // path: /vue/communication.html
@@ -21,6 +25,8 @@ export const pagesData = {
   "v-3f43a2dc": () => import(/* webpackChunkName: "v-3f43a2dc" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue/dynamic.html.js").then(({ data }) => data),
   // path: /vue/form.html
   "v-6c4c521a": () => import(/* webpackChunkName: "v-6c4c521a" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue/form.html.js").then(({ data }) => data),
+  // path: /vue/lifeCycle.html
+  "v-9ea8eb9e": () => import(/* webpackChunkName: "v-9ea8eb9e" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue/lifeCycle.html.js").then(({ data }) => data),
   // path: /vue/modifier.html
   "v-5cf855c0": () => import(/* webpackChunkName: "v-5cf855c0" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue/modifier.html.js").then(({ data }) => data),
   // path: /vue/plugin.html

@@ -27,7 +27,6 @@
 `Children.vue`
 
 ```vue
-
 <script>
 export default {
   props: {   //props的类型定义
@@ -47,7 +46,6 @@ export default {
 `Father.vue`组件
 
 ```vue
-
 <Children name="jack" age="18"></Children>
 ```
 
@@ -66,32 +64,30 @@ this.$emit('update:title', newTitle)
 `Father.vue`组件
 
 ```vue
-
 <Children
     v-bind:title="title"
     v-on:update:title="title = $event"
 ></Children>
-//上面代码用.sync修饰符 , 可缩写为
+<!--上面代码用.sync修饰符 , 可缩写为-->
 <Children :title.sync="title"></Children>
 ```
 
 或者 使用回调函数
 
 ```vue
+<template>  
+  <Children  v-bind:title="title"  v-on:update:title="changeTitle"></Children>
+</template>  
 
-<Children
-    v-bind:title="title"
-    v-on:update:title="changeTitle"
-></Children>
-```
-
-```js
-methods:{
-    changeTitle(title)
-    {
+<script>
+export default{
+  methods:{
+    changeTitle(title){
         this.title = title
     }
+  }
 }
+</script>  
 ```
 
 ## EventBus
@@ -140,7 +136,7 @@ export default {
       eventBus: new Vue()
     }
   },
-  provide(){  //provide选项应该是一个对象或返回一个对象的函数
+  provide(){  //provide选项应该是一个对象或返回一个对象的函数 , 如果是data上的属性, 要用函数的形式return
     return {
       eventBus: this.eventBus
     }

@@ -1,14 +1,21 @@
 export const themeData = {
   "logo": "https://vuejs.org/images/logo.png",
+  "displayAllHeaders": false,
+  "collapsable": true,
   "sidebar": [
     {
       "text": "Vue系列",
-      "collapsible": true,
+      "collapsable": true,
       "sidebarDepth": 2,
       "children": [
         {
           "text": "Vue和React对比",
           "link": "/vue/character.md",
+          "children": []
+        },
+        {
+          "text": "Vue中的生命周期",
+          "link": "/vue/lifeCycle.md",
           "children": []
         },
         {
@@ -60,12 +67,22 @@ export const themeData = {
     },
     {
       "text": "Vue3系列",
-      "collapsible": true,
+      "collapsable": true,
       "sidebarDepth": 2,
       "children": [
         {
+          "text": "Vue2到vue3的变化",
+          "link": "/vue3/vue3.md",
+          "children": []
+        },
+        {
           "text": "Vue3中的v-model的使用",
           "link": "/vue3/v-model.md",
+          "children": []
+        },
+        {
+          "text": "Vue3中的Composition API",
+          "link": "/vue3/composition.md",
           "children": []
         }
       ]
