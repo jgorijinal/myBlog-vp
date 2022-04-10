@@ -1,6 +1,6 @@
 # Composition API
 
-## 一. 为什么⽤ Composition API
+## 1. 为什么⽤ Composition API
 
 1. 问题：业务逻辑关注点过于分散
 2. 期望：同⼀业务逻辑的代码放在⼀起
@@ -11,7 +11,7 @@
 - `watch`、`computed`是个函数
 - ⽣命周期钩⼦写法微调,xyz 变成 OnXyz,如 `mounted` 变成 `onMounted`。`created`和 `beforeCreate`不再需要
 
-## 二.  用ref处理响应式数据
+## 2.  用ref()处理响应式数据
 接受一个值，将其用作内部值来返回一个响应式的、可更改的 `ref` 对象。只有一个属性 `.value` 用来指向内部的值。
 
 ```vue
@@ -34,15 +34,28 @@ export default {
   },
 };
 </script>
-
-- **注意** : 从 `setup` 返回的 `ref` 在模板上访问时无须再在模板中为它写 `.value`。当通过 `this` 访问时也不需要写 `.value`
 ```
-## 三 . 模板ref
+- **注意** : 从 `setup` 返回的 `ref` 在模板上访问时无须再在模板中为它写 `.value`。当通过 `this` 访问时也不需要写 `.value`
+
+## 3. 用reactive()处理响应式数据
+reactive : 处理**对象**，变成响应式数据。
+```js
+const state = reactive({
+  foo: 1,
+  bar: 2
+})
+const fooRef = toRef(state, 'foo')    
+fooRef.value++
+console.log(state.foo) // 2
+state.foo++
+console.log(fooRef.value) // 3
+```
+## 4. 模板ref
 允许我们在一个特定的 `DOM` 元素或子组件实例被挂载后 ，获得对它的直接引用。
 ```html
 <input ref="input">
 ```
-### 访问模板 ref
+### (1) 访问模板 ref
 ```vue {2,8}
 <template>
   <input ref="input" />
@@ -72,7 +85,7 @@ watchEffect(() => {
   }
 })
 ```
-### v-for 和 ref 配合使用
+### (2)v-for 和 ref 配合使用
 当 `ref` 在 `v-for` 中使用时，相应的 `ref` 中包含的值是一个数组，它将在元素被挂载后填充：
 除了使用字符串值作名字,`ref` attribute 还可以绑定为一个函数，会在每次组件更新时都被调用。函数接受**该元素引用**作为第一个参数：
 ```vue{3,13}
@@ -96,7 +109,52 @@ export default  {
 <style lang="scss" scoped>
 </style>
 ```
-## 三. watch() 
+## 5. computed()
+接受一个计算函数，返回一个只读的响应式 `ref` 对象，即计算函数的返回值。它也可以接受一个带有`get`和 `set` 函数的对象来创建一个可写的 `ref` 对象。
+
+创建一个**只读**的计算属性 `ref`：
+```js
+<script>
+import {computed, ref} from "vue";
+
+export default {
+  setup() {
+    const count = ref(1)
+    const plusOne = computed(() => {
+      return count.value + 1
+    })
+    console.log(plusOne.value)  // 2
+    console.log(count.value)    // 1
+  }
+};
+</script>
+```
+创建一个**可写**的计算属性 `ref`：
+```js
+<script>
+import {computed, ref} from "vue";
+
+export default {
+  setup(){
+    const count = ref(1)
+   const plusOne = computed({
+     get(){
+       return count.value + 1
+     },
+     set(value){
+        count.value  = value - 1
+     }
+   })
+    console.log(plusOne.value)  //2
+    plusOne.value = 10
+    console.log(count.value);   //1
+    console.log(plusOne.value);   //10
+  }
+};
+</script>
+```
+
+## 6 . watch() 
 监视一个或多个数据源，并在数据源更改时调用回调函数 , `Watch ()`在默认情况下是**惰性**的——也就是说，只有在监视数据更改时才调用回调。
 
 1. **第一个参数**可以是
@@ -140,7 +198,7 @@ export default  {
 </script>
 ```
 
-## 四 . watchEffect()
+## 7. watchEffect()
 立即运行函数 ，并在依赖项发生更改时重新运行该函数。 
 
 1. 第一个参数是要运行的函数。函数接收一个可用于注册清理回调的函数。清理回调将在下次重新运行效果之前调用，并且可以用于清除无效的副作用，例如挂起的异步请求(参见下面的例子)。
@@ -187,8 +245,8 @@ onMounted( ()=>{
 })
 ```
 
-## setup()
-### 访问 Props
+## 8. setup()
+### (1)访问 Props
 setup 函数的第一个参数是组件的 props, 是响应式的，并且会在传入新的 props 时同步更新。
 ```js
 export default {
@@ -200,6 +258,8 @@ export default {
   }
 }
 ```
+### (2)toRef() , toRefs
+
 **注意** , 如果从 `props` 对象上`解构`，被解构的变量**将会丢失响应性**,因此推荐通过 `props.xxx` 的形式来使用其中的属性。
 
 如果你确实需要从 `props` 上解构，或者想要将某个 `prop` 传入到一个外部函数中但想保持响应性，那么你可以使用 `toRefs()` `toRef()` 这两个工具 API：
@@ -212,13 +272,15 @@ export default {
     const { title } = toRefs(props)
     // `title` 是一个追踪着 `props.title` 的 ref
     console.log(title.value)
-
     // 或者，将 `props` 的单个属性转为一个 ref
     const title = toRef(props, 'title')
+
+    const obj = reactive({name:'Eren'})
+    return {...toRefs(obj)}   //善用 ... 把obj的属性都变成响应式
   }
 }
 ```
-### context 上下文
+### (3)context 上下文
 传入 `setup` 函数的第二个参数是一个 `Setup` 上下文 对象。上下文对象上暴露了其他一些在 `setup` 之中很有用的值：
 ```js
 export default {
@@ -248,14 +310,14 @@ export default {
 }
 ```
 ####  attrs属性绑定和 slots
-1. context.attrs
+1. **context.attrs**
 * 默认外面传的所有属性都绑定到**根元素**  (Vue2 也一样)
 * 使用 `inheritAttrs: false` 可以取消默认绑定 
 * 使用 `this.$attrs` 或者 `context.attrs` 获取所有属性
 * 在模板里使用 `v-bind="$attrs"` 批量绑定属性
 * 使用 `const {size, level, ...xxx} = context.attrs` 将属性解构分开 , 在一个个绑定到模板中
 
-2. context.slots
+2. **context.slots**
 * `const defaults = context.slots.default()`可得到默认的插槽 , defaults是包含**对象**的**数组**
 ```html
 <component :is="defaults[0]"></component> 
@@ -266,7 +328,7 @@ export default {
 * 被注册的组件名
 * setup里return出的组件对象
 
-##  依赖注入 provide / inject 
+##  9 . 依赖注入 provide / inject 
 要为组件后代供给数据，需要使用到 `provide(/* 注入名 */ , /* 值 */ )` 函数
 
 在爷组件中 :

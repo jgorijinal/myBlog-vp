@@ -3,11 +3,11 @@
 <p>Vue3 为什么使用 Proxy?</p>
 </blockquote>
 <ul>
-<li>(1)弥补<code>Onject.defineProperty</code>的两个不足
+<li>(1)弥补<code>Object.defineProperty</code>的两个不足
 <strong>动态</strong>创建的<code>data</code>属性需要用<code>Vue.set</code>来赋值 , <code>Vue3</code>用了<code>Proxy</code>就不需要了
 如果一开始属性不在<code>data</code>里面 , 突然我对<code>data</code>突然增加了一个属性 , 那么<code>vue</code>是不知道的
 基于性能考虑 , <code>Vue2</code> 篡改了数组的7个API , <code>Vue</code>用了<code>proxy</code>就不需要了</li>
-<li>(2) <code>defineProperty</code>需要提前递归遍历<code>data</code>做到响应式 ,
+<li>(2) <code>Object.defineProperty</code>需要提前递归遍历<code>data</code>做到响应式 ,
 而<code>proxy</code>可以在真正需要深层数据的时候在做响应式(<strong>惰性</strong>)</li>
 </ul>
 <blockquote>

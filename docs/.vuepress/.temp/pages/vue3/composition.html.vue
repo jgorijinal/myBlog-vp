@@ -1,5 +1,5 @@
 <template><h1 id="composition-api" tabindex="-1"><a class="header-anchor" href="#composition-api" aria-hidden="true">#</a> Composition API</h1>
-<h2 id="一-为什么用-composition-api" tabindex="-1"><a class="header-anchor" href="#一-为什么用-composition-api" aria-hidden="true">#</a> 一. 为什么⽤ Composition API</h2>
+<h2 id="_1-为什么用-composition-api" tabindex="-1"><a class="header-anchor" href="#_1-为什么用-composition-api" aria-hidden="true">#</a> 1. 为什么⽤ Composition API</h2>
 <ol>
 <li>问题：业务逻辑关注点过于分散</li>
 <li>期望：同⼀业务逻辑的代码放在⼀起</li>
@@ -11,7 +11,7 @@
 <li><code>watch</code>、<code>computed</code>是个函数</li>
 <li>⽣命周期钩⼦写法微调,xyz 变成 OnXyz,如 <code>mounted</code> 变成 <code>onMounted</code>。<code>created</code>和 <code>beforeCreate</code>不再需要</li>
 </ul>
-<h2 id="二-用ref处理响应式数据" tabindex="-1"><a class="header-anchor" href="#二-用ref处理响应式数据" aria-hidden="true">#</a> 二.  用ref处理响应式数据</h2>
+<h2 id="_2-用ref-处理响应式数据" tabindex="-1"><a class="header-anchor" href="#_2-用ref-处理响应式数据" aria-hidden="true">#</a> 2.  用ref()处理响应式数据</h2>
 <p>接受一个值，将其用作内部值来返回一个响应式的、可更改的 <code>ref</code> 对象。只有一个属性 <code>.value</code> 用来指向内部的值。</p>
 <div class="language-vue ext-vue line-numbers-mode"><pre v-pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">@click</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>count++<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>{{ count }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
@@ -32,12 +32,24 @@
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
-
-- **注意** : 从 `setup` 返回的 `ref` 在模板上访问时无须再在模板中为它写 `.value`。当通过 `this` 访问时也不需要写 `.value`
-</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br></div></div><h2 id="三-模板ref" tabindex="-1"><a class="header-anchor" href="#三-模板ref" aria-hidden="true">#</a> 三 . 模板ref</h2>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br></div></div><ul>
+<li><strong>注意</strong> : 从 <code>setup</code> 返回的 <code>ref</code> 在模板上访问时无须再在模板中为它写 <code>.value</code>。当通过 <code>this</code> 访问时也不需要写 <code>.value</code></li>
+</ul>
+<h2 id="_3-用reactive-处理响应式数据" tabindex="-1"><a class="header-anchor" href="#_3-用reactive-处理响应式数据" aria-hidden="true">#</a> 3. 用reactive()处理响应式数据</h2>
+<p>reactive : 处理<strong>对象</strong>，变成响应式数据。</p>
+<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token keyword">const</span> state <span class="token operator">=</span> <span class="token function">reactive</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token literal-property property">foo</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">bar</span><span class="token operator">:</span> <span class="token number">2</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> fooRef <span class="token operator">=</span> <span class="token function">toRef</span><span class="token punctuation">(</span>state<span class="token punctuation">,</span> <span class="token string">'foo'</span><span class="token punctuation">)</span>    
+fooRef<span class="token punctuation">.</span>value<span class="token operator">++</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>state<span class="token punctuation">.</span>foo<span class="token punctuation">)</span> <span class="token comment">// 2</span>
+state<span class="token punctuation">.</span>foo<span class="token operator">++</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>fooRef<span class="token punctuation">.</span>value<span class="token punctuation">)</span> <span class="token comment">// 3</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><h2 id="_4-模板ref" tabindex="-1"><a class="header-anchor" href="#_4-模板ref" aria-hidden="true">#</a> 4. 模板ref</h2>
 <p>允许我们在一个特定的 <code>DOM</code> 元素或子组件实例被挂载后 ，获得对它的直接引用。</p>
 <div class="language-html ext-html line-numbers-mode"><pre v-pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>input<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br></div></div><h3 id="访问模板-ref" tabindex="-1"><a class="header-anchor" href="#访问模板-ref" aria-hidden="true">#</a> 访问模板 ref</h3>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br></div></div><h3 id="_1-访问模板-ref" tabindex="-1"><a class="header-anchor" href="#_1-访问模板-ref" aria-hidden="true">#</a> (1) 访问模板 ref</h3>
 <div class="language-vue ext-vue line-numbers-mode"><pre v-pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>input<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
@@ -62,7 +74,7 @@
     <span class="token comment">// 此时还未挂载，或此元素已经被卸载（例如通过 v-if 控制）</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span>
-</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><h3 id="v-for-和-ref-配合使用" tabindex="-1"><a class="header-anchor" href="#v-for-和-ref-配合使用" aria-hidden="true">#</a> v-for 和 ref 配合使用</h3>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><h3 id="_2-v-for-和-ref-配合使用" tabindex="-1"><a class="header-anchor" href="#_2-v-for-和-ref-配合使用" aria-hidden="true">#</a> (2)v-for 和 ref 配合使用</h3>
 <p>当 <code>ref</code> 在 <code>v-for</code> 中使用时，相应的 <code>ref</code> 中包含的值是一个数组，它将在元素被挂载后填充：
 除了使用字符串值作名字,<code>ref</code> attribute 还可以绑定为一个函数，会在每次组件更新时都被调用。函数接受<strong>该元素引用</strong>作为第一个参数：</p>
 <div class="language-vue ext-vue line-numbers-mode"><pre v-pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
@@ -84,7 +96,46 @@
 </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>scss<span class="token punctuation">"</span></span> <span class="token attr-name">scoped</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
 </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span>
-</code></pre><div class="highlight-lines"><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br></div><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br></div></div><h2 id="三-watch" tabindex="-1"><a class="header-anchor" href="#三-watch" aria-hidden="true">#</a> 三. watch()</h2>
+</code></pre><div class="highlight-lines"><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br></div><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br></div></div><h2 id="_5-computed" tabindex="-1"><a class="header-anchor" href="#_5-computed" aria-hidden="true">#</a> 5. computed()</h2>
+<p>接受一个计算函数，返回一个只读的响应式 <code>ref</code> 对象，即计算函数的返回值。它也可以接受一个带有<code>get</code>和 <code>set</code> 函数的对象来创建一个可写的 <code>ref</code> 对象。</p>
+<p>创建一个<strong>只读</strong>的计算属性 <code>ref</code>：</p>
+<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token operator">&lt;</span>script<span class="token operator">></span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>computed<span class="token punctuation">,</span> ref<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"vue"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  <span class="token function">setup</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> count <span class="token operator">=</span> <span class="token function">ref</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token keyword">const</span> plusOne <span class="token operator">=</span> <span class="token function">computed</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> count<span class="token punctuation">.</span>value <span class="token operator">+</span> <span class="token number">1</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>plusOne<span class="token punctuation">.</span>value<span class="token punctuation">)</span>  <span class="token comment">// 2</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>count<span class="token punctuation">.</span>value<span class="token punctuation">)</span>    <span class="token comment">// 1</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br></div></div><p>创建一个<strong>可写</strong>的计算属性 <code>ref</code>：</p>
+<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token operator">&lt;</span>script<span class="token operator">></span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>computed<span class="token punctuation">,</span> ref<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"vue"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  <span class="token function">setup</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">const</span> count <span class="token operator">=</span> <span class="token function">ref</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+   <span class="token keyword">const</span> plusOne <span class="token operator">=</span> <span class="token function">computed</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+     <span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+       <span class="token keyword">return</span> count<span class="token punctuation">.</span>value <span class="token operator">+</span> <span class="token number">1</span>
+     <span class="token punctuation">}</span><span class="token punctuation">,</span>
+     <span class="token function">set</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        count<span class="token punctuation">.</span>value  <span class="token operator">=</span> value <span class="token operator">-</span> <span class="token number">1</span>
+     <span class="token punctuation">}</span>
+   <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>plusOne<span class="token punctuation">.</span>value<span class="token punctuation">)</span>  <span class="token comment">//2</span>
+    plusOne<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token number">10</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>count<span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">//1</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>plusOne<span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">//10</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br></div></div><h2 id="_6-watch" tabindex="-1"><a class="header-anchor" href="#_6-watch" aria-hidden="true">#</a> 6 . watch()</h2>
 <p>监视一个或多个数据源，并在数据源更改时调用回调函数 , <code>Watch ()</code>在默认情况下是<strong>惰性</strong>的——也就是说，只有在监视数据更改时才调用回调。</p>
 <ol>
 <li><strong>第一个参数</strong>可以是</li>
@@ -133,7 +184,7 @@
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
-</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br></div></div><h2 id="四-watcheffect" tabindex="-1"><a class="header-anchor" href="#四-watcheffect" aria-hidden="true">#</a> 四 . watchEffect()</h2>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br></div></div><h2 id="_7-watcheffect" tabindex="-1"><a class="header-anchor" href="#_7-watcheffect" aria-hidden="true">#</a> 7. watchEffect()</h2>
 <p>立即运行函数 ，并在依赖项发生更改时重新运行该函数。</p>
 <ol>
 <li>
@@ -175,8 +226,8 @@ count<span class="token punctuation">.</span>value<span class="token operator">+
     <span class="token operator">...</span><span class="token punctuation">.</span><span class="token keyword">do</span> something<span class="token operator">...</span>
   <span class="token punctuation">}</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span>
-</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><h2 id="setup" tabindex="-1"><a class="header-anchor" href="#setup" aria-hidden="true">#</a> setup()</h2>
-<h3 id="访问-props" tabindex="-1"><a class="header-anchor" href="#访问-props" aria-hidden="true">#</a> 访问 Props</h3>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><h2 id="_8-setup" tabindex="-1"><a class="header-anchor" href="#_8-setup" aria-hidden="true">#</a> 8. setup()</h2>
+<h3 id="_1-访问-props" tabindex="-1"><a class="header-anchor" href="#_1-访问-props" aria-hidden="true">#</a> (1)访问 Props</h3>
 <p>setup 函数的第一个参数是组件的 props, 是响应式的，并且会在传入新的 props 时同步更新。</p>
 <div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token literal-property property">props</span><span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -186,7 +237,8 @@ count<span class="token punctuation">.</span>value<span class="token operator">+
     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>props<span class="token punctuation">.</span>title<span class="token punctuation">)</span>  <span class="token comment">//props.xxx获取</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><p><strong>注意</strong> , 如果从 <code>props</code> 对象上<code>解构</code>，被解构的变量<strong>将会丢失响应性</strong>,因此推荐通过 <code>props.xxx</code> 的形式来使用其中的属性。</p>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><h3 id="_2-toref-torefs" tabindex="-1"><a class="header-anchor" href="#_2-toref-torefs" aria-hidden="true">#</a> (2)toRef() , toRefs</h3>
+<p><strong>注意</strong> , 如果从 <code>props</code> 对象上<code>解构</code>，被解构的变量<strong>将会丢失响应性</strong>,因此推荐通过 <code>props.xxx</code> 的形式来使用其中的属性。</p>
 <p>如果你确实需要从 <code>props</code> 上解构，或者想要将某个 <code>prop</code> 传入到一个外部函数中但想保持响应性，那么你可以使用 <code>toRefs()</code> <code>toRef()</code> 这两个工具 API：</p>
 <div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> toRefs <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue'</span>
 
@@ -196,12 +248,14 @@ count<span class="token punctuation">.</span>value<span class="token operator">+
     <span class="token keyword">const</span> <span class="token punctuation">{</span> title <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">toRefs</span><span class="token punctuation">(</span>props<span class="token punctuation">)</span>
     <span class="token comment">// `title` 是一个追踪着 `props.title` 的 ref</span>
     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>title<span class="token punctuation">.</span>value<span class="token punctuation">)</span>
-
     <span class="token comment">// 或者，将 `props` 的单个属性转为一个 ref</span>
     <span class="token keyword">const</span> title <span class="token operator">=</span> <span class="token function">toRef</span><span class="token punctuation">(</span>props<span class="token punctuation">,</span> <span class="token string">'title'</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token function">reactive</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token literal-property property">name</span><span class="token operator">:</span><span class="token string">'Eren'</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span><span class="token operator">...</span><span class="token function">toRefs</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">}</span>   <span class="token comment">//善用 ... 把obj的属性都变成响应式</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><h3 id="context-上下文" tabindex="-1"><a class="header-anchor" href="#context-上下文" aria-hidden="true">#</a> context 上下文</h3>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><h3 id="_3-context-上下文" tabindex="-1"><a class="header-anchor" href="#_3-context-上下文" aria-hidden="true">#</a> (3)context 上下文</h3>
 <p>传入 <code>setup</code> 函数的第二个参数是一个 <code>Setup</code> 上下文 对象。上下文对象上暴露了其他一些在 <code>setup</code> 之中很有用的值：</p>
 <div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token function">setup</span><span class="token punctuation">(</span><span class="token parameter">props<span class="token punctuation">,</span> context</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -228,7 +282,7 @@ count<span class="token punctuation">.</span>value<span class="token operator">+
 <span class="token punctuation">}</span>
 </code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><h4 id="attrs属性绑定和-slots" tabindex="-1"><a class="header-anchor" href="#attrs属性绑定和-slots" aria-hidden="true">#</a> attrs属性绑定和 slots</h4>
 <ol>
-<li>context.attrs</li>
+<li><strong>context.attrs</strong></li>
 </ol>
 <ul>
 <li>默认外面传的所有属性都绑定到<strong>根元素</strong>  (Vue2 也一样)</li>
@@ -238,7 +292,7 @@ count<span class="token punctuation">.</span>value<span class="token operator">+
 <li>使用 <code>const {size, level, ...xxx} = context.attrs</code> 将属性解构分开 , 在一个个绑定到模板中</li>
 </ul>
 <ol start="2">
-<li>context.slots</li>
+<li><strong>context.slots</strong></li>
 </ol>
 <ul>
 <li><code>const defaults = context.slots.default()</code>可得到默认的插槽 , defaults是包含<strong>对象</strong>的<strong>数组</strong></li>
@@ -250,7 +304,7 @@ count<span class="token punctuation">.</span>value<span class="token operator">+
 <li>被注册的组件名</li>
 <li>setup里return出的组件对象</li>
 </ul>
-<h2 id="依赖注入-provide-inject" tabindex="-1"><a class="header-anchor" href="#依赖注入-provide-inject" aria-hidden="true">#</a> 依赖注入 provide / inject</h2>
+<h2 id="_9-依赖注入-provide-inject" tabindex="-1"><a class="header-anchor" href="#_9-依赖注入-provide-inject" aria-hidden="true">#</a> 9 . 依赖注入 provide / inject</h2>
 <p>要为组件后代供给数据，需要使用到 <code>provide(/* 注入名 */ , /* 值 */ )</code> 函数</p>
 <p>在爷组件中 :</p>
 <div class="language-vue ext-vue line-numbers-mode"><pre v-pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
