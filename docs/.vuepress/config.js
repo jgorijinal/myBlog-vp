@@ -16,8 +16,7 @@ module.exports = {
             // SidebarItem
             {
                 text: 'Vue系列',
-                collapsable: true,
-                sidebarDepth:2,
+                collapsible: true,
                 children: [
                     {
                         text: 'Vue和React对比',
@@ -79,8 +78,7 @@ module.exports = {
             },
             {
                 text: 'Vue3系列',
-                collapsable: true,
-                sidebarDepth: 2,
+                collapsible: true,
                 children: [
                     {
                         text: 'Vue2到vue3的变化',
@@ -98,6 +96,12 @@ module.exports = {
                         children: [],
                     },
                 ]
+            },
+            {
+                text: 'json-server与mock',
+                sidebarDepth: 2,
+                link:'/json-server与mock/README.md',
+                children: []
             }
         ],
     }

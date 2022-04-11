@@ -5,8 +5,7 @@ export const themeData = {
   "sidebar": [
     {
       "text": "Vue系列",
-      "collapsable": true,
-      "sidebarDepth": 2,
+      "collapsible": true,
       "children": [
         {
           "text": "Vue和React对比",
@@ -67,8 +66,7 @@ export const themeData = {
     },
     {
       "text": "Vue3系列",
-      "collapsable": true,
-      "sidebarDepth": 2,
+      "collapsible": true,
       "children": [
         {
           "text": "Vue2到vue3的变化",
@@ -86,6 +84,12 @@ export const themeData = {
           "children": []
         }
       ]
+    },
+    {
+      "text": "json-server与mock",
+      "sidebarDepth": 2,
+      "link": "/json-server与mock/README.md",
+      "children": []
     }
   ],
   "locales": {

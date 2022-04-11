@@ -11,7 +11,7 @@
 而<code>proxy</code>可以在真正需要深层数据的时候在做响应式(<strong>惰性</strong>)</li>
 </ul>
 <blockquote>
-<p>为什么使用  composition API ?</p>
+<p>为什么使用  Composition API ?</p>
 </blockquote>
 <ul>
 <li>(1)解决了数据来源不清晰</li>

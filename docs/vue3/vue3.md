@@ -9,7 +9,7 @@
 而`proxy`可以在真正需要深层数据的时候在做响应式(**惰性**)
 
 
-> 为什么使用  composition API ?
+> 为什么使用  Composition API ?
 * (1)解决了数据来源不清晰
 * (2)更适合`typescript`
 

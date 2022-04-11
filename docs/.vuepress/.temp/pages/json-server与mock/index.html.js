@@ -1,35 +1,29 @@
 export const data = {
-  "key": "v-9ea8eb9e",
-  "path": "/vue/lifeCycle.html",
-  "title": "Vue中的生命周期",
+  "key": "v-5b635b6e",
+  "path": "/json-server%E4%B8%8Emock/",
+  "title": "",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
   "headers": [
     {
       "level": 2,
-      "title": "一 . 生命周期有哪些",
-      "slug": "一-生命周期有哪些",
+      "title": "安装配置json-server",
+      "slug": "安装配置json-server",
       "children": []
     },
     {
       "level": 2,
-      "title": "二 . 生命周期具体分析",
-      "slug": "二-生命周期具体分析",
+      "title": "使用mockjs批量生成中文数据",
+      "slug": "使用mockjs批量生成中文数据",
       "children": []
     }
   ],
   "git": {
-    "updatedTime": 1649520897000,
-    "contributors": [
-      {
-        "name": "jgoriginal",
-        "email": "932274204@qq.com",
-        "commits": 1
-      }
-    ]
+    "updatedTime": null,
+    "contributors": []
   },
-  "filePathRelative": "vue/lifeCycle.md"
+  "filePathRelative": "json-server与mock/README.md"
 }
 
 if (import.meta.webpackHot) {
