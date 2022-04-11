@@ -82,6 +82,22 @@ export const themeData = {
           "text": "Vue3中的Composition API",
           "link": "/vue3/composition.md",
           "children": []
+        },
+        {
+          "text": "Vue3中的Composition之script-setup",
+          "link": "/vue3/script-setup.md",
+          "children": []
+        }
+      ]
+    },
+    {
+      "text": "Vue Router系列",
+      "collapsible": true,
+      "children": [
+        {
+          "text": "",
+          "link": "/vue-router/.md",
+          "children": []
         }
       ]
     },

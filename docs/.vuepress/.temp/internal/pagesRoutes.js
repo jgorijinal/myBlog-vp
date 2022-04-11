@@ -18,6 +18,7 @@ const routeItems = [
   ["v-7b5b5cfd","/vue/showIf.html",{"title":"v-show和v-if有什么区别？"},["/vue/showIf","/vue/showIf.md"]],
   ["v-f221a40e","/vue/slot.html",{"title":"Vue中的插槽 - slot"},["/vue/slot","/vue/slot.md"]],
   ["v-29530678","/vue3/composition.html",{"title":"Composition API"},["/vue3/composition","/vue3/composition.md"]],
+  ["v-812fd256","/vue3/script-setup.html",{"title":""},["/vue3/script-setup","/vue3/script-setup.md"]],
   ["v-4f57be90","/vue3/v-model.html",{"title":"v-model 的使用"},["/vue3/v-model","/vue3/v-model.md"]],
   ["v-26626eba","/vue3/vue3.html",{"title":"Vue2到Vue3的变化"},["/vue3/vue3","/vue3/vue3.md"]],
   ["v-3706649a","/404.html",{"title":""},["/404"]],

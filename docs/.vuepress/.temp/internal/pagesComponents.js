@@ -35,6 +35,8 @@ export const pagesComponents = {
   "v-f221a40e": defineAsyncComponent(() => import(/* webpackChunkName: "v-f221a40e" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue/slot.html.vue")),
   // path: /vue3/composition.html
   "v-29530678": defineAsyncComponent(() => import(/* webpackChunkName: "v-29530678" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue3/composition.html.vue")),
+  // path: /vue3/script-setup.html
+  "v-812fd256": defineAsyncComponent(() => import(/* webpackChunkName: "v-812fd256" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue3/script-setup.html.vue")),
   // path: /vue3/v-model.html
   "v-4f57be90": defineAsyncComponent(() => import(/* webpackChunkName: "v-4f57be90" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue3/v-model.html.vue")),
   // path: /vue3/vue3.html

@@ -22,6 +22,7 @@ module.exports = ()=>{
     for(let i =0;i<20;i++){
         data.news.push({
             id:i,
+            title:Random.cword(10,20),
             content:Random.cparagraph(10)
         })
     }
