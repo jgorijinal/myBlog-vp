@@ -1,4 +1,5 @@
 ## `<script setup>`
+[官网](https://staging-cn.vuejs.org/api/sfc-script-setup.html)
 
 `<script setup>` 是在单文件组件 (SFC) 中使用`Composition API` 的编译时语法糖。相比于普通的 `<script>` 语法，它具有更多优势：
 
@@ -72,6 +73,7 @@ import Todo from './Todo.vue'  //组件可直接在模板里使用
   </suspense>
 </template>
 ```
+**注意**: `<Suspense>`的**插槽**要求**只能有一个根元素**
 ## 2. defineProps() 和 defineEmits()
 介绍 : 在 `<script setup>` 中**必须**使用 `defineProps` 和 `defineEmits API` 来声明 `props` 和 `emits` ，它们具备完整的类型推断并且在 `<script setup>` 中是**直接可用**的：
 
@@ -105,7 +107,8 @@ const get = async ()=>{  //get函数 , 能获取最新的数据
 </script>
 
 <template>
-  <Item v-for="todo of todos" :key="todo.id"  @get ="get"   :todo="todo"/>//用props传入todo
+  <Item v-for="todo of todos" :key="todo.id"  @get ="get"   :todo="todo"/>
+  <!--import进的组件可直接使用-->
 </template>
 ```
 子组件Item.vue :

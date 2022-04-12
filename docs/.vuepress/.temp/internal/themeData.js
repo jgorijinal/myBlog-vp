@@ -95,8 +95,22 @@ export const themeData = {
       "collapsible": true,
       "children": [
         {
-          "text": "",
-          "link": "/vue-router/.md",
+          "text": "初始配置",
+          "link": "/vue-router/start.md"
+        },
+        {
+          "text": "HTML",
+          "link": "/vue-router/routerHTML.md",
+          "children": []
+        },
+        {
+          "text": "命名路由",
+          "link": "/vue-router/name.md",
+          "children": []
+        },
+        {
+          "text": "动态路由匹配",
+          "link": "/vue-router/params.md",
           "children": []
         }
       ]

@@ -1,4 +1,5 @@
 <template><h1 id="v-model-的使用" tabindex="-1"><a class="header-anchor" href="#v-model-的使用" aria-hidden="true">#</a> v-model 的使用</h1>
+<p><a href="https://staging-cn.vuejs.org/guide/components/events.html#usage-with-v-model" target="_blank" rel="noopener noreferrer">官网<ExternalLinkIcon/></a></p>
 <p>Vue3 用 <code>v-model</code>代替了Vue2里的 <code>v-model</code> 和 <code>.sync</code></p>
 <ul>
 <li>

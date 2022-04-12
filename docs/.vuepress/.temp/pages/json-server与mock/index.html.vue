@@ -1,12 +1,12 @@
 <template><h2 id="安装配置json-server" tabindex="-1"><a class="header-anchor" href="#安装配置json-server" aria-hidden="true">#</a> 安装配置json-server</h2>
 <p><a href="https://github.com/typicode/json-server" target="_blank" rel="noopener noreferrer">json-server官网<ExternalLinkIcon/></a></p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code># 命令行
-yarn add --dev json-server
-json-server --watch --post 3003 --host 127.0.0.1 db.json
+<div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token comment"># 命令行</span>
+<span class="token function">yarn</span> <span class="token function">add</span> --dev json-server
+json-server --watch --post <span class="token number">3003</span> --host <span class="token number">127.0</span>.0.1 db.json
 </code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h2 id="使用mockjs批量生成中文数据" tabindex="-1"><a class="header-anchor" href="#使用mockjs批量生成中文数据" aria-hidden="true">#</a> 使用mockjs批量生成中文数据</h2>
 <p><a href="http://mockjs.com/" target="_blank" rel="noopener noreferrer">mockjs官网<ExternalLinkIcon/></a></p>
-<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code># 命令行
-yarn add mockjs
+<div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token comment"># 命令行</span>
+<span class="token function">yarn</span> <span class="token function">add</span> mockjs
 </code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>db.js:</p>
 <div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token keyword">const</span> Mock <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'mockjs'</span><span class="token punctuation">)</span>
 

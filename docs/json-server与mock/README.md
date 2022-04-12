@@ -1,13 +1,13 @@
 ## 安装配置json-server
 [json-server官网](https://github.com/typicode/json-server) 
-```
+```sh
 # 命令行
 yarn add --dev json-server
 json-server --watch --post 3003 --host 127.0.0.1 db.json
 ```
 ## 使用mockjs批量生成中文数据
 [mockjs官网](http://mockjs.com/) 
-```
+```sh
 # 命令行
 yarn add mockjs
 ```

@@ -1,4 +1,6 @@
 # v-model 的使用
+[官网](https://staging-cn.vuejs.org/guide/components/events.html#usage-with-v-model)
+
 Vue3 用 `v-model`代替了Vue2里的 `v-model` 和 `.sync`
 - 1. 在`<input>`里面的使用
 
