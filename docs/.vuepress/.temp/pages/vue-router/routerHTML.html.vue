@@ -40,10 +40,17 @@
 <span class="token punctuation">}</span><span class="token punctuation">)</span>
 </code></pre><div class="highlight-lines"><br><br><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br></div><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><h2 id="router-view-的-v-slot" tabindex="-1"><a class="header-anchor" href="#router-view-的-v-slot" aria-hidden="true">#</a> <code>&lt;router-view&gt;</code> 的 <code>v-slot</code></h2>
 <p><code>&lt;router-view&gt;</code> 暴露了一个 <code>v-slot</code> API</p>
-<p>基本用法 : <code>&lt;router-view v-slot=&quot;{ Component, route }&quot;&gt;</code></p>
-<ul>
-<li>Component: 要传递给 <code>&lt;component&gt;</code> 的 <code>VNodes</code> 是 <code>prop</code>。</li>
-<li>route: 解析出的<a href="https://router.vuejs.org/zh/api/#routelocationnormalized" target="_blank" rel="noopener noreferrer">标准化路由地址<ExternalLinkIcon/></a>。</li>
+<p>基本用法 :</p>
+<div class="language-html ext-html line-numbers-mode"><pre v-pre class="language-html"><code>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>router-view</span> <span class="token attr-name">v-slot</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>{Component , route}<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>component</span> <span class="token attr-name">:is</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Component<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>router-view</span><span class="token punctuation">></span></span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><ul>
+<li>
+<p>Component: 要传递给 <code>&lt;component&gt;</code>的组件对象(初始配置里面的<code>component:xxx</code>) 。</p>
+</li>
+<li>
+<p>route: 解析出的<a href="https://router.vuejs.org/zh/api/#routelocationnormalized" target="_blank" rel="noopener noreferrer">标准化路由地址<ExternalLinkIcon/></a>。</p>
+</li>
 </ul>
 <h3 id="应用-1-根据meta动态设置样式" tabindex="-1"><a class="header-anchor" href="#应用-1-根据meta动态设置样式" aria-hidden="true">#</a> 应用: (1)根据meta动态设置样式</h3>
 <div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token keyword">const</span> router <span class="token operator">=</span> <span class="token function">createRouter</span><span class="token punctuation">(</span><span class="token punctuation">{</span>

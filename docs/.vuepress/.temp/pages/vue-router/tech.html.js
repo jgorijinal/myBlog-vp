@@ -1,22 +1,16 @@
 export const data = {
-  "key": "v-4f57be90",
-  "path": "/vue3/v-model.html",
-  "title": "v-model 的使用",
+  "key": "v-1337369d",
+  "path": "/vue-router/tech.html",
+  "title": "",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
   "headers": [],
   "git": {
-    "updatedTime": 1649781039000,
-    "contributors": [
-      {
-        "name": "jgoriginal",
-        "email": "932274204@qq.com",
-        "commits": 3
-      }
-    ]
+    "updatedTime": null,
+    "contributors": []
   },
-  "filePathRelative": "vue3/v-model.md"
+  "filePathRelative": "vue-router/tech.md"
 }
 
 if (import.meta.webpackHot) {

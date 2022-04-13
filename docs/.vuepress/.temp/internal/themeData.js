@@ -112,6 +112,26 @@ export const themeData = {
           "text": "动态路由匹配",
           "link": "/vue-router/params.md",
           "children": []
+        },
+        {
+          "text": "嵌套路由",
+          "link": "/vue-router/nest.md",
+          "children": []
+        },
+        {
+          "text": "命名视图",
+          "link": "/vue-router/router-view-name.md",
+          "children": []
+        },
+        {
+          "text": "重定向和别名",
+          "link": "/vue-router/redirect-alias.md",
+          "children": []
+        },
+        {
+          "text": "编程式导航",
+          "link": "/vue-router/function.md",
+          "children": []
         }
       ]
     },

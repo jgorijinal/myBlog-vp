@@ -48,8 +48,15 @@ const router = createRouter({
 ## `<router-view>` 的 `v-slot`
 `<router-view>` 暴露了一个 `v-slot` API
 
-基本用法 : `<router-view v-slot="{ Component, route }">`
-* Component: 要传递给 `<component>` 的 `VNodes` 是 `prop`。
+基本用法 :
+```html
+  <router-view v-slot="{Component , route}">
+    <component :is="Component" />
+  </router-view>
+```
+
+* Component: 要传递给 `<component>`的组件对象(初始配置里面的`component:xxx`) 。
+
 * route: 解析出的[标准化路由地址](https://router.vuejs.org/zh/api/#routelocationnormalized)。
 
 ### 应用: (1)根据meta动态设置样式

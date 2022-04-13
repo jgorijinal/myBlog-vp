@@ -1,22 +1,23 @@
 export const data = {
-  "key": "v-4f57be90",
-  "path": "/vue3/v-model.html",
-  "title": "v-model 的使用",
+  "key": "v-070b0fca",
+  "path": "/vue-router/nest.html",
+  "title": "",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
-  "headers": [],
+  "headers": [
+    {
+      "level": 2,
+      "title": "嵌套路由",
+      "slug": "嵌套路由",
+      "children": []
+    }
+  ],
   "git": {
-    "updatedTime": 1649781039000,
-    "contributors": [
-      {
-        "name": "jgoriginal",
-        "email": "932274204@qq.com",
-        "commits": 3
-      }
-    ]
+    "updatedTime": null,
+    "contributors": []
   },
-  "filePathRelative": "vue3/v-model.md"
+  "filePathRelative": "vue-router/nest.md"
 }
 
 if (import.meta.webpackHot) {

@@ -2,8 +2,10 @@
 Vue Router 是 Vue.js官方的路由管理器 , 适用于构建单页面应用  (单页应用路由管理器)
 [官网](https://router.vuejs.org/zh/introduction.html)
 ## 安装
-```sh
+```sh{2}
+yarn create vite vue --template vue
 yarn add vue-router@4
+yarn add -D sass@1.26.10  #安装sass 
 ```
 ## 初始配置
 src/router/index.js
