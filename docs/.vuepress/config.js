@@ -137,7 +137,7 @@ module.exports = {
                     },
                     {
                         text: '重定向和别名',
-                        link: '/vue-router/redirect-alias.md',
+                        link: '/vue-router/redirectAlias.md',
                         children: [],
                     },
                     {
@@ -145,6 +145,22 @@ module.exports = {
                         link: '/vue-router/function.md',
                         children: [],
                     },
+                    {
+                        text: '路由守卫',
+                        link: '/vue-router/guard.md',
+                        children: [],
+                    },
+                ]
+            },
+            {
+                text: 'JS系列',
+                collapsible: true,
+                children: [
+                    {
+                        text: `Promise`,
+                        link: '/JS/promise.md',
+                        children: [],
+                    }
                 ]
             },
             {
