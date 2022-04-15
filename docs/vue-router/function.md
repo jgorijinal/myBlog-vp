@@ -1,6 +1,6 @@
-## 编程式的导航
+# 编程式的导航
 不借助 `router-link` 标签 , 用函数让路由跳转更加灵活
-### router.push()
+## router.push()
 会追加历史记录 
 **注意：在 `Vue`实例内部，你可以通过 `$router` 访问路由实例。因此你可以调用 `this.$router.push`。**
 
@@ -46,20 +46,20 @@ router.push({ path: `/user/${userId}` })    // /user/123
 // 这里的 params 不生效
 router.push({ path: '/user', params: { userId }}) // -> /user  
 ```
-### router.replace()
+## router.replace()
 跟 `router.push` 很像，唯一的不同就是，它**不会向 history 添加新记录**，而是跟它的方法名一样 —— 替换掉当前的 `history` 记录。
-### router.forward()
+## router.forward()
 前进
-### router.back()
+## router.back()
 后退
-### router.go()
+## router.go()
 参数为数字 ,  正数 或者 负数
 
 * 比如
 `this.$router.go(3)`   前进3 page
 `this.$router.go(-4)`  后退 4 page 
 
-###  $route 和 $router 
+##  $route 和 $router 
 $route 每个组件都有  , 都不同 
 $router 只有一个 
 

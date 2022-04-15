@@ -150,6 +150,16 @@ module.exports = {
                         link: '/vue-router/guard.md',
                         children: [],
                     },
+                    {
+                        text: '过度动画',
+                        link: '/vue-router/animation.md',
+                        children: [],
+                    },
+                    {
+                        text: '滚动行为',
+                        link: '/vue-router/scroll.md',
+                        children: [],
+                    },
                 ]
             },
             {

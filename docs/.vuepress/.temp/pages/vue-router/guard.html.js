@@ -74,11 +74,42 @@ export const data = {
       "title": "路由解析流程",
       "slug": "路由解析流程",
       "children": []
+    },
+    {
+      "level": 2,
+      "title": "例子: 使用路由守卫获取数据",
+      "slug": "例子-使用路由守卫获取数据",
+      "children": [
+        {
+          "level": 3,
+          "title": "在setup里改写",
+          "slug": "在setup里改写",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "或者 使用watch监听路由",
+          "slug": "或者-使用watch监听路由",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "用watch监听页码获取数据",
+          "slug": "用watch监听页码获取数据",
+          "children": []
+        }
+      ]
     }
   ],
   "git": {
-    "updatedTime": null,
-    "contributors": []
+    "updatedTime": 1649953842000,
+    "contributors": [
+      {
+        "name": "jgoriginal",
+        "email": "932274204@qq.com",
+        "commits": 1
+      }
+    ]
   },
   "filePathRelative": "vue-router/guard.md"
 }

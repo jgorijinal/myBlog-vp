@@ -70,7 +70,7 @@ const route = useRoute()
 watch(route , async ()=>{    //使用watch监听route的变化
   console.log(route.params.id)
   // obj.value  = await api.find(route.params.id)  // 对路由变化作出响应
-})
+} , {immediate:true})
 </script>
 ```
 这种方式也可以解决上述问题，但代价是组件内多了一个`watch`，这会带来依赖追踪的内存开销。
@@ -78,10 +78,12 @@ watch(route , async ()=>{    //使用watch监听route的变化
 ```js
 watch(route.params.id,()=>{
    // 对路由变化作出响应
-})
+} , {immediate:true})
 ```
 ### (2)使用`beforeRouteUpdate` [导航守卫](https://router.vuejs.org/zh/guide/advanced/navigation-guards.html)：
-
+**`watch` 和 `beforeRouteUpdate`的区别: 
+* `beforeRouteUpdate`**不能**监听**初始化的值，`watch` **可以** 通过`immediate`属性监听到初始化的值!!!!!!!!
+* `beforeRouteUpdate`可以拦截`next()`，`watch`不行
 ## 3. 404 路由
 ```js{14}
 const router = createRouter({

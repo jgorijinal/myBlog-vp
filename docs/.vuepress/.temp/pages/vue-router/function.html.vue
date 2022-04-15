@@ -1,6 +1,6 @@
-<template><h2 id="编程式的导航" tabindex="-1"><a class="header-anchor" href="#编程式的导航" aria-hidden="true">#</a> 编程式的导航</h2>
+<template><h1 id="编程式的导航" tabindex="-1"><a class="header-anchor" href="#编程式的导航" aria-hidden="true">#</a> 编程式的导航</h1>
 <p>不借助 <code>router-link</code> 标签 , 用函数让路由跳转更加灵活</p>
-<h3 id="router-push" tabindex="-1"><a class="header-anchor" href="#router-push" aria-hidden="true">#</a> router.push()</h3>
+<h2 id="router-push" tabindex="-1"><a class="header-anchor" href="#router-push" aria-hidden="true">#</a> router.push()</h2>
 <p>会追加历史记录
 <strong>注意：在 <code>Vue</code>实例内部，你可以通过 <code>$router</code> 访问路由实例。因此你可以调用 <code>this.$router.push</code>。</strong></p>
 <p>例子:</p>
@@ -39,20 +39,20 @@ router<span class="token punctuation">.</span><span class="token function">push<
 router<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">/user/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>userId<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span> <span class="token punctuation">}</span><span class="token punctuation">)</span>    <span class="token comment">// /user/123</span>
 <span class="token comment">// 这里的 params 不生效</span>
 router<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'/user'</span><span class="token punctuation">,</span> <span class="token literal-property property">params</span><span class="token operator">:</span> <span class="token punctuation">{</span> userId <span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token comment">// -> /user  </span>
-</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><h3 id="router-replace" tabindex="-1"><a class="header-anchor" href="#router-replace" aria-hidden="true">#</a> router.replace()</h3>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><h2 id="router-replace" tabindex="-1"><a class="header-anchor" href="#router-replace" aria-hidden="true">#</a> router.replace()</h2>
 <p>跟 <code>router.push</code> 很像，唯一的不同就是，它<strong>不会向 history 添加新记录</strong>，而是跟它的方法名一样 —— 替换掉当前的 <code>history</code> 记录。</p>
-<h3 id="router-forward" tabindex="-1"><a class="header-anchor" href="#router-forward" aria-hidden="true">#</a> router.forward()</h3>
+<h2 id="router-forward" tabindex="-1"><a class="header-anchor" href="#router-forward" aria-hidden="true">#</a> router.forward()</h2>
 <p>前进</p>
-<h3 id="router-back" tabindex="-1"><a class="header-anchor" href="#router-back" aria-hidden="true">#</a> router.back()</h3>
+<h2 id="router-back" tabindex="-1"><a class="header-anchor" href="#router-back" aria-hidden="true">#</a> router.back()</h2>
 <p>后退</p>
-<h3 id="router-go" tabindex="-1"><a class="header-anchor" href="#router-go" aria-hidden="true">#</a> router.go()</h3>
+<h2 id="router-go" tabindex="-1"><a class="header-anchor" href="#router-go" aria-hidden="true">#</a> router.go()</h2>
 <p>参数为数字 ,  正数 或者 负数</p>
 <ul>
 <li>比如
 <code>this.$router.go(3)</code>   前进3 page
 <code>this.$router.go(-4)</code>  后退 4 page</li>
 </ul>
-<h3 id="route-和-router" tabindex="-1"><a class="header-anchor" href="#route-和-router" aria-hidden="true">#</a> $route 和 $router</h3>
+<h2 id="route-和-router" tabindex="-1"><a class="header-anchor" href="#route-和-router" aria-hidden="true">#</a> $route 和 $router</h2>
 <p>$route 每个组件都有  , 都不同
 $router 只有一个</p>
 </template>

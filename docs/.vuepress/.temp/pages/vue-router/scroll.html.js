@@ -1,35 +1,29 @@
 export const data = {
-  "key": "v-50c6102b",
-  "path": "/vue-router/redirectAlias.html",
-  "title": "重定向和别名",
+  "key": "v-029f4374",
+  "path": "/vue-router/scroll.html",
+  "title": "滚动行为",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
   "headers": [
     {
-      "level": 2,
-      "title": "重定向",
-      "slug": "重定向",
+      "level": 3,
+      "title": "滚动到指定元素",
+      "slug": "滚动到指定元素",
       "children": []
     },
     {
-      "level": 2,
-      "title": "别名",
-      "slug": "别名",
+      "level": 3,
+      "title": "不同路由自定义滚动效果",
+      "slug": "不同路由自定义滚动效果",
       "children": []
     }
   ],
   "git": {
-    "updatedTime": 1649865226000,
-    "contributors": [
-      {
-        "name": "jgoriginal",
-        "email": "932274204@qq.com",
-        "commits": 1
-      }
-    ]
+    "updatedTime": null,
+    "contributors": []
   },
-  "filePathRelative": "vue-router/redirectAlias.md"
+  "filePathRelative": "vue-router/scroll.md"
 }
 
 if (import.meta.webpackHot) {

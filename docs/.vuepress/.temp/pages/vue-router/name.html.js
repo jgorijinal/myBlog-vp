@@ -1,18 +1,11 @@
 export const data = {
   "key": "v-05f7afc8",
   "path": "/vue-router/name.html",
-  "title": "",
+  "title": "命名路由 name",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
-  "headers": [
-    {
-      "level": 2,
-      "title": "命名路由 name",
-      "slug": "命名路由-name",
-      "children": []
-    }
-  ],
+  "headers": [],
   "git": {
     "updatedTime": 1649781039000,
     "contributors": [

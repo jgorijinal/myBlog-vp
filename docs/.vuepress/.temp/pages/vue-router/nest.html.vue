@@ -1,4 +1,4 @@
-<template><h2 id="嵌套路由" tabindex="-1"><a class="header-anchor" href="#嵌套路由" aria-hidden="true">#</a> 嵌套路由</h2>
+<template><h1 id="嵌套路由" tabindex="-1"><a class="header-anchor" href="#嵌套路由" aria-hidden="true">#</a> 嵌套路由</h1>
 <p>要在嵌套的出口中渲染组件，需要在 VueRouter 的参数中使用 <code>children</code> 配置：
 <code>注意</code>:父级路由组件中要有<code>&lt;router-view /&gt;</code></p>
 <div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token keyword">const</span> router <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">VueRouter</span><span class="token punctuation">(</span><span class="token punctuation">{</span>

@@ -1,18 +1,11 @@
 export const data = {
   "key": "v-070b0fca",
   "path": "/vue-router/nest.html",
-  "title": "",
+  "title": "嵌套路由",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
-  "headers": [
-    {
-      "level": 2,
-      "title": "嵌套路由",
-      "slug": "嵌套路由",
-      "children": []
-    }
-  ],
+  "headers": [],
   "git": {
     "updatedTime": 1649865226000,
     "contributors": [

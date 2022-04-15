@@ -149,6 +149,11 @@ export default  {
 
 所以想要响应路由参数的变化, 修改数据:
 **(1)** 可以通过`watch`监听`$route`对象的变化 , **(2)** 也可以使用**组件内守卫**  **`beforeRouteUpdate`**
+
+他俩的区别: 
+* `beforeRouteUpdate`不能监听初始化的值，`watch`可以通过`immediate`属性监听到初始化的值!!!!!!!!
+* `beforeRouteUpdate`可以拦截`next()`，`watch`不行
+
 ### (3) `beforeRouteLeave`
 #### 例子: 使用`beforeRouteLeave`保护数据
 如果当前页面为编辑页面, 用户点击退出会丢失编辑好的资料 , 所以这个时候可以加上退出前确认
@@ -196,6 +201,125 @@ export default  {
 2. 组件内的`beforeRouteUpdate`
 3. 全局的`beforeResolve`
 4. 全局的`afterEach`
+## 例子: 使用路由守卫获取数据
+```vue
+<script>
+const load = async () => {
+  return await fetch('http://127.0.0.1:3000/news').then(r => r.json())
+}
+export default {
+  data() {
+    return {
+      articles: ''
+    }
+  },
+  beforeRouteEnter(to, from, next) {
+     next(async vm => {
+      vm.articles = await load()  //beforeRouteEnter访问不了this, 要用vm实例
+    })
+  },
+  async beforeRouteUpdate(to,from ){  //响应路由参数变化要用beforeRouteUpdate , 再获取数据
+    console.log('更新了')
+    this.articles = await load()
+  }
+}
+</script>
+<template>
+ <ul>
+   <li v-for="article of articles" :key="article.id">{{ article.title }}}</li>
+ </ul>
+  <router-link :to="{name:'article',query:{id:Math.random()}}" >下一页</router-link>
+</template>
+<style lang="scss" scoped>
+</style>
+```
+### 在setup里改写
+先用`<suspense>`包裹`<router-view>`
+```html
+    <suspense>
+      <template v-slot:default>
+        <div>
+          <router-view/>
+        </div>
+      </template>
+      <template v-slot:fallback>
+        loading...
+      </template>
+    </suspense>
+```
+```js{3,10}
+<script setup>
+import { ref} from "vue";
+import {onBeforeRouteUpdate,onBeforeRouteLeave} from "vue-router";  //只有这俩
 
+const load = async () => {
+  return await fetch('http://127.0.0.1:3000/news').then(r => r.json())
+}
+const articles = ref([])
+articles.value = await load()
+onBeforeRouteUpdate(async ()=>{
+  articles.value = await load()
+  console.log('参数变了')
+})
+</script>
+<template>
+ <ul>
+   <li v-for="article of articles" :key="article.id">{{ article.title }}}</li>
+ </ul>
+  <router-link :to="{name:'article',query:{id:Math.random()}}" >下一页</router-link>
+</template>
+```
+### 或者 使用`watch`监听路由
+```vue
+<script setup>
+import { ref , watch} from "vue";
+import {useRoute} from "vue-router";
+const load = async () => {
+  return await fetch('http://127.0.0.1:3000/news').then(r => r.json())
+}
+const articles = ref([])
+articles.value = await load()
+const route = useRoute()
 
+watch(route , async ()=>{
+  if(route.name === 'article') {   //route.name等于当前导航时
+    console.log('来到article导航了')
+    articles.value = await load()
+  }
+},{immediate:true})   //刷新时立即执行
+</script> 
+```
+### 用`watch`监听页码获取数据
+```vue{17-23,30}
+<script setup>
+import { ref , watch} from "vue";
+import {useRoute} from "vue-router";
+const load = async () => {
+  return await fetch('http://127.0.0.1:3000/news').then(r => r.json())
+}
+const articles = ref([])
+articles.value = await load()
+const route = useRoute()
+watch(route , async ()=>{
+  if(route.name === 'article') {
+    console.log('来到article导航了')
+    articles.value = await load()
+  }
+},{immediate:true})
 
+const  page  = ref(route.query.page ? route.query.page : 1)
+console.log(page.value)
+
+watch(page , async ()=>{
+  articles.value = await load()
+  console.log('请求数据了')
+} , {immediate:true})
+</script>
+<template>
+ <ul>
+   <li v-for="article of articles" :key="article.id">{{ article.title }}}</li>
+ </ul>
+<!--  <router-link :to="{name:'article',query:{id:Math.random()}}">下一页</router-link>-->
+  <button @click="page = page +1">页码+1 页码:{{page}}</button>
+</template>
+```

@@ -1,22 +1,23 @@
 export const data = {
-  "key": "v-c60638ea",
-  "path": "/JS/promise.html",
-  "title": "",
+  "key": "v-54b9850a",
+  "path": "/vue-router/animation.html",
+  "title": "过渡动画",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
-  "headers": [],
+  "headers": [
+    {
+      "level": 2,
+      "title": "单个路由的过渡动画",
+      "slug": "单个路由的过渡动画",
+      "children": []
+    }
+  ],
   "git": {
-    "updatedTime": 1649953842000,
-    "contributors": [
-      {
-        "name": "jgoriginal",
-        "email": "932274204@qq.com",
-        "commits": 1
-      }
-    ]
+    "updatedTime": null,
+    "contributors": []
   },
-  "filePathRelative": "JS/promise.md"
+  "filePathRelative": "vue-router/animation.md"
 }
 
 if (import.meta.webpackHot) {
