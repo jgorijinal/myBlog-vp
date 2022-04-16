@@ -147,6 +147,16 @@ export const themeData = {
           "text": "滚动行为",
           "link": "/vue-router/scroll.md",
           "children": []
+        },
+        {
+          "text": "懒加载",
+          "link": "/vue-router/lazyLoading.md",
+          "children": []
+        },
+        {
+          "text": "动态路由",
+          "link": "/vue-router/dynamicRouter.md",
+          "children": []
         }
       ]
     },

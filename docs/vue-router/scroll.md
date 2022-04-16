@@ -52,4 +52,44 @@ const router = createRouter({
 });
 ```
 ### 不同路由自定义滚动效果
-
+```js{3-10,16,21}
+const router = createRouter({
+    history: createWebHashHistory(),
+    scrollBehavior(to, from, savedPosition) {
+        const options = {behavior: 'smooth'}
+        if (to.meta.scrollTo) {   //meta.scroll存在的话 , options对象里面添加el
+            options['el']= to.meta.scrollTo  
+            console.log(options)
+        }
+        return savedPosition ? savedPosition : options
+    },
+     routes: [
+        {
+            path: '/home', 
+            name: 'home', 
+            component: Home,
+            meta: {scrollTo: '#home'},
+        },
+        {
+            path: '/about',
+            name: 'about',
+            meta: {scrollTo: '#about'},
+            component: About,
+```
+### 使用promise异步处理滚动效果
+```js{8-13}
+const router = createRouter({
+    history: createWebHashHistory(),
+    scrollBehavior(to, from, savedPosition) {
+        const options = {behavior: 'smooth',top:0}
+        if (to.meta.scrollTo) {
+            options['el']= to.meta.scrollTo
+        }
+        return new Promise((resolve,reject) =>{
+            setTimeout(()=>{
+                resolve(savedPosition ? savedPosition : options)
+            },1000)
+        })
+    },
+    routes:[...]
+```

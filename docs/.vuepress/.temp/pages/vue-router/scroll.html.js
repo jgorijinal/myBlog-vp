@@ -17,11 +17,23 @@ export const data = {
       "title": "不同路由自定义滚动效果",
       "slug": "不同路由自定义滚动效果",
       "children": []
+    },
+    {
+      "level": 3,
+      "title": "使用promise异步处理滚动效果",
+      "slug": "使用promise异步处理滚动效果",
+      "children": []
     }
   ],
   "git": {
-    "updatedTime": null,
-    "contributors": []
+    "updatedTime": 1650034527000,
+    "contributors": [
+      {
+        "name": "jgoriginal",
+        "email": "932274204@qq.com",
+        "commits": 1
+      }
+    ]
   },
   "filePathRelative": "vue-router/scroll.md"
 }
