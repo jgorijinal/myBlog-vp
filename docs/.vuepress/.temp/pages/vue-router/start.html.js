@@ -24,6 +24,18 @@ export const data = {
           "children": []
         }
       ]
+    },
+    {
+      "level": 2,
+      "title": "别名@",
+      "slug": "别名",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "配合TS的路由初始配置",
+      "slug": "配合ts的路由初始配置",
+      "children": []
     }
   ],
   "git": {

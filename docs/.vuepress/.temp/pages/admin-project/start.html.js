@@ -1,22 +1,23 @@
 export const data = {
-  "key": "v-2bcc5a52",
-  "path": "/vue-router/lazyLoading.html",
-  "title": "懒加载",
+  "key": "v-2e63fcb8",
+  "path": "/admin-project/start.html",
+  "title": "项目",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
-  "headers": [],
+  "headers": [
+    {
+      "level": 2,
+      "title": "初始的路由配置",
+      "slug": "初始的路由配置",
+      "children": []
+    }
+  ],
   "git": {
-    "updatedTime": 1650118470000,
-    "contributors": [
-      {
-        "name": "jgoriginal",
-        "email": "932274204@qq.com",
-        "commits": 1
-      }
-    ]
+    "updatedTime": null,
+    "contributors": []
   },
-  "filePathRelative": "vue-router/lazyLoading.md"
+  "filePathRelative": "admin-project/start.md"
 }
 
 if (import.meta.webpackHot) {

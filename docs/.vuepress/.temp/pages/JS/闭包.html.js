@@ -1,22 +1,16 @@
 export const data = {
-  "key": "v-2bcc5a52",
-  "path": "/vue-router/lazyLoading.html",
-  "title": "懒加载",
+  "key": "v-d3a5463a",
+  "path": "/JS/%E9%97%AD%E5%8C%85.html",
+  "title": "",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
   "headers": [],
   "git": {
-    "updatedTime": 1650118470000,
-    "contributors": [
-      {
-        "name": "jgoriginal",
-        "email": "932274204@qq.com",
-        "commits": 1
-      }
-    ]
+    "updatedTime": null,
+    "contributors": []
   },
-  "filePathRelative": "vue-router/lazyLoading.md"
+  "filePathRelative": "JS/闭包.md"
 }
 
 if (import.meta.webpackHot) {

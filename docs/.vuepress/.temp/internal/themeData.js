@@ -1,6 +1,6 @@
 export const themeData = {
   "logo": "https://vuejs.org/images/logo.png",
-  "displayAllHeaders": false,
+  "displayAllHeaders": true,
   "collapsable": true,
   "sidebar": [
     {
@@ -163,10 +163,30 @@ export const themeData = {
     {
       "text": "JS系列",
       "collapsible": true,
+      "sidebarDepth": 2,
       "children": [
         {
           "text": "Promise",
-          "link": "/JS/promise.md",
+          "link": "/JS/promise.md"
+        },
+        {
+          "text": "闭包",
+          "link": "/JS/闭包.md"
+        }
+      ]
+    },
+    {
+      "text": "脚手架项目",
+      "collapsible": true,
+      "children": [
+        {
+          "text": "路由初始配置",
+          "link": "/admin-project/start.md",
+          "children": []
+        },
+        {
+          "text": "Vite环境变量",
+          "link": "/admin-project/vite.md",
           "children": []
         }
       ]

@@ -8,7 +8,7 @@ module.exports = {
     theme: '@vuepress/theme-default',
     themeConfig: {
         logo: 'https://vuejs.org/images/logo.png',
-        displayAllHeaders: false ,// 默认值：false
+        displayAllHeaders: true,// 默认值：false
         // 侧边栏对象
         // 不同子路径下的页面会使用不同的侧边栏
         collapsable: true,
@@ -175,12 +175,32 @@ module.exports = {
             {
                 text: 'JS系列',
                 collapsible: true,
+                sidebarDepth:2,
                 children: [
                     {
                         text: `Promise`,
                         link: '/JS/promise.md',
-                        children: [],
+                    },
+                    {
+                        text: `闭包`,
+                        link: '/JS/闭包.md',
                     }
+                ]
+            },
+            {
+                text: '脚手架项目',
+                collapsible: true,
+                children: [
+                    {
+                        text: `路由初始配置`,
+                        link: '/admin-project/start.md',
+                        children: [],
+                    },
+                    {
+                        text: `Vite环境变量`,
+                        link: '/admin-project/vite.md',
+                        children: [],
+                    },
                 ]
             },
             {

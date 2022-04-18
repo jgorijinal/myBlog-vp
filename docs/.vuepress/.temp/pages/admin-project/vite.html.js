@@ -1,22 +1,23 @@
 export const data = {
-  "key": "v-2bcc5a52",
-  "path": "/vue-router/lazyLoading.html",
-  "title": "懒加载",
+  "key": "v-5a98d968",
+  "path": "/admin-project/vite.html",
+  "title": "Vite环境变量",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
-  "headers": [],
+  "headers": [
+    {
+      "level": 2,
+      "title": "环境变量 .env文件",
+      "slug": "环境变量-env文件",
+      "children": []
+    }
+  ],
   "git": {
-    "updatedTime": 1650118470000,
-    "contributors": [
-      {
-        "name": "jgoriginal",
-        "email": "932274204@qq.com",
-        "commits": 1
-      }
-    ]
+    "updatedTime": null,
+    "contributors": []
   },
-  "filePathRelative": "vue-router/lazyLoading.md"
+  "filePathRelative": "admin-project/vite.md"
 }
 
 if (import.meta.webpackHot) {

@@ -48,3 +48,67 @@ createApp(App).use(router).mount('#app')    //app.use(router)
 2. 兼容性比`hash`模式略差
 3. 应用部署时需要后端人员配合 ,  解决刷新页面404的问题 , 否则页⾯刷新就挂了
 
+## 别名@ 
+TS环境:
+```sh
+yarn add -D path
+yarn add -D @types/node
+```
+```ts
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import path from 'path'     //TS
+
+export default defineConfig({
+  plugins: [vue()],
+  resolve:{
+    alias:{'@':path.resolve(__dirname,'src')}
+  }
+})
+```
+## 配合TS的路由初始配置
+router/routes.ts:
+```ts
+import {RouteRecordRaw} from 'vue-router';
+
+const routes = [
+    {
+      path: '/',
+      name: 'home',
+      component: () => import('@/views/Home.vue')
+    }
+  ] as RouteRecordRaw[]
+
+export default routes
+```
+router/index.ts: 
+```ts{3,12,16-18}
+import {createRouter, createWebHashHistory, RouteRecordRaw} from 'vue-router';
+import {App} from 'vue';
+import routes from './routes';
+
+const router = createRouter({
+  history: createWebHashHistory(),
+  routes  
+});
+
+export function setupRouter(app: App) {
+  app.use(router);
+}
+
+export default router;
+```
+main.ts:
+```ts{5-11}
+import { createApp } from 'vue'
+import App from './App.vue'
+import router , { setupRouter } from './router';
+
+async function bootstrap() {
+  const app = createApp(App)
+  setupRouter(app)
+  await router.isReady()   //等到路由器完成初始化导航, isReady()会返回promise, 后面再挂载
+  app.mount('#app')
+}
+bootstrap()
+```
