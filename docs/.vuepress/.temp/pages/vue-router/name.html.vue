@@ -1,4 +1,4 @@
-<template><h1 id="命名路由-name" tabindex="-1"><a class="header-anchor" href="#命名路由-name" aria-hidden="true">#</a> 命名路由 name</h1>
+<template><h1 id="命名路由" tabindex="-1"><a class="header-anchor" href="#命名路由" aria-hidden="true">#</a> 命名路由</h1>
 <p>有时候，通过一个名称来标识一个路由显得更方便一些，可以在创建 <code>Router</code> 实例的时候，在 <code>routes</code> 配置中给某个路由设置名称。</p>
 <div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token keyword">const</span> routes <span class="token operator">=</span> <span class="token punctuation">[</span>
   <span class="token punctuation">{</span>

@@ -1,15 +1,15 @@
 export const data = {
   "key": "v-c60638ea",
   "path": "/JS/promise.html",
-  "title": "",
+  "title": "Promise",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
   "headers": [
     {
       "level": 2,
-      "title": "为什么使用Promise?",
-      "slug": "为什么使用promise",
+      "title": "为什么使用 Promise?",
+      "slug": "为什么使用-promise",
       "children": []
     },
     {
@@ -36,15 +36,21 @@ export const data = {
       "title": "Promise 微任务机制",
       "slug": "promise-微任务机制",
       "children": []
+    },
+    {
+      "level": 2,
+      "title": "Promise的单一状态与状态中转",
+      "slug": "promise的单一状态与状态中转",
+      "children": []
     }
   ],
   "git": {
-    "updatedTime": 1649953842000,
+    "updatedTime": 1650290712000,
     "contributors": [
       {
         "name": "jgoriginal",
         "email": "932274204@qq.com",
-        "commits": 1
+        "commits": 2
       }
     ]
   },

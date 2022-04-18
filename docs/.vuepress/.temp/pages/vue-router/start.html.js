@@ -1,7 +1,7 @@
 export const data = {
   "key": "v-763d9b46",
   "path": "/vue-router/start.html",
-  "title": "Vue Router 4",
+  "title": "Vue Router 4 初始配置",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
@@ -39,12 +39,12 @@ export const data = {
     }
   ],
   "git": {
-    "updatedTime": 1649865226000,
+    "updatedTime": 1650290712000,
     "contributors": [
       {
         "name": "jgoriginal",
         "email": "932274204@qq.com",
-        "commits": 2
+        "commits": 3
       }
     ]
   },

@@ -1,7 +1,7 @@
 export const data = {
   "key": "v-571ee6a4",
   "path": "/vue-router/router-view-name.html",
-  "title": "router-view的命名视图",
+  "title": "<router-view>的命名视图",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",

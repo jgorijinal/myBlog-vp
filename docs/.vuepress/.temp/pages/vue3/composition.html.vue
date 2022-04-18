@@ -1,4 +1,4 @@
-<template><h1 id="composition-api" tabindex="-1"><a class="header-anchor" href="#composition-api" aria-hidden="true">#</a> Composition API</h1>
+<template><h1 id="vue3中的composition-api" tabindex="-1"><a class="header-anchor" href="#vue3中的composition-api" aria-hidden="true">#</a> Vue3中的Composition API</h1>
 <p><a href="https://staging-cn.vuejs.org/api/composition-api-setup.html#basic-usage" target="_blank" rel="noopener noreferrer">官网<ExternalLinkIcon/></a></p>
 <h2 id="_1-为什么用-composition-api" tabindex="-1"><a class="header-anchor" href="#_1-为什么用-composition-api" aria-hidden="true">#</a> 1. 为什么⽤ Composition API</h2>
 <ol>

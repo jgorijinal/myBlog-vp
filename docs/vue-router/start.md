@@ -1,4 +1,4 @@
-# Vue Router 4
+# Vue Router 4 初始配置
 Vue Router 是 Vue.js官方的路由管理器 , 适用于构建单页面应用  (单页应用路由管理器)
 [官网](https://router.vuejs.org/zh/introduction.html)
 ## 安装

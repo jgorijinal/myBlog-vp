@@ -1,7 +1,7 @@
 export const data = {
   "key": "v-05f7afc8",
   "path": "/vue-router/name.html",
-  "title": "命名路由 name",
+  "title": "命名路由",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",

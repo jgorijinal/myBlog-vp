@@ -1,4 +1,5 @@
-## `<script setup>`
+# Vue3中的Composition API之`script setup`
+## `<script setup>`的优势
 [官网](https://staging-cn.vuejs.org/api/sfc-script-setup.html)
 
 `<script setup>` 是在单文件组件 (SFC) 中使用`Composition API` 的编译时语法糖。相比于普通的 `<script>` 语法，它具有更多优势：
@@ -8,7 +9,7 @@
 * 更好的运行时性能 (其模板会被编译成与其同一作用域的渲染函数，没有任何的中间代理)。
 * 更好的 `IDE` 类型推断性能 (减少语言服务器从代码中抽离类型的工作)。
 
-## 1. 顶层await
+##  顶层await
 ```vue{4,5}
 <script setup>
 import { onMounted, ref } from "vue";
@@ -36,7 +37,7 @@ todos.value = await fetch('http://127.0.0.1:3000/news').then(r => r.json())  //�
 ```
 `<script setup>` 中可以使用`顶层 await`。结果代码会被编译成 `async setup()`
 如果使用 `<script setup>`，那么顶层 `await` 表达式会自动让该组件成为一个异步依赖：
-### (1)suspense处理全局异步
+### suspense处理全局异步
 Todo.vue组件
 ```vue
 <script setup>
@@ -74,7 +75,7 @@ import Todo from './Todo.vue'  //组件可直接在模板里使用
 </template>
 ```
 **注意**: `<Suspense>`的**插槽**要求**只能有一个根元素**
-## 2. defineProps() 和 defineEmits()
+## defineProps() 和 defineEmits()
 介绍 : 在 `<script setup>` 中**必须**使用 `defineProps` 和 `defineEmits API` 来声明 `props` 和 `emits` ，它们具备完整的类型推断并且在 `<script setup>` 中是**直接可用**的：
 
 **基本用法**:
@@ -90,7 +91,7 @@ const emit = defineEmits(['emit1' , 'emit2' .. ])   //返回的是函数
 </script>
 ```
 
-## 3.  制作一个小demo(增删todoList):
+## 制作一个小demo(增删todoList)
 ![图片](../.vuepress/public/images/setup1.png)
 
 父组件Todo.vue:

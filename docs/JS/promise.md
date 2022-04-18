@@ -1,4 +1,6 @@
-## 为什么使用Promise?
+# Promise
+
+## 为什么使用 Promise?
 
 Promise 是 JS 进行异步编程的新的解决方案
 为什么用 Promise?
@@ -117,7 +119,7 @@ console.log("同步");
 ```js
 new Promise((resolve, reject) => {
   resolve();
-  console.log('promise');
+  console.log("promise");
 }).then((value) => console.log("then"));
 
 console.log("同步");
@@ -125,7 +127,9 @@ console.log("同步");
 // '同步'
 // 'then'
 ```
+
 先执行同步的, `promise`构造函数里面的代码是同步执行的,`then`里的任务加到微任务队列里面。所以先打出'promise'又打出'同步', 后打出'then'
+
 ```js
 setTimeout(() => {
   console.log("setTimeout");
@@ -133,12 +137,60 @@ setTimeout(() => {
 
 new Promise((resolve, reject) => {
   resolve();
-  console.log('promise');
+  console.log("promise");
 }).then((value) => console.log("then"));
 
 console.log("同步");
 ```
+
 那么想一下 , 上面代码会依次打出什么?
-(提示: 同步 ->  微任务 -> 宏任务)
+(提示: 同步 -> 微任务 -> 宏任务)
 
 会依次打出: 'promise' , '同步' , 'then' , 'setTimeout'
+
+* 宏任务的提升原来是个误解
+```js
+let promise = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve();
+    console.log('setTimeout')
+  }, 0);
+  console.log("promise");
+}).then((value) => console.log("then"));
+
+console.log("同步");
+```
+在想一想这种情况改怎么思考....`promise`构造函数里面居然有`setTimeout`.....
+
+`promise`构造函数里面的代码是同步执行的, 但遇到了`setTimeout`不会马上执行,会把他放到**宏任务**里面。所以先是打印'promise', '同步'。注意`setTimeout`被丢到宏任务里面,所以他里面的`resolve()`还没执行, **微任务还没有创建**。等它执行的时候会创建微任务。打印顺序是: 'promise','同步' , 'setTimeout' , 'then'
+问题所在是, 在这种情况,**宏任务没执行,微任务就没办法生成**, 因为微任务是宏任务执行过程当中生成出来的 
+
+## Promise的单一状态与状态中转
+```js
+
+let p1 = new Promise((resolve,reject)=>{
+    // resolve('成功')
+    reject('拒绝')
+})
+new Promise((resolve, reject) => {
+    resolve(p1)      // 传递了一个Promise -  p1
+}).then(msg => {     //如果p1是成功状态 , 走这条路 , 打出 '成功'
+    console.log(msg)    
+}, (error) => {      //如果p1是拒绝状态 , 会走这条路 , 打出 '失败'   
+    console.log(error)  
+})
+```
+Promise只要状态改变了之后是不可逆的,不可撤销的
+```js
+new Promise((resolve, reject) => {
+    resolve('fulfilled')
+    reject('失败')  //这行代码无效 ,只要上面状态一改变, 就丢到微任务里, 然后就没戏了      
+}).then(msg => {     
+    console.log(msg)    
+}, (error) => {      '   
+    console.log(error)  
+})
+```
+```
+
+

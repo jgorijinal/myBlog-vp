@@ -1,21 +1,21 @@
 export const data = {
   "key": "v-2c11d1a6",
   "path": "/vue-router/params.html",
-  "title": "",
+  "title": "动态路由匹配",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
   "headers": [
     {
       "level": 2,
-      "title": "1. 动态路由匹配",
-      "slug": "_1-动态路由匹配",
+      "title": "带参数的动态路由匹配",
+      "slug": "带参数的动态路由匹配",
       "children": []
     },
     {
       "level": 2,
-      "title": "2. 响应路由参数的变化 (不同的路由且同一组件识别)",
-      "slug": "_2-响应路由参数的变化-不同的路由且同一组件识别",
+      "title": "响应路由参数的变化 (不同的路由且同一组件识别)",
+      "slug": "响应路由参数的变化-不同的路由且同一组件识别",
       "children": [
         {
           "level": 3,
@@ -33,8 +33,8 @@ export const data = {
     },
     {
       "level": 2,
-      "title": "3. 404 路由",
-      "slug": "_3-404-路由",
+      "title": "404 路由",
+      "slug": "_404-路由",
       "children": []
     }
   ],

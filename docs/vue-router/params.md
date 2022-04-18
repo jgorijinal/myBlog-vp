@@ -1,4 +1,5 @@
-## 1. 动态路由匹配
+# 动态路由匹配
+## 带参数的动态路由匹配
 路径参数 用**冒号** : 表示。当一个路由被匹配时，它的 `params` 的值将在每个组件中以 `this.$route.params` 的形式暴露出来。在`Composition API`里需要引用 `useRoute` 来获取 useRoute().params
 ```js{10}
 const router = createRouter({
@@ -48,7 +49,7 @@ console.log(route.params.id)
 <!--判断$route.params包含指定参数,指定类名-->
 ```
 
-## 2. 响应路由参数的变化 (不同的路由且同一组件识别)
+## 响应路由参数的变化 (不同的路由且同一组件识别)
 当使用路由参数时，例如从 /user/foo 导航到 /user/bar，**原来的组件实例会被复用**。因为两个路由都渲染同个组件，比起销毁再创建，复用则显得更加高效。不过，**这也意味着组件的生命周期钩子不会再被调用**。
 
 当页面切换到同一个路由但不同参数的地址时，组件的生命周期钩子**不会**重新触发。
@@ -84,7 +85,7 @@ watch(route.params.id,()=>{
 **`watch` 和 `beforeRouteUpdate`的区别: 
 * `beforeRouteUpdate`**不能**监听**初始化的值，`watch` **可以** 通过`immediate`属性监听到初始化的值!!!!!!!!
 * `beforeRouteUpdate`可以拦截`next()`，`watch`不行
-## 3. 404 路由
+## 404 路由
 ```js{14}
 const router = createRouter({
     history: createWebHashHistory(),

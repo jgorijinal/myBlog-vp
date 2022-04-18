@@ -1,4 +1,4 @@
-<template><h1 id="vue-router-4" tabindex="-1"><a class="header-anchor" href="#vue-router-4" aria-hidden="true">#</a> Vue Router 4</h1>
+<template><h1 id="vue-router-4-初始配置" tabindex="-1"><a class="header-anchor" href="#vue-router-4-初始配置" aria-hidden="true">#</a> Vue Router 4 初始配置</h1>
 <p>Vue Router 是 Vue.js官方的路由管理器 , 适用于构建单页面应用  (单页应用路由管理器)
 <a href="https://router.vuejs.org/zh/introduction.html" target="_blank" rel="noopener noreferrer">官网<ExternalLinkIcon/></a></p>
 <h2 id="安装" tabindex="-1"><a class="header-anchor" href="#安装" aria-hidden="true">#</a> 安装</h2>

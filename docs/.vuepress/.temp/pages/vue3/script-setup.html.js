@@ -1,40 +1,40 @@
 export const data = {
   "key": "v-812fd256",
   "path": "/vue3/script-setup.html",
-  "title": "",
+  "title": "Vue3中的Composition API之script setup",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
   "headers": [
     {
       "level": 2,
-      "title": "<script setup>",
-      "slug": "script-setup",
+      "title": "<script setup>的优势",
+      "slug": "script-setup-的优势",
       "children": []
     },
     {
       "level": 2,
-      "title": "1. 顶层await",
-      "slug": "_1-顶层await",
+      "title": "顶层await",
+      "slug": "顶层await",
       "children": [
         {
           "level": 3,
-          "title": "(1)suspense处理全局异步",
-          "slug": "_1-suspense处理全局异步",
+          "title": "suspense处理全局异步",
+          "slug": "suspense处理全局异步",
           "children": []
         }
       ]
     },
     {
       "level": 2,
-      "title": "2. defineProps() 和 defineEmits()",
-      "slug": "_2-defineprops-和-defineemits",
+      "title": "defineProps() 和 defineEmits()",
+      "slug": "defineprops-和-defineemits",
       "children": []
     },
     {
       "level": 2,
-      "title": "3.  制作一个小demo(增删todoList):",
-      "slug": "_3-制作一个小demo-增删todolist",
+      "title": "制作一个小demo(增删todoList)",
+      "slug": "制作一个小demo-增删todolist",
       "children": []
     }
   ],

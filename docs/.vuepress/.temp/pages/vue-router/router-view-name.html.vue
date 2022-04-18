@@ -1,4 +1,4 @@
-<template><h1 id="router-view的命名视图" tabindex="-1"><a class="header-anchor" href="#router-view的命名视图" aria-hidden="true">#</a> <code>router-view</code>的命名视图</h1>
+<template><h1 id="router-view-的命名视图" tabindex="-1"><a class="header-anchor" href="#router-view-的命名视图" aria-hidden="true">#</a> <code>&lt;router-view&gt;</code>的命名视图</h1>
 <p>想同时展示多个视图, 并且每个试图展示不同的组件, 可以使用命名视图</p>
 <p><code>&lt;router-view&gt;</code>可以设置<code>name</code>属性, <strong>默认值</strong>：&quot;default&quot;</p>
 <ul>

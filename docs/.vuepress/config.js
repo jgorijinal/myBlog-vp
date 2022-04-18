@@ -80,111 +80,37 @@ module.exports = {
                 text: 'Vue3系列',
                 collapsible: true,
                 children: [
-                    {
-                        text: 'Vue2到vue3的变化',
-                        link: '/vue3/vue3.md',
-                        children: [],
-                    },
-                    {
-                        text: 'Vue3中的v-model的使用',
-                        link: '/vue3/v-model.md',
-                        children: [],
-                    },
-                    {
-                        text: 'Vue3中的Composition API',
-                        link: '/vue3/composition.md',
-                        children: [],
-                    },
-                    {
-                        text: 'Vue3中的Composition之script-setup',
-                        link: '/vue3/script-setup.md',
-                        children: [],
-                    },
+                    '/vue3/vue3.md',
+                    '/vue3/v-model.md',
+                    '/vue3/composition.md',
+                    '/vue3/script-setup.md',
                 ]
             },
             {
                 text: 'Vue Router系列',
                 collapsible: true,
                 children: [
-                    {
-                        text: '初始配置',
-                        link: '/vue-router/start.md',
-                    },
-                    {
-                        text: 'HTML',
-                        link: '/vue-router/routerHTML.md',
-                        children: [],
-                    },
-                    {
-                        text: '命名路由',
-                        link: '/vue-router/name.md',
-                        children: [],
-                    },
-                    {
-                        text: '动态路由匹配',
-                        link: '/vue-router/params.md',
-                        children: [],
-                    },
-                    {
-                        text:'嵌套路由',
-                        link: '/vue-router/nest.md',
-                        children: [],
-                    },
-                    {
-                        text: '命名视图',
-                        link: '/vue-router/router-view-name.md',
-                        children: [],
-                    },
-                    {
-                        text: '重定向和别名',
-                        link: '/vue-router/redirectAlias.md',
-                        children: [],
-                    },
-                    {
-                        text: '编程式导航',
-                        link: '/vue-router/function.md',
-                        children: [],
-                    },
-                    {
-                        text: '路由守卫',
-                        link: '/vue-router/guard.md',
-                        children: [],
-                    },
-                    {
-                        text: '过度动画',
-                        link: '/vue-router/animation.md',
-                        children: [],
-                    },
-                    {
-                        text: '滚动行为',
-                        link: '/vue-router/scroll.md',
-                        children: [],
-                    },
-                    {
-                        text: '懒加载',
-                        link: '/vue-router/lazyLoading.md',
-                        children: [],
-                    },
-                    {
-                        text: '动态路由',
-                        link: '/vue-router/dynamicRouter.md',
-                        children: [],
-                    },
+                    '/vue-router/start.md',
+                    '/vue-router/routerHTML.md',
+                    '/vue-router/name.md',
+                    '/vue-router/params.md',
+                    '/vue-router/nest.md',
+                    '/vue-router/router-view-name.md',
+                    '/vue-router/redirectAlias.md',
+                    '/vue-router/function.md',
+                    '/vue-router/guard.md',
+                    '/vue-router/animation.md',
+                    '/vue-router/scroll.md',
+                    '/vue-router/lazyLoading.md',
+                    '/vue-router/dynamicRouter.md',
                 ]
             },
             {
                 text: 'JS系列',
                 collapsible: true,
-                sidebarDepth:2,
                 children: [
-                    {
-                        text: `Promise`,
-                        link: '/JS/promise.md',
-                    },
-                    {
-                        text: `闭包`,
-                        link: '/JS/闭包.md',
-                    }
+                    '/JS/promise.md',
+                    '/JS/closure.md'
                 ]
             },
             {

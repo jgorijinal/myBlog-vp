@@ -1,4 +1,5 @@
-<template><h2 id="_1-动态路由匹配" tabindex="-1"><a class="header-anchor" href="#_1-动态路由匹配" aria-hidden="true">#</a> 1. 动态路由匹配</h2>
+<template><h1 id="动态路由匹配" tabindex="-1"><a class="header-anchor" href="#动态路由匹配" aria-hidden="true">#</a> 动态路由匹配</h1>
+<h2 id="带参数的动态路由匹配" tabindex="-1"><a class="header-anchor" href="#带参数的动态路由匹配" aria-hidden="true">#</a> 带参数的动态路由匹配</h2>
 <p>路径参数 用<strong>冒号</strong> : 表示。当一个路由被匹配时，它的 <code>params</code> 的值将在每个组件中以 <code>this.$route.params</code> 的形式暴露出来。在<code>Composition API</code>里需要引用 <code>useRoute</code> 来获取 useRoute().params</p>
 <div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token keyword">const</span> router <span class="token operator">=</span> <span class="token function">createRouter</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
     <span class="token literal-property property">history</span><span class="token operator">:</span> <span class="token function">createWebHashHistory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
@@ -38,7 +39,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <p>技巧 : 路由高亮</p>
 <div class="language-html ext-html line-numbers-mode"><pre v-pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>router-link</span> <span class="token attr-name">to</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>{name:<span class="token punctuation">'</span>user<span class="token punctuation">'</span>}<span class="token punctuation">"</span></span> <span class="token attr-name">:class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span> {<span class="token punctuation">'</span>link-active<span class="token punctuation">'</span>:$route.params.includes(<span class="token punctuation">'</span>user<span class="token punctuation">'</span>) }<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>用户<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>router-link</span><span class="token punctuation">></span></span>
 <span class="token comment">&lt;!--判断$route.params包含指定参数,指定类名--></span>
-</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h2 id="_2-响应路由参数的变化-不同的路由且同一组件识别" tabindex="-1"><a class="header-anchor" href="#_2-响应路由参数的变化-不同的路由且同一组件识别" aria-hidden="true">#</a> 2. 响应路由参数的变化 (不同的路由且同一组件识别)</h2>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h2 id="响应路由参数的变化-不同的路由且同一组件识别" tabindex="-1"><a class="header-anchor" href="#响应路由参数的变化-不同的路由且同一组件识别" aria-hidden="true">#</a> 响应路由参数的变化 (不同的路由且同一组件识别)</h2>
 <p>当使用路由参数时，例如从 /user/foo 导航到 /user/bar，<strong>原来的组件实例会被复用</strong>。因为两个路由都渲染同个组件，比起销毁再创建，复用则显得更加高效。不过，<strong>这也意味着组件的生命周期钩子不会再被调用</strong>。</p>
 <p>当页面切换到同一个路由但不同参数的地址时，组件的生命周期钩子<strong>不会</strong>重新触发。</p>
 <p>这是因为<code>vue-router</code>会识别出两个路由使用的是同一个组件从而进行复用，并不会重新创建组件，因此组件的生命周期钩子自然也不会触发。</p>
@@ -68,7 +69,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <li><code>beforeRouteUpdate</code><strong>不能</strong>监听**初始化的值，<code>watch</code> <strong>可以</strong> 通过<code>immediate</code>属性监听到初始化的值!!!!!!!!</li>
 <li><code>beforeRouteUpdate</code>可以拦截<code>next()</code>，<code>watch</code>不行</li>
 </ul>
-<h2 id="_3-404-路由" tabindex="-1"><a class="header-anchor" href="#_3-404-路由" aria-hidden="true">#</a> 3. 404 路由</h2>
+<h2 id="_404-路由" tabindex="-1"><a class="header-anchor" href="#_404-路由" aria-hidden="true">#</a> 404 路由</h2>
 <div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token keyword">const</span> router <span class="token operator">=</span> <span class="token function">createRouter</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
     <span class="token literal-property property">history</span><span class="token operator">:</span> <span class="token function">createWebHashHistory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token literal-property property">routes</span><span class="token operator">:</span> <span class="token punctuation">[</span>

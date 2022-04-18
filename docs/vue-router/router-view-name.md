@@ -1,4 +1,4 @@
-# `router-view`的命名视图
+# `<router-view>`的命名视图
 想同时展示多个视图, 并且每个试图展示不同的组件, 可以使用命名视图
 
 `<router-view>`可以设置`name`属性, **默认值**："default"
