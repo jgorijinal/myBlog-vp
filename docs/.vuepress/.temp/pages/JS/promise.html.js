@@ -42,15 +42,102 @@ export const data = {
       "title": "Promise的单一状态与状态中转",
       "slug": "promise的单一状态与状态中转",
       "children": []
+    },
+    {
+      "level": 2,
+      "title": "Promise.then的用法",
+      "slug": "promise-then的用法",
+      "children": [
+        {
+          "level": 3,
+          "title": "then返回值的处理技巧",
+          "slug": "then返回值的处理技巧",
+          "children": []
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "title": "使用Promise封装ajax请求",
+      "slug": "使用promise封装ajax请求",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "Promise多种错误监测与catch的使用",
+      "slug": "promise多种错误监测与catch的使用",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "使用finally实现异步加载动画",
+      "slug": "使用finally实现异步加载动画",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "用Promise封装setTimeout定时器",
+      "slug": "用promise封装settimeout定时器",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "Promise.resolve()",
+      "slug": "promise-resolve",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "Promise.reject()",
+      "slug": "promise-reject",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "Promise.all()",
+      "slug": "promise-all",
+      "children": [
+        {
+          "level": 3,
+          "title": "批量获取用户数据",
+          "slug": "批量获取用户数据",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "手写Promise.all",
+          "slug": "手写promise-all",
+          "children": []
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "title": "Promise.allSettled()",
+      "slug": "promise-allsettled",
+      "children": [
+        {
+          "level": 3,
+          "title": "手写 Promise.allSettled()",
+          "slug": "手写-promise-allsettled",
+          "children": []
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "title": "Promise.race()",
+      "slug": "promise-race",
+      "children": []
     }
   ],
   "git": {
-    "updatedTime": 1650290712000,
+    "updatedTime": 1650298555000,
     "contributors": [
       {
         "name": "jgoriginal",
         "email": "932274204@qq.com",
-        "commits": 2
+        "commits": 3
       }
     ]
   },
