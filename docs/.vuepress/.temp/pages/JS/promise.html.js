@@ -10,7 +10,14 @@ export const data = {
       "level": 2,
       "title": "为什么使用 Promise?",
       "slug": "为什么使用-promise",
-      "children": []
+      "children": [
+        {
+          "level": 3,
+          "title": "Promise对象",
+          "slug": "promise对象",
+          "children": []
+        }
+      ]
     },
     {
       "level": 2,
@@ -129,15 +136,46 @@ export const data = {
       "title": "Promise.race()",
       "slug": "promise-race",
       "children": []
+    },
+    {
+      "level": 2,
+      "title": "async/await语法糖",
+      "slug": "async-await语法糖",
+      "children": [
+        {
+          "level": 3,
+          "title": "async",
+          "slug": "async",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "await",
+          "slug": "await",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "async 实现做一个延时的函数",
+          "slug": "async-实现做一个延时的函数",
+          "children": []
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "title": "await错误处理",
+      "slug": "await错误处理",
+      "children": []
     }
   ],
   "git": {
-    "updatedTime": 1650298555000,
+    "updatedTime": 1650444167000,
     "contributors": [
       {
         "name": "jgoriginal",
         "email": "932274204@qq.com",
-        "commits": 3
+        "commits": 4
       }
     ]
   },

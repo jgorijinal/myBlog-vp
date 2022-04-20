@@ -6,6 +6,15 @@ Promise 是 JS 进行异步编程的新的解决方案
 - 指定回调函数的方式更加灵活. 返回`promise`对象,可以给`promise`对象绑定回调函数.
 - 支持链式调用,可以解决回调地狱的问题
 
+### Promise对象
+`Promise` 对象用于表示一个异步操作的最终完成 (或失败)及其结果值。
+```js
+console.log(
+  new Promise((resolve,reject)=>{
+    resolve('hello')
+}))
+```
+![图片](../.vuepress/public/images/promise.png)
 ## 回调地狱和复杂的嵌套
 ### 异步加载图片体验 JS 的任务操作
 ```js
@@ -239,7 +248,19 @@ new Promise((resolve, reject) => {
     console.log(error)  
 })
 ```
-
+```js
+let p1 = Promise.resolve('hello')
+let p2 = p1
+    .then(value => {
+        console.log('then')
+        return new Promise((resolve,reject)=>{
+            //这里没写 , 是pending状态
+        })
+    })
+    .then(value => {          //这时候的then是 上面return new Promise的处理 , 目前是pending状态
+        console.log('then')
+    })
+```
 ## Promise.then的用法
 **每个`then`最终返回的也是一个`promise`对象, 如果后面在写一个`then` , 那么它是对上一个`promise`的处理**
 ```js
@@ -508,3 +529,127 @@ Promise.MyAllSettled2 = (promiseList) => {
 ```
 ## Promise.race()
 `Promise.race` 从字面意思理解就是赛跑，以状态变化最快的那个 `Promise` 实例为准，最快的 `Promise` 成功 `Promise.race` 就成功，最快的 `Promise` 失败 `Promise.race` 就失败。
+
+## async/await语法糖
+### async
+**`async` 函数返回一个 `Promise` 对象**
+`async` 函数内部 `return` 返回的值。会成为 `then` 方法回调函数的参数。
+```js
+async function fn(){
+  //return undefined
+}
+console.log(fn())
+```
+打出来看看
+![图片](../.vuepress/public/images/async.png)
+注意看,返回的是`promise`对象, 是`resolved`状态 ,值是`undefined` 
+
+上面代码等同于
+```js
+function fn(){
+    return new Promise((resolve,reject) =>
+        resolve()
+    )
+}
+console.log(fn())
+```
+所以按这个逻辑, 可以写出
+```js
+async function fn(){
+    return 'hello'
+}
+fn().then(value => console.log(value))   //打出 'hello'
+```
+如果要return一个`promise` , 也同样一个逻辑
+```js
+async function fn(){
+   return new Promise((resolve,reject)=>{
+        resolve('hello')
+    })
+}
+fn().then(value => console.log(value))  //打出 'hello'
+```
+### await
+`await`是`.then`的语法糖 , `await`要跟`async`一起使用
+```js
+new Promise((resolve, reject) => {
+    resolve()
+}).then(value => {
+    return new Promise((resolve,reject)=>{
+      resolve('hello')
+    })
+}).then(value=>{
+    console.log(value)  // 'hello'
+})
+```
+用`async/await`改写
+```js
+async function fn(){
+    let name = await new Promise((resolve,reject)=>{
+      resolve('hello')
+    })
+    console.log(name);
+    // let site =  await new Promise((resolve,reject)=>{  // 等上一个await处理后,再处理下面的
+    //   setTimeout(()=>{
+    //       resolve('baidu.com')
+    //   } ,2000)
+    // })
+}
+fn()
+```
+**`async` 函数返回的 `Promise` 对象，必须等到内部所有的 `await` 命令的 `Promise` 对象执行完，才会发生状态改变**
+```js
+const delay = timeout => new Promise(resolve=> setTimeout(resolve, timeout));
+async function f(){
+    await delay(1000);
+    await delay(2000);
+    await delay(3000);
+    return 'done';
+}
+f().then(v => console.log(v)); // 等待6s后才输出 'done'
+```
+**正常情况下，`await` 命令后面跟着的是 `Promise` ，如果不是的话，也会被转换成一个 立即 `resolve` 的 `Promise`**
+```js
+async function  f() {
+    return await 1
+};
+f().then( (v) => console.log(v)) // 1
+```
+### async 实现做一个延时的函数
+```js
+function sleep(delay){
+    return new Promise((resolve , reject)=>{
+        setTimeout(()=>{
+            resolve()
+         }, delay)
+    })
+}
+async function fn(){
+    for (let user of ['name1' , 'name2', 'name3']) {
+        await sleep(2000)
+        console.log(user)
+    }
+}
+fn()  //每隔2秒会打出名字
+```
+## await错误处理
+**当 `async` 函数中只要一个 `await` 出现 `reject` 状态，则后面的 `await` 都不会被执行。**
+
+**解决办法：可以添加 `try/catch`**
+```js
+async function getUsers(name) {
+    try {
+        let user = await ajax(`http://.../?name=${name}`)
+        let lessons = await ajax(`http://....${user.id}`)
+        return lessons
+    } catch (error) {
+        window.alert(error.message)
+    }
+}
+getUsers('用户').then(value => {
+    console.log(value)
+}).catch(reason => {
+    console.log(reason)
+})
+```
+
