@@ -6,17 +6,8 @@ Promise 是 JS 进行异步编程的新的解决方案
 - 指定回调函数的方式更加灵活. 返回`promise`对象,可以给`promise`对象绑定回调函数.
 - 支持链式调用,可以解决回调地狱的问题
 
-### Promise对象
-`Promise` 对象用于表示一个异步操作的最终完成 (或失败)及其结果值。
-```js
-console.log(
-  new Promise((resolve,reject)=>{
-    resolve('hello')
-}))
-```
-![图片](../.vuepress/public/images/promise.png)
-## 回调地狱和复杂的嵌套
-### 异步加载图片体验 JS 的任务操作
+## 回调地狱和复杂嵌套
+### 异步加载图片
 ```js
 function loadImage(src, success, fail) {
   let image = new Image();
@@ -60,7 +51,7 @@ loadImage('./img.png').then(image => {
     console.log(reason)
 })
 ```
-### 定时器的任务轮询
+### 定时器嵌套
 
 用`setInterval`制作一个可以移动有变化的 div
 
@@ -136,7 +127,7 @@ interval(100 , (id ,resolve)=>{
     })
 
 ```
-## Promise 微任务机制
+## 微任务机制
 无论是宏任务还是微任务，首先它们都是异步任务。`setTimeout` 和 `Promise` 并不在同一个异步队列中，前者属于宏任务，而后者属于微任务。**先**执行微任务, **后**执行宏任务
 
 ```js
@@ -222,9 +213,42 @@ console.log("同步");
 `promise`构造函数里面的代码是同步执行的, 但遇到了`setTimeout`不会马上执行,会把他放到**宏任务**里面。所以先是打印'promise', '同步'。注意`setTimeout`被丢到宏任务里面,所以他里面的`resolve()`还没执行, **微任务还没有创建**。等它执行的时候会创建微任务。打印顺序是: 'promise','同步' , 'setTimeout' , 'then'
 问题所在是, 在这种情况,**宏任务没执行,微任务就没办法生成**, 因为微任务是宏任务执行过程当中生成出来的 
 
-## Promise的单一状态与状态中转
-```js
+## 异步状态
+`Promise` 可以理解为承诺，就像我们去KFC点餐服务员给我们一引取餐票，这就是承诺。如果餐做好了叫我们这就是成功，如果没有办法给我们做出食物这就是拒绝。
 
+* 一个 `promise` 必须有一个 `then` 方法用于处理状态改变
+### 状态说明
+`Promise` 包含 `pending`、`fulfilled`、`rejected`三种状态
+* `pending` 指初始等待状态，初始化 `promise` 时的状态
+* `resolve` 指已经解决，将 `promise` 状态设置为 `fulfilled`
+* `reject` 指拒绝处理，将 `promise` 状态设置为 `rejected`
+
+`promise` 没有使用 `resolve` 或 `reject` 更改状态时，状态为 `pending`
+```js
+console.log(
+  new Promise((resolve, reject) => {
+  });
+); //Promise {<pending>}
+```
+当改变状态后
+```js
+console.log(
+  new Promise((resolve, reject) => {
+    resolve("fulfilled");
+  })
+); //Promise {<resolved>: "fulfilled"}
+
+console.log(
+  new Promise((resolve, reject) => {
+    reject("rejected");
+  })
+); //Promise {<rejected>: "rejected"}
+```
+`promise` 创建时即立即执行即同步任务，`then` 会放在异步微任务中执行，需要等同步任务执行后才执行。
+
+### 动态改变
+如果 `resolve` 参数是一个 `promise` ，将会改变 `promise`状态。
+```js
 let p1 = new Promise((resolve,reject)=>{
     // resolve('成功')
     reject('拒绝')
@@ -261,8 +285,28 @@ let p2 = p1
         console.log('then')
     })
 ```
-## Promise.then的用法
-**每个`then`最终返回的也是一个`promise`对象, 如果后面在写一个`then` , 那么它是对上一个`promise`的处理**
+当 `promise` 做为参数传递时，需要等待 `promise` 执行完才可以继承，下面的 `p2`需要等待`p1`执行完成。
+```js
+const p1 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve("操作成功");
+  }, 2000);
+});
+const p2 = new Promise((resolve, reject) => {
+  resolve(p1);
+}).then(
+  msg => {
+    console.log(msg);
+  },
+  error => {
+    console.log(error);
+  }
+);
+```
+## Promise.then
+### 链式调用
+每次的 `then` 都是一个全新的 `promise`，默认 `then` 返回的 `promise` 状态是 `fulfilled`。
+**每个`then`最终返回的也是一个`promise`对象, 如果后面在写一个`then` , 那么它是对上一个`promise`的处理**,默认传递 `fulfilled` 状态
 ```js
 let p1 = new Promise((resolve, reject) => {
     resolve('成功')
@@ -333,27 +377,7 @@ let p2 = p1
     })
 ```
 就一句话 , **后面的`then`就是对前面返回的`promise`的处理**
-
-## 使用Promise封装ajax请求
-```js{8}
-function ajax(url){
-    return new Promise((resolve ,reject)=>{
-        const  xhr = new XMLHttpRequest()
-        xhr.open('GET' ,url)
-        xhr.onreadystatechange = ()=>{
-            if (xhr.readyState === 4) {
-                if(xhr.status  >= 200 &&  xhr.status < 300 || xhr.status === 304 ){
-                    resolve(xhr.responseText)
-                }else {
-                    reject('失败')
-                }
-            }
-        }
-        xhr.send()
-    })
-}
-```
-## Promise多种错误监测与catch的使用
+## 多种错误监测与catch
 常见的抛出错误方法
 ```js{2-4}
 new Promise((resolve, reject) => {
@@ -378,7 +402,7 @@ new Promise((resolve, reject) => {
 }).catch((reason => console.log(reason)))   //会打出 '123'
 ```
 **细节**:`catch`返回的`promise`对象是解决状态
-## 使用finally实现异步加载动画
+## finally
 
 `.finally`基本使用:`finally`无论promise成功或者失败**始终会执行**
 ```js
@@ -530,7 +554,7 @@ Promise.MyAllSettled2 = (promiseList) => {
 ## Promise.race()
 `Promise.race` 从字面意思理解就是赛跑，以状态变化最快的那个 `Promise` 实例为准，最快的 `Promise` 成功 `Promise.race` 就成功，最快的 `Promise` 失败 `Promise.race` 就失败。
 
-## async/await语法糖
+## async/await
 ### async
 **`async` 函数返回一个 `Promise` 对象**
 `async` 函数内部 `return` 返回的值。会成为 `then` 方法回调函数的参数。
@@ -652,4 +676,51 @@ getUsers('用户').then(value => {
     console.log(reason)
 })
 ```
+## await并行处理技巧
+`await`后面跟的`promise`要等到这个`promise`的状态改变之后才会执行后续代码
+```js
+function p1() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve('hello')
+        }, 1000)   //1秒
+    })
+}
 
+function p2() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve('hi')
+        }, 2000) //2秒
+    })
+}
+
+async function h() {
+    let h1 = await p1()
+    console.log(h1)   //1秒后
+    let h2 = await p2()
+    console.log(h2)     //再过2秒后, 总共花了3秒
+}
+h()
+```
+想要并行处理
+
+(1)可以利用promise立即执行的特性
+```js
+async function h() {
+    let h1 = p1()
+    let h2 = p2()
+    let x = await h1
+    let y = await h2
+    console.log(x , y)
+}
+h()
+```
+(2)用`Promise.all`
+```js
+async function h() {
+    let res = await Promise.all([p1(), p2()])
+    console.log(res)
+}
+h()
+```

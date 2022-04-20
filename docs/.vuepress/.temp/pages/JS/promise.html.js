@@ -10,51 +10,63 @@ export const data = {
       "level": 2,
       "title": "为什么使用 Promise?",
       "slug": "为什么使用-promise",
-      "children": [
-        {
-          "level": 3,
-          "title": "Promise对象",
-          "slug": "promise对象",
-          "children": []
-        }
-      ]
+      "children": []
     },
     {
       "level": 2,
-      "title": "回调地狱和复杂的嵌套",
-      "slug": "回调地狱和复杂的嵌套",
+      "title": "回调地狱和复杂嵌套",
+      "slug": "回调地狱和复杂嵌套",
       "children": [
         {
           "level": 3,
-          "title": "异步加载图片体验 JS 的任务操作",
-          "slug": "异步加载图片体验-js-的任务操作",
+          "title": "异步加载图片",
+          "slug": "异步加载图片",
           "children": []
         },
         {
           "level": 3,
-          "title": "定时器的任务轮询",
-          "slug": "定时器的任务轮询",
+          "title": "定时器嵌套",
+          "slug": "定时器嵌套",
           "children": []
         }
       ]
     },
     {
       "level": 2,
-      "title": "Promise 微任务机制",
-      "slug": "promise-微任务机制",
+      "title": "微任务机制",
+      "slug": "微任务机制",
       "children": []
     },
     {
       "level": 2,
-      "title": "Promise的单一状态与状态中转",
-      "slug": "promise的单一状态与状态中转",
-      "children": []
-    },
-    {
-      "level": 2,
-      "title": "Promise.then的用法",
-      "slug": "promise-then的用法",
+      "title": "异步状态",
+      "slug": "异步状态",
       "children": [
+        {
+          "level": 3,
+          "title": "状态说明",
+          "slug": "状态说明",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "动态改变",
+          "slug": "动态改变",
+          "children": []
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "title": "Promise.then",
+      "slug": "promise-then",
+      "children": [
+        {
+          "level": 3,
+          "title": "链式调用",
+          "slug": "链式调用",
+          "children": []
+        },
         {
           "level": 3,
           "title": "then返回值的处理技巧",
@@ -65,20 +77,14 @@ export const data = {
     },
     {
       "level": 2,
-      "title": "使用Promise封装ajax请求",
-      "slug": "使用promise封装ajax请求",
+      "title": "多种错误监测与catch",
+      "slug": "多种错误监测与catch",
       "children": []
     },
     {
       "level": 2,
-      "title": "Promise多种错误监测与catch的使用",
-      "slug": "promise多种错误监测与catch的使用",
-      "children": []
-    },
-    {
-      "level": 2,
-      "title": "使用finally实现异步加载动画",
-      "slug": "使用finally实现异步加载动画",
+      "title": "finally",
+      "slug": "finally",
       "children": []
     },
     {
@@ -139,8 +145,8 @@ export const data = {
     },
     {
       "level": 2,
-      "title": "async/await语法糖",
-      "slug": "async-await语法糖",
+      "title": "async/await",
+      "slug": "async-await",
       "children": [
         {
           "level": 3,
@@ -167,15 +173,21 @@ export const data = {
       "title": "await错误处理",
       "slug": "await错误处理",
       "children": []
+    },
+    {
+      "level": 2,
+      "title": "await并行处理技巧",
+      "slug": "await并行处理技巧",
+      "children": []
     }
   ],
   "git": {
-    "updatedTime": 1650444167000,
+    "updatedTime": 1650466492000,
     "contributors": [
       {
         "name": "jgoriginal",
         "email": "932274204@qq.com",
-        "commits": 4
+        "commits": 5
       }
     ]
   },
