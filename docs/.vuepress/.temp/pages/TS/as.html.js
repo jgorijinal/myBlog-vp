@@ -1,22 +1,16 @@
 export const data = {
-  "key": "v-05f7afc8",
-  "path": "/vue-router/name.html",
-  "title": "命名路由",
+  "key": "v-222ca7e0",
+  "path": "/TS/as.html",
+  "title": "",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
   "headers": [],
   "git": {
-    "updatedTime": 1650298555000,
-    "contributors": [
-      {
-        "name": "jgoriginal",
-        "email": "932274204@qq.com",
-        "commits": 3
-      }
-    ]
+    "updatedTime": null,
+    "contributors": []
   },
-  "filePathRelative": "vue-router/name.md"
+  "filePathRelative": "TS/as.md"
 }
 
 if (import.meta.webpackHot) {

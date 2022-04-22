@@ -3,6 +3,8 @@ import { defineAsyncComponent } from 'vue'
 export const pagesComponents = {
   // path: /
   "v-8daa1a0e": defineAsyncComponent(() => import(/* webpackChunkName: "v-8daa1a0e" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/index.html.vue")),
+  // path: /admin-project/axios.html
+  "v-a950b3e0": defineAsyncComponent(() => import(/* webpackChunkName: "v-a950b3e0" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/admin-project/axios.html.vue")),
   // path: /admin-project/start.html
   "v-2e63fcb8": defineAsyncComponent(() => import(/* webpackChunkName: "v-2e63fcb8" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/admin-project/start.html.vue")),
   // path: /admin-project/vite.html
@@ -19,6 +21,12 @@ export const pagesComponents = {
   "v-c60638ea": defineAsyncComponent(() => import(/* webpackChunkName: "v-c60638ea" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/promise.html.vue")),
   // path: /json-server%E4%B8%8Emock/
   "v-5b635b6e": defineAsyncComponent(() => import(/* webpackChunkName: "v-5b635b6e" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/json-server与mock/index.html.vue")),
+  // path: /TS/as.html
+  "v-222ca7e0": defineAsyncComponent(() => import(/* webpackChunkName: "v-222ca7e0" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/TS/as.html.vue")),
+  // path: /TS/basic.html
+  "v-2644d4a2": defineAsyncComponent(() => import(/* webpackChunkName: "v-2644d4a2" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/TS/basic.html.vue")),
+  // path: /TS/start.html
+  "v-0b7ee4ee": defineAsyncComponent(() => import(/* webpackChunkName: "v-0b7ee4ee" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/TS/start.html.vue")),
   // path: /vue/character.html
   "v-b1db4c9c": defineAsyncComponent(() => import(/* webpackChunkName: "v-b1db4c9c" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue/character.html.vue")),
   // path: /vue/communication.html

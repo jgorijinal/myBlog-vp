@@ -114,19 +114,21 @@ module.exports = {
                 ]
             },
             {
+                text: 'TS系列',
+                collapsible: true,
+                children: [
+                    '/TS/start.md',
+                    '/TS/basic.md',
+                    '/TS/as.md',
+                ]
+            },
+            {
                 text: '脚手架项目',
                 collapsible: true,
                 children: [
-                    {
-                        text: `路由初始配置`,
-                        link: '/admin-project/start.md',
-                        children: [],
-                    },
-                    {
-                        text: `Vite环境变量`,
-                        link: '/admin-project/vite.md',
-                        children: [],
-                    },
+                    '/admin-project/start.md',
+                    '/admin-project/vite.md',
+                    '/admin-project/axios.md',
                 ]
             },
             {

@@ -102,19 +102,21 @@ export const themeData = {
       ]
     },
     {
+      "text": "TS系列",
+      "collapsible": true,
+      "children": [
+        "/TS/start.md",
+        "/TS/basic.md",
+        "/TS/basic.md"
+      ]
+    },
+    {
       "text": "脚手架项目",
       "collapsible": true,
       "children": [
-        {
-          "text": "路由初始配置",
-          "link": "/admin-project/start.md",
-          "children": []
-        },
-        {
-          "text": "Vite环境变量",
-          "link": "/admin-project/vite.md",
-          "children": []
-        }
+        "/admin-project/start.md",
+        "/admin-project/vite.md",
+        "/admin-project/axios.md"
       ]
     },
     {
@@ -151,4 +153,17 @@ export const themeData = {
   "openInNewWindow": "open in new window",
   "toggleDarkMode": "toggle dark mode",
   "toggleSidebar": "toggle sidebar"
+}
+
+if (import.meta.webpackHot) {
+  import.meta.webpackHot.accept()
+  if (__VUE_HMR_RUNTIME__.updateThemeData) {
+    __VUE_HMR_RUNTIME__.updateThemeData(themeData)
+  }
+}
+
+if (import.meta.hot) {
+  import.meta.hot.accept(({ themeData }) => {
+    __VUE_HMR_RUNTIME__.updateThemeData(themeData)
+  })
 }

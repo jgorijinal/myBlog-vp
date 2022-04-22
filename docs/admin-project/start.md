@@ -91,5 +91,19 @@ function getChildRouteByModules(layoutsRoute: RouteRecordRaw) {
 }
 
 export default layoutsRoutes;
+```
+src/main.ts
+```ts
+import { createApp } from 'vue'
+import App from '@/App.vue'
+import router , { setupRouter } from '@/router';
 
+async function bootstrap() {
+  const app = createApp(App)
+  setupRouter(app)     //路由
+  //setupPlugins(app)  //插件
+  await router.isReady()
+  app.mount('#app')
+}
+bootstrap()
 ```
