@@ -110,7 +110,10 @@ module.exports = {
                 collapsible: true,
                 children: [
                     '/JS/promise.md',
-                    '/JS/closure.md'
+                    '/JS/closure.md',
+                    '/JS/proto.md',
+                    '/JS/class.md',
+                
                 ]
             },
             {

@@ -594,7 +594,13 @@ async function fn(){
 fn().then(value => console.log(value))  //打出 'hello'
 ```
 ### await
-`await`是`.then`的语法糖 , `await`要跟`async`一起使用
+使用 await 关键词后会等待promise 完
+
+* await 后面一般是promise，如果不是直接返回
+* await 必须放在 async 定义的函数中使用
+* await 用于替代 then 使编码更优雅
+
+`await`是`.then`的语法糖
 ```js
 new Promise((resolve, reject) => {
     resolve()

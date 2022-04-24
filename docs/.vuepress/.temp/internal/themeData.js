@@ -98,7 +98,9 @@ export const themeData = {
       "collapsible": true,
       "children": [
         "/JS/promise.md",
-        "/JS/closure.md"
+        "/JS/closure.md",
+        "/JS/proto.md",
+        "/JS/class.md"
       ]
     },
     {
@@ -107,7 +109,7 @@ export const themeData = {
       "children": [
         "/TS/start.md",
         "/TS/basic.md",
-        "/TS/basic.md"
+        "/TS/as.md"
       ]
     },
     {
