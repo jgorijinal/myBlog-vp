@@ -1,4 +1,4 @@
-<template><h1 id="原型与继承" tabindex="-1"><a class="header-anchor" href="#原型与继承" aria-hidden="true">#</a> 原型与继承</h1>
+<template><h1 id="原型" tabindex="-1"><a class="header-anchor" href="#原型" aria-hidden="true">#</a> 原型</h1>
 <h2 id="原型基础" tabindex="-1"><a class="header-anchor" href="#原型基础" aria-hidden="true">#</a> 原型基础</h2>
 <h3 id="原型对象" tabindex="-1"><a class="header-anchor" href="#原型对象" aria-hidden="true">#</a> 原型对象</h3>
 <ul>
@@ -230,5 +230,4 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token keyword">let</span> obj <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 hd<span class="token punctuation">.</span>__proto__ <span class="token operator">=</span> <span class="token string">"向军"</span><span class="token punctuation">;</span>
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>hd<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//{__proto__: "向军"}</span>
-</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h2 id="继承" tabindex="-1"><a class="header-anchor" href="#继承" aria-hidden="true">#</a> 继承</h2>
-</template>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div></template>

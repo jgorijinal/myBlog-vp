@@ -101,4 +101,43 @@ class User {
 const user = User.create("frank" , 18);  //用 类 调
 console.log(user);
 ```
+## 访问控制
+### public
+`public` 指不受保护的属性，在类的内部与外部都可以访问到
+```js
+class User {
+    url = 'https://www.baidu.com'
+    constructor(name) {
+        this.name = name
+    }
+}
+const user = new User('frank')
+console.log(user.url , user.name)
+```
+### private
+`private` 指私有属性，只在当前类可以访问到，并且不允许继承使用
+
+* 为属性或方法名前加 `#` 为声明为私有属性
+* 私有属性只能在声明的类中使用
+
+下面声明私有属性 `#host` 与私有方法 `check` 用于检测用户名
+```js
+class User {
+    #host = 'baidu.com'
+    constructor(name) {
+        this.name = name
+        this.#check()
+    }
+    #check(){
+        if(this.name.length < 5) {
+            throw new Error('名字不可以小于5位')
+        }
+        return true
+    }
+}
+const user = new User('xxx')
+console.log(user.#host)  // Uncaught SyntaxError: Private field '#host' must be declared in an enclosing class
+user.#check()    //Private field '#check' must be declared in an enclosing class
+```
+
 

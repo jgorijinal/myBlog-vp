@@ -49,11 +49,36 @@ export const data = {
           "children": []
         }
       ]
+    },
+    {
+      "level": 2,
+      "title": "访问控制",
+      "slug": "访问控制",
+      "children": [
+        {
+          "level": 3,
+          "title": "public",
+          "slug": "public",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "private",
+          "slug": "private",
+          "children": []
+        }
+      ]
     }
   ],
   "git": {
-    "updatedTime": null,
-    "contributors": []
+    "updatedTime": 1650817943000,
+    "contributors": [
+      {
+        "name": "jgoriginal",
+        "email": "932274204@qq.com",
+        "commits": 1
+      }
+    ]
   },
   "filePathRelative": "JS/class.md"
 }

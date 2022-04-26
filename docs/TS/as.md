@@ -188,6 +188,21 @@ console.log(el.id);
 const bodyEl = document.querySelector('body') //const body: HTMLBodyElement | null
 const el = document.querySelector('xxx')   //const el: Element | null
 ```
+下例中的 `DOM` 类型会报错，因为 .xxx 是 `Element` 类型，而构建函数参数 `el` 的类型是 `HTMLDivElement`,
+所以要明确断言类型成 `HTMLDivElement`
+```ts
+class Hd {
+  el: HTMLDivElement;
+  constructor(el:HTMLDivElement) {
+    this.el = el
+  }
+  html(){
+    return this.el.innerHTML
+  }
+}
+const el = document.querySelector('xxx') as HTMLDivElement  // const el: Element | null , 所以要断言
+new Hd(el)
+```
 ### 对null的处理 (非空断言)
 针对于其他标签元素，返回值可能为 null，所以使用 `as` 断言或`！`处理
 ```ts

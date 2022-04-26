@@ -1,7 +1,7 @@
 export const data = {
   "key": "v-76dfbbc4",
   "path": "/JS/proto.html",
-  "title": "原型与继承",
+  "title": "原型",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
@@ -84,17 +84,17 @@ export const data = {
           "children": []
         }
       ]
-    },
-    {
-      "level": 2,
-      "title": "继承",
-      "slug": "继承",
-      "children": []
     }
   ],
   "git": {
-    "updatedTime": null,
-    "contributors": []
+    "updatedTime": 1650817943000,
+    "contributors": [
+      {
+        "name": "jgoriginal",
+        "email": "932274204@qq.com",
+        "commits": 1
+      }
+    ]
   },
   "filePathRelative": "JS/proto.md"
 }

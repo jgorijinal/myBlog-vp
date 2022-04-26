@@ -123,6 +123,9 @@ module.exports = {
                     '/TS/start.md',
                     '/TS/basic.md',
                     '/TS/as.md',
+                    '/TS/class.md',
+                    '/TS/generics.md',
+                    '/TS/Vue3.md'
                 ]
             },
             {
