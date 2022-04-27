@@ -5,7 +5,14 @@ export const data = {
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
-  "headers": [],
+  "headers": [
+    {
+      "level": 2,
+      "title": "封装axios请求",
+      "slug": "封装axios请求",
+      "children": []
+    }
+  ],
   "git": {
     "updatedTime": 1650639686000,
     "contributors": [

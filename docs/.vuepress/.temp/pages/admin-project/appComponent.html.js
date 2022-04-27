@@ -1,29 +1,29 @@
 export const data = {
-  "key": "v-4b29d755",
-  "path": "/TS/Vue3.html",
-  "title": "TS 与 Vue 结合",
+  "key": "v-cd447420",
+  "path": "/admin-project/appComponent.html",
+  "title": "全局组件注册",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
   "headers": [
     {
       "level": 2,
-      "title": "封装fetch请求",
-      "slug": "封装fetch请求",
+      "title": "全局组件注册",
+      "slug": "全局组件注册-1",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "自定义input组件和v-model",
+      "slug": "自定义input组件和v-model",
       "children": []
     }
   ],
   "git": {
-    "updatedTime": 1650975785000,
-    "contributors": [
-      {
-        "name": "jgoriginal",
-        "email": "932274204@qq.com",
-        "commits": 1
-      }
-    ]
+    "updatedTime": null,
+    "contributors": []
   },
-  "filePathRelative": "TS/Vue3.md"
+  "filePathRelative": "admin-project/appComponent.md"
 }
 
 if (import.meta.webpackHot) {

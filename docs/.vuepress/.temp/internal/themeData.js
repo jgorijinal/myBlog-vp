@@ -121,7 +121,9 @@ export const themeData = {
       "children": [
         "/admin-project/start.md",
         "/admin-project/vite.md",
-        "/admin-project/axios.md"
+        "/admin-project/axios.md",
+        "/admin-project/tailwindcss.md",
+        "/admin-project/appComponent.md"
       ]
     },
     {

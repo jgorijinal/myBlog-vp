@@ -25,13 +25,13 @@ Vue3 用 `v-model`代替了Vue2里的 `v-model` 和 `.sync`
 ```vue
 <CustomInput :modelValue="xxx" @update:modelValue="xxx = $event" />
 ```
+**如果是input组件,
+为了使组件能像这样工作，内部的 `<input>` 组件必须：**
 
-为了使组件能像这样工作，内部的 `<input>` 组件必须：
+- **绑定 `value` attribute 到 `modelValue` prop**
+- **输入新的值时在 `input` 元素上触发 `update:modelValue` 事件**
 
-- 绑定 `value` attribute 到 `modelValue` prop
-- 输入新的值时在 `input` 元素上触发 `update:modelValue` 事件
-
-这里是相应的代码：
+**这里是相应的代码：**
 
 ```vue
 <!-- CustomInput.vue -->

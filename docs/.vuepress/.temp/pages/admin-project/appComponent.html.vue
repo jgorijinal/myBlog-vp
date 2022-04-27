@@ -1,0 +1,51 @@
+<template><h1 id="全局组件注册" tabindex="-1"><a class="header-anchor" href="#全局组件注册" aria-hidden="true">#</a> 全局组件注册</h1>
+<h2 id="全局组件注册-1" tabindex="-1"><a class="header-anchor" href="#全局组件注册-1" aria-hidden="true">#</a> 全局组件注册</h2>
+<p>当要使用vue组件时 ,需要每次手动引入组件会很麻烦 , 所以用函数全部全局注册每个组件
+还是那个熟悉的api <code>import.meta.globEager(pattern)</code></p>
+<p>src/plugins/index.ts</p>
+<div class="language-typescript ext-ts line-numbers-mode"><pre v-pre class="language-typescript"><code><span class="token keyword">import</span> <span class="token punctuation">{</span>App<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>setupTailwindcss<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/plugins/tailwindcss'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> _ <span class="token keyword">from</span> <span class="token string">'lodash'</span>
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">setupPlugins</span><span class="token punctuation">(</span>app<span class="token operator">:</span>App<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token function">setupTailwindcss</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token function">autoRegisterComponent</span><span class="token punctuation">(</span>app<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 全局自动注册组件函数</span>
+<span class="token keyword">function</span>  <span class="token function">autoRegisterComponent</span><span class="token punctuation">(</span>app<span class="token operator">:</span>App<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token keyword">const</span> components<span class="token operator">=</span> <span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span><span class="token function">globEager</span><span class="token punctuation">(</span><span class="token string">'../components/form/*.vue'</span><span class="token punctuation">)</span>
+  <span class="token comment">//console.log(components)</span>
+  Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>components<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token operator">=></span><span class="token punctuation">{</span>
+    <span class="token keyword">const</span> name <span class="token operator">=</span> _<span class="token punctuation">.</span><span class="token function">camelCase</span><span class="token punctuation">(</span>key<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">?.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'.'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">shift</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">as</span> <span class="token builtin">string</span><span class="token punctuation">)</span>
+    <span class="token comment">//console.log(name)</span>
+    app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span>name <span class="token punctuation">,</span> components<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">.</span>default<span class="token punctuation">)</span>   <span class="token comment">// 组件全局注册</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="highlight-lines"><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><br></div><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br></div></div><p><img src="@source/.vuepress/public/images/camelCase.png" alt="图片"></p>
+<p><strong>小插曲</strong>:<code>camelCase()</code>是&quot;骆驼拼写法&quot;, 除了第一个每个单词第一个字母大写</p>
+<h2 id="自定义input组件和v-model" tabindex="-1"><a class="header-anchor" href="#自定义input组件和v-model" aria-hidden="true">#</a> 自定义input组件和v-model</h2>
+<p>模板里使用input组件:</p>
+<div class="language-typescript ext-ts line-numbers-mode"><pre v-pre class="language-typescript"><code><span class="token operator">&lt;</span>script setup lang<span class="token operator">=</span><span class="token string">"ts"</span><span class="token operator">></span>
+  <span class="token keyword">const</span> form <span class="token operator">=</span> <span class="token function">reactive</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    account<span class="token operator">:</span><span class="token string">''</span><span class="token punctuation">,</span>
+    password<span class="token operator">:</span><span class="token string">''</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span>
+<span class="token operator">&lt;</span>template<span class="token operator">></span>
+    <span class="token operator">&lt;</span>hdInput  v<span class="token operator">-</span>model<span class="token operator">=</span><span class="token string">"form.account"</span><span class="token operator">></span> 
+    <span class="token comment">//等价于 下面代码( 细品 )</span>
+    <span class="token operator">&lt;</span>hdInput <span class="token operator">:</span>modelValue<span class="token operator">=</span><span class="token string">"form.account"</span> <span class="token decorator"><span class="token at operator">@</span><span class="token function">update</span></span><span class="token operator">:</span>modelValue<span class="token operator">=</span><span class="token string">"modelValue = $event"</span><span class="token operator">></span> 
+<span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">></span>  
+</code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br></div><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><p>hdInput组件 :</p>
+<template>
+  <input :value="props.modelValue" @input="$emit('update:modelValue' ,$event.target.value )">  <!--细品-->
+</template>
+</template>
+
+<script setup lang="ts">
+  const props = defineProps({
+    modelValue:{
+      type:string
+    }
+  })
+</script>

@@ -21,12 +21,13 @@
 <div class="language-vue ext-vue line-numbers-mode"><pre v-pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>CustomInput</span> <span class="token attr-name">v-model</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>xxx<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
 </code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br></div></div><p>上面代码等价于</p>
 <div class="language-vue ext-vue line-numbers-mode"><pre v-pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>CustomInput</span> <span class="token attr-name">:modelValue</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>xxx<span class="token punctuation">"</span></span> <span class="token attr-name"><span class="token namespace">@update:</span>modelValue</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>xxx = $event<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
-</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br></div></div><p>为了使组件能像这样工作，内部的 <code>&lt;input&gt;</code> 组件必须：</p>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br></div></div><p><strong>如果是input组件,
+为了使组件能像这样工作，内部的 <code>&lt;input&gt;</code> 组件必须：</strong></p>
 <ul>
-<li>绑定 <code>value</code> attribute 到 <code>modelValue</code> prop</li>
-<li>输入新的值时在 <code>input</code> 元素上触发 <code>update:modelValue</code> 事件</li>
+<li><strong>绑定 <code>value</code> attribute 到 <code>modelValue</code> prop</strong></li>
+<li><strong>输入新的值时在 <code>input</code> 元素上触发 <code>update:modelValue</code> 事件</strong></li>
 </ul>
-<p>这里是相应的代码：</p>
+<p><strong>这里是相应的代码：</strong></p>
 <div class="language-vue ext-vue line-numbers-mode"><pre v-pre class="language-vue"><code><span class="token comment">&lt;!-- CustomInput.vue --></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>

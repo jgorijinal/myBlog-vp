@@ -2,8 +2,10 @@ import { Vuepress } from '@vuepress/client/lib/components/Vuepress'
 
 const routeItems = [
   ["v-8daa1a0e","/",{"title":"记录开始"},["/index.html","/README.md"]],
+  ["v-cd447420","/admin-project/appComponent.html",{"title":"全局组件注册"},["/admin-project/appComponent","/admin-project/appComponent.md"]],
   ["v-a950b3e0","/admin-project/axios.html",{"title":"Axios结合Typescript"},["/admin-project/axios","/admin-project/axios.md"]],
   ["v-2e63fcb8","/admin-project/start.html",{"title":"项目"},["/admin-project/start","/admin-project/start.md"]],
+  ["v-15de9f3b","/admin-project/tailwindcss.html",{"title":"tailwindcss"},["/admin-project/tailwindcss","/admin-project/tailwindcss.md"]],
   ["v-5a98d968","/admin-project/vite.html",{"title":"Vite环境"},["/admin-project/vite","/admin-project/vite.md"]],
   ["v-522485bf","/category_2/child1.html",{"title":"子 1"},["/category_2/child1","/category_2/child1.md"]],
   ["v-53d95e5e","/category_2/child2.html",{"title":"子 2"},["/category_2/child2","/category_2/child2.md"]],

@@ -42,6 +42,8 @@ export function setupRouter(app: App) {
 export default router;
 ```
 src/router/autoload.ts
+
+使用`import.meta.globEager(pattern)`api , 获取vue文件
 ```ts
 import {RouteRecordRaw} from 'vue-router';
 //import.meta.globEager(pattern)

@@ -169,7 +169,7 @@ export default function setupMockPlugin(isBuild:boolean){
 }
 ```
 ## 优化环境变量导出
-src/types/helper.ts
+src/util/helper.ts
 ```ts
 import * as _ from 'lodash';
  class Helper  {

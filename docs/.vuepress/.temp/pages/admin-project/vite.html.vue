@@ -133,7 +133,7 @@ npx tailwindcss init -p
   <span class="token punctuation">}</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
 </code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><h2 id="优化环境变量导出" tabindex="-1"><a class="header-anchor" href="#优化环境变量导出" aria-hidden="true">#</a> 优化环境变量导出</h2>
-<p>src/types/helper.ts</p>
+<p>src/util/helper.ts</p>
 <div class="language-typescript ext-ts line-numbers-mode"><pre v-pre class="language-typescript"><code><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> _ <span class="token keyword">from</span> <span class="token string">'lodash'</span><span class="token punctuation">;</span>
  <span class="token keyword">class</span> <span class="token class-name">Helper</span>  <span class="token punctuation">{</span>
   <span class="token keyword">public</span> env <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token keyword">as</span> ImportMetaEnv

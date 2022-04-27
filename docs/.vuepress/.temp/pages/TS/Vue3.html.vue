@@ -1,5 +1,5 @@
 <template><h1 id="ts-与-vue-结合" tabindex="-1"><a class="header-anchor" href="#ts-与-vue-结合" aria-hidden="true">#</a> TS 与 Vue 结合</h1>
-<h2 id="封装请求" tabindex="-1"><a class="header-anchor" href="#封装请求" aria-hidden="true">#</a> 封装请求</h2>
+<h2 id="封装fetch请求" tabindex="-1"><a class="header-anchor" href="#封装fetch请求" aria-hidden="true">#</a> 封装fetch请求</h2>
 <p>src/composables/useApi.ts</p>
 <div class="language-typescript ext-ts line-numbers-mode"><pre v-pre class="language-typescript"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> ref <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"vue"</span><span class="token punctuation">;</span>
 

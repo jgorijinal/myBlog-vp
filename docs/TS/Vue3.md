@@ -1,6 +1,6 @@
 # TS 与 Vue 结合
 
-## 封装请求
+## 封装fetch请求
 
 src/composables/useApi.ts
 
