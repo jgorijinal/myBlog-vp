@@ -3,10 +3,17 @@
 <p><a href="https://cn.vitejs.dev/guide/env-and-mode.html" target="_blank" rel="noopener noreferrer">官网<ExternalLinkIcon/></a></p>
 <p><code>.env</code></p>
 <div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>VITE_SOME_KEY=123
-VITE_ROUTE_AUTOLOAD=true
+VITE_ROUTER_AUTOLOAD=true
 VITE_API_URL="/api"
 </code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>加载的环境变量也会通过<code>import.meta.env</code> 以<strong>字符串形式</strong>暴露给客户端源码。</p>
-<p>vite/alias.ts  <strong>@别名</strong></p>
+<div class="language-vue ext-vue line-numbers-mode"><pre v-pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>ts<span class="token punctuation">"</span></span> <span class="token attr-name">setup</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span>env<span class="token punctuation">)</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>注意, 值全都是<strong>字符串</strong>
+<img src="@source/../docs/.vuepress/public/images/env.png" alt="图片"></p>
+<h2 id="vite-config-ts" tabindex="-1"><a class="header-anchor" href="#vite-config-ts" aria-hidden="true">#</a> vite.config.ts</h2>
+<p>创建一个叫<code>vite</code>的文件夹, 把<code>vite.config.ts</code>的配置拆分到这个文件夹里, 防止配置的代码堆积
+vite/alias.ts  <strong>@别名</strong></p>
 <div class="language-typescript ext-ts line-numbers-mode"><pre v-pre class="language-typescript"><code><span class="token keyword">import</span> path <span class="token keyword">from</span> <span class="token string">'path'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span>AliasOptions<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vite'</span><span class="token punctuation">;</span>
 
@@ -17,8 +24,8 @@ VITE_API_URL="/api"
 <div class="language-typescript ext-ts line-numbers-mode"><pre v-pre class="language-typescript"><code><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> _ <span class="token keyword">from</span> <span class="token string">'lodash'</span>
 
 <span class="token keyword">export</span> <span class="token keyword">function</span>  <span class="token function">parseEnv</span><span class="token punctuation">(</span>env<span class="token operator">:</span>Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span><span class="token builtin">any</span><span class="token operator">></span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">//转换env环境变量的函数</span>
-    <span class="token keyword">const</span> envs <span class="token operator">=</span> _<span class="token punctuation">.</span><span class="token function">cloneDeep</span><span class="token punctuation">(</span>env<span class="token punctuation">)</span>
-  <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>envs<span class="token punctuation">)</span>
+    <span class="token keyword">const</span> envs <span class="token operator">=</span> _<span class="token punctuation">.</span><span class="token function">cloneDeep</span><span class="token punctuation">(</span>env<span class="token punctuation">)</span>  <span class="token comment">//深拷贝</span>
+    <span class="token comment">// console.log(envs)</span>
     Object<span class="token punctuation">.</span><span class="token function">entries</span><span class="token punctuation">(</span>envs<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">[</span>key<span class="token punctuation">,</span>value<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">=></span><span class="token punctuation">{</span>
       <span class="token keyword">if</span><span class="token punctuation">(</span>value <span class="token operator">===</span> <span class="token string">'true'</span> <span class="token operator">||</span> value <span class="token operator">===</span> <span class="token string">'false'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         envs<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> value <span class="token operator">===</span> <span class="token string">'true'</span>
@@ -29,7 +36,7 @@ VITE_API_URL="/api"
     <span class="token punctuation">}</span><span class="token punctuation">)</span>
   <span class="token keyword">return</span> envs
 <span class="token punctuation">}</span>
-</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><p>vite.config.ts  <strong>vite总配置</strong></p>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><p><code>vite.config.ts</code>  <strong>vite总配置</strong></p>
 <div class="language-typescript ext-ts line-numbers-mode"><pre v-pre class="language-typescript"><code><span class="token keyword">import</span> <span class="token punctuation">{</span>ConfigEnv<span class="token punctuation">,</span>  loadEnv<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vite'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> vue <span class="token keyword">from</span> <span class="token string">'@vitejs/plugin-vue'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> alias <span class="token keyword">from</span> <span class="token string">'./vite/alias'</span><span class="token punctuation">;</span>
@@ -132,7 +139,21 @@ npx tailwindcss init -p
     localEnabled<span class="token operator">:</span> <span class="token operator">!</span>isBuild<span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
-</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><h2 id="优化环境变量导出" tabindex="-1"><a class="header-anchor" href="#优化环境变量导出" aria-hidden="true">#</a> 优化环境变量导出</h2>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><h2 id="为环境变量添加类型支持" tabindex="-1"><a class="header-anchor" href="#为环境变量添加类型支持" aria-hidden="true">#</a> 为环境变量添加类型支持</h2>
+<p><a href="https://cn.vitejs.dev/guide/env-and-mode.html#intellisense" target="_blank" rel="noopener noreferrer">vite官网<ExternalLinkIcon/></a>
+types/viteEnv.d.ts</p>
+<div class="language-typescript ext-ts line-numbers-mode"><pre v-pre class="language-typescript"><code><span class="token keyword">interface</span> <span class="token class-name">ViteEnv</span> <span class="token punctuation">{</span>
+  <span class="token constant">VITE_SOME_KEY</span><span class="token operator">:</span><span class="token builtin">number</span>
+  <span class="token constant">VITE_ROUTER_AUTOLOAD</span><span class="token operator">:</span><span class="token builtin">boolean</span>
+  <span class="token constant">VITE_API_URL</span><span class="token operator">:</span><span class="token builtin">string</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">interface</span> <span class="token class-name">ImportMetaEnv</span>  <span class="token keyword">extends</span> <span class="token class-name">ViteEnv</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+<span class="token keyword">interface</span> <span class="token class-name">ImportMeta</span> <span class="token punctuation">{</span>
+  <span class="token keyword">readonly</span> env<span class="token operator">:</span> ImportMetaEnv
+<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><h2 id="优化环境变量导出" tabindex="-1"><a class="header-anchor" href="#优化环境变量导出" aria-hidden="true">#</a> 优化环境变量导出</h2>
 <p>src/util/helper.ts</p>
 <div class="language-typescript ext-ts line-numbers-mode"><pre v-pre class="language-typescript"><code><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> _ <span class="token keyword">from</span> <span class="token string">'lodash'</span><span class="token punctuation">;</span>
  <span class="token keyword">class</span> <span class="token class-name">Helper</span>  <span class="token punctuation">{</span>

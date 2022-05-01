@@ -1,22 +1,16 @@
 export const data = {
-  "key": "v-cd447420",
-  "path": "/admin-project/appComponent.html",
-  "title": "",
+  "key": "v-29734508",
+  "path": "/admin-project/form.html",
+  "title": "表单验证 vee-validate",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
   "headers": [],
   "git": {
-    "updatedTime": 1651079178000,
-    "contributors": [
-      {
-        "name": "jgoriginal",
-        "email": "932274204@qq.com",
-        "commits": 1
-      }
-    ]
+    "updatedTime": null,
+    "contributors": []
   },
-  "filePathRelative": "admin-project/appComponent.md"
+  "filePathRelative": "admin-project/form.md"
 }
 
 if (import.meta.webpackHot) {

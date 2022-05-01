@@ -2,8 +2,10 @@ import { Vuepress } from '@vuepress/client/lib/components/Vuepress'
 
 const routeItems = [
   ["v-8daa1a0e","/",{"title":"记录开始"},["/index.html","/README.md"]],
-  ["v-cd447420","/admin-project/appComponent.html",{"title":"全局组件注册"},["/admin-project/appComponent","/admin-project/appComponent.md"]],
   ["v-a950b3e0","/admin-project/axios.html",{"title":"Axios结合Typescript"},["/admin-project/axios","/admin-project/axios.md"]],
+  ["v-34681369","/admin-project/component.html",{"title":"全局组件注册"},["/admin-project/component","/admin-project/component.md"]],
+  ["v-29734508","/admin-project/form.html",{"title":"表单验证 vee-validate"},["/admin-project/form","/admin-project/form.md"]],
+  ["v-0150a664","/admin-project/routerAutoload.html",{"title":"根据配置项自定义路由自动注册"},["/admin-project/routerAutoload","/admin-project/routerAutoload.md"]],
   ["v-2e63fcb8","/admin-project/start.html",{"title":"项目"},["/admin-project/start","/admin-project/start.md"]],
   ["v-15de9f3b","/admin-project/tailwindcss.html",{"title":"tailwindcss"},["/admin-project/tailwindcss","/admin-project/tailwindcss.md"]],
   ["v-5a98d968","/admin-project/vite.html",{"title":"Vite环境"},["/admin-project/vite","/admin-project/vite.md"]],
@@ -14,6 +16,7 @@ const routeItems = [
   ["v-4244732a","/JS/closure.html",{"title":"闭包"},["/JS/closure","/JS/closure.md"]],
   ["v-c60638ea","/JS/promise.html",{"title":"Promise"},["/JS/promise","/JS/promise.md"]],
   ["v-76dfbbc4","/JS/proto.html",{"title":"原型"},["/JS/proto","/JS/proto.md"]],
+  ["v-7cc72632","/JS/reg.html",{"title":"正则表达式"},["/JS/reg","/JS/reg.md"]],
   ["v-5b635b6e","/json-server%E4%B8%8Emock/",{"title":""},["/json-server与mock/","/json-server%E4%B8%8Emock/index.html","/json-server与mock/README.md","/json-server%E4%B8%8Emock/README.md"]],
   ["v-222ca7e0","/TS/as.html",{"title":"断言"},["/TS/as","/TS/as.md"]],
   ["v-2644d4a2","/TS/basic.html",{"title":"基础类型"},["/TS/basic","/TS/basic.md"]],

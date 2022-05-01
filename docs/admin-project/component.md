@@ -1,6 +1,5 @@
 # 全局组件注册
-
-## 全局组件注册
+## 全局组件的注册
 当要使用vue组件时 ,需要每次手动引入组件会很麻烦 , 所以用函数全部全局注册每个组件
 还是那个熟悉的api `import.meta.globEager(pattern)`
 
@@ -31,7 +30,7 @@ function  autoRegisterComponent(app:App){
 
 ## 自定义input组件和v-model
 模板里使用input组件:
-```ts{8}
+```vue{8}
 <script setup lang="ts">
   const form = reactive({
     account:'',
@@ -44,7 +43,9 @@ function  autoRegisterComponent(app:App){
     <hdInput :modelValue="form.account" @update:modelValue="modelValue = $event"> 
 </template>  
 ```
+
 hdInput组件 :
+```vue
 <script setup lang="ts">
   const props = defineProps({
     modelValue:{
@@ -55,4 +56,4 @@ hdInput组件 :
 <template>
   <input :value="props.modelValue" @input="$emit('update:modelValue' ,$event.target.value )">  <!--细品-->
 </template>
-
+```

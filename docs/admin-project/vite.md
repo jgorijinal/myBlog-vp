@@ -5,11 +5,20 @@
 `.env`
 ```
 VITE_SOME_KEY=123
-VITE_ROUTE_AUTOLOAD=true
+VITE_ROUTER_AUTOLOAD=true
 VITE_API_URL="/api"
 ```
 加载的环境变量也会通过`import.meta.env` 以**字符串形式**暴露给客户端源码。
+```vue
+<script lang="ts" setup>
+  console.log(import.meta.env)
+</script>
+```
+注意, 值全都是**字符串**
+![图片](../../docs/.vuepress/public/images/env.png)
 
+## vite.config.ts
+创建一个叫`vite`的文件夹, 把`vite.config.ts`的配置拆分到这个文件夹里, 防止配置的代码堆积
 vite/alias.ts  **@别名**
 ```ts
 import path from 'path';
@@ -24,8 +33,8 @@ vite/util.ts  因为环境变量都是字符串 , 这是**转换env环境变量�
 import * as _ from 'lodash'
 
 export function  parseEnv(env:Record<string,any>) { //转换env环境变量的函数
-    const envs = _.cloneDeep(env)
-  console.log(envs)
+    const envs = _.cloneDeep(env)  //深拷贝
+    // console.log(envs)
     Object.entries(envs).forEach(([key,value])=>{
       if(value === 'true' || value === 'false') {
         envs[key] = value === 'true'
@@ -37,7 +46,7 @@ export function  parseEnv(env:Record<string,any>) { //转换env环境变量的�
   return envs
 }
 ```
-vite.config.ts  **vite总配置**
+`vite.config.ts`  **vite总配置**
 ```ts
 import {ConfigEnv,  loadEnv} from 'vite';
 import vue from '@vitejs/plugin-vue';
@@ -168,6 +177,24 @@ export default function setupMockPlugin(isBuild:boolean){
   })
 }
 ```
+## 为环境变量添加类型支持
+[vite官网](https://cn.vitejs.dev/guide/env-and-mode.html#intellisense)
+types/viteEnv.d.ts
+```ts
+interface ViteEnv {
+  VITE_SOME_KEY:number
+  VITE_ROUTER_AUTOLOAD:boolean
+  VITE_API_URL:string
+}
+
+interface ImportMetaEnv  extends ViteEnv{}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv
+}
+```
+
+
 ## 优化环境变量导出
 src/util/helper.ts
 ```ts

@@ -1,29 +1,29 @@
 export const data = {
-  "key": "v-a950b3e0",
-  "path": "/admin-project/axios.html",
-  "title": "Axios结合Typescript",
+  "key": "v-34681369",
+  "path": "/admin-project/component.html",
+  "title": "全局组件注册",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
   "headers": [
     {
       "level": 2,
-      "title": "封装axios请求",
-      "slug": "封装axios请求",
+      "title": "全局组件的注册",
+      "slug": "全局组件的注册",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "自定义input组件和v-model",
+      "slug": "自定义input组件和v-model",
       "children": []
     }
   ],
   "git": {
-    "updatedTime": 1651079178000,
-    "contributors": [
-      {
-        "name": "jgoriginal",
-        "email": "932274204@qq.com",
-        "commits": 2
-      }
-    ]
+    "updatedTime": null,
+    "contributors": []
   },
-  "filePathRelative": "admin-project/axios.md"
+  "filePathRelative": "admin-project/component.md"
 }
 
 if (import.meta.webpackHot) {

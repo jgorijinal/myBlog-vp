@@ -100,7 +100,8 @@ export const themeData = {
         "/JS/promise.md",
         "/JS/closure.md",
         "/JS/proto.md",
-        "/JS/class.md"
+        "/JS/class.md",
+        "/JS/reg.md"
       ]
     },
     {
@@ -123,7 +124,9 @@ export const themeData = {
         "/admin-project/vite.md",
         "/admin-project/axios.md",
         "/admin-project/tailwindcss.md",
-        "/admin-project/appComponent.md"
+        "/admin-project/component.md",
+        "/admin-project/routerAutoload.md",
+        "/admin-project/form.md"
       ]
     },
     {
