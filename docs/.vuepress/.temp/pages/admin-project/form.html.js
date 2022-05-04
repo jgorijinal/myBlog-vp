@@ -34,6 +34,12 @@ export const data = {
           "title": "验证规则",
           "slug": "验证规则",
           "children": []
+        },
+        {
+          "level": 3,
+          "title": "批量定义验证规则",
+          "slug": "批量定义验证规则",
+          "children": []
         }
       ]
     },
@@ -57,7 +63,7 @@ export const data = {
         {
           "level": 3,
           "title": "批量定义验证规则",
-          "slug": "批量定义验证规则",
+          "slug": "批量定义验证规则-1",
           "children": []
         }
       ]
@@ -120,12 +126,12 @@ export const data = {
     }
   ],
   "git": {
-    "updatedTime": 1651395990000,
+    "updatedTime": 1651647106000,
     "contributors": [
       {
         "name": "jgoriginal",
         "email": "932274204@qq.com",
-        "commits": 1
+        "commits": 2
       }
     ]
   },

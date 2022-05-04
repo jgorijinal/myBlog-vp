@@ -16,7 +16,7 @@ vee-validate提供了组件方式进行验证，加快常用表单验证的开�
 
 * 组件`Field`中的`label`属性用于定义错误消息的表单名称
 * 组件`Field`中的`rules`属性用于定义[验证规则](https://vee-validate.logaretm.com/v4/guide/global-validators#available-rules)
-* 组件`Field`中的 `validate-on-input`指`input`事件时验证(但默认是失去焦点时)，其他事件请查看[事件文档](https://vee-validate.logaretm.com/v4/guide/components/validation#customizing-validation-triggers)
+* 组件`Field`中的 `validate-on-input`指`input`事件时验证(但默认是失去焦点时)，其他事件要查看[事件文档](https://vee-validate.logaretm.com/v4/guide/components/validation#customizing-validation-triggers)
 
 ```vue
 <script lang="ts" setup>
@@ -35,7 +35,10 @@ const onSubmit = (values:any) => {
 </script>
 <template>
   <Form @submit="onSubmit">
-    <Field name="email" :rules="validateEmail" v-model="account" label="帐号" :validate-on-input="true"/>
+    <Field name="email" :rules="validateEmail" 
+    v-model="account" label="帐号  as="input"
+    placeholder="请输入您的用户名或邮箱" 
+    :validate-on-input="true"/>
     <ErrorMessage name="email" />
     <hr />
     <button>提交</button>
@@ -93,6 +96,51 @@ const onSubmit = (values: any) => {
   </Form>
 </template>
 ```
+### 批量定义验证规则
+```vue{15-22,25}
+<script lang="ts" setup>
+import v from '@/plugins/validate'
+const {Form , Field , ErrorMessage} = v
+
+import {reactive} from 'vue';
+const form = reactive({
+  account:'abc',
+  password:''
+})
+
+const onSubmit = (values:any)=>{
+  console.log(values)
+}
+
+const schema = v.yup.object({    //可以用 yup
+  account:v.yup.string().email().required().label('用户名'),  
+  password:v.yup.string().required().min(3).label('密码')
+})
+// const schema = {     // 也可以用 rules
+//   account:{required:true ,  email:true},
+//   password:{required:true ,  min:3,max:10}
+// }
+</script>
+<template>  
+    <Form @submit="onSubmit" :validation-schema="schema" >  // 使用props -> :validation-schema
+          <Field name="account"
+                 placeholder="请输入您的邮箱"
+                 label="用户名"            
+                 :validate-on-input="true" class="hd-input" />  <!--Field可以不写rules了,因为是上面schema中已经定义了规则-->
+          <ErrorMessage name="account" class="hd-error"/>
+          <Field name="password" type="password" label="密码"
+                 placeholder="请输入密码"
+                  class="hd-input mt-2"
+                 :validate-on-input="true" />
+          <ErrorMessage name="password" class="hd-error"/>
+        <button class="hd-button mt-2 " type="submit">登录</button>
+        </Form>
+</template>
+<style lang="scss" scoped>
+....
+</style>
+```
+
 ## 组合 API
 非组件形式的JS编程方式进行表单验证
 ### 单独定义
@@ -124,7 +172,7 @@ const {errorMessage : usernameError , value:usernameValue} = useField(
 </template>
 ```
 ### 操作表单
-使用 [handleSubmit](https://vee-validate.logaretm.com/v4/guide/composition-api/handling-forms)可以在验证通过时提交表单,
+使用 [handleSubmit](https://vee-validate.logaretm.com/v4/guide/composition-api/handling-forms)可以在验证通过时提交表单, (组件形式的话不需要这个函数)
 `handleSubmit`函数接受一个接收最终表单值的回调，
 ```vue{14,18,29,30}
 <script setup lang="ts">
@@ -344,7 +392,8 @@ loadLocaleFromURL('https://unpkg.com/@vee-validate/i18n@4.1.0/dist/locale/zh_CN.
 
 //中文消息定义
 veeValidate.configure({
-  generateMessage: localize('zh_CN')
+  validateOnInput:true,    //全局设定输入时验证
+  generateMessage: localize('zh_CN')  //中文
 });
 
 //批量定义规则
