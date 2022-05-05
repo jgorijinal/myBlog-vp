@@ -109,6 +109,7 @@ module.exports = {
                 text: 'JS系列',
                 collapsible: true,
                 children: [
+                    '/JS/array.md',
                     '/JS/promise.md',
                     '/JS/closure.md',
                     '/JS/proto.md',
