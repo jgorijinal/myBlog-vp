@@ -614,7 +614,7 @@ console.log([...div.textContent]);  // 变成字符串数组
     span.addEventListener('mouseover' , (e)=>{   //鼠标浮上时添加类名
         e.target.classList.add('hover')
     })
-    span.addEventListener('animationend' , (e)=>{
+    span.addEventListener('animationend' , (e)=>{  // animationed事件!!!!!!!!!!
         e.target.classList.remove('hover')
     })
 } , 0)
