@@ -21,12 +21,12 @@ vee-validate提供了组件方式进行验证，加快常用表单验证的开�
 ```vue
 <script lang="ts" setup>
 import { Form, Field, ErrorMessage } from 'vee-validate';
-
+import { ref } from 'vue'
 const validateEmail = (value:any) =>{
   return /@/.test(value) ? true : '邮箱格式错误'    //要 return true
 }
 
-const account  = ''
+const account  = ref<any>('')
 
 const onSubmit = (values:any) => {
   console.log(values)   // {email: 'cuizhixian20@gmail.com'}
@@ -145,7 +145,7 @@ const schema = v.yup.object({    //可以用 yup
 非组件形式的JS编程方式进行表单验证
 ### 单独定义
 useField的第一个参数是name , 第二个参数是rules , 第三个参数是options
-```vue{14,17}
+```vue{14-17}
 <script setup lang="ts">
 import {configure, defineRule, useField} from 'vee-validate';  //userField
 import {min , max , email , regex , required} from '@vee-validate/rules';

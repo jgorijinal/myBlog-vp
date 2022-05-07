@@ -115,7 +115,7 @@ module.exports = {
                     '/JS/proto.md',
                     '/JS/class.md',
                     '/JS/reg.md',
-                
+                    '/JS/module.md',
                 ]
             },
             {
