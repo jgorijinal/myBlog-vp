@@ -7,7 +7,6 @@
 <div class="language-typescript ext-ts line-numbers-mode"><pre v-pre class="language-typescript"><code><span class="token keyword">import</span> <span class="token punctuation">{</span>MockMethod<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vite-plugin-mock'</span><span class="token punctuation">;</span>
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">[</span>
-
   <span class="token punctuation">{</span>
     url<span class="token operator">:</span> <span class="token string">'/api/info'</span><span class="token punctuation">,</span>
     method<span class="token operator">:</span> <span class="token string">'get'</span><span class="token punctuation">,</span>
@@ -23,8 +22,22 @@
       <span class="token punctuation">}</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    url<span class="token operator">:</span>'<span class="token operator">/</span>api<span class="token operator">/</span>login<span class="token punctuation">,</span>
+    method<span class="token operator">:</span><span class="token string">'post'</span><span class="token punctuation">,</span>
+    response<span class="token operator">:</span><span class="token punctuation">(</span><span class="token punctuation">{</span>query<span class="token punctuation">}</span><span class="token operator">=></span><span class="token punctuation">{</span>
+      <span class="token keyword">return</span> <span class="token punctuation">{</span>
+        code<span class="token operator">:</span><span class="token number">200</span><span class="token punctuation">,</span>
+        message<span class="token operator">:</span><span class="token string">'登录成功'</span><span class="token punctuation">,</span>
+        type<span class="token operator">:</span><span class="token string">'success'</span><span class="token punctuation">,</span>
+        result<span class="token operator">:</span><span class="token punctuation">{</span>
+          token<span class="token operator">:</span>Random<span class="token punctuation">.</span><span class="token function">string</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
 <span class="token punctuation">]</span> <span class="token keyword">as</span> MockMethod<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br></div></div><p>types/ResponseResult.ts   response.data 的类型</p>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br></div></div><p>types/ResponseResult.ts   response.data 的类型</p>
 <div class="language-typescript ext-ts line-numbers-mode"><pre v-pre class="language-typescript"><code><span class="token keyword">interface</span> <span class="token class-name">ResponseResult<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">></span></span> <span class="token punctuation">{</span>   <span class="token comment">// 请求返回的数据</span>
   code<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span>
   message<span class="token operator">:</span><span class="token builtin">string</span><span class="token punctuation">,</span>

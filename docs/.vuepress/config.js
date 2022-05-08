@@ -141,6 +141,8 @@ module.exports = {
                     '/admin-project/component.md',
                     '/admin-project/routerAutoload.md',
                     '/admin-project/form.md',
+                    '/admin-project/token.md',
+                    '/admin-project/guard.md',
                 ]
             },
             {

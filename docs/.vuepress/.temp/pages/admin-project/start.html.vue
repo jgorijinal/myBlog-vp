@@ -3,7 +3,12 @@
 <h2 id="初始的路由配置" tabindex="-1"><a class="header-anchor" href="#初始的路由配置" aria-hidden="true">#</a> 初始的路由配置</h2>
 <p><img src="@source/.vuepress/public/images/file.png" alt="图片"></p>
 <p><strong>注意</strong>: 布局路由一定要写上<code>&lt;router-view&gt;</code></p>
-<p>src/router/routes.ts</p>
+<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>src/router
+|--autoload.ts
+|--guard.ts    //路由守卫
+|--index.ts
+|--routes.ts
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><p>src/router/routes.ts</p>
 <div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token keyword">import</span> <span class="token punctuation">{</span>RouteRecordRaw<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue-router'</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> routes <span class="token operator">=</span> <span class="token punctuation">[</span>

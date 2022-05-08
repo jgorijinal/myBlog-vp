@@ -4,7 +4,13 @@
  ![图片](../.vuepress/public/images/file.png)
 
 **注意**: 布局路由一定要写上`<router-view>`
-
+```
+src/router
+|--autoload.ts
+|--guard.ts    //路由守卫
+|--index.ts
+|--routes.ts
+```
 src/router/routes.ts
 ```js
 import {RouteRecordRaw} from 'vue-router';

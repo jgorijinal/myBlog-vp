@@ -60,7 +60,7 @@ const onSubmit = (values:any) => {
 ```
 ### 验证规则
 使用 [@vee-validate/rules](https://vee-validate.logaretm.com/v4/guide/global-validators#available-rules)提供的验证规则进行验证，可以减少我们写验证规则
-```vue{4,8,9}
+```vue{4,8,9,25}
 <script>
 import {Form, Field, ErrorMessage, defineRule, configure} from 'vee-validate';
 
@@ -70,6 +70,7 @@ import {ref} from 'vue';
 
 defineRule('required', required);
 defineRule('email', email);
+
 
 // const validateEmail = (value:any) =>{
 //   return /@/.test(value) ? true : '邮箱格式错误'    //要 return true

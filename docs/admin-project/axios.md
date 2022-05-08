@@ -10,7 +10,6 @@ mock/user.ts  模拟的后台数据
 import {MockMethod} from 'vite-plugin-mock';
 
 export default [
-
   {
     url: '/api/info',
     method: 'get',
@@ -26,6 +25,20 @@ export default [
       }
     },
   },
+  {
+    url:'/api/login,
+    method:'post',
+    response:({query}=>{
+      return {
+        code:200,
+        message:'登录成功',
+        type:'success',
+        result:{
+          token:Random.string(10)
+        }
+      }
+    })
+  }
 ] as MockMethod[];
 ```
 types/ResponseResult.ts   response.data 的类型
