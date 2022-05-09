@@ -31,6 +31,8 @@ export const pagesData = {
   "v-06d77c8e": () => import(/* webpackChunkName: "v-06d77c8e" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/class.html.js").then(({ data }) => data),
   // path: /JS/closure.html
   "v-4244732a": () => import(/* webpackChunkName: "v-4244732a" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/closure.html.js").then(({ data }) => data),
+  // path: /JS/function.html
+  "v-73f5eeb4": () => import(/* webpackChunkName: "v-73f5eeb4" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/function.html.js").then(({ data }) => data),
   // path: /JS/module.html
   "v-12696d40": () => import(/* webpackChunkName: "v-12696d40" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/module.html.js").then(({ data }) => data),
   // path: /JS/promise.html

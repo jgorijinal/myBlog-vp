@@ -110,12 +110,14 @@ module.exports = {
                 collapsible: true,
                 children: [
                     '/JS/array.md',
+                    '/JS/function.md',
                     '/JS/promise.md',
                     '/JS/closure.md',
                     '/JS/proto.md',
                     '/JS/class.md',
                     '/JS/reg.md',
                     '/JS/module.md',
+                    
                 ]
             },
             {

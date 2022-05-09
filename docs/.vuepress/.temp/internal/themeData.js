@@ -98,6 +98,7 @@ export const themeData = {
       "collapsible": true,
       "children": [
         "/JS/array.md",
+        "/JS/function.md",
         "/JS/promise.md",
         "/JS/closure.md",
         "/JS/proto.md",
