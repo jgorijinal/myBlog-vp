@@ -173,4 +173,239 @@ document.querySelector('button').addEventListener('click',(e)=>{
   console.log(e.target)
 })
 ```
-## 
+## this
+### 函数调用
+全局环境下`this`就是`window`对象的引用
+```js
+function get(){
+    console.log(this)
+}
+get()   // Window
+
+console.log(this === window) // true
+```
+在严格模式下 , `this`是`undefined`
+```js
+"use strict"
+var x = 'frank'
+function get(){
+    console.log(this.x)  //  Cannot read properties of undefined (reading 'x')
+}
+get() 
+```
+### 方法调用
+函数为对象的方法时`this`指向该对象
+
+**对象字面量**
+* 下面的`render`函数不属于对象方法 , 所以指向`window
+* `show`函数属于对象 , 所以`this`是obj
+```js
+const obj = {
+    site:'frank',
+    show(){
+        console.log(this.site)
+        function render(){
+            console.log(this)
+        }
+        render()
+    }
+}
+
+obj.show()
+// 'frank'
+//  window
+```
+在方法中使用函数时有些函数可以改变`this`如`forEach`，当然也可以使用后面介绍的`apply/call/bind`
+```js
+const obj = {
+    site: 'frank',
+    list: ['js', 'css', 'vue'],
+    show() {
+        this.list.forEach(function (title) {
+            console.log(this)       //这里的 this 是 window
+            console.log(`${this.site}+${title}`)  // this.site 是 undefined
+        })
+    }
+}
+obj.show()
+```
+解决上面现象 , 可以在`forEach`的第二个参数传入`this`
+```js{8}
+const obj = {
+    site: 'frank',
+    list: ['js', 'css', 'vue'],
+    show() {
+        this.list.forEach(function (title) {
+            console.log(this)       
+            console.log(`${this.site}+${title}`) 
+        } , this)  // forEach 第二个参数传入 this  
+    }
+}
+obj.show()
+```
+也可以在父作用域中定义引用`this`的变量
+```js{5,7,8}
+const obj = {
+    site: 'frank',
+    list: ['js', 'css', 'vue'],
+    show() {
+        let self = this
+        this.list.forEach(function (title) {
+            console.log(self)
+            console.log(`${self.site}+${title}`)
+        })
+    }
+}
+obj.show()
+```
+### 箭头函数
+箭头函数就压根没有`this` , 可以理解为`this`是个变量指向定义函数时的上下文, 可以理解为和外层的函数指向同一个`this`
+
+这里的 `this` 是 `window`对象
+```js
+var site = 'frank';
+var obj = {
+    site: 'eren',
+    getSite: function () {
+        return function () {
+            return this.site;
+        }
+    }
+}
+console.log(obj.getSite()()); //返回 window.site的值 frank
+```
+使用**箭头函数** , 可以不用关心`this`的指向 , 这个时候`this`是个变量指向定义函数时的上下文
+```js
+var site = 'frank';
+var obj = {
+    site: 'eren',
+    getSite: function () {
+        return  ()=> {
+            return this.site;
+        }
+    }
+}
+console.log(obj.getSite()()); //返回window.site的值 frank
+```
+事件中使用箭头函数结果不是我们想要的结果
+
+* **事件**函数可理解为对象 `onclick` 设置值，所以函数声明时`this`为当前对象
+* 但使用箭头函数时`this`为声明函数上下文
+
+使用普通函数时`this`为当前DOM对象
+```html
+<button>Hello</button>
+```
+```js{8,12}
+let  dom = {
+    site:'frank',
+    bind(){
+        const button = document.querySelector('button')
+        button.addEventListener('click' , function (){
+            console.log(this)
+        })
+        // addEventListener 可以用理解为
+        // button.onclick = function (){
+        //     console.log(this)
+        // }
+        // 因为是属于button对象的属性 , 所以 this 是 button 本身
+    }
+}
+dom.bind()   // 打印出 <button>Hello</button>
+```
+`addEventListener`里的函数用了箭头函数 , `this`指向上下文
+```js
+let  dom = {
+    site:'frank',
+    bind(){
+        const button = document.querySelector('button')
+        button.addEventListener('click' , ()=>{
+            console.log(this)      // {site: 'frank', bind: ƒ}   this 指向了 上下文
+            console.log(this.site) // 'frank
+        })
+    }
+}
+dom.bind()   
+```
+若想同时访问DOM对象 和 上下文 , 可以使用 箭头函数 +  `event.target`
+```js{5-8}
+let  dom = {
+    site:'frank',
+    bind(){
+        const button = document.querySelector('button')
+        button.addEventListener('click' , (event)=>{
+           console.log(event.target)  // <button>Hello</button>
+           console.log(this)          // {site: 'frank', bind: ƒ}
+        })
+    }
+}
+dom.bind()
+```
+再看一下稍微复杂的情况 , 有多个`<button>` , 遍历时使用了`forEach` , 注意多层函数的关系
+```html
+<button>Hello</button>
+<button>World</button>  
+```
+```js
+let dom = {
+    site:'frank',
+    bind(){
+        const buttons = document.querySelectorAll('button')
+        buttons.forEach(function (elem){
+            elem.addEventListener('click',()=>{
+                console.log(this)    // 看这里
+                //使用了箭头函数 , this 指向了上下文 , 这时上下文的 this 是 window
+            })
+        })
+    }
+}
+dom.bind()
+
+//打印出了 window
+```
+所以这时想要访问到对象的`site`属性 , 里面可以全部使用箭头函数
+```js
+let dom = {
+    site:'frank',
+    bind(){
+        const buttons = document.querySelectorAll('button')
+        buttons.forEach(elem=>{   //使用了箭头函数 , this是上下文的this , 因为是对象的方法, this也就是这个对象
+            console.log(this)    // 看这里
+            elem.addEventListener('click',()=>{
+                console.log(this)
+            })
+        })
+    }
+}
+dom.bind()
+```
+想要访问到DOM对象, 当然此时可以使用`event.target`
+```js{7,9}
+let dom = {
+    site:'frank',
+    bind(){
+        const buttons = document.querySelectorAll('button')
+        buttons.forEach(elem=>{   
+            console.log(this)    
+            elem.addEventListener('click',(event)=>{
+                console.log(this)
+                console.log(event.target)
+            })
+        })
+    }
+}
+dom.bind()
+```
+当然其他方法也有使用`self`等...
+
+
+
+
+
+
+
+
+
+
+
+
