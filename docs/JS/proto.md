@@ -263,6 +263,6 @@ console.log(obj);
 但是 , 下面定义的 `__proto__` 就会成功，因为这是一个极简对象，没有原型对象所以不会影响 `__proto__` 赋值。
 ```js
 let obj = Object.create(null);
-hd.__proto__ = "向军";
-console.log(hd); //{__proto__: "向军"}
+hd.__proto__ = "xxx";
+console.log(hd); //{__proto__: "xxx"}
 ```
