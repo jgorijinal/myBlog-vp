@@ -398,10 +398,93 @@ dom.bind()
 ```
 当然其他方法也有使用`self`等...
 
+## apply/call/bind
+### apply/call
+`call`和`bind`可以显示地绑定`this`, 这俩在传递参数上有所区别
+* `apply`用数组传参
+* `call`需要分别传参
+* 也 `bind` 不同的是他来会立即执行函数
 
+简单语法示例
+```js
+function show(title){
+    console.log(`${title}-${this.name}`)
+}
+const user1 = {
+    name:'frank'
+}
+const user2 = {
+    name:'eren'
+}
 
+show.apply(user1 , ['xxxx'])  // xxxx-frank
+show.call(user2 , 'yyyy')     // yyyy-eren
+```
+使用了`call`设置了`this`
+```html
+<button message="frank">Hello</button>
+<button message="eren">World</button>
+```
+```js
+function show(){
+    console.log(this.getAttribute('message'))
+}
+const buttons = document.querySelectorAll('button')
+buttons.forEach((button)=>{
+    button.addEventListener('click',()=>{
+        show.call(button)
+    })
+})
+//打出 
+// 'frank'
+// 'eren'
+```
+找数组中的最大值
+```js
+const arr = [5,6,2,1,7,9,8,9]
+console.log(Math.max(arr))  //NaN
+console.log(Math.max.apply(Math , arr)) // 9
+console.log(Math.max(...arr))    // 9 
+```
+### 实现构造函数的继承
+```js{14}
+function Request(params) {
+    this.get = function () {
+        //id=1&cat=js
+        let str = Object.keys(params)
+            .map((key,index)=> `${key}=${params[key]}`)
+            .join('&')
+        let url = `http://xxx.com/${this.url}/?${str}`
+        console.log(url)
+    }
+}
 
+function Article(params) {
+    this.url = 'article/lists'
+    Request.call(this , params)
+}
 
+const a = new Article({id: 1, cat: 'js'})
+a.get()
+```
+### bind
+`bind()`是将函数绑定到某个对象，比如 `a.bind(obj))` 可以理解为将a函数绑定到`obj`对象上即 `obj.a()`
+* 与 `call/apply` 不同`bind`不会立即执行
+* `bind` 会**返回新函数**
+```js
+function a (){}
+let b = a
+console.log(a === b) // true
+let c = a.bind()
+console.log(a === c) // false
+```
+事件上使用`bind`
+```js
+const button = document.querySelector('button')
+button.addEventListener('click',function(event){
+    console.log(this.url + event.target.textContent)
+}.bind({url:'xxxx.com'}))
+```
 
 
 

@@ -84,15 +84,40 @@ export const data = {
           "children": []
         }
       ]
+    },
+    {
+      "level": 2,
+      "title": "apply/call/bind",
+      "slug": "apply-call-bind",
+      "children": [
+        {
+          "level": 3,
+          "title": "apply/call",
+          "slug": "apply-call",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "实现构造函数的继承",
+          "slug": "实现构造函数的继承",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "bind",
+          "slug": "bind",
+          "children": []
+        }
+      ]
     }
   ],
   "git": {
-    "updatedTime": 1652113145000,
+    "updatedTime": 1652198300000,
     "contributors": [
       {
         "name": "jgoriginal",
         "email": "932274204@qq.com",
-        "commits": 1
+        "commits": 2
       }
     ]
   },
