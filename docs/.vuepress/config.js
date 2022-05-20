@@ -106,6 +106,13 @@ module.exports = {
                 ]
             },
             {
+                text: 'CSS系列',
+                collapsible: true,
+                children: [
+                    '/css/init.md',
+                ]
+            },
+            {
                 text: 'JS系列',
                 collapsible: true,
                 children: [
@@ -130,6 +137,15 @@ module.exports = {
                     '/TS/generics.md',
                     '/TS/Vue3.md'
                 ]
+            },
+            {
+                text: 'Vue3组件库项目',
+                collapsible: true,
+                children: [
+                    '/vue3UI/start.md',
+                    '/vue3UI/switch.md',
+                    '/vue3UI/dialog.md',
+                    ]
             },
             {
                 text: '脚手架项目',

@@ -1,6 +1,10 @@
 <template><h1 id="项目" tabindex="-1"><a class="header-anchor" href="#项目" aria-hidden="true">#</a> 项目</h1>
 <p>介绍: 使用<code>Vue3</code>开发的前端脚手架，使用技术包括<code>Vue3</code>、<code>typescript</code>、<code>tailwindcss</code>、<code>elementPlus</code>、<code>axios</code>、<code>mockJs</code>、<code>vite</code></p>
-<h2 id="初始的路由配置" tabindex="-1"><a class="header-anchor" href="#初始的路由配置" aria-hidden="true">#</a> 初始的路由配置</h2>
+<h2 id="创建项目" tabindex="-1"><a class="header-anchor" href="#创建项目" aria-hidden="true">#</a> 创建项目</h2>
+<div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token function">mkdir</span> 项目名
+<span class="token builtin class-name">cd</span> 项目名
+<span class="token function">yarn</span> create vite
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h2 id="初始的路由配置" tabindex="-1"><a class="header-anchor" href="#初始的路由配置" aria-hidden="true">#</a> 初始的路由配置</h2>
 <p><img src="@source/.vuepress/public/images/file.png" alt="图片"></p>
 <p><strong>注意</strong>: 布局路由一定要写上<code>&lt;router-view&gt;</code></p>
 <div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>src/router

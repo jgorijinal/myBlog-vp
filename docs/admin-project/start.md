@@ -1,5 +1,11 @@
  # 项目
  介绍: 使用`Vue3`开发的前端脚手架，使用技术包括`Vue3`、`typescript`、`tailwindcss`、`elementPlus`、`axios`、`mockJs`、`vite`
+ ## 创建项目
+ ```sh
+ mkdir 项目名
+ cd 项目名
+ yarn create vite
+ ```
  ## 初始的路由配置
  ![图片](../.vuepress/public/images/file.png)
 

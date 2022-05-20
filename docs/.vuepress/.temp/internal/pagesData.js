@@ -25,6 +25,8 @@ export const pagesData = {
   "v-53d95e5e": () => import(/* webpackChunkName: "v-53d95e5e" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/category_2/child2.html.js").then(({ data }) => data),
   // path: /category_2/
   "v-e34766f6": () => import(/* webpackChunkName: "v-e34766f6" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/category_2/index.html.js").then(({ data }) => data),
+  // path: /css/init.html
+  "v-9ff66338": () => import(/* webpackChunkName: "v-9ff66338" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/css/init.html.js").then(({ data }) => data),
   // path: /JS/array.html
   "v-603fcf66": () => import(/* webpackChunkName: "v-603fcf66" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/array.html.js").then(({ data }) => data),
   // path: /JS/class.html
@@ -111,6 +113,12 @@ export const pagesData = {
   "v-4f57be90": () => import(/* webpackChunkName: "v-4f57be90" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue3/v-model.html.js").then(({ data }) => data),
   // path: /vue3/vue3.html
   "v-26626eba": () => import(/* webpackChunkName: "v-26626eba" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue3/vue3.html.js").then(({ data }) => data),
+  // path: /vue3UI/dialog.html
+  "v-663f64fc": () => import(/* webpackChunkName: "v-663f64fc" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue3UI/dialog.html.js").then(({ data }) => data),
+  // path: /vue3UI/start.html
+  "v-a9c5c828": () => import(/* webpackChunkName: "v-a9c5c828" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue3UI/start.html.js").then(({ data }) => data),
+  // path: /vue3UI/switch.html
+  "v-387e02e0": () => import(/* webpackChunkName: "v-387e02e0" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue3UI/switch.html.js").then(({ data }) => data),
   // path: /404.html
   "v-3706649a": () => import(/* webpackChunkName: "v-3706649a" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/404.html.js").then(({ data }) => data),
 }

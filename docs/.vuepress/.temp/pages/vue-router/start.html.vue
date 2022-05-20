@@ -1,6 +1,6 @@
 <template><h1 id="vue-router-4-初始配置" tabindex="-1"><a class="header-anchor" href="#vue-router-4-初始配置" aria-hidden="true">#</a> Vue Router 4 初始配置</h1>
-<p>Vue Router 是 Vue.js官方的路由管理器 , 适用于构建单页面应用  (单页应用路由管理器)
-<a href="https://router.vuejs.org/zh/introduction.html" target="_blank" rel="noopener noreferrer">官网<ExternalLinkIcon/></a></p>
+<p>Vue Router 是 Vue.js官方的路由管理器 , 适用于构建单页面应用  (单页应用路由管理器)</p>
+<p><a href="https://router.vuejs.org/zh/introduction.html" target="_blank" rel="noopener noreferrer">官网<ExternalLinkIcon/></a></p>
 <h2 id="安装" tabindex="-1"><a class="header-anchor" href="#安装" aria-hidden="true">#</a> 安装</h2>
 <div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token function">yarn</span> create vite vue --template vue
 <span class="token function">yarn</span> <span class="token function">add</span> vue-router@4
@@ -26,7 +26,15 @@
 <span class="token punctuation">}</span><span class="token punctuation">)</span>
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> router
-</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br></div></div><p>main.js</p>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br></div></div><h4 id="createrouter" tabindex="-1"><a class="header-anchor" href="#createrouter" aria-hidden="true">#</a> createRouter</h4>
+<p>创建一个可以被 <code>Vue</code> 应用程序使用的路由实例。查看 <a href="https://router.vuejs.org/zh/api/#history" target="_blank" rel="noopener noreferrer"><code>RouterOptions</code><ExternalLinkIcon/></a> 中的所有可以传递的属性列表</p>
+<div class="language-typescript ext-ts line-numbers-mode"><pre v-pre class="language-typescript"><code><span class="token keyword">export</span> <span class="token keyword">declare</span> <span class="token keyword">function</span> <span class="token function">createRouter</span><span class="token punctuation">(</span>options<span class="token operator">:</span> RouterOptions<span class="token punctuation">)</span><span class="token operator">:</span> Router
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br></div></div><p>参数 <code>options</code>用来初始化 <code>router</code></p>
+<h4 id="routeroptions" tabindex="-1"><a class="header-anchor" href="#routeroptions" aria-hidden="true">#</a> RouterOptions</h4>
+<p><a href="https://router.vuejs.org/zh/api/#history" target="_blank" rel="noopener noreferrer">官网参考<ExternalLinkIcon/></a></p>
+<h4 id="routerecordraw" tabindex="-1"><a class="header-anchor" href="#routerecordraw" aria-hidden="true">#</a> RouteRecordRaw</h4>
+<p><a href="https://router.vuejs.org/zh/api/#routerecordraw" target="_blank" rel="noopener noreferrer">官网参考<ExternalLinkIcon/></a>
+main.js</p>
 <div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> createApp <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue'</span>
 <span class="token keyword">import</span> App <span class="token keyword">from</span> <span class="token string">'./App.vue'</span>
 <span class="token keyword">import</span> <span class="token string">'./index.css'</span>
@@ -40,6 +48,7 @@
 <ol>
 <li>地址永远带<code>#</code> , 不美观</li>
 <li>兼容性较好</li>
+<li><code>SEO</code> 差</li>
 </ol>
 <ul>
 <li><code>history</code>模式:</li>
@@ -49,13 +58,14 @@
 <li>兼容性比<code>hash</code>模式略差</li>
 <li>应用部署时需要后端人员配合 ,  解决刷新页面404的问题 , 否则页⾯刷新就挂了</li>
 </ol>
+<p>大多数 <code>web</code> 应用程序都应该使用 <code>createWebHistory</code>，但它要求正确配置服务器。你还可以使用 <code>createWebHashHistory</code> 的基于 <code>hash</code> 的历史记录，它不需要在服务器上进行任何配置，但是搜索引擎根本不会处理它，在 <code>SEO</code> 上表现很差。</p>
 <h2 id="别名" tabindex="-1"><a class="header-anchor" href="#别名" aria-hidden="true">#</a> 别名@</h2>
 <p>TS环境:</p>
 <div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token function">yarn</span> <span class="token function">add</span> -D path
 <span class="token function">yarn</span> <span class="token function">add</span> -D @types/node
 </code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><div class="language-typescript ext-ts line-numbers-mode"><pre v-pre class="language-typescript"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> defineConfig <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vite'</span>
 <span class="token keyword">import</span> vue <span class="token keyword">from</span> <span class="token string">'@vitejs/plugin-vue'</span>
-<span class="token keyword">import</span> path <span class="token keyword">from</span> <span class="token string">'path'</span>     <span class="token comment">//TS</span>
+<span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> path <span class="token keyword">from</span> <span class="token string">'path'</span>     <span class="token comment">//TS</span>
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token function">defineConfig</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token function">vue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>

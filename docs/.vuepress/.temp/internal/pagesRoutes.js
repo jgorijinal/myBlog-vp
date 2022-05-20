@@ -14,6 +14,7 @@ const routeItems = [
   ["v-522485bf","/category_2/child1.html",{"title":"子 1"},["/category_2/child1","/category_2/child1.md"]],
   ["v-53d95e5e","/category_2/child2.html",{"title":"子 2"},["/category_2/child2","/category_2/child2.md"]],
   ["v-e34766f6","/category_2/",{"title":"category_2"},["/category_2/index.html","/category_2/README.md"]],
+  ["v-9ff66338","/css/init.html",{"title":"样式初始化"},["/css/init","/css/init.md"]],
   ["v-603fcf66","/JS/array.html",{"title":"数组"},["/JS/array","/JS/array.md"]],
   ["v-06d77c8e","/JS/class.html",{"title":"类"},["/JS/class","/JS/class.md"]],
   ["v-4244732a","/JS/closure.html",{"title":"闭包"},["/JS/closure","/JS/closure.md"]],
@@ -57,6 +58,9 @@ const routeItems = [
   ["v-812fd256","/vue3/script-setup.html",{"title":"Vue3中的Composition API之script setup"},["/vue3/script-setup","/vue3/script-setup.md"]],
   ["v-4f57be90","/vue3/v-model.html",{"title":"Vue3中v-model 的使用"},["/vue3/v-model","/vue3/v-model.md"]],
   ["v-26626eba","/vue3/vue3.html",{"title":"Vue2到Vue3的变化"},["/vue3/vue3","/vue3/vue3.md"]],
+  ["v-663f64fc","/vue3UI/dialog.html",{"title":"Dialog 对话框组件"},["/vue3UI/dialog","/vue3UI/dialog.md"]],
+  ["v-a9c5c828","/vue3UI/start.html",{"title":"使用 vite 搭建官网"},["/vue3UI/start","/vue3UI/start.md"]],
+  ["v-387e02e0","/vue3UI/switch.html",{"title":"Switch 开关组件"},["/vue3UI/switch","/vue3UI/switch.md"]],
   ["v-3706649a","/404.html",{"title":""},["/404"]],
 ]
 
