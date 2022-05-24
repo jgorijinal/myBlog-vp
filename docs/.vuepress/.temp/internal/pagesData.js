@@ -119,6 +119,8 @@ export const pagesData = {
   "v-a9c5c828": () => import(/* webpackChunkName: "v-a9c5c828" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue3UI/start.html.js").then(({ data }) => data),
   // path: /vue3UI/switch.html
   "v-387e02e0": () => import(/* webpackChunkName: "v-387e02e0" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue3UI/switch.html.js").then(({ data }) => data),
+  // path: /vue3UI/Tabs.html
+  "v-802641b4": () => import(/* webpackChunkName: "v-802641b4" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue3UI/Tabs.html.js").then(({ data }) => data),
   // path: /404.html
   "v-3706649a": () => import(/* webpackChunkName: "v-3706649a" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/404.html.js").then(({ data }) => data),
 }

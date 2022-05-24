@@ -69,8 +69,14 @@ export const data = {
     }
   ],
   "git": {
-    "updatedTime": null,
-    "contributors": []
+    "updatedTime": 1653065072000,
+    "contributors": [
+      {
+        "name": "jgoriginal",
+        "email": "932274204@qq.com",
+        "commits": 1
+      }
+    ]
   },
   "filePathRelative": "vue3UI/start.md"
 }

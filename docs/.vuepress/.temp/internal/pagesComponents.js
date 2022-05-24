@@ -121,6 +121,8 @@ export const pagesComponents = {
   "v-a9c5c828": defineAsyncComponent(() => import(/* webpackChunkName: "v-a9c5c828" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue3UI/start.html.vue")),
   // path: /vue3UI/switch.html
   "v-387e02e0": defineAsyncComponent(() => import(/* webpackChunkName: "v-387e02e0" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue3UI/switch.html.vue")),
+  // path: /vue3UI/Tabs.html
+  "v-802641b4": defineAsyncComponent(() => import(/* webpackChunkName: "v-802641b4" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue3UI/Tabs.html.vue")),
   // path: /404.html
   "v-3706649a": defineAsyncComponent(() => import(/* webpackChunkName: "v-3706649a" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/404.html.vue")),
 }

@@ -14,21 +14,52 @@ export const data = {
     },
     {
       "level": 2,
-      "title": "基本的实现 <script setup>",
-      "slug": "基本的实现-script-setup",
+      "title": "基本的实现之 <script setup>",
+      "slug": "基本的实现之-script-setup",
       "children": [
         {
           "level": 3,
-          "title": "Teleport",
-          "slug": "teleport",
+          "title": "Teleport 传送门",
+          "slug": "teleport-传送门",
+          "children": []
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "title": "一句话打开Dialog - (动态挂载组件)",
+      "slug": "一句话打开dialog-动态挂载组件",
+      "children": [
+        {
+          "level": 3,
+          "title": "h()",
+          "slug": "h",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "需求",
+          "slug": "需求",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "实现",
+          "slug": "实现",
           "children": []
         }
       ]
     }
   ],
   "git": {
-    "updatedTime": null,
-    "contributors": []
+    "updatedTime": 1653065072000,
+    "contributors": [
+      {
+        "name": "jgoriginal",
+        "email": "932274204@qq.com",
+        "commits": 1
+      }
+    ]
   },
   "filePathRelative": "vue3UI/dialog.md"
 }

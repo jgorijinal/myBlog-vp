@@ -132,7 +132,8 @@ export const themeData = {
       "children": [
         "/vue3UI/start.md",
         "/vue3UI/switch.md",
-        "/vue3UI/dialog.md"
+        "/vue3UI/dialog.md",
+        "/vue3UI/tabs.md"
       ]
     },
     {

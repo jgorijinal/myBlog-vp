@@ -38,9 +38,9 @@ API设计:
   </Dialog>
 </template>
 ```
-## 基本的实现 `<script setup>`
+## 基本的实现之 `<script setup>`
 
-### Teleport
+### Teleport 传送门
 注意: 最后要使用 `Teleport` 传送门把 Dialog 移到 body 下面 , 防止被其他因素遮挡
 ```vue
 <Teleport to="body">
@@ -48,7 +48,7 @@ API设计:
 </Teleport>
 ```
 
-使用到的知识点有 `v-model` , `.self修饰符` , `具名插槽` , `Teleport` , `Transition` 等... , 难度感觉还可以
+使用到的知识点有 `v-model` , `.self修饰符` , `具名插槽` , `Teleport` , `Transition` 等.....
 
 Dialog.vue
 ```vue
@@ -211,4 +211,136 @@ $border-color: #d9d9d9;
   opacity: 0;
 }
 </style>
+```
+## 一句话打开Dialog - (动态挂载组件)
+```vue
+<script lang="ts" setup>
+const showDialog = ()=>{
+  openDialog({
+    title:'标题',
+    content:'内容'  
+  })
+}
+</script>
+
+<template>
+  <button @click="showDialog">点击</button>  
+</template>
+```
+### h()
+创建虚拟 `DOM` 节点 `(vnode)`
+```js
+createApp({
+  render(){  
+    return h()
+  }
+})
+```
+[h() 渲染函数](https://staging-cn.vuejs.org/guide/extras/render-function.html#render-functions-jsx)
+#### 类型
+```ts
+// 完整参数签名
+function h(
+  type: string | Component,
+  props?: object | null,
+  children?: Children | Slot | Slots
+): VNode
+
+// 省略 props
+function h(type: string | Component, children?: Children | Slot): VNode
+
+type Children = string | number | boolean | VNode | null | Children[]
+
+type Slot = () => Children
+
+type Slots = { [name: string]: Slot }
+```
+* 第一个参数既可以是一个字符串 (用于原生元素) 也可以是一个 Vue **组件**。第二个参数是要传递的 `prop`，第三个参数是子节点
+
+* 当创建一个组件的 vnode 时，子节点必须以**插槽函数**进行传递。如果组件只有默认槽，可以使用单个插槽函数进行传递。否则，必须以插槽函数的对象形式来传递
+
+* 为了方便阅读，当子节点不是插槽对象时，可以省略 prop 参数
+
+#### 创建组件
+```js
+import Foo from './Foo.vue'
+// 传递 prop
+h(Foo, {
+  // 等价于 some-prop="hello"
+  someProp: 'hello',
+  // 等价于 @update="() => {}"
+  onUpdate: () => {}
+})
+
+// 传递单个默认插槽
+h(Foo, () => 'default slot')
+
+// 传递具名插槽
+// 注意，需要使用 `null` 来避免
+// 插槽对象被当作是 prop
+h(MyComponent, null, {
+  default: () => 'default slot',
+  foo: () => h('div', 'foo'),
+  bar: () => [h('span', 'one'), h('span', 'two')]
+})
+```
+### 需求
+使用`openDialog(options)`函数一句话打开Dialog
+```vue{4-7}
+<script lang="ts" setup>
+import { openDialog } from '../lib/openDialog';
+const showDialog = ()=>{
+  openDialog({
+    title:'标题!!!!!',
+    content:'内容!!!!!!!!',
+    ok:()=>{
+      console.log('ok')
+      return true
+    },
+    cancel:()=>{
+       console.log('cancel')
+      return true
+    }
+  })
+}
+</script>
+
+<template>
+  <button @click="showDialog">点击</button>
+</template>
+```
+### 实现
+`h()`动态挂载组件
+
+src/lib/openDialog.ts
+```ts
+import {createApp, h} from 'vue';
+import Dialog from '@/components/Dialog.vue';
+
+export const openDialog = (options: any) => {
+  const {title, content, ok, cancel, okText, cancelText} = options;
+  const div = document.createElement('div');
+  document.body.appendChild(div);
+  const app = createApp({
+    render() {
+      return h( Dialog , {  // h()函数的第一个参数 组件 , 第二个参数 props , 第三个参数 插槽
+        modelValue: true,
+        'onUpdate:modelValue': (value: boolean) => {  // 监听 update:modelValue事件
+          if (!value) {    // 当 modelValue是false时 , unmount该组件
+            app.unmount();
+            div.remove();
+          }
+        },
+        ok: ok,
+        cancel: cancel,
+        okText,
+        cancelText
+      }, {
+        title: () => title,
+        default: () => content
+      });
+    }
+  });
+  app.mount(div);
+};
 ```

@@ -61,6 +61,7 @@ const routeItems = [
   ["v-663f64fc","/vue3UI/dialog.html",{"title":"Dialog 对话框组件"},["/vue3UI/dialog","/vue3UI/dialog.md"]],
   ["v-a9c5c828","/vue3UI/start.html",{"title":"使用 vite 搭建官网"},["/vue3UI/start","/vue3UI/start.md"]],
   ["v-387e02e0","/vue3UI/switch.html",{"title":"Switch 开关组件"},["/vue3UI/switch","/vue3UI/switch.md"]],
+  ["v-802641b4","/vue3UI/Tabs.html",{"title":"Tabs 标签页组件"},["/vue3UI/Tabs","/vue3UI/Tabs.md"]],
   ["v-3706649a","/404.html",{"title":""},["/404"]],
 ]
 
