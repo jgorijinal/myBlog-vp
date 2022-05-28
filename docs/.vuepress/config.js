@@ -12,6 +12,7 @@ module.exports = {
         // 侧边栏对象
         // 不同子路径下的页面会使用不同的侧边栏
         collapsable: true,
+        lastUpdated:false,
         sidebar: [
             // SidebarItem
             {
@@ -146,6 +147,7 @@ module.exports = {
                     '/vue3UI/switch.md',
                     '/vue3UI/dialog.md',
                     '/vue3UI/tabs.md',
+                    '/vue3UI/build.md',
                     ]
             },
             {

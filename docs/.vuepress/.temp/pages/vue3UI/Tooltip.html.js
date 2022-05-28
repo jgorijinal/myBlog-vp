@@ -1,28 +1,28 @@
 export const data = {
-  "key": "v-4b29d755",
-  "path": "/TS/Vue3.html",
-  "title": "TS 与 Vue 结合",
+  "key": "v-c2e2706a",
+  "path": "/vue3UI/Tooltip.html",
+  "title": "Tooltip 文字提示组件",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
   "headers": [
     {
       "level": 2,
-      "title": "封装fetch请求",
-      "slug": "封装fetch请求",
+      "title": "需求与API",
+      "slug": "需求与api",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "最初的实现(有很多bug)",
+      "slug": "最初的实现-有很多bug",
       "children": []
     }
   ],
   "git": {
-    "contributors": [
-      {
-        "name": "jgoriginal",
-        "email": "932274204@qq.com",
-        "commits": 2
-      }
-    ]
+    "contributors": []
   },
-  "filePathRelative": "TS/Vue3.md"
+  "filePathRelative": "vue3UI/Tooltip.md"
 }
 
 if (import.meta.webpackHot) {

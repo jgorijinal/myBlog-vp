@@ -1,13 +1,12 @@
 export const data = {
   "key": "v-8daa1a0e",
   "path": "/",
-  "title": "记录开始",
+  "title": "记录优于记忆",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
   "headers": [],
   "git": {
-    "updatedTime": 1651766986000,
     "contributors": [
       {
         "name": "jgoriginal",

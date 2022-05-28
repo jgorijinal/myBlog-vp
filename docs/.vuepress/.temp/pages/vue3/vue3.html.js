@@ -7,7 +7,6 @@ export const data = {
   "excerpt": "",
   "headers": [],
   "git": {
-    "updatedTime": 1649647626000,
     "contributors": [
       {
         "name": "jgoriginal",

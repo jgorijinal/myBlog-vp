@@ -2,6 +2,7 @@ export const themeData = {
   "logo": "https://vuejs.org/images/logo.png",
   "displayAllHeaders": true,
   "collapsable": true,
+  "lastUpdated": false,
   "sidebar": [
     {
       "text": "Vue系列",
@@ -133,7 +134,8 @@ export const themeData = {
         "/vue3UI/start.md",
         "/vue3UI/switch.md",
         "/vue3UI/dialog.md",
-        "/vue3UI/tabs.md"
+        "/vue3UI/tabs.md",
+        "/vue3UI/build.md"
       ]
     },
     {
@@ -171,7 +173,6 @@ export const themeData = {
   "sidebarDepth": 2,
   "editLink": true,
   "editLinkText": "Edit this page",
-  "lastUpdated": true,
   "lastUpdatedText": "Last Updated",
   "contributors": true,
   "contributorsText": "Contributors",

@@ -1,7 +1,7 @@
 export const data = {
   "key": "v-2e63fcb8",
   "path": "/admin-project/start.html",
-  "title": "项目",
+  "title": "路由配置",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
@@ -20,7 +20,6 @@ export const data = {
     }
   ],
   "git": {
-    "updatedTime": 1653065072000,
     "contributors": [
       {
         "name": "jgoriginal",

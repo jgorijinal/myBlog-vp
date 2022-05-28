@@ -1,4 +1,4 @@
- # 项目
+ # 路由配置
  介绍: 使用`Vue3`开发的前端脚手架，使用技术包括`Vue3`、`typescript`、`tailwindcss`、`elementPlus`、`axios`、`mockJs`、`vite`
  ## 创建项目
  ```sh
@@ -7,17 +7,28 @@
  yarn create vite
  ```
  ## 初始的路由配置
- ![图片](../.vuepress/public/images/file.png)
-
+即将要用**布局路由的自动注册**方法
+```
+src/layouts   布局路由(要加上<router-view>)
+|--admin.vue
+|--member.vue
+```
+```
+src/views
+admin
+|--user.vue
+member
+|--mail.vue
+```
 **注意**: 布局路由一定要写上`<router-view>`
 ```
 src/router
 |--autoload.ts
 |--guard.ts    //路由守卫
-|--index.ts
+|--index.ts     
 |--routes.ts
 ```
-src/router/routes.ts
+src/router/routes.ts 
 ```js
 import {RouteRecordRaw} from 'vue-router';
 
@@ -30,7 +41,6 @@ const routes = [
 ] as RouteRecordRaw[]
 
 export default routes
-
 ```
 src/router/index.ts
 ```js
@@ -59,8 +69,8 @@ src/router/autoload.ts
 ```ts
 import {RouteRecordRaw} from 'vue-router';
 //import.meta.globEager(pattern)
-const layoutsModules = import.meta.globEager('../layouts/*.vue'); //获取布局路由
-const viewsModules = import.meta.globEager('../views/**/*.vue');  //获取布局路由对应的子路由
+const routesModules = import.meta.globEager('../layouts/*.vue')   //布局路由
+const viewsModules = import.meta.globEager('../views/**/*.vue')   // 布局路由对应的子路由
 //https://cn.vitejs.dev/guide/features.html#glob-import 看vite文档
 //import.meta.globEager(pattern)
 //返回的格式为, 例如
@@ -68,43 +78,39 @@ const viewsModules = import.meta.globEager('../views/**/*.vue');  //获取布局
 //   './dir/foo.js': () => import('./dir/foo.js'),
 //   './dir/bar.js': () => import('./dir/bar.js')
 // }
-const layoutsRoutes = [] as RouteRecordRaw[];
-
-Object.entries(layoutsModules).forEach(([file, module]) => {
-  //file 打出来看看 :  `../layouts/Admin.vue`
-  const layoutsRoute = getRouteByModules(file, module);
-  layoutsRoute.children = getChildRouteByModules(layoutsRoute);  //添加 children
-
-  layoutsRoutes.push(layoutsRoute);
-});
-
-function getRouteByModules(file: string, module: { [p: string]: any }) {
-  const name = file.split('/').pop()?.split('.')[0].toLowerCase();
-  const obj = {
-    path: `/${name}`,
-    name: name,
-    component: module.default    // module.default
-  } as RouteRecordRaw;
-  return obj;
+const  getRoutes = ():RouteRecordRaw[]=>{
+  const layoutRoutes = [] as RouteRecordRaw[]
+  Object.entries(routesModules).forEach(([file , module]) =>{
+    const route = getRouteByModule(file , module)
+    route.children = getChildRouteByModules(route)
+    console.log(route)
+    layoutRoutes.push(route)
+  })
+  return layoutRoutes
 }
 
-function getChildRouteByModules(layoutsRoute: RouteRecordRaw) {
-  let childRoutes = [] as RouteRecordRaw[];  //子路由 children是数组
-  Object.entries(viewsModules).forEach(([file, module]) => {
-    if (file.includes(layoutsRoute.name as string)) {
-      const childName = file.split('/').pop()?.split('.')[0];
-      childRoutes.push(
-        {                  // 单个子路由
-          path: childName,
-          name: childName,
-          component: module.default
-        } as RouteRecordRaw);
+
+// ../views/admin/validate.vue
+const getChildRouteByModules = (layoutRoute:RouteRecordRaw) =>{
+  const routes = [] as RouteRecordRaw[]
+  Object.entries(viewsModules).forEach(([file , module])=>{
+    if (file.includes(`../views/${layoutRoute.name  as string}`)){   // 细品
+      const route = getRouteByModule(file , module)
+      routes.push(route)
     }
-  });
-  return childRoutes;
+  })
+  return routes
+}
+const getRouteByModule = (file:string , module:{ [key:string]:any} )=>{
+  const name = file.replace( /.+layouts\/|.+views\/|\.vue/gi, '')      // 细品 
+  return {
+    path: `/${name}`,
+    name: name.replace('/', '.'),
+    component: module.default
+  } as RouteRecordRaw
 }
 
-export default layoutsRoutes;
+export default getRoutes()
 ```
 src/main.ts
 ```ts

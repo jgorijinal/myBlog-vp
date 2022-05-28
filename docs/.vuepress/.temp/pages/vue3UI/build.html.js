@@ -1,40 +1,34 @@
 export const data = {
-  "key": "v-387e02e0",
-  "path": "/vue3UI/switch.html",
-  "title": "Switch 开关组件",
+  "key": "v-2650fd40",
+  "path": "/vue3UI/build.html",
+  "title": "部署",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
   "headers": [
     {
       "level": 2,
-      "title": "API 设计",
-      "slug": "api-设计",
+      "title": "设置 build path",
+      "slug": "设置-build-path",
       "children": []
     },
     {
       "level": 2,
-      "title": "最基本的实现之 <script setup>",
-      "slug": "最基本的实现之-script-setup",
+      "title": "部署",
+      "slug": "部署-1",
       "children": []
     },
     {
       "level": 2,
-      "title": "最基本的实现之 setup()",
-      "slug": "最基本的实现之-setup",
+      "title": "一键部署",
+      "slug": "一键部署",
       "children": []
     }
   ],
   "git": {
-    "contributors": [
-      {
-        "name": "jgoriginal",
-        "email": "932274204@qq.com",
-        "commits": 1
-      }
-    ]
+    "contributors": []
   },
-  "filePathRelative": "vue3UI/switch.md"
+  "filePathRelative": "vue3UI/build.md"
 }
 
 if (import.meta.webpackHot) {

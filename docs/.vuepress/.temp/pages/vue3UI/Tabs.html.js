@@ -34,13 +34,30 @@ export const data = {
           "title": "显示被选中的导航",
           "slug": "显示被选中的导航",
           "children": []
+        },
+        {
+          "level": 3,
+          "title": "动态设置div的 width 和 left",
+          "slug": "动态设置div的-width-和-left",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "优化代码!",
+          "slug": "优化代码",
+          "children": []
         }
       ]
     }
   ],
   "git": {
-    "updatedTime": null,
-    "contributors": []
+    "contributors": [
+      {
+        "name": "jgoriginal",
+        "email": "932274204@qq.com",
+        "commits": 1
+      }
+    ]
   },
   "filePathRelative": "vue3UI/Tabs.md"
 }

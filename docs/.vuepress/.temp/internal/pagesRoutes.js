@@ -1,13 +1,13 @@
 import { Vuepress } from '@vuepress/client/lib/components/Vuepress'
 
 const routeItems = [
-  ["v-8daa1a0e","/",{"title":"记录开始"},["/index.html","/README.md"]],
+  ["v-8daa1a0e","/",{"title":"记录优于记忆"},["/index.html","/README.md"]],
   ["v-a950b3e0","/admin-project/axios.html",{"title":"Axios结合Typescript"},["/admin-project/axios","/admin-project/axios.md"]],
   ["v-34681369","/admin-project/component.html",{"title":"全局组件注册"},["/admin-project/component","/admin-project/component.md"]],
   ["v-29734508","/admin-project/form.html",{"title":"表单验证 vee-validate"},["/admin-project/form","/admin-project/form.md"]],
   ["v-2358cd7e","/admin-project/guard.html",{"title":"路由守卫"},["/admin-project/guard","/admin-project/guard.md"]],
   ["v-0150a664","/admin-project/routerAutoload.html",{"title":"根据配置项自定义路由自动注册"},["/admin-project/routerAutoload","/admin-project/routerAutoload.md"]],
-  ["v-2e63fcb8","/admin-project/start.html",{"title":"项目"},["/admin-project/start","/admin-project/start.md"]],
+  ["v-2e63fcb8","/admin-project/start.html",{"title":"路由配置"},["/admin-project/start","/admin-project/start.md"]],
   ["v-15de9f3b","/admin-project/tailwindcss.html",{"title":"tailwindcss"},["/admin-project/tailwindcss","/admin-project/tailwindcss.md"]],
   ["v-4c9ef26d","/admin-project/token.html",{"title":"TOKEN储存与登录请求"},["/admin-project/token","/admin-project/token.md"]],
   ["v-5a98d968","/admin-project/vite.html",{"title":"Vite环境"},["/admin-project/vite","/admin-project/vite.md"]],
@@ -58,10 +58,12 @@ const routeItems = [
   ["v-812fd256","/vue3/script-setup.html",{"title":"Vue3中的Composition API之script setup"},["/vue3/script-setup","/vue3/script-setup.md"]],
   ["v-4f57be90","/vue3/v-model.html",{"title":"Vue3中v-model 的使用"},["/vue3/v-model","/vue3/v-model.md"]],
   ["v-26626eba","/vue3/vue3.html",{"title":"Vue2到Vue3的变化"},["/vue3/vue3","/vue3/vue3.md"]],
+  ["v-2650fd40","/vue3UI/build.html",{"title":"部署"},["/vue3UI/build","/vue3UI/build.md"]],
   ["v-663f64fc","/vue3UI/dialog.html",{"title":"Dialog 对话框组件"},["/vue3UI/dialog","/vue3UI/dialog.md"]],
   ["v-a9c5c828","/vue3UI/start.html",{"title":"使用 vite 搭建官网"},["/vue3UI/start","/vue3UI/start.md"]],
   ["v-387e02e0","/vue3UI/switch.html",{"title":"Switch 开关组件"},["/vue3UI/switch","/vue3UI/switch.md"]],
   ["v-802641b4","/vue3UI/Tabs.html",{"title":"Tabs 标签页组件"},["/vue3UI/Tabs","/vue3UI/Tabs.md"]],
+  ["v-c2e2706a","/vue3UI/Tooltip.html",{"title":"Tooltip 文字提示组件"},["/vue3UI/Tooltip","/vue3UI/Tooltip.md"]],
   ["v-3706649a","/404.html",{"title":""},["/404"]],
 ]
 

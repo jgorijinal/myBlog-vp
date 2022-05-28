@@ -26,7 +26,6 @@ export const data = {
     }
   ],
   "git": {
-    "updatedTime": 1650118470000,
     "contributors": [
       {
         "name": "jgoriginal",
