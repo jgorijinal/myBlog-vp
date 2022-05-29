@@ -65,6 +65,9 @@ export default router;
 ```
 src/router/autoload.ts
 
+**小插曲**: **`Object.entries(obj)`** 返回给定对象自身可枚举属性的键值对**数组**  
+例如: `[[key,value],[key,value]...]`
+
 使用`import.meta.globEager(pattern)`api , 获取vue文件
 ```ts
 import {RouteRecordRaw} from 'vue-router';

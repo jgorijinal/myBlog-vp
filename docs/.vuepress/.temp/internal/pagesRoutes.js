@@ -19,6 +19,7 @@ const routeItems = [
   ["v-06d77c8e","/JS/class.html",{"title":"类"},["/JS/class","/JS/class.md"]],
   ["v-4244732a","/JS/closure.html",{"title":"闭包"},["/JS/closure","/JS/closure.md"]],
   ["v-73f5eeb4","/JS/function.html",{"title":"函数"},["/JS/function","/JS/function.md"]],
+  ["v-036a2e4b","/JS/hongwei.html",{"title":"任务机制"},["/JS/hongwei","/JS/hongwei.md"]],
   ["v-12696d40","/JS/module.html",{"title":"模块"},["/JS/module","/JS/module.md"]],
   ["v-c60638ea","/JS/promise.html",{"title":"Promise"},["/JS/promise","/JS/promise.md"]],
   ["v-76dfbbc4","/JS/proto.html",{"title":"原型"},["/JS/proto","/JS/proto.md"]],

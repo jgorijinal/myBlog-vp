@@ -125,6 +125,7 @@ module.exports = {
                     '/JS/promise.md',
                     '/JS/reg.md',
                     '/JS/module.md',
+                    '/JS/hongwei.md',
                 ]
             },
             {

@@ -112,7 +112,8 @@ export const themeData = {
         "/JS/class.md",
         "/JS/promise.md",
         "/JS/reg.md",
-        "/JS/module.md"
+        "/JS/module.md",
+        "/JS/hongwei.md"
       ]
     },
     {

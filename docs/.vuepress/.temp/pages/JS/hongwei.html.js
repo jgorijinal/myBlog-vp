@@ -1,40 +1,40 @@
 export const data = {
-  "key": "v-2650fd40",
-  "path": "/vue3UI/build.html",
-  "title": "部署",
+  "key": "v-036a2e4b",
+  "path": "/JS/hongwei.html",
+  "title": "任务机制",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
   "headers": [
     {
       "level": 2,
-      "title": "设置 build path",
-      "slug": "设置-build-path",
+      "title": "原理分析",
+      "slug": "原理分析",
       "children": []
     },
     {
       "level": 2,
-      "title": "部署",
-      "slug": "部署-1",
+      "title": "定时器的任务编排",
+      "slug": "定时器的任务编排",
       "children": []
     },
     {
       "level": 2,
-      "title": "一键部署",
-      "slug": "一键部署",
+      "title": "脚本的加载(DOM渲染任务)",
+      "slug": "脚本的加载-dom渲染任务",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "任务共享内存",
+      "slug": "任务共享内存",
       "children": []
     }
   ],
   "git": {
-    "contributors": [
-      {
-        "name": "jgoriginal",
-        "email": "932274204@qq.com",
-        "commits": 1
-      }
-    ]
+    "contributors": []
   },
-  "filePathRelative": "vue3UI/build.md"
+  "filePathRelative": "JS/hongwei.md"
 }
 
 if (import.meta.webpackHot) {

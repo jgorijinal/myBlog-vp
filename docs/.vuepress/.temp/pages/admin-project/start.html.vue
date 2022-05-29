@@ -52,6 +52,8 @@ console<span class="token punctuation">.</span><span class="token function">log<
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> router<span class="token punctuation">;</span>
 </code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br></div></div><p>src/router/autoload.ts</p>
+<p><strong>小插曲</strong>: <strong><code>Object.entries(obj)</code></strong> 返回给定对象自身可枚举属性的键值对<strong>数组</strong><br>
+例如: <code>[[key,value],[key,value]...]</code></p>
 <p>使用<code>import.meta.globEager(pattern)</code>api , 获取vue文件</p>
 <div class="language-typescript ext-ts line-numbers-mode"><pre v-pre class="language-typescript"><code><span class="token keyword">import</span> <span class="token punctuation">{</span>RouteRecordRaw<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue-router'</span><span class="token punctuation">;</span>
 <span class="token comment">//import.meta.globEager(pattern)</span>
