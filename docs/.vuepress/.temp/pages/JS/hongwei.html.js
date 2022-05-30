@@ -29,10 +29,22 @@ export const data = {
       "title": "任务共享内存",
       "slug": "任务共享内存",
       "children": []
+    },
+    {
+      "level": 2,
+      "title": "进度条",
+      "slug": "进度条",
+      "children": []
     }
   ],
   "git": {
-    "contributors": []
+    "contributors": [
+      {
+        "name": "jgoriginal",
+        "email": "932274204@qq.com",
+        "commits": 1
+      }
+    ]
   },
   "filePathRelative": "JS/hongwei.md"
 }

@@ -79,7 +79,19 @@ setTimeout(()=>{
 
 // 1 2 
 ```
-## 制作一个进度条
+## 进度条
+下面的定时器虽然都定时了一秒钟，但也是按先进先执行原则，依次执行
+```js
+let i = 0;
+setTimeout(() => {
+  console.log(++i);
+}, 1000);
+
+setTimeout(() => {
+  console.log(++i);
+}, 1000);
+```
+制作进度条
 ```html
 <div class="progress"></div> 
 ```
