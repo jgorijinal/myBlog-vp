@@ -97,10 +97,128 @@ export const data = {
           "children": []
         }
       ]
+    },
+    {
+      "level": 2,
+      "title": "Boolean",
+      "slug": "boolean",
+      "children": [
+        {
+          "level": 3,
+          "title": "声明定义",
+          "slug": "声明定义",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "隐式转换",
+          "slug": "隐式转换",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "显示转换",
+          "slug": "显示转换",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "实例",
+          "slug": "实例",
+          "children": []
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "title": "Number",
+      "slug": "number",
+      "children": [
+        {
+          "level": 3,
+          "title": "声明定义",
+          "slug": "声明定义-1",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "NaN",
+          "slug": "nan",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "类型转换",
+          "slug": "类型转换-1",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "舍入操作",
+          "slug": "舍入操作",
+          "children": []
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "title": "Math",
+      "slug": "math",
+      "children": [
+        {
+          "level": 3,
+          "title": "取极值",
+          "slug": "取极值",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "舍入操作",
+          "slug": "舍入操作-1",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "random",
+          "slug": "random",
+          "children": []
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "title": "Date",
+      "slug": "date",
+      "children": [
+        {
+          "level": 3,
+          "title": "ISO和TIMESTAMP(时间戳)格式转换",
+          "slug": "iso和timestamp-时间戳-格式转换",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "封装日期函数",
+          "slug": "封装日期函数",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "moment.js",
+          "slug": "moment-js",
+          "children": []
+        }
+      ]
     }
   ],
   "git": {
-    "contributors": []
+    "contributors": [
+      {
+        "name": "jgoriginal",
+        "email": "932274204@qq.com",
+        "commits": 1
+      }
+    ]
   },
   "filePathRelative": "JS/basic.md"
 }
