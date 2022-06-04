@@ -1,52 +1,46 @@
 export const data = {
-  "key": "v-036a2e4b",
-  "path": "/JS/hongwei.html",
-  "title": "任务机制",
+  "key": "v-12f9abb8",
+  "path": "/admin-project/backMainUI.html",
+  "title": "后台主体界面",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
   "headers": [
     {
       "level": 2,
-      "title": "原理分析",
-      "slug": "原理分析",
+      "title": "elementPlus安装",
+      "slug": "elementplus安装",
       "children": []
     },
     {
       "level": 2,
-      "title": "定时器的任务编排",
-      "slug": "定时器的任务编排",
+      "title": "顶部导航样式处理",
+      "slug": "顶部导航样式处理",
       "children": []
     },
     {
       "level": 2,
-      "title": "脚本的加载(DOM渲染任务)",
-      "slug": "脚本的加载-dom渲染任务",
+      "title": "历史菜单组件",
+      "slug": "历史菜单组件",
       "children": []
     },
     {
       "level": 2,
-      "title": "任务共享内存",
-      "slug": "任务共享内存",
+      "title": "后台首页面板",
+      "slug": "后台首页面板",
       "children": []
     },
     {
       "level": 2,
-      "title": "进度条",
-      "slug": "进度条",
+      "title": "echart图表",
+      "slug": "echart图表",
       "children": []
     }
   ],
   "git": {
-    "contributors": [
-      {
-        "name": "jgoriginal",
-        "email": "932274204@qq.com",
-        "commits": 2
-      }
-    ]
+    "contributors": []
   },
-  "filePathRelative": "JS/hongwei.md"
+  "filePathRelative": "admin-project/backMainUI.md"
 }
 
 if (import.meta.webpackHot) {

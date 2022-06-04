@@ -1,28 +1,28 @@
 export const data = {
-  "key": "v-4b29d755",
-  "path": "/TS/Vue3.html",
-  "title": "TS 与 Vue 结合",
+  "key": "v-6294654d",
+  "path": "/admin-project/menu.html",
+  "title": "左侧菜单的实现",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
   "headers": [
     {
       "level": 2,
-      "title": "封装fetch请求",
-      "slug": "封装fetch请求",
+      "title": "菜单布局基础",
+      "slug": "菜单布局基础",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "提取菜单组件",
+      "slug": "提取菜单组件",
       "children": []
     }
   ],
   "git": {
-    "contributors": [
-      {
-        "name": "jgoriginal",
-        "email": "932274204@qq.com",
-        "commits": 2
-      }
-    ]
+    "contributors": []
   },
-  "filePathRelative": "TS/Vue3.md"
+  "filePathRelative": "admin-project/menu.md"
 }
 
 if (import.meta.webpackHot) {

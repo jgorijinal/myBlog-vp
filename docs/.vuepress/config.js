@@ -165,6 +165,8 @@ module.exports = {
                     '/admin-project/form.md',
                     '/admin-project/token.md',
                     '/admin-project/guard.md',
+                    '/admin-project/menu.md',
+                    '/admin-project/backMainUI.md',
                 ]
             },
             {

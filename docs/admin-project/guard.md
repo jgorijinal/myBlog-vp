@@ -55,7 +55,7 @@ export default (router: Router) => {
 * 对权限的处理
 
 guard.ts
-```ts{19}
+```ts{13-15,19-21}
 import {RouteLocationNormalized, Router} from 'vue-router';
 import store, {IData} from '@/utils/store';
 
@@ -75,14 +75,55 @@ class Guard {
   }
   // 检查是否满足可查看某页面的条件 , 返回布尔值
   private isLogin(toRoute: RouteLocationNormalized, token: IData | null) {
-    if (!toRoute.meta.auth || (token && toRoute.meta.auth)){  
-      return true;
-    }
-    return false;
+     return Boolean(!toRoute.meta.auth || (token && toRoute.meta.auth))
   }
 }
 export default (router: Router) => {
   new Guard(router).run();
 }
 ```
-其中给**`meta`**定义类型, [官网](https://router.vuejs.org/zh/guide/advanced/meta.html#typescript)
+其中给`meta`定义ts类型, [官网](https://router.vuejs.org/zh/guide/advanced/meta.html#typescript)
+## 游客登录拦截
+已登录的游客 , 不让访问登录页面
+
+guard.ts
+```js{20-22,30-32}
+import {RouteLocationNormalized, Router} from 'vue-router';
+import store, {IData} from '@/utils/store';
+
+class Guard {
+  private router: Router;
+
+  constructor(router: Router) {
+    this.router = router;
+  }
+
+  public run() {
+    this.router.beforeEach((to, from) => {
+      console.log(to);
+      const token = store.get('token');
+      // 如果没登录 , 跳转到 login 页面
+      if (this.isLogin(to, token) === false) {
+        return {name: 'login'};
+      }
+
+      if (this.isGuest(to, token) === false) {
+        return from;
+      }
+    });
+  }
+  // 检查是否满足可查看某页面的条件 , 返回布尔值
+  private isLogin(toRoute: RouteLocationNormalized, token: IData | null) {
+    return Boolean(!toRoute.meta.auth || (token && toRoute.meta.auth));
+
+  }
+  private isGuest(toRoute: RouteLocationNormalized, token: IData | null) {
+    return Boolean(!toRoute.meta.guest || (toRoute.meta.guest && !token));
+  }
+}
+
+export default (router: Router) => {
+  new Guard(router).run();
+}
+
+```

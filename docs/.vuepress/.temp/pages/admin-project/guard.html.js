@@ -17,6 +17,12 @@ export const data = {
       "title": "登录验证机制",
       "slug": "登录验证机制",
       "children": []
+    },
+    {
+      "level": 2,
+      "title": "游客登录拦截",
+      "slug": "游客登录拦截",
+      "children": []
     }
   ],
   "git": {
@@ -29,4 +35,17 @@ export const data = {
     ]
   },
   "filePathRelative": "admin-project/guard.md"
+}
+
+if (import.meta.webpackHot) {
+  import.meta.webpackHot.accept()
+  if (__VUE_HMR_RUNTIME__.updatePageData) {
+    __VUE_HMR_RUNTIME__.updatePageData(data)
+  }
+}
+
+if (import.meta.hot) {
+  import.meta.hot.accept(({ data }) => {
+    __VUE_HMR_RUNTIME__.updatePageData(data)
+  })
 }
