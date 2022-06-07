@@ -8,7 +8,7 @@
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">[</span>
   <span class="token punctuation">{</span>
-    url<span class="token operator">:</span> <span class="token string">'/api/info'</span><span class="token punctuation">,</span>
+    url<span class="token operator">:</span> <span class="token string">'/api/user/info'</span><span class="token punctuation">,</span>
     method<span class="token operator">:</span> <span class="token string">'get'</span><span class="token punctuation">,</span>
     <span class="token function-variable function">response</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">{</span> query <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
       <span class="token keyword">return</span> <span class="token punctuation">{</span>       <span class="token comment">// axios的response.data返回的格式</span>
@@ -119,7 +119,7 @@ src/plugins/axios/index.ts  创建axios实例, 把实例导出</p>
 <span class="token punctuation">}</span>
  <span class="token keyword">async</span> <span class="token keyword">function</span>  <span class="token function">info</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>    <span class="token comment">//获取用户信息</span>
    <span class="token keyword">return</span>  <span class="token keyword">await</span> http<span class="token punctuation">.</span><span class="token generic-function"><span class="token function">request</span><span class="token generic class-name"><span class="token operator">&lt;</span>User<span class="token operator">></span></span></span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-    url<span class="token operator">:</span><span class="token string">'info'</span>
+    url<span class="token operator">:</span><span class="token string">'user/info'</span>
   <span class="token punctuation">}</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
 

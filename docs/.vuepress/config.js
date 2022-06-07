@@ -2,7 +2,7 @@ module.exports = {
     // 站点配置
     base:'/myBlog-vp/',
     lang: 'zh-CN',
-    title: 'Eren的博客 - 记录优于记忆',
+    title: 'Eren的个人文档 - 记录优于记忆',
     description: '这是我的第一个 VuePress 站点',
     // 主题和它的配置
     theme: '@vuepress/theme-default',
@@ -149,6 +149,7 @@ module.exports = {
                     '/vue3UI/switch.md',
                     '/vue3UI/dialog.md',
                     '/vue3UI/tabs.md',
+                    '/vue3UI/Tooltip.md',
                     '/vue3UI/build.md',
                     ]
             },
@@ -167,6 +168,8 @@ module.exports = {
                     '/admin-project/guard.md',
                     '/admin-project/menu.md',
                     '/admin-project/backMainUI.md',
+                    '/admin-project/moduleRoute.md',
+                    '/admin-project/improveMenu.md',
                 ]
             },
             {

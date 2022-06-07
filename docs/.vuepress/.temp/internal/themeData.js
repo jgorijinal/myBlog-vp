@@ -137,6 +137,7 @@ export const themeData = {
         "/vue3UI/switch.md",
         "/vue3UI/dialog.md",
         "/vue3UI/tabs.md",
+        "/vue3UI/Tooltip.md",
         "/vue3UI/build.md"
       ]
     },
@@ -154,7 +155,9 @@ export const themeData = {
         "/admin-project/token.md",
         "/admin-project/guard.md",
         "/admin-project/menu.md",
-        "/admin-project/backMainUI.md"
+        "/admin-project/backMainUI.md",
+        "/admin-project/moduleRoute.md",
+        "/admin-project/improveMenu.md"
       ]
     },
     {

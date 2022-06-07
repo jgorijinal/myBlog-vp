@@ -189,10 +189,11 @@ const schema = {
 const onSubmit = async (values: any) => {
   //console.log(values);
   const {result: {token}} = await userApi.login(values); // 获取 token
-  store.set('token',{  //设置 localstorage , 到期时间
+  store.set('token',{   //设置 localstorage , 到期时间
     expire:100,
-    data:values
+    data:token
   })
+  await router.push({name:'home'})
 };
 </script>
 <template>

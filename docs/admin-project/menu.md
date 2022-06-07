@@ -75,71 +75,75 @@ const resetMenu = ()=>{
 </template>
 
 <style lang="scss" scoped>
-.admin {
-  display: flex;
-  .menu {
-    width: 220px;
-    background: #283142;
-    height: 100vh;
-    .logo{
-      padding-top: 8px;
+.menu {
+  min-width: 220px;
+  background: #283142;
+  min-height: 100vh;
+  white-space: nowrap;
+  .logo{
+    padding-top: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #f1f2f6;
+    font-size: 18px;
+    > svg {
+      fill:#f23fce ;
+      width: 2em;
+      height: 2em;
+      margin-right: 6px;
+    }
+  }
+  .left-container {
+    dt {
+      cursor: pointer;
+      padding:8px;
       display: flex;
       align-items: center;
-      justify-content: center;
-      color: #f1f2f6;
-      font-size: 18px;
-        > svg {
-          fill:#f23fce ;
-          width: 2em;
-          height: 2em;
-          margin-right: 6px;
-        }
-    }
-    .left-container {
-      dt {
-        cursor: pointer;
-        padding:8px;
+      justify-content: space-between;
+      color:#f1f2f6;
+      font-weight: bold;
+      .title{
         display: flex;
-        align-items: center;
-        justify-content: space-between;
-        color:#f1f2f6;
-        font-weight: bold;
-        .title{
-          display: flex;
-          >svg {
-            margin:0px  8px;
-            width: 1.3em;
-            height:1.3em;
-          }
-        }
-        .arrow {
-          >svg {
-            margin:0  10px;
-            width: 1em;
-            height:1em;
-          }
+        >svg {
+          margin:0px  8px;
+          width: 1.3em;
+          height:1.3em;
         }
       }
-      dd{
-        margin: 0 12px;
-        padding: 12px 10px 12px 30px;
-        border-radius: 6px;
+      .arrow {
         transition: all 0.25s ease;
-        font-size: 14px;
-        color: #f1f2f6;
-        cursor: pointer;
-        &.active {
-          background: #5e25de;
+        &.active{
+          transform: rotate(180deg);
         }
-        &:hover {
-          background: #744dcc;
+        >svg {
+          margin:0  10px;
+          width: 1em;
+          height:1em;
         }
+      }
+    }
+    dd{
+      margin: 0 12px 10px 12px;
+      padding: 12px 10px 12px 30px;
+      border-radius: 6px;
+      transition: all 0.25s ease;
+      font-size: 14px;
+      color: #f1f2f6;
+      cursor: pointer;
+      background: #353b48;
+      &.active {
+        background: #5e25de;
+      }
+      &:hover {
+        background: #744dcc;
       }
     }
   }
-  .content{
-    flex-grow: 1;
-    background: #f1f2f6;
+}
+@media (max-width:1000px) {   
+  .menu{
+    display: none;
   }
 }
 </style>

@@ -11,8 +11,12 @@ export const pagesData = {
   "v-29734508": () => import(/* webpackChunkName: "v-29734508" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/admin-project/form.html.js").then(({ data }) => data),
   // path: /admin-project/guard.html
   "v-2358cd7e": () => import(/* webpackChunkName: "v-2358cd7e" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/admin-project/guard.html.js").then(({ data }) => data),
+  // path: /admin-project/improveMenu.html
+  "v-d9f0d722": () => import(/* webpackChunkName: "v-d9f0d722" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/admin-project/improveMenu.html.js").then(({ data }) => data),
   // path: /admin-project/menu.html
   "v-6294654d": () => import(/* webpackChunkName: "v-6294654d" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/admin-project/menu.html.js").then(({ data }) => data),
+  // path: /admin-project/moduleRoute.html
+  "v-37b2b1e9": () => import(/* webpackChunkName: "v-37b2b1e9" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/admin-project/moduleRoute.html.js").then(({ data }) => data),
   // path: /admin-project/routerAutoload.html
   "v-0150a664": () => import(/* webpackChunkName: "v-0150a664" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/admin-project/routerAutoload.html.js").then(({ data }) => data),
   // path: /admin-project/start.html

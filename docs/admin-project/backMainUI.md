@@ -150,11 +150,10 @@ const links = ref<{ title: string }[]>([
 </template>
 <style lang="scss" scoped>
 .historyLinks {
-  margin-top: 8px;
-  margin-left: 8px;
   display: flex;
+  margin:8px 10px ;
   overflow: auto;
-  max-width: calc(100vw - 230px);
+  max-width:calc(100vw - 220px );
   .link {
     display: flex;
     align-items: center;
@@ -163,7 +162,7 @@ const links = ref<{ title: string }[]>([
     margin-right: 8px;
     border-radius: 4px;
     white-space: nowrap;
-    font-size: 14px;
+    font-size: 12px;
     >svg {
       border-radius: 100%;
       margin-left: 4px;
@@ -173,6 +172,11 @@ const links = ref<{ title: string }[]>([
         background: black;
       }
     }
+  }
+}
+@media (max-width: 1000px) {
+  .historyLinks {
+    max-width:100vw;
   }
 }
 </style>

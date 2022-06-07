@@ -11,7 +11,7 @@ import {MockMethod} from 'vite-plugin-mock';
 
 export default [
   {
-    url: '/api/info',
+    url: '/api/user/info',
     method: 'get',
     response: ({ query }) => {
       return {       // axios的response.data返回的格式
@@ -132,7 +132,7 @@ interface  User {
 }
  async function  info(){    //获取用户信息
    return  await http.request<User>({
-    url:'info'
+    url:'user/info'
   })
 }
 
