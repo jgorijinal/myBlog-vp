@@ -98,7 +98,8 @@ export const themeData = {
       "text": "CSS系列",
       "collapsible": true,
       "children": [
-        "/css/init.md"
+        "/css/init.md",
+        "/css/grid.md"
       ]
     },
     {
@@ -157,7 +158,10 @@ export const themeData = {
         "/admin-project/menu.md",
         "/admin-project/backMainUI.md",
         "/admin-project/moduleRoute.md",
-        "/admin-project/improveMenu.md"
+        "/admin-project/improveMenu.md",
+        "/admin-project/reactive.md",
+        "/admin-project/auth.md",
+        "/admin-project/markdown.md"
       ]
     },
     {

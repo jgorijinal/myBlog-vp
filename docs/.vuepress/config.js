@@ -111,6 +111,7 @@ module.exports = {
                 collapsible: true,
                 children: [
                     '/css/init.md',
+                    '/css/grid.md',
                 ]
             },
             {
@@ -170,6 +171,9 @@ module.exports = {
                     '/admin-project/backMainUI.md',
                     '/admin-project/moduleRoute.md',
                     '/admin-project/improveMenu.md',
+                    '/admin-project/reactive.md',
+                    '/admin-project/auth.md',
+                    '/admin-project/markdown.md',
                 ]
             },
             {

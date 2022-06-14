@@ -187,9 +187,9 @@ function  autoRegisterComponent(app:App){
 ### 基本使用
 ```
 src/store
-|--router.ts
+|--menuStore.ts
 ```
-router.ts
+menuStore.ts
 ```ts
 import {defineStore} from 'pinia';
 
@@ -209,7 +209,7 @@ export const useRouterStore = defineStore('router',{
 在组件里面使用时
 ```vue
 <script lang="ts" setup>
-import { useRouterStore } from '@/store/router';
+import { useRouterStore } from '@/store/menuStore';
 
 const router = useRouterStore()
 console.log(router.xxx)
@@ -294,7 +294,7 @@ export default  {
 ```
 ## 根据meta字段提取菜单可用路由
 使用 `pinia` 的 `state` 传递筛选的路由
-src/store/router.ts  
+src/store/menuStore.ts  
 ```ts
 import {defineStore} from 'pinia';
 import {useRouter} from 'vue-router';
@@ -333,7 +333,7 @@ src/layouts/admin/menu.vue 左侧菜单组件
 import Icon from '@/components/Icon.vue'
 import {reactive, ref} from 'vue';
 
-import {useRouterStore} from '@/plugins/store/router';
+import {useRouterStore} from '@/plugins/store/menuStore';
 import {RouteRecordNormalized, RouteRecordRaw , useRouter} from 'vue-router';
 const router = useRouterStore()
 const routes  = reactive(router.routes)
@@ -386,7 +386,7 @@ const reset = ()=>{
 ## pinia保存用户数据
 在全局前置路由守卫中,  getUserInfo() 获取用户数据 , 并保存到pinia状态管理
 
-scr/plugins/store/user.ts
+scr/plugins/store/userStore.ts
 ```ts
 //在全局前置路由守卫中,  getUserInfo() 获取用户数据 , 并保存到pinia状态管理
 
@@ -411,7 +411,7 @@ guard.ts  在路由守卫的前置守卫中发送请求
 ```ts{19,23-27}
 import {RouteLocationNormalized, Router, RouteRecordNormalized} from 'vue-router';
 import store, {IData} from '@/utils/store';
-import {useUserStore} from '@/plugins/store/user';
+import {useUserStore} from '@/plugins/store/userStore';
 
 class Guard {
   private router: Router;

@@ -1,28 +1,22 @@
 export const data = {
-  "key": "v-a950b3e0",
-  "path": "/admin-project/axios.html",
-  "title": "Axios结合Typescript",
+  "key": "v-14a862a4",
+  "path": "/admin-project/auth.html",
+  "title": "根据权限控制路由",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
   "headers": [
     {
       "level": 2,
-      "title": "封装axios请求",
-      "slug": "封装axios请求",
+      "title": "优化过滤历史菜单",
+      "slug": "优化过滤历史菜单",
       "children": []
     }
   ],
   "git": {
-    "contributors": [
-      {
-        "name": "jgoriginal",
-        "email": "932274204@qq.com",
-        "commits": 4
-      }
-    ]
+    "contributors": []
   },
-  "filePathRelative": "admin-project/axios.md"
+  "filePathRelative": "admin-project/auth.md"
 }
 
 if (import.meta.webpackHot) {
