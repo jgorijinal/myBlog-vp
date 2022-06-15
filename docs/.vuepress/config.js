@@ -174,6 +174,8 @@ module.exports = {
                     '/admin-project/reactive.md',
                     '/admin-project/auth.md',
                     '/admin-project/markdown.md',
+                    '/admin-project/package.md',
+                    '/admin-project/wangEditor.md',
                 ]
             },
             {

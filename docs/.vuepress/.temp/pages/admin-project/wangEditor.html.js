@@ -1,7 +1,7 @@
 export const data = {
-  "key": "v-1e697386",
-  "path": "/admin-project/markdown.html",
-  "title": "toastui的 markdown 编辑器",
+  "key": "v-45aad488",
+  "path": "/admin-project/wangEditor.html",
+  "title": "wangEditor  富文本编辑器",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
@@ -14,14 +14,14 @@ export const data = {
     },
     {
       "level": 2,
-      "title": "编辑器props类型声明及处理",
-      "slug": "编辑器props类型声明及处理",
+      "title": "编辑器props设置高度",
+      "slug": "编辑器props设置高度",
       "children": []
     },
     {
       "level": 2,
-      "title": "定义mock图片的上传接口",
-      "slug": "定义mock图片的上传接口",
+      "title": "绑定数据及父组件数据同步",
+      "slug": "绑定数据及父组件数据同步",
       "children": []
     },
     {
@@ -29,24 +29,12 @@ export const data = {
       "title": "自定义图片上传",
       "slug": "自定义图片上传",
       "children": []
-    },
-    {
-      "level": 2,
-      "title": "全屏缩放事件",
-      "slug": "全屏缩放事件",
-      "children": []
     }
   ],
   "git": {
-    "contributors": [
-      {
-        "name": "jgoriginal",
-        "email": "932274204@qq.com",
-        "commits": 1
-      }
-    ]
+    "contributors": []
   },
-  "filePathRelative": "admin-project/markdown.md"
+  "filePathRelative": "admin-project/wangEditor.md"
 }
 
 if (import.meta.webpackHot) {
