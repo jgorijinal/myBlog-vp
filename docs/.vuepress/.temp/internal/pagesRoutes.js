@@ -2,6 +2,7 @@ import { Vuepress } from '@vuepress/client/lib/components/Vuepress'
 
 const routeItems = [
   ["v-8daa1a0e","/",{"title":"记录优于记忆"},["/index.html","/README.md"]],
+  ["v-36e3d6c4","/admin-project/animationList.html",{"title":"动画列表组件"},["/admin-project/animationList","/admin-project/animationList.md"]],
   ["v-14a862a4","/admin-project/auth.html",{"title":"根据权限控制路由"},["/admin-project/auth","/admin-project/auth.md"]],
   ["v-a950b3e0","/admin-project/axios.html",{"title":"Axios结合Typescript"},["/admin-project/axios","/admin-project/axios.md"]],
   ["v-12f9abb8","/admin-project/backMainUI.html",{"title":"后台主体界面"},["/admin-project/backMainUI","/admin-project/backMainUI.md"]],
@@ -68,6 +69,7 @@ const routeItems = [
   ["v-763d9b46","/vue-router/start.html",{"title":"Vue Router 4 初始配置"},["/vue-router/start","/vue-router/start.md"]],
   ["v-29530678","/vue3/composition.html",{"title":"Vue3中的Composition API"},["/vue3/composition","/vue3/composition.md"]],
   ["v-812fd256","/vue3/script-setup.html",{"title":"Vue3中的Composition API之script setup"},["/vue3/script-setup","/vue3/script-setup.md"]],
+  ["v-a561730a","/vue3/transition.html",{"title":""},["/vue3/transition","/vue3/transition.md"]],
   ["v-4f57be90","/vue3/v-model.html",{"title":"Vue3中v-model 的使用"},["/vue3/v-model","/vue3/v-model.md"]],
   ["v-26626eba","/vue3/vue3.html",{"title":"Vue2到Vue3的变化"},["/vue3/vue3","/vue3/vue3.md"]],
   ["v-2650fd40","/vue3UI/build.html",{"title":"部署"},["/vue3UI/build","/vue3UI/build.md"]],

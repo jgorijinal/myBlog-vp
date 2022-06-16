@@ -3,6 +3,8 @@ import { defineAsyncComponent } from 'vue'
 export const pagesComponents = {
   // path: /
   "v-8daa1a0e": defineAsyncComponent(() => import(/* webpackChunkName: "v-8daa1a0e" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/index.html.vue")),
+  // path: /admin-project/animationList.html
+  "v-36e3d6c4": defineAsyncComponent(() => import(/* webpackChunkName: "v-36e3d6c4" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/admin-project/animationList.html.vue")),
   // path: /admin-project/auth.html
   "v-14a862a4": defineAsyncComponent(() => import(/* webpackChunkName: "v-14a862a4" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/admin-project/auth.html.vue")),
   // path: /admin-project/axios.html
@@ -135,6 +137,8 @@ export const pagesComponents = {
   "v-29530678": defineAsyncComponent(() => import(/* webpackChunkName: "v-29530678" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue3/composition.html.vue")),
   // path: /vue3/script-setup.html
   "v-812fd256": defineAsyncComponent(() => import(/* webpackChunkName: "v-812fd256" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue3/script-setup.html.vue")),
+  // path: /vue3/transition.html
+  "v-a561730a": defineAsyncComponent(() => import(/* webpackChunkName: "v-a561730a" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue3/transition.html.vue")),
   // path: /vue3/v-model.html
   "v-4f57be90": defineAsyncComponent(() => import(/* webpackChunkName: "v-4f57be90" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue3/v-model.html.vue")),
   // path: /vue3/vue3.html

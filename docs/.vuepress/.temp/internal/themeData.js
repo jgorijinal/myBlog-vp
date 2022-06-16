@@ -72,7 +72,8 @@ export const themeData = {
         "/vue3/vue3.md",
         "/vue3/v-model.md",
         "/vue3/composition.md",
-        "/vue3/script-setup.md"
+        "/vue3/script-setup.md",
+        "/vue3/transition.md"
       ]
     },
     {
@@ -163,7 +164,8 @@ export const themeData = {
         "/admin-project/auth.md",
         "/admin-project/markdown.md",
         "/admin-project/package.md",
-        "/admin-project/wangEditor.md"
+        "/admin-project/wangEditor.md",
+        "/admin-project/animationList.md"
       ]
     },
     {

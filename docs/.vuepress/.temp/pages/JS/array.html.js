@@ -28,6 +28,12 @@ export const data = {
           "title": "类型检测",
           "slug": "类型检测",
           "children": []
+        },
+        {
+          "level": 3,
+          "title": "生成随机的数据(mock)",
+          "slug": "生成随机的数据-mock",
+          "children": []
         }
       ]
     },

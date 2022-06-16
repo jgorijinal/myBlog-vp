@@ -32,6 +32,18 @@ console.log(Array.isArray({}))
 // true
 // false
 ```
+### 生成随机的数据(mock)
+```js
+import {Random} from 'mockjs'
+
+new Array(30).fill().map((article,index) =>{
+    return {
+        id:index,
+        title:Random.ctitle(),
+        content:Random.cparagraph()
+    }
+})
+```
 ## 类型转换
 可以将数组转换为字符串 , 也可以将其他类型转换为数组
 ### 转为字符串

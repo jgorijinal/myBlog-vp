@@ -24,7 +24,17 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <span class="token comment">// false</span>
 <span class="token comment">// true</span>
 <span class="token comment">// false</span>
-</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><h2 id="类型转换" tabindex="-1"><a class="header-anchor" href="#类型转换" aria-hidden="true">#</a> 类型转换</h2>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><h3 id="生成随机的数据-mock" tabindex="-1"><a class="header-anchor" href="#生成随机的数据-mock" aria-hidden="true">#</a> 生成随机的数据(mock)</h3>
+<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token keyword">import</span> <span class="token punctuation">{</span>Random<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'mockjs'</span>
+
+<span class="token keyword">new</span> <span class="token class-name">Array</span><span class="token punctuation">(</span><span class="token number">30</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">fill</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">article<span class="token punctuation">,</span>index</span><span class="token punctuation">)</span> <span class="token operator">=></span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>
+        <span class="token literal-property property">id</span><span class="token operator">:</span>index<span class="token punctuation">,</span>
+        <span class="token literal-property property">title</span><span class="token operator">:</span>Random<span class="token punctuation">.</span><span class="token function">ctitle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">content</span><span class="token operator">:</span>Random<span class="token punctuation">.</span><span class="token function">cparagraph</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><h2 id="类型转换" tabindex="-1"><a class="header-anchor" href="#类型转换" aria-hidden="true">#</a> 类型转换</h2>
 <p>可以将数组转换为字符串 , 也可以将其他类型转换为数组</p>
 <h3 id="转为字符串" tabindex="-1"><a class="header-anchor" href="#转为字符串" aria-hidden="true">#</a> 转为字符串</h3>
 <p>大部分数据类型都可以使用<code>.toString()</code> 函数转换为字符串</p>

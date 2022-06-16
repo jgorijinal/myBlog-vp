@@ -85,6 +85,7 @@ module.exports = {
                     '/vue3/v-model.md',
                     '/vue3/composition.md',
                     '/vue3/script-setup.md',
+                    '/vue3/transition.md',
                 ]
             },
             {
@@ -176,6 +177,7 @@ module.exports = {
                     '/admin-project/markdown.md',
                     '/admin-project/package.md',
                     '/admin-project/wangEditor.md',
+                    '/admin-project/animationList.md',
                 ]
             },
             {

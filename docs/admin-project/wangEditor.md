@@ -179,5 +179,71 @@ declare class wangEditor {
 }
 ```
 ## 自定义图片上传
+editor.vue
+```vue{8,12}
+<script setup lang="ts">
+import wangEditor from './wangEditor';
+import {nextTick} from 'vue';
 
+interface Props {
+  height?:number,
+  modelValue?:string,
+  uploadImgServer?:string
+}
+const props = withDefaults(defineProps<Props>(), {
+  height:500,
+  uploadImgServer:'/api/upload/image'
+})
+const emit = defineEmits(['update:modelValue'])
 
+nextTick(()=>{
+  new wangEditor('#editor',(newHtml:string)=>{
+    emit('update:modelValue',newHtml)
+  }, props)
+})
+</script>
+
+<template>
+ <div id="editor"></div>
+</template>
+<style lang="scss" scoped>
+#editor {
+  background: white;
+}
+</style>
+```
+wangEditor.ts
+```ts{7,8,13-19}
+export default  class  {
+  editor:wangEditor
+  constructor(el:string,callback:(newHtml:string)=>void, config:{[keys:string]:any}) {
+    this.editor = new wangEditor(el)
+    this.editor.config.height = config.height
+    this.editor.config.onchange = callback
+    this.editor.config.uploadImgServer = config.uploadImgServer
+    this.editor.config.uploadImgHooks = this.uploadImage()
+    this.editor.create()
+    this.editor.txt.html(config.modelValue)
+  }
+
+  private uploadImage(){
+    return {
+      customInsert(insertImgFn:Function, result:any) {
+        insertImgFn(result.result.url)
+      }
+    }
+  }
+}
+```
+typings.d.ts
+```ts
+declare class wangEditor {
+  constructor(el: string)
+
+  create: () => void
+  config: { [key: string]: any }
+  txt: { [key: string]: any }
+  uploadImgServer: () => void
+  uploadImgHooks:()=>void
+}
+```
