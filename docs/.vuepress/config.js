@@ -50,11 +50,6 @@ module.exports = {
                         children: [],
                     },
                     {
-                        text: 'Vue中常用的指令',
-                        link: '/vue/directives.md',
-                        children: [],
-                    },
-                    {
                         text: '使用Vue中的开发插件',
                         link: '/vue/plugin.md',
                         children: [],
@@ -144,7 +139,15 @@ module.exports = {
                 ]
             },
             {
-                text: 'Vue3组件库项目',
+                text: 'Vue2 UI',
+                collapsible: true,
+                children: [
+                    '/vue2ui/layout.md',
+                    '/vue2ui/toast.md',
+                    ]
+            },
+            {
+                text: 'Vue3 UI',
                 collapsible: true,
                 children: [
                     '/vue3UI/start.md',
@@ -178,6 +181,7 @@ module.exports = {
                     '/admin-project/package.md',
                     '/admin-project/wangEditor.md',
                     '/admin-project/animationList.md',
+                    '/admin-project/optimize.md',
                 ]
             },
             {

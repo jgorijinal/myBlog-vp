@@ -5,6 +5,10 @@
 ```
   <script src="https://cdn.jsdelivr.net/npm/wangeditor@latest/dist/wangEditor.min.js"></script>
 ```
+推荐安装
+```
+npm i wangeditor --save
+```
 ## 基本配置
 ```
 components/wangEditor
@@ -13,6 +17,7 @@ components/wangEditor
 ```
 wangEditor.ts
 ```ts
+import wangEditor from "wangeditor"
 export default  class  {
   constructor(el:string) {
     const editor = new wangEditor(el)
@@ -81,6 +86,7 @@ nextTick(()=>{
 ```
 wangEditor.ts
 ```ts
+import wangEditor from "wangeditor"
 export default  class  {
   editor:wangEditor
   constructor(el:string, config:{[keys:string]:any}) {
@@ -156,6 +162,7 @@ nextTick(()=>{
 
 components/wangEditor/wangEditor.ts 
 ```ts
+import wangEditor from "wangeditor"
 export default  class  {
   editor:wangEditor
   constructor(el:string,callback:(newHtml:string)=>void, config:{[keys:string]:any}) {  // 第二个参数回调
@@ -214,6 +221,7 @@ nextTick(()=>{
 ```
 wangEditor.ts
 ```ts{7,8,13-19}
+import wangEditor from "wangeditor"
 export default  class  {
   editor:wangEditor
   constructor(el:string,callback:(newHtml:string)=>void, config:{[keys:string]:any}) {

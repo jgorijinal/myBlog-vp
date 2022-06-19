@@ -23,6 +23,8 @@ export const pagesData = {
   "v-6294654d": () => import(/* webpackChunkName: "v-6294654d" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/admin-project/menu.html.js").then(({ data }) => data),
   // path: /admin-project/moduleRoute.html
   "v-37b2b1e9": () => import(/* webpackChunkName: "v-37b2b1e9" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/admin-project/moduleRoute.html.js").then(({ data }) => data),
+  // path: /admin-project/optimize.html
+  "v-4e2f15e2": () => import(/* webpackChunkName: "v-4e2f15e2" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/admin-project/optimize.html.js").then(({ data }) => data),
   // path: /admin-project/package.html
   "v-a6e8ce00": () => import(/* webpackChunkName: "v-a6e8ce00" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/admin-project/package.html.js").then(({ data }) => data),
   // path: /admin-project/reactive.html
@@ -131,6 +133,10 @@ export const pagesData = {
   "v-029f4374": () => import(/* webpackChunkName: "v-029f4374" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue-router/scroll.html.js").then(({ data }) => data),
   // path: /vue-router/start.html
   "v-763d9b46": () => import(/* webpackChunkName: "v-763d9b46" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue-router/start.html.js").then(({ data }) => data),
+  // path: /vue2ui/layout.html
+  "v-e20b43ce": () => import(/* webpackChunkName: "v-e20b43ce" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue2ui/layout.html.js").then(({ data }) => data),
+  // path: /vue2ui/toast.html
+  "v-58a360b0": () => import(/* webpackChunkName: "v-58a360b0" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue2ui/toast.html.js").then(({ data }) => data),
   // path: /vue3/composition.html
   "v-29530678": () => import(/* webpackChunkName: "v-29530678" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue3/composition.html.js").then(({ data }) => data),
   // path: /vue3/script-setup.html

@@ -7,12 +7,16 @@ components/markdown
 |--toastEditor.ts  配置
 |--editor.vue     组件
 ```
+```
+npm install --save @toast-ui/editor
+```
 toastEditor.ts
 ```ts
+import Editor from '@toast-ui/editor';
 export default  class {
-  editor:toastui.Editor
+  editor:Editor
   constructor(el:string, initialValue:string, height:string, placeholder:string) {
-    this.editor =  new toastui.Editor({
+    this.editor =  new Editor({
       el: document.querySelector(el),
       initialEditType:'markdown',
       previewStyle: 'vertical',
@@ -174,12 +178,12 @@ export function uploadImage(data:FormData){
 toastEditor.ts
 ```ts{15,18-30}
 import {uploadImage} from '@/apis/uploadApi';
-
+import Editor from '@toast-ui/editor';
 export default class {
-  editor: toastui.Editor;
+  editor: Editor;
 
   constructor(el: string, initialValue: string, height: string, placeholder: string) {
-    this.editor = new toastui.Editor({
+    this.editor = new Editor({
       el: document.querySelector(el),
       initialEditType: 'markdown',
       previewStyle: 'vertical',
@@ -227,12 +231,13 @@ declare namespace toastui {
 components/markdown/toastEditor.ts
 ```ts{14,33,42,49-71}
 import {uploadImage} from '@/apis/uploadApi';
+import Editor from '@toast-ui/editor';
 
 export default class {
-  editor: toastui.Editor;
+  editor: Editor;
 
   constructor(el: string, initialValue: string, public height: string, placeholder: string) {
-    this.editor = new toastui.Editor({
+    this.editor = new Editor({
       el: document.querySelector(el),
       initialEditType: 'markdown',
       previewStyle: 'vertical',

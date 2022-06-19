@@ -39,11 +39,6 @@ export const themeData = {
           "children": []
         },
         {
-          "text": "Vue中常用的指令",
-          "link": "/vue/directives.md",
-          "children": []
-        },
-        {
           "text": "使用Vue中的开发插件",
           "link": "/vue/plugin.md",
           "children": []
@@ -132,7 +127,15 @@ export const themeData = {
       ]
     },
     {
-      "text": "Vue3组件库项目",
+      "text": "Vue2 UI",
+      "collapsible": true,
+      "children": [
+        "/vue2ui/layout.md",
+        "/vue2ui/toast.md"
+      ]
+    },
+    {
+      "text": "Vue3 UI",
       "collapsible": true,
       "children": [
         "/vue3UI/start.md",
@@ -165,7 +168,8 @@ export const themeData = {
         "/admin-project/markdown.md",
         "/admin-project/package.md",
         "/admin-project/wangEditor.md",
-        "/admin-project/animationList.md"
+        "/admin-project/animationList.md",
+        "/admin-project/optimize.md"
       ]
     },
     {

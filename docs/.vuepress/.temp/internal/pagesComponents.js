@@ -25,6 +25,8 @@ export const pagesComponents = {
   "v-6294654d": defineAsyncComponent(() => import(/* webpackChunkName: "v-6294654d" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/admin-project/menu.html.vue")),
   // path: /admin-project/moduleRoute.html
   "v-37b2b1e9": defineAsyncComponent(() => import(/* webpackChunkName: "v-37b2b1e9" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/admin-project/moduleRoute.html.vue")),
+  // path: /admin-project/optimize.html
+  "v-4e2f15e2": defineAsyncComponent(() => import(/* webpackChunkName: "v-4e2f15e2" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/admin-project/optimize.html.vue")),
   // path: /admin-project/package.html
   "v-a6e8ce00": defineAsyncComponent(() => import(/* webpackChunkName: "v-a6e8ce00" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/admin-project/package.html.vue")),
   // path: /admin-project/reactive.html
@@ -133,6 +135,10 @@ export const pagesComponents = {
   "v-029f4374": defineAsyncComponent(() => import(/* webpackChunkName: "v-029f4374" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue-router/scroll.html.vue")),
   // path: /vue-router/start.html
   "v-763d9b46": defineAsyncComponent(() => import(/* webpackChunkName: "v-763d9b46" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue-router/start.html.vue")),
+  // path: /vue2ui/layout.html
+  "v-e20b43ce": defineAsyncComponent(() => import(/* webpackChunkName: "v-e20b43ce" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue2ui/layout.html.vue")),
+  // path: /vue2ui/toast.html
+  "v-58a360b0": defineAsyncComponent(() => import(/* webpackChunkName: "v-58a360b0" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue2ui/toast.html.vue")),
   // path: /vue3/composition.html
   "v-29530678": defineAsyncComponent(() => import(/* webpackChunkName: "v-29530678" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue3/composition.html.vue")),
   // path: /vue3/script-setup.html
