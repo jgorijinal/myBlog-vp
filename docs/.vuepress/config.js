@@ -126,18 +126,18 @@ module.exports = {
                     '/JS/hongwei.md',
                 ]
             },
-            {
-                text: 'TS系列',
-                collapsible: true,
-                children: [
-                    '/TS/start.md',
-                    '/TS/basic.md',
-                    '/TS/as.md',
-                    '/TS/class.md',
-                    '/TS/generics.md',
-                    '/TS/Vue3.md'
-                ]
-            },
+            // {
+            //     text: 'TS系列',
+            //     collapsible: true,
+            //     children: [
+            //         '/TS/start.md',
+            //         '/TS/basic.md',
+            //         '/TS/as.md',
+            //         '/TS/class.md',
+            //         '/TS/generics.md',
+            //         '/TS/Vue3.md'
+            //     ]
+            // },
             {
                 text: 'Vue2 UI',
                 collapsible: true,

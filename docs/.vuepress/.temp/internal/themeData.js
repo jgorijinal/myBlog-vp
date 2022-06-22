@@ -115,18 +115,6 @@ export const themeData = {
       ]
     },
     {
-      "text": "TS系列",
-      "collapsible": true,
-      "children": [
-        "/TS/start.md",
-        "/TS/basic.md",
-        "/TS/as.md",
-        "/TS/class.md",
-        "/TS/generics.md",
-        "/TS/Vue3.md"
-      ]
-    },
-    {
       "text": "Vue2 UI",
       "collapsible": true,
       "children": [
@@ -205,17 +193,4 @@ export const themeData = {
   "openInNewWindow": "open in new window",
   "toggleDarkMode": "toggle dark mode",
   "toggleSidebar": "toggle sidebar"
-}
-
-if (import.meta.webpackHot) {
-  import.meta.webpackHot.accept()
-  if (__VUE_HMR_RUNTIME__.updateThemeData) {
-    __VUE_HMR_RUNTIME__.updateThemeData(themeData)
-  }
-}
-
-if (import.meta.hot) {
-  import.meta.hot.accept(({ themeData }) => {
-    __VUE_HMR_RUNTIME__.updateThemeData(themeData)
-  })
 }

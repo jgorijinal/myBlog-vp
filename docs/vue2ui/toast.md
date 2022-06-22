@@ -11,10 +11,21 @@
 ```html
 <button @click="showToast()">click</button>  
 ```
+this.$toast(message, options)调用
 ```
 methods:{
   showToast(){
-    this.$toast('hello',options...)
+    this.$toast('hello',{
+      position: 'middle',
+      enableHtml:true,
+      closeButton:{
+        text:'关闭按钮',
+        callback(){
+          console.log('你点击了关闭按钮')
+        }
+      }
+      ....
+    })
   }
 }
 ```
@@ -207,8 +218,9 @@ export  default  {
 
 `$refs` 和 `$nextTick`的使用
 
+`$nextTick` :将回调延迟到下次 `DOM` 更新循环之后执行。 在修改数据之后立即使用它，然后等待 `DOM` 更新。
 获取`toast`的总高度 , 强制把高度赋给`line`的高度
-
+[nextTick异步更新队列](https://cn.vuejs.org/v2/guide/reactivity.html#%E5%BC%82%E6%AD%A5%E6%9B%B4%E6%96%B0%E9%98%9F%E5%88%97)
 注意要`nextTick`异步获取高度
 ```vue{2,5,54-57}
 <template>
@@ -300,4 +312,153 @@ $bg-color:  #424242;
   }
 }
 </style>
+```
+## 位置(上,中,下)
+`position`可设置为 `top`,'bottom','middle'
+```vue{2,35-41,43-49,102-114}
+<template>
+<div class="toast" ref="toast" :class="classes">
+  <div v-if="enableHtml" class="content" v-html="$slots.default[0]"></div>
+  <div v-else class="content"><slot></slot></div>
+  <div class="line" ref="line"></div>
+  <div class="close" v-if="showClose" @click="onClickClose" >
+    关闭
+  </div>
+</div>
+</template>
+<script lang="js">
+export  default  {
+  props:{
+    duration:{
+      type:Number,
+      default:4500   //单位为毫秒
+    },
+    showClose:{
+      type:Boolean,
+      default: true
+    },
+    closeButton:{
+      type:Object,
+      default(){      //default是对象的话 , 要用函数return返回
+        return{
+          text:'关闭',
+          callback:undefined
+        }
+      }
+    },
+    enableHtml:{
+      type:Boolean,
+      default:false
+    },
+    position:{
+      type:String,
+      default:'middle',
+      validate(value){
+        return ['top','middle','bottom'].indexOf(value) >= 0          // 也可用includes,  但它兼容性不好(IE不支持), 所以用indexOf
+      }
+    }
+  },
+  computed:{
+    classes(){
+      return {
+        [`position-${this.position}`] : true
+      }
+    }
+  },
+  methods:{
+    close(){
+        this.$el.remove()
+        this.$destroy()
+    },
+    onClickClose(){
+      this.close()
+      if(this.closeButton && typeof this.closeButton.callback === 'function')
+      this.closeButton.callback(this)       // 细节: 传入this , 想让外面调自己
+    }
+  },
+  mounted(){
+    if(this.duration > 0){
+      setTimeout(()=>{
+          this.close()
+      },this.duration)
+    }
+    this.$nextTick(()=>{
+      const totalHeight = this.$refs.toast.getBoundingClientRect().height
+      this.$refs.line.style.height = totalHeight+ 'px'
+    })
+  }
+}
+
+</script>
+<style lang="scss" scoped>
+$font-size:14px;
+$bg-color:  #424242;
+.toast {
+  position: fixed;
+  left: 50%;
+  padding: 0 0 0 10px;
+  font-size: $font-size;
+  line-height: 1.8;
+  background: $bg-color;
+  color: #eeeeee;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  max-width:300px;
+  .content{
+    padding:6px 10px 6px 0 ;
+  }
+  .close {
+    padding:0 10px ;
+    white-space: nowrap;
+  }
+  .line {
+  border-left: 1px solid #eeeeee;
+  }
+  &.position-top{
+    top:0;
+    transform: translateX(-50%);
+  }
+  &.position-middle{
+    top:50%;
+    transform: translate(-50%,-50%);
+  }
+  &.position-bottom{
+    bottom: 0;
+    transform: translateX(-50%);
+  }
+}
+</style>
+```
+## 如果页面里有出现`toast`, 干掉它在出现  (重构)
+重构 : 提取函数起个名 , return 当前`toast` 
+
+如果`toast`存在就干掉
+plugin.js
+```js
+import Toast from './g-toast.vue';
+
+let currentToast
+export default {
+  install(Vue, options) {
+    //添加实例方法
+    Vue.prototype.$toast = function (message , toastOptions) {
+      if (currentToast){
+       currentToast.close()
+      }
+      currentToast = createToast(Vue, message ,toastOptions )
+    };
+  }
+};
+
+function createToast(Vue,message , toastOptions){
+  let Constructor = Vue.extend(Toast);
+  let toast = new Constructor({
+    propsData:{...toastOptions}
+  });
+  toast.$slots.default = [message];
+  toast.$mount();
+  document.body.appendChild(toast.$el);
+  return toast                        
+}
 ```

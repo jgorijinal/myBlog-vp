@@ -488,9 +488,9 @@ Promise.all2 = function (promiseList){
      return new Promise((resolve,reject)=>{
          let result = []
          let count = 0
-         promiseList.forEach((promise,index) =>{
-             promise.then((data)=>{         // 进入then已经说明promise成功
-                 result[index] = data
+         promiseList.forEach((promise) =>{
+             promise.then((data)=>{         // 进入then已经说明 promise 成功
+                 result.push(data) 
                  count += 1
                  if(count === promiseList.length) {
                      resolve(result)
@@ -553,6 +553,23 @@ Promise.MyAllSettled2 = (promiseList) => {
 ```
 ## Promise.race()
 `Promise.race` 从字面意思理解就是赛跑，以状态变化最快的那个 `Promise` 实例为准，最快的 `Promise` 成功 `Promise.race` 就成功，最快的 `Promise` 失败 `Promise.race` 就失败。
+### 手写
+```js
+Promise.race2 = function(promiseList){
+    return new Promise(function(resolve, reject){
+        let resolved = false
+        promiseList.forEach((p)=>{
+            p.then((data)=>{
+                if(!resolved){
+                    resolve(data)
+                }
+            }).catch((err)=>{
+                reject(err)
+            })
+        })
+    }
+}
+```
 
 ## async/await
 ### async
