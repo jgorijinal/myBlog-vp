@@ -1,4 +1,4 @@
-<template><h1 id="container-布局容器组件" tabindex="-1"><a class="header-anchor" href="#container-布局容器组件" aria-hidden="true">#</a> Container 布局容器组件</h1>
+<template><h1 id="container-布局容器" tabindex="-1"><a class="header-anchor" href="#container-布局容器" aria-hidden="true">#</a> Container 布局容器</h1>
 <h2 id="需求与api设计" tabindex="-1"><a class="header-anchor" href="#需求与api设计" aria-hidden="true">#</a> 需求与API设计</h2>
 <ul>
 <li><code>&lt;g-container&gt;</code>：外层容器。 如果子元素内有<code>&lt;g-aside&gt;</code>就左右水平布局</li>

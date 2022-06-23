@@ -137,6 +137,8 @@ export const pagesComponents = {
   "v-763d9b46": defineAsyncComponent(() => import(/* webpackChunkName: "v-763d9b46" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue-router/start.html.vue")),
   // path: /vue2ui/layout.html
   "v-e20b43ce": defineAsyncComponent(() => import(/* webpackChunkName: "v-e20b43ce" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue2ui/layout.html.vue")),
+  // path: /vue2ui/tabs.html
+  "v-267a8676": defineAsyncComponent(() => import(/* webpackChunkName: "v-267a8676" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue2ui/tabs.html.vue")),
   // path: /vue2ui/toast.html
   "v-58a360b0": defineAsyncComponent(() => import(/* webpackChunkName: "v-58a360b0" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue2ui/toast.html.vue")),
   // path: /vue3/composition.html

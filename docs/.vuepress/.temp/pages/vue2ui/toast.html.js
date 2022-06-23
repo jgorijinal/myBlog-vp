@@ -1,7 +1,7 @@
 export const data = {
   "key": "v-58a360b0",
   "path": "/vue2ui/toast.html",
-  "title": "Toast 轻提示组件",
+  "title": "Toast 轻提示",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
@@ -61,9 +61,22 @@ export const data = {
       {
         "name": "jgoriginal",
         "email": "932274204@qq.com",
-        "commits": 1
+        "commits": 2
       }
     ]
   },
   "filePathRelative": "vue2ui/toast.md"
+}
+
+if (import.meta.webpackHot) {
+  import.meta.webpackHot.accept()
+  if (__VUE_HMR_RUNTIME__.updatePageData) {
+    __VUE_HMR_RUNTIME__.updatePageData(data)
+  }
+}
+
+if (import.meta.hot) {
+  import.meta.hot.accept(({ data }) => {
+    __VUE_HMR_RUNTIME__.updatePageData(data)
+  })
 }

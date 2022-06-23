@@ -141,7 +141,14 @@ export const data = {
       "level": 2,
       "title": "Promise.race()",
       "slug": "promise-race",
-      "children": []
+      "children": [
+        {
+          "level": 3,
+          "title": "手写",
+          "slug": "手写",
+          "children": []
+        }
+      ]
     },
     {
       "level": 2,
@@ -186,9 +193,22 @@ export const data = {
       {
         "name": "jgoriginal",
         "email": "932274204@qq.com",
-        "commits": 7
+        "commits": 8
       }
     ]
   },
   "filePathRelative": "JS/promise.md"
+}
+
+if (import.meta.webpackHot) {
+  import.meta.webpackHot.accept()
+  if (__VUE_HMR_RUNTIME__.updatePageData) {
+    __VUE_HMR_RUNTIME__.updatePageData(data)
+  }
+}
+
+if (import.meta.hot) {
+  import.meta.hot.accept(({ data }) => {
+    __VUE_HMR_RUNTIME__.updatePageData(data)
+  })
 }

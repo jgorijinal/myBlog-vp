@@ -1,4 +1,4 @@
-# Toast 轻提示组件
+# Toast 轻提示
 ![图片](../.vuepress/public/images/toast.png)
 ## 需求与API设计
 点击按钮时弹出提示框

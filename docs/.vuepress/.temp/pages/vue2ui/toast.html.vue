@@ -1,4 +1,4 @@
-<template><h1 id="toast-轻提示组件" tabindex="-1"><a class="header-anchor" href="#toast-轻提示组件" aria-hidden="true">#</a> Toast 轻提示组件</h1>
+<template><h1 id="toast-轻提示" tabindex="-1"><a class="header-anchor" href="#toast-轻提示" aria-hidden="true">#</a> Toast 轻提示</h1>
 <p><img src="@source/.vuepress/public/images/toast.png" alt="图片"></p>
 <h2 id="需求与api设计" tabindex="-1"><a class="header-anchor" href="#需求与api设计" aria-hidden="true">#</a> 需求与API设计</h2>
 <p>点击按钮时弹出提示框</p>

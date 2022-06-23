@@ -144,6 +144,7 @@ module.exports = {
                 children: [
                     '/vue2ui/layout.md',
                     '/vue2ui/toast.md',
+                    '/vue2ui/tabs.md',
                     ]
             },
             {

@@ -119,7 +119,8 @@ export const themeData = {
       "collapsible": true,
       "children": [
         "/vue2ui/layout.md",
-        "/vue2ui/toast.md"
+        "/vue2ui/toast.md",
+        "/vue2ui/tabs.md"
       ]
     },
     {
@@ -193,4 +194,17 @@ export const themeData = {
   "openInNewWindow": "open in new window",
   "toggleDarkMode": "toggle dark mode",
   "toggleSidebar": "toggle sidebar"
+}
+
+if (import.meta.webpackHot) {
+  import.meta.webpackHot.accept()
+  if (__VUE_HMR_RUNTIME__.updateThemeData) {
+    __VUE_HMR_RUNTIME__.updateThemeData(themeData)
+  }
+}
+
+if (import.meta.hot) {
+  import.meta.hot.accept(({ themeData }) => {
+    __VUE_HMR_RUNTIME__.updateThemeData(themeData)
+  })
 }

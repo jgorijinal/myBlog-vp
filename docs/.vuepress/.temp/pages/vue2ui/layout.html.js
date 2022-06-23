@@ -1,7 +1,7 @@
 export const data = {
   "key": "v-e20b43ce",
   "path": "/vue2ui/layout.html",
-  "title": "Container 布局容器组件",
+  "title": "Container 布局容器",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
@@ -29,4 +29,17 @@ export const data = {
     ]
   },
   "filePathRelative": "vue2ui/layout.md"
+}
+
+if (import.meta.webpackHot) {
+  import.meta.webpackHot.accept()
+  if (__VUE_HMR_RUNTIME__.updatePageData) {
+    __VUE_HMR_RUNTIME__.updatePageData(data)
+  }
+}
+
+if (import.meta.hot) {
+  import.meta.hot.accept(({ data }) => {
+    __VUE_HMR_RUNTIME__.updatePageData(data)
+  })
 }

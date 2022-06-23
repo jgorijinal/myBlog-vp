@@ -1,4 +1,4 @@
-# Container 布局容器组件
+# Container 布局容器
 ## 需求与API设计
 * `<g-container>`：外层容器。 如果子元素内有`<g-aside>`就左右水平布局
 * `<g-header>`：顶栏容器
