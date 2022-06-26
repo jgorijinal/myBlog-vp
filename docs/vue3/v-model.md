@@ -1,5 +1,6 @@
-# Vue3中v-model 的使用
+# v-model
 [官网](https://staging-cn.vuejs.org/guide/components/events.html#usage-with-v-model)
+
 
 Vue3 用 `v-model`代替了Vue2里的 `v-model` 和 `.sync`
 - 1. 在`<input>`里面的使用
@@ -13,7 +14,7 @@ Vue3 用 `v-model`代替了Vue2里的 `v-model` 和 `.sync`
 ```vue
 <input :value="xxx" @input="xxx = $event.target.value" />
 ```
-
+**v-bind:value的数据绑定** 和 **@input的事件监听**
 - 2.  在**组件**里面的使用
 
 ```vue

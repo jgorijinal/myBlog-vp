@@ -1,4 +1,4 @@
-<template><h1 id="vue3中v-model-的使用" tabindex="-1"><a class="header-anchor" href="#vue3中v-model-的使用" aria-hidden="true">#</a> Vue3中v-model 的使用</h1>
+<template><h1 id="v-model" tabindex="-1"><a class="header-anchor" href="#v-model" aria-hidden="true">#</a> v-model</h1>
 <p><a href="https://staging-cn.vuejs.org/guide/components/events.html#usage-with-v-model" target="_blank" rel="noopener noreferrer">官网<ExternalLinkIcon/></a></p>
 <p>Vue3 用 <code>v-model</code>代替了Vue2里的 <code>v-model</code> 和 <code>.sync</code></p>
 <ul>
@@ -11,7 +11,8 @@
 <div class="language-vue ext-vue line-numbers-mode"><pre v-pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">v-model</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>xxx<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
 </code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br></div></div><p>上面代码等价于</p>
 <div class="language-vue ext-vue line-numbers-mode"><pre v-pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">:value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>xxx<span class="token punctuation">"</span></span> <span class="token attr-name">@input</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>xxx = $event.target.value<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
-</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br></div></div><ul>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br></div></div><p><strong>v-bind:value的数据绑定</strong> 和 <strong>@input的事件监听</strong></p>
+<ul>
 <li>
 <ol start="2">
 <li>在<strong>组件</strong>里面的使用</li>

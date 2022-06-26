@@ -1,4 +1,4 @@
-<template><h1 id="vue3中的composition-api之script-setup" tabindex="-1"><a class="header-anchor" href="#vue3中的composition-api之script-setup" aria-hidden="true">#</a> Vue3中的Composition API之<code>script setup</code></h1>
+<template><h1 id="composition-api之script-setup" tabindex="-1"><a class="header-anchor" href="#composition-api之script-setup" aria-hidden="true">#</a> Composition API之<code>script setup</code></h1>
 <h2 id="script-setup-的优势" tabindex="-1"><a class="header-anchor" href="#script-setup-的优势" aria-hidden="true">#</a> <code>&lt;script setup&gt;</code>的优势</h2>
 <p><a href="https://staging-cn.vuejs.org/api/sfc-script-setup.html" target="_blank" rel="noopener noreferrer">官网<ExternalLinkIcon/></a></p>
 <p><code>&lt;script setup&gt;</code> 是在单文件组件 (SFC) 中使用<code>Composition API</code> 的编译时语法糖。相比于普通的 <code>&lt;script&gt;</code> 语法，它具有更多优势：</p>

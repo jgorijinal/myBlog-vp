@@ -65,7 +65,13 @@ export const themeData = {
       "collapsible": true,
       "children": [
         "/vue3/vue3.md",
+        "/vue3/life.md",
+        "/vue3/communication.md",
+        "/vue3/dynamic.md",
+        "/vue3/async.md",
         "/vue3/v-model.md",
+        "/vue3/options.md",
+        "/vue3/mixin.md",
         "/vue3/composition.md",
         "/vue3/script-setup.md",
         "/vue3/transition.md"
@@ -134,38 +140,6 @@ export const themeData = {
         "/vue3UI/Tooltip.md",
         "/vue3UI/build.md"
       ]
-    },
-    {
-      "text": "脚手架项目",
-      "collapsible": true,
-      "children": [
-        "/admin-project/start.md",
-        "/admin-project/vite.md",
-        "/admin-project/axios.md",
-        "/admin-project/tailwindcss.md",
-        "/admin-project/component.md",
-        "/admin-project/routerAutoload.md",
-        "/admin-project/form.md",
-        "/admin-project/token.md",
-        "/admin-project/guard.md",
-        "/admin-project/menu.md",
-        "/admin-project/backMainUI.md",
-        "/admin-project/moduleRoute.md",
-        "/admin-project/improveMenu.md",
-        "/admin-project/reactive.md",
-        "/admin-project/auth.md",
-        "/admin-project/markdown.md",
-        "/admin-project/package.md",
-        "/admin-project/wangEditor.md",
-        "/admin-project/animationList.md",
-        "/admin-project/optimize.md"
-      ]
-    },
-    {
-      "text": "json-server与mock",
-      "sidebarDepth": 2,
-      "link": "/json-server与mock/README.md",
-      "children": []
     }
   ],
   "locales": {

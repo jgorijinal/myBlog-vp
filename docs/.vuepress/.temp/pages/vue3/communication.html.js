@@ -1,21 +1,15 @@
 export const data = {
-  "key": "v-267a8676",
-  "path": "/vue2ui/tabs.html",
-  "title": "Tabs 标签页",
+  "key": "v-f9f1c4e8",
+  "path": "/vue3/communication.html",
+  "title": "组件通信",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
   "headers": [
     {
       "level": 2,
-      "title": "需求与 API 设计",
-      "slug": "需求与-api-设计",
-      "children": []
-    },
-    {
-      "level": 2,
-      "title": "基本的实现",
-      "slug": "基本的实现",
+      "title": "非父子组件通信",
+      "slug": "非父子组件通信",
       "children": [
         {
           "level": 3,
@@ -25,23 +19,17 @@ export const data = {
         },
         {
           "level": 3,
-          "title": "用 eventBus 实现 tab 切换",
-          "slug": "用-eventbus-实现-tab-切换",
+          "title": "全局事件总线mitt库",
+          "slug": "全局事件总线mitt库",
           "children": []
         }
       ]
     }
   ],
   "git": {
-    "contributors": [
-      {
-        "name": "jgoriginal",
-        "email": "932274204@qq.com",
-        "commits": 1
-      }
-    ]
+    "contributors": []
   },
-  "filePathRelative": "vue2ui/tabs.md"
+  "filePathRelative": "vue3/communication.md"
 }
 
 if (import.meta.webpackHot) {

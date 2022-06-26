@@ -1,34 +1,28 @@
 export const data = {
-  "key": "v-e20b43ce",
-  "path": "/vue2ui/layout.html",
-  "title": "Container 布局容器",
+  "key": "v-3c727183",
+  "path": "/vue3/dynamic.html",
+  "title": "动态组件",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
   "headers": [
     {
       "level": 2,
-      "title": "需求与API设计",
-      "slug": "需求与api设计",
+      "title": "基本使用",
+      "slug": "基本使用",
       "children": []
     },
     {
       "level": 2,
-      "title": "基本的实现",
-      "slug": "基本的实现",
+      "title": "keep-alive",
+      "slug": "keep-alive",
       "children": []
     }
   ],
   "git": {
-    "contributors": [
-      {
-        "name": "jgoriginal",
-        "email": "932274204@qq.com",
-        "commits": 2
-      }
-    ]
+    "contributors": []
   },
-  "filePathRelative": "vue2ui/layout.md"
+  "filePathRelative": "vue3/dynamic.md"
 }
 
 if (import.meta.webpackHot) {

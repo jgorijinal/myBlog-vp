@@ -1,4 +1,4 @@
-# Vue3中的Composition API之`script setup`
+# Composition API之`script setup`
 ## `<script setup>`的优势
 [官网](https://staging-cn.vuejs.org/api/sfc-script-setup.html)
 

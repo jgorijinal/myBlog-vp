@@ -1,7 +1,7 @@
 export const data = {
   "key": "v-812fd256",
   "path": "/vue3/script-setup.html",
-  "title": "Vue3中的Composition API之script setup",
+  "title": "Composition API之script setup",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",

@@ -1,21 +1,15 @@
 export const data = {
-  "key": "v-4f57be90",
-  "path": "/vue3/v-model.html",
-  "title": "v-model",
+  "key": "v-64663b18",
+  "path": "/vue3/life.html",
+  "title": "生命周期",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
   "headers": [],
   "git": {
-    "contributors": [
-      {
-        "name": "jgoriginal",
-        "email": "932274204@qq.com",
-        "commits": 5
-      }
-    ]
+    "contributors": []
   },
-  "filePathRelative": "vue3/v-model.md"
+  "filePathRelative": "vue3/life.md"
 }
 
 if (import.meta.webpackHot) {

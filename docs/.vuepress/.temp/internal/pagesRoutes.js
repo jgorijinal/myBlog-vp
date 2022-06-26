@@ -71,10 +71,16 @@ const routeItems = [
   ["v-e20b43ce","/vue2ui/layout.html",{"title":"Container 布局容器"},["/vue2ui/layout","/vue2ui/layout.md"]],
   ["v-267a8676","/vue2ui/tabs.html",{"title":"Tabs 标签页"},["/vue2ui/tabs","/vue2ui/tabs.md"]],
   ["v-58a360b0","/vue2ui/toast.html",{"title":"Toast 轻提示"},["/vue2ui/toast","/vue2ui/toast.md"]],
-  ["v-29530678","/vue3/composition.html",{"title":"Vue3中的Composition API"},["/vue3/composition","/vue3/composition.md"]],
-  ["v-812fd256","/vue3/script-setup.html",{"title":"Vue3中的Composition API之script setup"},["/vue3/script-setup","/vue3/script-setup.md"]],
+  ["v-205c7ba6","/vue3/async.html",{"title":"异步组件"},["/vue3/async","/vue3/async.md"]],
+  ["v-f9f1c4e8","/vue3/communication.html",{"title":"组件通信"},["/vue3/communication","/vue3/communication.md"]],
+  ["v-29530678","/vue3/composition.html",{"title":"Composition API"},["/vue3/composition","/vue3/composition.md"]],
+  ["v-3c727183","/vue3/dynamic.html",{"title":"动态组件"},["/vue3/dynamic","/vue3/dynamic.md"]],
+  ["v-64663b18","/vue3/life.html",{"title":"生命周期"},["/vue3/life","/vue3/life.md"]],
+  ["v-6b866cc1","/vue3/mixin.html",{"title":"Mixin 和 extends"},["/vue3/mixin","/vue3/mixin.md"]],
+  ["v-b71522f8","/vue3/options.html",{"title":"Options API"},["/vue3/options","/vue3/options.md"]],
+  ["v-812fd256","/vue3/script-setup.html",{"title":"Composition API之script setup"},["/vue3/script-setup","/vue3/script-setup.md"]],
   ["v-a561730a","/vue3/transition.html",{"title":"Transition 过度动画"},["/vue3/transition","/vue3/transition.md"]],
-  ["v-4f57be90","/vue3/v-model.html",{"title":"Vue3中v-model 的使用"},["/vue3/v-model","/vue3/v-model.md"]],
+  ["v-4f57be90","/vue3/v-model.html",{"title":"v-model"},["/vue3/v-model","/vue3/v-model.md"]],
   ["v-26626eba","/vue3/vue3.html",{"title":"Vue2到Vue3的变化"},["/vue3/vue3","/vue3/vue3.md"]],
   ["v-2650fd40","/vue3UI/build.html",{"title":"部署"},["/vue3UI/build","/vue3UI/build.md"]],
   ["v-663f64fc","/vue3UI/dialog.html",{"title":"Dialog 对话框组件"},["/vue3UI/dialog","/vue3UI/dialog.md"]],
@@ -83,6 +89,7 @@ const routeItems = [
   ["v-802641b4","/vue3UI/Tabs.html",{"title":"Tabs 标签页组件"},["/vue3UI/Tabs","/vue3UI/Tabs.md"]],
   ["v-c2e2706a","/vue3UI/Tooltip.html",{"title":"Tooltip 文字提示组件"},["/vue3UI/Tooltip","/vue3UI/Tooltip.md"]],
   ["v-3706649a","/404.html",{"title":""},["/404"]],
+  ["v-6831bb92","/vue3/other.html",{"title":""},["/vue3/other","/vue3/other.md"]],
 ]
 
 export const pagesRoutes = routeItems.reduce(
