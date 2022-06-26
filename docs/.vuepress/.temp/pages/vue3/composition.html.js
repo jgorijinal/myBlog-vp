@@ -8,9 +8,78 @@ export const data = {
   "headers": [
     {
       "level": 2,
-      "title": "1. 为什么⽤ Composition API",
-      "slug": "_1-为什么用-composition-api",
+      "title": "Options API 的弊端",
+      "slug": "options-api-的弊端",
       "children": []
+    },
+    {
+      "level": 2,
+      "title": "setup 函数",
+      "slug": "setup-函数",
+      "children": [
+        {
+          "level": 3,
+          "title": "setup 函数的参数",
+          "slug": "setup-函数的参数",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "setup 函数的返回值",
+          "slug": "setup-函数的返回值",
+          "children": []
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "title": "核心",
+      "slug": "核心",
+      "children": [
+        {
+          "level": 3,
+          "title": "reactive api",
+          "slug": "reactive-api",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "ref API",
+          "slug": "ref-api",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "readonly",
+          "slug": "readonly",
+          "children": []
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "title": "工具函数",
+      "slug": "工具函数",
+      "children": [
+        {
+          "level": 3,
+          "title": "toRefs",
+          "slug": "torefs",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "toRef",
+          "slug": "toref",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "customRef",
+          "slug": "customref",
+          "children": []
+        }
+      ]
     }
   ],
   "git": {
@@ -18,7 +87,7 @@ export const data = {
       {
         "name": "jgoriginal",
         "email": "932274204@qq.com",
-        "commits": 4
+        "commits": 5
       }
     ]
   },
