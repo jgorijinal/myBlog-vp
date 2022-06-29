@@ -84,16 +84,20 @@ module.exports = {
                     '/vue3/v-model.md',
                     '/vue3/options.md',
                     '/vue3/mixin.md',
+                    '/vue3/directives.md',
+                    '/vue3/chajian.md',
                     '/vue3/composition.md',
                     '/vue3/script-setup.md',
+                    '/vue3/h.md',
                     '/vue3/transition.md',
-                  
+            
                 ]
             },
             {
                 text: 'Vue Router系列',
                 collapsible: true,
                 children: [
+                    '/vue-router/router.md',
                     '/vue-router/start.md',
                     '/vue-router/routerHTML.md',
                     '/vue-router/name.md',
@@ -107,6 +111,14 @@ module.exports = {
                     '/vue-router/scroll.md',
                     '/vue-router/lazyLoading.md',
                     '/vue-router/dynamicRouter.md',
+                ]
+            },
+            {
+                text: 'Vuex系列',
+                collapsible: true,
+                children: [
+                    '/vuex/start.md',
+                
                 ]
             },
             {

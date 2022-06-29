@@ -72,8 +72,11 @@ export const themeData = {
         "/vue3/v-model.md",
         "/vue3/options.md",
         "/vue3/mixin.md",
+        "/vue3/directives.md",
+        "/vue3/chajian.md",
         "/vue3/composition.md",
         "/vue3/script-setup.md",
+        "/vue3/h.md",
         "/vue3/transition.md"
       ]
     },
@@ -81,6 +84,7 @@ export const themeData = {
       "text": "Vue Router系列",
       "collapsible": true,
       "children": [
+        "/vue-router/router.md",
         "/vue-router/start.md",
         "/vue-router/routerHTML.md",
         "/vue-router/name.md",
@@ -94,6 +98,13 @@ export const themeData = {
         "/vue-router/scroll.md",
         "/vue-router/lazyLoading.md",
         "/vue-router/dynamicRouter.md"
+      ]
+    },
+    {
+      "text": "Vuex系列",
+      "collapsible": true,
+      "children": [
+        "/vuex/start.md"
       ]
     },
     {
@@ -168,4 +179,17 @@ export const themeData = {
   "openInNewWindow": "open in new window",
   "toggleDarkMode": "toggle dark mode",
   "toggleSidebar": "toggle sidebar"
+}
+
+if (import.meta.webpackHot) {
+  import.meta.webpackHot.accept()
+  if (__VUE_HMR_RUNTIME__.updateThemeData) {
+    __VUE_HMR_RUNTIME__.updateThemeData(themeData)
+  }
+}
+
+if (import.meta.hot) {
+  import.meta.hot.accept(({ themeData }) => {
+    __VUE_HMR_RUNTIME__.updateThemeData(themeData)
+  })
 }
