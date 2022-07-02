@@ -65,6 +65,25 @@ getters 中的函数本身 , 可以返回一个函数 , 那么在使用的地方
 ![图片](../.vuepress/public/images/mg1.png)
 * 在 setup 中使用: 
 ![图片](../.vuepress/public/images/sg.png)
+###  封装useState和useGetters 辅助函数
+```
+hooks
+|-- useMapper.js  抽取共同的代码部分
+|-- useState.js
+|-- useGetters.js
+```
+useMapper.js
+
+![图片](../.vuepress/public/images/useMapper.png)
+
+useState.js 
+
+![图片](../.vuepress/public/images/us.png)
+
+useGetters.js 
+
+![图片](../.vuepress/public/images/ug.png)
+
 ## mutation 基本使用 
 **更改 Vuex 的 store 中的状态的唯一方法就是提交 mutation :**
 ![图片](../.vuepress/public/images/mu1.png)
@@ -98,3 +117,94 @@ getters 中的函数本身 , 可以返回一个函数 , 那么在使用的地方
 * 在setup中使用 mapMutations
 
 ![图片](../.vuepress/public/images/sm.png)
+## actions的基本使用
+action 类似于 mutation ,不同在于 : 
+* action 提交的是 mutation , 而不是直接变更状态
+* action 可以包含任何异步操作 
+
+这里有一个非常重要的参数 context 
+* context 是一个和store实例均有相同方法和属性的 context 对象
+* 所以可以从其中获取到 commit 方法来提交一个mutation, 或者通过context.state 和 context.getters 来获取state和getters 
+* 但是为什么他不是 store 对象? 在下面 modules 部分会知道 
+
+### actions的分发操作
+* 分发是用的是 store 上的 dispatch 函数 , 同样也可以携带参数 
+
+![图片](../.vuepress/public/images/dispatch.png) 
+![图片](../.vuepress/public/images/context.png) 
+### actions的其他细节 
+* 把 context 打出来看看 , 在参数上可进行解构 
+![图片](../.vuepress/public/images/cgetters.png)
+![图片](../.vuepress/public/images/gg.png)
+* 对象形式的派发风格
+
+![图片](../.vuepress/public/images/oa.png)
+
+### mapActions 辅助函数 
+![图片](../.vuepress/public/images/ma.png)
+* 在setup中使用 :
+![图片](../.vuepress/public/images/sa.png)
+### actions的异步操作
+Action 通常是异步的 , 那么如何知道 action 什么时候结束 ? 
+* 可以通过让action返回一个 Promise , 在Promise的then中处理完成后的操作
+
+![图片](../.vuepress/public/images/pp.png)
+![图片](../.vuepress/public/images/ppp.png)
+## modules的基本使用
+什么是 Module ? 
+* 由于使用单一状态树 , 应用中的所有状态会集中到一个比较大的对象 ,  当应用变得非常复杂时 , store对象就有可能变得相当臃肿
+* 为了解决这个问题 , Vuex 允许我们将store 分割成多个**模块(module)**
+* 每个模块拥有自己的 state , getters , mutations , actions, 甚至是嵌套子模块 
+```
+store
+|-- index.js
+|-- modules/home.js
+|-- modules/user.js
+```
+home.js
+![图片](../.vuepress/public/images/home.png)
+
+user.js
+![图片](../.vuepress/public/images/user.png)
+
+index.js
+![图片](../.vuepress/public/images/i.png)
+
+模板: 
+![图片](../.vuepress/public/images/tmo.png)
+
+### module的命名空间
+默认情况下, 模块内部的action 和 mutation 仍然是注册在**全局的命名空间**中: 
+* 这样使得多个模块能够对同一个 action 或 mutation 作出相应
+* Getter 同样也默认注册在全局的命名空间中
+
+如果我们希望具有更高的封装度和复用性, 可以添加 **namespaced:true** 的方式使其成为带命名空间的模块 :
+* 当模块被注册后, 它的所有getters , actions , mutations ,都会自动根据模块注册的路径调整命名
+
+![图片](../.vuepress/public/images/namespaced.png)
+
+### module的辅助函数
+
+使用辅助函数有三种使用方法: 
+* 方式一 : 通过完整的模块名称来查找
+* 方式二 : 第一个参数传入模块空间名称, 后面写上要使用的属性 
+* 方式三 : 通过 **createNamespacedHelper** 生成一个模块的辅助函数
+
+![图片](../.vuepress/public/images/no1.png)
+
+主要使用下面的方法: **createNamespacedHelper**
+
+![图片](../.vuepress/public/images/555.png)
+
+### 对 useState 和 useGetters的修改 (setup中的使用)
+
+useState.js
+
+![图片](../.vuepress/public/images/ms.png)
+
+useGetters.js
+
+![图片](../.vuepress/public/images/mg.png)
+
+
+

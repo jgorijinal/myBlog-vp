@@ -1,5 +1,5 @@
 # 断言
-## enum枚举
+<!-- ## enum枚举
 * 不设置值时，值以0开始递增
 ```ts
 enum SexType {
@@ -37,10 +37,10 @@ const user = {
   sex:SexType.GIRL
 }
 console.log(user) //{ name: 'frank', sex: '女' }
-```
+``` -->
 ## as断言
 跳过吧..
-## const断言
+<!-- ## const断言
 ### let & const
 * const 保证该字面量的严格类型
 * let 为通用类型比如字符串类型
@@ -158,7 +158,10 @@ a = undefined
 let a: string | null | undefined = 'hello'
 a = null
 a = undefined
-```
+``` -->
+
+
+
 ## 非空断言
 先要开启 tsconfig.json 的配置项strictNullChecks 字段为 true。
 

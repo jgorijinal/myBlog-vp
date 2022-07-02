@@ -8,51 +8,8 @@ export const data = {
   "headers": [
     {
       "level": 2,
-      "title": "enum枚举",
-      "slug": "enum枚举",
-      "children": []
-    },
-    {
-      "level": 2,
       "title": "as断言",
       "slug": "as断言",
-      "children": []
-    },
-    {
-      "level": 2,
-      "title": "const断言",
-      "slug": "const断言",
-      "children": [
-        {
-          "level": 3,
-          "title": "let & const",
-          "slug": "let-const",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "as const",
-          "slug": "as-const",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "数组使用as const",
-          "slug": "数组使用as-const",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "解构中使用as const",
-          "slug": "解构中使用as-const",
-          "children": []
-        }
-      ]
-    },
-    {
-      "level": 2,
-      "title": "null / undefined",
-      "slug": "null-undefined",
       "children": []
     },
     {
@@ -97,4 +54,17 @@ export const data = {
     ]
   },
   "filePathRelative": "TS/as.md"
+}
+
+if (import.meta.webpackHot) {
+  import.meta.webpackHot.accept()
+  if (__VUE_HMR_RUNTIME__.updatePageData) {
+    __VUE_HMR_RUNTIME__.updatePageData(data)
+  }
+}
+
+if (import.meta.hot) {
+  import.meta.hot.accept(({ data }) => {
+    __VUE_HMR_RUNTIME__.updatePageData(data)
+  })
 }

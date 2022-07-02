@@ -47,6 +47,12 @@ export const data = {
           "title": "mapGetters 辅助函数",
           "slug": "mapgetters-辅助函数",
           "children": []
+        },
+        {
+          "level": 3,
+          "title": "封装useState和useGetters 辅助函数",
+          "slug": "封装usestate和usegetters-辅助函数",
+          "children": []
         }
       ]
     },
@@ -68,6 +74,62 @@ export const data = {
           "children": []
         }
       ]
+    },
+    {
+      "level": 2,
+      "title": "actions的基本使用",
+      "slug": "actions的基本使用",
+      "children": [
+        {
+          "level": 3,
+          "title": "actions的分发操作",
+          "slug": "actions的分发操作",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "actions的其他细节",
+          "slug": "actions的其他细节",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "mapActions 辅助函数",
+          "slug": "mapactions-辅助函数",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "actions的异步操作",
+          "slug": "actions的异步操作",
+          "children": []
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "title": "modules的基本使用",
+      "slug": "modules的基本使用",
+      "children": [
+        {
+          "level": 3,
+          "title": "module的命名空间",
+          "slug": "module的命名空间",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "module的辅助函数",
+          "slug": "module的辅助函数",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "对 useState 和 useGetters的修改 (setup中的使用)",
+          "slug": "对-usestate-和-usegetters的修改-setup中的使用",
+          "children": []
+        }
+      ]
     }
   ],
   "git": {
@@ -75,7 +137,7 @@ export const data = {
       {
         "name": "jgoriginal",
         "email": "932274204@qq.com",
-        "commits": 1
+        "commits": 2
       }
     ]
   },

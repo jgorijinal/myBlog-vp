@@ -1,4 +1,5 @@
 <template><h1 id="基础类型" tabindex="-1"><a class="header-anchor" href="#基础类型" aria-hidden="true">#</a> 基础类型</h1>
+<p><img src="@source/.vuepress/public/images/super.png" alt="图片"></p>
 <h2 id="类型推断" tabindex="-1"><a class="header-anchor" href="#类型推断" aria-hidden="true">#</a> 类型推断</h2>
 <h3 id="数组" tabindex="-1"><a class="header-anchor" href="#数组" aria-hidden="true">#</a> 数组</h3>
 <p>类型推断会表示数组内容值为字符串</p>
@@ -28,6 +29,7 @@ user<span class="token punctuation">.</span>lessons<span class="token punctuatio
 </code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><h2 id="基本类型" tabindex="-1"><a class="header-anchor" href="#基本类型" aria-hidden="true">#</a> 基本类型</h2>
 <p>除了上面的类型自动推断外，还是要明确设置变量类型</p>
 <h3 id="数组-1" tabindex="-1"><a class="header-anchor" href="#数组-1" aria-hidden="true">#</a> 数组</h3>
+<p><img src="@source/.vuepress/public/images/aa1.png" alt="图片"></p>
 <div class="language-typescript ext-ts line-numbers-mode"><pre v-pre class="language-typescript"><code><span class="token keyword">let</span> array<span class="token operator">:</span><span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
 array <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
 array<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token string">'hi'</span><span class="token punctuation">)</span>
@@ -40,15 +42,34 @@ array<span class="token punctuation">.</span><span class="token function">push</
 user1 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
 user1 <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
 <span class="token function-variable function">user1</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
-</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p>限定对象值类型 ,属性后面加<code>?</code>,这样的属性是非必填项</p>
-<div class="language-typescript ext-ts line-numbers-mode"><pre v-pre class="language-typescript"><code><span class="token keyword">let</span> user1<span class="token operator">:</span><span class="token punctuation">{</span>name<span class="token operator">:</span><span class="token builtin">string</span> <span class="token punctuation">,</span> age<span class="token operator">:</span><span class="token builtin">number</span> <span class="token punctuation">,</span> url<span class="token operator">?</span><span class="token operator">:</span><span class="token builtin">string</span><span class="token punctuation">}</span>
-user1 <span class="token operator">=</span><span class="token punctuation">{</span>name<span class="token operator">:</span><span class="token string">'frank'</span><span class="token punctuation">,</span> age<span class="token operator">:</span><span class="token number">18</span><span class="token punctuation">}</span>
-</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h3 id="元组" tabindex="-1"><a class="header-anchor" href="#元组" aria-hidden="true">#</a> 元组</h3>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p>但开发中不推荐使用这种方法
+<img src="@source/.vuepress/public/images/tobj.png" alt="图片">
+属性后面加 <strong><code>?</code></strong>,这样的属性是非必填项
+<img src="@source/.vuepress/public/images/tobj2.png" alt="图片"></p>
+<h3 id="tuple" tabindex="-1"><a class="header-anchor" href="#tuple" aria-hidden="true">#</a> tuple</h3>
 <p>明确数组每个成员值类型的数组为元组</p>
-<div class="language-typescript ext-ts line-numbers-mode"><pre v-pre class="language-typescript"><code><span class="token keyword">let</span> x<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">number</span><span class="token punctuation">,</span> <span class="token builtin">boolean</span><span class="token punctuation">]</span>
-x <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'frank'</span><span class="token punctuation">,</span> <span class="token number">2090</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">]</span>
-<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h3 id="any" tabindex="-1"><a class="header-anchor" href="#any" aria-hidden="true">#</a> any</h3>
+<p>那么tuple和数组有什么区别呢？</p>
+<ul>
+<li>首先，数组中通常建议存放相同类型的元素，不同类型的元素是不推荐放在数组中。（可以放在对象或者元组
+中）</li>
+<li>其次，元组中每个元素都有自己特性的类型，根据索引值获取到的值可以确定对应的类型</li>
+</ul>
+<p><img src="@source/.vuepress/public/images/tutu.png" alt="图片"></p>
+<h3 id="null-undefined" tabindex="-1"><a class="header-anchor" href="#null-undefined" aria-hidden="true">#</a> null &amp; undefined</h3>
+<p>在 JavaScript 中，undefined 和 null 是两个基本数据类型。</p>
+<p>在TypeScript中，它们各自的类型也是undefined和null，也就意味着它们既是实际的值，也是自己的类型：</p>
+<p><img src="@source/.vuepress/public/images/nu.png" alt="图片"></p>
+<h3 id="symbol" tabindex="-1"><a class="header-anchor" href="#symbol" aria-hidden="true">#</a> symbol</h3>
+<ul>
+<li>我们不可以在对象中添加相同的属性名</li>
+</ul>
+<p><img src="@source/.vuepress/public/images/s1.png" alt="图片"></p>
+<ul>
+<li>通常我们的做法是定义两个不同的属性名字：比如 title1 和 title2</li>
+<li>但是我们也可以通过 symbol 来定义相同的名称，因为 Symbol 函数返回的是不同的值</li>
+</ul>
+<p><img src="@source/.vuepress/public/images/symbol.png" alt="图片"></p>
+<h3 id="any" tabindex="-1"><a class="header-anchor" href="#any" aria-hidden="true">#</a> any</h3>
 <p>使用 any 指包含所有值的顶部类型，所以any不进行类型检查，等于关闭了 TS 对该变量的严格类型校验</p>
 <ul>
 <li>使用any 类型等同于使用纯 JavaScript 的开发方式</li>
@@ -56,7 +77,11 @@ x <span class="token operator">=</span> <span class="token punctuation">[</span>
 <li>使用any类型将<strong>失去</strong> typescript 静态类型的强制检测</li>
 <li>只有在描述一个根本不知道的类型时使用 any</li>
 </ul>
-<p>any 太过宽泛所以<strong>不建议使用</strong>，他会丢失 TS 的严格类型校验，</p>
+<p>any 太过宽泛所以<strong>不建议使用</strong>，他会丢失 TS 的严格类型校验</p>
+<ul>
+<li>如果对于某些情况的处理过于繁琐不希望添加规定的类型注解，或者在引入一些第三方库时，缺失了类型注解，这个时候
+我们可以使用any</li>
+</ul>
 <h3 id="unknown" tabindex="-1"><a class="header-anchor" href="#unknown" aria-hidden="true">#</a> unknown</h3>
 <p>unknown 类型也是顶部类型这与 any 一样</p>
 <ul>
@@ -104,14 +129,12 @@ x <span class="token operator">=</span> <span class="token punctuation">[</span>
 <ul>
 <li>void 是有null 或 undefined 值的</li>
 <li>never 是永远不会结束的函数，所以也不会有返回值</li>
+<li>如果一个函数中是一个死循环或者抛出一个异常，那么这个函数会返回东西吗？</li>
+<li>不会，那么写void类型或者其他类型作为返回值类型都不合适，我们就可以使用never类型</li>
 </ul>
-<div class="language-typescript ext-ts line-numbers-mode"><pre v-pre class="language-typescript"><code><span class="token keyword">function</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span><span class="token builtin">never</span> <span class="token punctuation">{</span>
-  <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">'类型错误'</span><span class="token punctuation">)</span>   <span class="token comment">//抛出异常,函数不会执行到最后</span>
-<span class="token punctuation">}</span>  
-</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h3 id="null-undefined" tabindex="-1"><a class="header-anchor" href="#null-undefined" aria-hidden="true">#</a> null &amp; undefined</h3>
-<p>null 与 undefined 也是对变量类型，用于定义值为 null 或 undefined</p>
+<p><img src="@source/.vuepress/public/images/never.png" alt="图片"></p>
 <h2 id="函数" tabindex="-1"><a class="header-anchor" href="#函数" aria-hidden="true">#</a> 函数</h2>
-<h3 id="函数参数的声明" tabindex="-1"><a class="header-anchor" href="#函数参数的声明" aria-hidden="true">#</a> 函数参数的声明</h3>
+<h3 id="函数参数的可选类型" tabindex="-1"><a class="header-anchor" href="#函数参数的可选类型" aria-hidden="true">#</a> 函数参数的可选类型</h3>
 <p>如果参数是可选的，使用 <code>?</code> 修饰</p>
 <ul>
 <li>下面的ratio 参数可以不传</li>
@@ -125,7 +148,13 @@ x <span class="token operator">=</span> <span class="token punctuation">[</span>
 <div class="language-typescript ext-ts line-numbers-mode"><pre v-pre class="language-typescript"><code><span class="token keyword">function</span> <span class="token function">sum</span><span class="token punctuation">(</span>a<span class="token operator">:</span><span class="token builtin">number</span> <span class="token punctuation">,</span> b<span class="token operator">:</span><span class="token builtin">number</span> <span class="token punctuation">,</span> ratio<span class="token operator">:</span><span class="token builtin">number</span> <span class="token operator">=</span> <span class="token number">0.6</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
   <span class="token keyword">return</span> <span class="token punctuation">(</span>a <span class="token operator">+</span> b<span class="token punctuation">)</span> <span class="token operator">*</span> ratio
 <span class="token punctuation">}</span>
-</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h3 id="返回值的类型" tabindex="-1"><a class="header-anchor" href="#返回值的类型" aria-hidden="true">#</a> 返回值的类型</h3>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><ul>
+<li>其实上，可选类型可以看做是 类型 和 undefined 的联合类型</li>
+</ul>
+<p><img src="@source/.vuepress/public/images/uu.png" alt="图片"></p>
+<h3 id="函数参数的联合类型" tabindex="-1"><a class="header-anchor" href="#函数参数的联合类型" aria-hidden="true">#</a> 函数参数的联合类型</h3>
+<p><img src="@source/.vuepress/public/images/union.png" alt="图片"></p>
+<h3 id="函数的返回值的类型" tabindex="-1"><a class="header-anchor" href="#函数的返回值的类型" aria-hidden="true">#</a> 函数的返回值的类型</h3>
 <p>系统自动推算返回值类型</p>
 <div class="language-typescript ext-ts line-numbers-mode"><pre v-pre class="language-typescript"><code><span class="token keyword">function</span> <span class="token function">sum</span><span class="token punctuation">(</span>a<span class="token operator">:</span><span class="token builtin">number</span> <span class="token punctuation">,</span> b<span class="token operator">:</span><span class="token builtin">number</span> <span class="token punctuation">)</span><span class="token punctuation">{</span>
   <span class="token keyword">return</span> a <span class="token operator">+</span> b
@@ -142,7 +171,7 @@ x <span class="token operator">=</span> <span class="token punctuation">[</span>
 <div class="language-typescript ext-ts line-numbers-mode"><pre v-pre class="language-typescript"><code><span class="token keyword">function</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span><span class="token keyword">void</span> <span class="token punctuation">{</span>
   <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'没有返回值 , 最好明确使用void'</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
-</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h3 id="使用-type-对函数参数声明" tabindex="-1"><a class="header-anchor" href="#使用-type-对函数参数声明" aria-hidden="true">#</a> 使用 type 对函数参数声明</h3>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h3 id="使用-type-对函数参数声明-类型别名" tabindex="-1"><a class="header-anchor" href="#使用-type-对函数参数声明-类型别名" aria-hidden="true">#</a> 使用 type 对函数参数声明(类型别名)</h3>
 <div class="language-typescript ext-ts line-numbers-mode"><pre v-pre class="language-typescript"><code><span class="token keyword">let</span> addUser <span class="token operator">=</span> <span class="token punctuation">(</span>user<span class="token operator">:</span><span class="token punctuation">{</span>name<span class="token operator">:</span><span class="token builtin">string</span> <span class="token punctuation">,</span> age<span class="token operator">:</span><span class="token builtin">number</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">:</span><span class="token keyword">void</span> <span class="token operator">=></span><span class="token punctuation">{</span>
    <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'添加用户'</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
@@ -210,14 +239,4 @@ addUser <span class="token operator">=</span> <span class="token punctuation">(<
 <span class="token punctuation">}</span>
 
 <span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">'frank'</span><span class="token punctuation">,</span> <span class="token string">'jack'</span><span class="token punctuation">,</span> <span class="token string">'john'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><h3 id="元组tuple" tabindex="-1"><a class="header-anchor" href="#元组tuple" aria-hidden="true">#</a> 元组Tuple</h3>
-<p>元组与数组类似，但元组要为每个值进行类型声明。</p>
-<p>数组只是定义了值的类型，并没有约束某个位置的值必须是什么类型</p>
-<div class="language-typescript ext-ts line-numbers-mode"><pre v-pre class="language-typescript"><code><span class="token keyword">const</span> arr<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token builtin">number</span> <span class="token operator">|</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token builtin">boolean</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'frank'</span><span class="token punctuation">,</span> <span class="token number">2030</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-
-arr<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'abcdef'</span>     <span class="token comment">//不报错，可以将原来是数值的更改为字符串，数组允许</span>
-arr<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'向军老师'</span> 		<span class="token comment">//不报错，类型也是允许的</span>
-<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><div class="language-typescript ext-ts line-numbers-mode"><pre v-pre class="language-typescript"><code><span class="token keyword">const</span> hd<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">number</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'frank'</span><span class="token punctuation">,</span> <span class="token number">2030</span><span class="token punctuation">]</span>
-hd<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span>    <span class="token comment">//报错，第一个值必须是字符串</span>
-</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div></template>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div></template>

@@ -44,8 +44,20 @@ export const data = {
         },
         {
           "level": 3,
-          "title": "元组",
-          "slug": "元组",
+          "title": "tuple",
+          "slug": "tuple",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "null & undefined",
+          "slug": "null-undefined",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "symbol",
+          "slug": "symbol",
           "children": []
         },
         {
@@ -71,12 +83,6 @@ export const data = {
           "title": "never",
           "slug": "never",
           "children": []
-        },
-        {
-          "level": 3,
-          "title": "null & undefined",
-          "slug": "null-undefined",
-          "children": []
         }
       ]
     },
@@ -87,20 +93,26 @@ export const data = {
       "children": [
         {
           "level": 3,
-          "title": "函数参数的声明",
-          "slug": "函数参数的声明",
+          "title": "函数参数的可选类型",
+          "slug": "函数参数的可选类型",
           "children": []
         },
         {
           "level": 3,
-          "title": "返回值的类型",
-          "slug": "返回值的类型",
+          "title": "函数参数的联合类型",
+          "slug": "函数参数的联合类型",
           "children": []
         },
         {
           "level": 3,
-          "title": "使用 type 对函数参数声明",
-          "slug": "使用-type-对函数参数声明",
+          "title": "函数的返回值的类型",
+          "slug": "函数的返回值的类型",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "使用 type 对函数参数声明(类型别名)",
+          "slug": "使用-type-对函数参数声明-类型别名",
           "children": []
         },
         {
@@ -113,12 +125,6 @@ export const data = {
           "level": 3,
           "title": "剩余参数",
           "slug": "剩余参数",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "元组Tuple",
-          "slug": "元组tuple",
           "children": []
         }
       ]
@@ -134,4 +140,17 @@ export const data = {
     ]
   },
   "filePathRelative": "TS/basic.md"
+}
+
+if (import.meta.webpackHot) {
+  import.meta.webpackHot.accept()
+  if (__VUE_HMR_RUNTIME__.updatePageData) {
+    __VUE_HMR_RUNTIME__.updatePageData(data)
+  }
+}
+
+if (import.meta.hot) {
+  import.meta.hot.accept(({ data }) => {
+    __VUE_HMR_RUNTIME__.updatePageData(data)
+  })
 }

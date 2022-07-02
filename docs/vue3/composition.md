@@ -100,7 +100,7 @@ computed 使用方法
 * 首先, **watchEffect传入的函数会被立即执行一次**, 并且在执行的过程中收集依赖
 * 其次 , 只有收集的依赖发生变化时, watchEffect传入的函数才会立即执行
 
-![图片](../.vuepress/public/images/computed2.png)
+![图片](../.vuepress/public/images/watchEffect.png)
 #### watchEffect 停止侦听
 watchEffect 函数的返回值是一个用来停止该副作用的函数
 

@@ -1,5 +1,5 @@
 # 基础类型
-
+![图片](../.vuepress/public/images/super.png)
 ## 类型推断
 ### 数组
 类型推断会表示数组内容值为字符串
@@ -38,6 +38,7 @@ const user: {
 ## 基本类型
 除了上面的类型自动推断外，还是要明确设置变量类型
 ### 数组
+![图片](../.vuepress/public/images/aa1.png)
 ```ts
 let array:string[]
 array = []
@@ -56,18 +57,34 @@ user1 = []
 user1 = {}
 user1 = function (){}
 ```
-限定对象值类型 ,属性后面加`?`,这样的属性是非必填项
-```ts
-let user1:{name:string , age:number , url?:string}
-user1 ={name:'frank', age:18}
-```
-### 元组
+但开发中不推荐使用这种方法
+![图片](../.vuepress/public/images/tobj.png)
+属性后面加 **`?`**,这样的属性是非必填项
+![图片](../.vuepress/public/images/tobj2.png)
+### tuple 
 明确数组每个成员值类型的数组为元组
-```ts
-let x: [string, number, boolean]
-x = ['frank', 2090, true]
-console.log(x);
-```
+
+那么tuple和数组有什么区别呢？
+* 首先，数组中通常建议存放相同类型的元素，不同类型的元素是不推荐放在数组中。（可以放在对象或者元组
+中）
+* 其次，元组中每个元素都有自己特性的类型，根据索引值获取到的值可以确定对应的类型
+
+![图片](../.vuepress/public/images/tutu.png)
+### null & undefined
+在 JavaScript 中，undefined 和 null 是两个基本数据类型。
+
+在TypeScript中，它们各自的类型也是undefined和null，也就意味着它们既是实际的值，也是自己的类型：
+
+![图片](../.vuepress/public/images/nu.png)
+### symbol 
+* 我们不可以在对象中添加相同的属性名
+
+![图片](../.vuepress/public/images/s1.png)
+* 通常我们的做法是定义两个不同的属性名字：比如 title1 和 title2
+* 但是我们也可以通过 symbol 来定义相同的名称，因为 Symbol 函数返回的是不同的值 
+
+![图片](../.vuepress/public/images/symbol.png)
+
 ### any
 
 使用 any 指包含所有值的顶部类型，所以any不进行类型检查，等于关闭了 TS 对该变量的严格类型校验
@@ -77,7 +94,10 @@ console.log(x);
 * 使用any类型将**失去** typescript 静态类型的强制检测
 * 只有在描述一个根本不知道的类型时使用 any
 
-any 太过宽泛所以**不建议使用**，他会丢失 TS 的严格类型校验，
+any 太过宽泛所以**不建议使用**，他会丢失 TS 的严格类型校验
+
+*  如果对于某些情况的处理过于繁琐不希望添加规定的类型注解，或者在引入一些第三方库时，缺失了类型注解，这个时候
+我们可以使用any
 ### unknown
 unknown 类型也是顶部类型这与 any 一样
 
@@ -134,16 +154,12 @@ function run():void {
 
 * void 是有null 或 undefined 值的
 * never 是永远不会结束的函数，所以也不会有返回值
-```ts
-function run():never {
-  throw new Error('类型错误')   //抛出异常,函数不会执行到最后
-}  
-```
-### null & undefined
-null 与 undefined 也是对变量类型，用于定义值为 null 或 undefined
+* 如果一个函数中是一个死循环或者抛出一个异常，那么这个函数会返回东西吗？
+* 不会，那么写void类型或者其他类型作为返回值类型都不合适，我们就可以使用never类型
 
+![图片](../.vuepress/public/images/never.png)
 ## 函数
-### 函数参数的声明
+### 函数参数的可选类型
 如果参数是可选的，使用 `?` 修饰
 * 下面的ratio 参数可以不传
 * 不传时ratio 值为 undefined
@@ -159,7 +175,13 @@ function sum(a:number , b:number , ratio:number = 0.6){
   return (a + b) * ratio
 }
 ```
-### 返回值的类型
+
+* 其实上，可选类型可以看做是 类型 和 undefined 的联合类型
+
+![图片](../.vuepress/public/images/uu.png)
+### 函数参数的联合类型
+![图片](../.vuepress/public/images/union.png)
+### 函数的返回值的类型
 系统自动推算返回值类型
 ```ts
 function sum(a:number , b:number ){
@@ -184,7 +206,7 @@ function run():void {
   console.log('没有返回值 , 最好明确使用void')
 }
 ```
-### 使用 type 对函数参数声明
+### 使用 type 对函数参数声明(类型别名)
 ```ts
 let addUser = (user:{name:string , age:number}):void =>{
    console.log('添加用户')
@@ -261,19 +283,4 @@ function push(arr: any[], ...args: any[]): any[] {
 }
 
 push([], 'frank', 'jack', 'john');
-```
-### 元组Tuple
-元组与数组类似，但元组要为每个值进行类型声明。
-
-数组只是定义了值的类型，并没有约束某个位置的值必须是什么类型
-```ts
-const arr: (number | string | boolean)[] = ['frank', 2030, true];
-
-arr[1] = 'abcdef'     //不报错，可以将原来是数值的更改为字符串，数组允许
-arr[10] = '向军老师' 		//不报错，类型也是允许的
-console.log(arr);
-```
-```ts
-const hd: [string, number] = ['frank', 2030]
-hd[0] = true    //报错，第一个值必须是字符串
 ```

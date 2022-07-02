@@ -100,7 +100,7 @@
 <li>首先, <strong>watchEffect传入的函数会被立即执行一次</strong>, 并且在执行的过程中收集依赖</li>
 <li>其次 , 只有收集的依赖发生变化时, watchEffect传入的函数才会立即执行</li>
 </ul>
-<p><img src="@source/.vuepress/public/images/computed2.png" alt="图片"></p>
+<p><img src="@source/.vuepress/public/images/watchEffect.png" alt="图片"></p>
 <h4 id="watcheffect-停止侦听" tabindex="-1"><a class="header-anchor" href="#watcheffect-停止侦听" aria-hidden="true">#</a> watchEffect 停止侦听</h4>
 <p>watchEffect 函数的返回值是一个用来停止该副作用的函数</p>
 <p><img src="@source/.vuepress/public/images/watchEffectStop.png" alt="图片"></p>
