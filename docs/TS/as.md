@@ -38,9 +38,76 @@ const user = {
 }
 console.log(user) //{ name: 'frank', sex: '女' }
 ``` -->
+
+<!--
+## null / undefined
+默认情况下 null 与 undefined 可以赋值给其他类型
+```ts
+let a  = 'hello'
+a = null
+a = undefined  
+```
+当我们需要严格模式 , 修改 tsconfig.json 配置文件的 strictNullChecks 字段为 true 时，则不能将 null、undefined 赋值给其他类型
+```
+"strictNullChecks": true     
+```
+除非向下面一样明确指定类型
+```ts
+let a: string | null | undefined = 'hello'
+a = null
+a = undefined
+``` -->
 ## as断言
-跳过吧..
-<!-- ## const断言
+TypeScript只知道该函数会返回 Element ，但并不知道它具体的类型
+![图片](../.vuepress/public/images/as1.png)
+![图片](../.vuepress/public/images/ad.png)
+
+## 非空断言!
+先要开启 tsconfig.json 的配置项strictNullChecks 字段为 true。
+
+通过 querySelector获取元素, 可能存在,也有可能为null
+```ts
+let el  = document.querySelector('xxx')   //let el: Element | null
+console.log(el.id)  //报错 Object is possibly 'null'.
+```
+可以使用 as 断言类型
+```ts
+let el  = document.querySelector('xxx')  as HTMLDivElement
+console.log(el.id) 
+```
+或者 在值后面使用 `!`来声明值非null
+```ts
+const el: HTMLDivElement = document.querySelector('.hd')!
+console.log(el.id);
+```
+
+![图片](../.vuepress/public/images/ad.png)
+这是因为传入的message有可能是为undefined的，这个时候是不能执行方法的；
+![图片](../.vuepress/public/images/mss.png)
+非空断言使用的是 `!` ，表示可以确定某个标识符是有值的，**跳过ts在编译阶段对它的检测**
+## 可选链的使用
+可选链事实上并不是TypeScript独有的特性，它是ES11（ES2020）中增加的特性：
+* 可选链使用可选链操作符 ?.；
+* 它的作用是当对象的属性不存在时，会短路，直接返回 undefined，如果存在，那么才会继续执行；
+* 虽然可选链操作是ECMAScript提出的特性，但是和 TypeScript 一起使用更版本
+![图片](../.vuepress/public/images/tp.png)   ![图片](../.vuepress/public/images/ip.png)
+![图片](../.vuepress/public/images/co.png)
+## ?? 和 !! 的作用
+!!操作符：
+* 将一个其他类型转换成boolean类型；
+* 类似于Boolean(变量)的方式；
+
+??操作符：
+* 它是ES11增加的新特性；
+* 空值合并操作符（??）是一个逻辑操作符，当**操作符的左侧是 null 或者 undefined 时**，返回其右侧操作数，否则返回左侧操作数
+
+![图片](../.vuepress/public/images/!!.png)
+
+![图片](../.vuepress/public/images/nnnn.png)
+## 字面量类型
+可以将多个类型联合在一起
+![图片](../.vuepress/public/images/string1.png)
+## const 断言
 ### let & const
 * const 保证该字面量的严格类型
 * let 为通用类型比如字符串类型
@@ -100,18 +167,6 @@ let x = arr[1]      //let x: number
 function run() {
   let a  = 'hello'
   let b = (x:number , y:number):number => x + y
-  return [a , b]
-}
-
-const [n , m] = run() //解构 , m的类型为 const m: string | ((x: number, y: number) => number)
-
-m(1, 6) //报错：因为类型可能是字符串，所以不允许调用
-```
-可以断言 m 为函数然后调用
-```ts{8}
-function run() {
-  let a  = 'hello'
-  let b = (x:number , y:number):number => x + y
   return [a , b] as const
 }
 
@@ -142,45 +197,14 @@ function run() {
 const [n , m] = run() //const m: (x: number, y: number) => number
 m(1, 6)
 ```
-## null / undefined
-默认情况下 null 与 undefined 可以赋值给其他类型
-```ts
-let a  = 'hello'
-a = null
-a = undefined  
+可以断言 m 为函数然后调用
+```ts{8}
+function run() {
+  let a  = 'hello'
+  let b = (x:number , y:number):number => x + y
+  
 ```
-当我们需要严格模式 , 修改 tsconfig.json 配置文件的 strictNullChecks 字段为 true 时，则不能将 null、undefined 赋值给其他类型
-```
-"strictNullChecks": true     
-```
-除非向下面一样明确指定类型
-```ts
-let a: string | null | undefined = 'hello'
-a = null
-a = undefined
-``` -->
-
-
-
-## 非空断言
-先要开启 tsconfig.json 的配置项strictNullChecks 字段为 true。
-
-通过 querySelector获取元素, 可能存在,也有可能为null
-```ts
-let el  = document.querySelector('xxx')   //let el: Element | null
-console.log(el.id)  //报错 Object is possibly 'null'.
-```
-可以使用 as 断言类型
-```ts
-let el  = document.querySelector('xxx')  as HTMLDivElement
-console.log(el.id) 
-```
-或者 在值后面使用 `!`来声明值非null
-```ts
-const el: HTMLDivElement = document.querySelector('.hd')!
-console.log(el.id);
-```
-## DOM
+<!-- ## DOM
 ### 类型推断
 对于获取的标签对象可能是为 null 也可能是该标签类型
 * body 等具体的标签可以推断出准确的标签和 null
@@ -222,5 +246,5 @@ const button = document.querySelector('button') as HTMLButtonElement
 button.addEventListener('click', (e: Event)=>{
   console.log('hi')
 })
-```
+``` -->
 

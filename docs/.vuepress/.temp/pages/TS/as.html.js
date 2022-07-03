@@ -14,31 +14,55 @@ export const data = {
     },
     {
       "level": 2,
-      "title": "非空断言",
+      "title": "非空断言!",
       "slug": "非空断言",
       "children": []
     },
     {
       "level": 2,
-      "title": "DOM",
-      "slug": "dom",
+      "title": "可选链的使用",
+      "slug": "可选链的使用",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "?? 和 !! 的作用",
+      "slug": "和-的作用",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "字面量类型",
+      "slug": "字面量类型",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "const 断言",
+      "slug": "const-断言",
       "children": [
         {
           "level": 3,
-          "title": "类型推断",
-          "slug": "类型推断",
+          "title": "let & const",
+          "slug": "let-const",
           "children": []
         },
         {
           "level": 3,
-          "title": "对null的处理 (非空断言)",
-          "slug": "对null的处理-非空断言",
+          "title": "as const",
+          "slug": "as-const",
           "children": []
         },
         {
           "level": 3,
-          "title": "DOM事件处理",
-          "slug": "dom事件处理",
+          "title": "数组使用as const",
+          "slug": "数组使用as-const",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "解构中使用as const",
+          "slug": "解构中使用as-const",
           "children": []
         }
       ]
@@ -49,7 +73,7 @@ export const data = {
       {
         "name": "jgoriginal",
         "email": "932274204@qq.com",
-        "commits": 3
+        "commits": 4
       }
     ]
   },

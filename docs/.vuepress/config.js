@@ -168,7 +168,10 @@ module.exports = {
                     '/TS/start.md',
                     '/TS/basic.md',
                     '/TS/as.md',
+                    '/TS/type.md',
+                    '/TS/function.md',
                     '/TS/class.md',
+                    '/TS/interface.md',
                     '/TS/generics.md',
                     '/TS/Vue3.md'
                 ]

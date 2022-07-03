@@ -1,164 +1,59 @@
 export const data = {
   "key": "v-57f5bd98",
   "path": "/TS/class.html",
-  "title": "类与接口",
+  "title": "类",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
   "headers": [
     {
       "level": 2,
-      "title": "修饰符",
-      "slug": "修饰符",
-      "children": [
-        {
-          "level": 3,
-          "title": "public",
-          "slug": "public",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "protected",
-          "slug": "protected",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "private",
-          "slug": "private",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "readonly",
-          "slug": "readonly",
-          "children": []
-        }
-      ]
-    },
-    {
-      "level": 2,
-      "title": "constructor",
-      "slug": "constructor",
+      "title": "类的继承",
+      "slug": "类的继承",
       "children": []
     },
     {
       "level": 2,
-      "title": "static",
-      "slug": "static",
+      "title": "类的成员修饰符",
+      "slug": "类的成员修饰符",
       "children": [
         {
           "level": 3,
-          "title": "基本语法",
-          "slug": "基本语法",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "单例模式",
-          "slug": "单例模式",
+          "title": "只读属性 readonly",
+          "slug": "只读属性-readonly",
           "children": []
         }
       ]
     },
     {
       "level": 2,
-      "title": "get / set",
-      "slug": "get-set",
+      "title": "getters/setters",
+      "slug": "getters-setters",
       "children": []
     },
     {
       "level": 2,
-      "title": "abstract",
-      "slug": "abstract",
+      "title": "静态成员",
+      "slug": "静态成员",
       "children": []
     },
     {
       "level": 2,
-      "title": "interface",
-      "slug": "interface",
-      "children": [
-        {
-          "level": 3,
-          "title": "抽象类",
-          "slug": "抽象类",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "对象",
-          "slug": "对象",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "接口继承",
-          "slug": "接口继承",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "函数",
-          "slug": "函数",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "类",
-          "slug": "类",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "数组 和 enum",
-          "slug": "数组-和-enum",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "案例",
-          "slug": "案例",
-          "children": []
-        }
-      ]
+      "title": "抽象类 abstract",
+      "slug": "抽象类-abstract",
+      "children": []
     },
     {
       "level": 2,
-      "title": "type",
-      "slug": "type",
-      "children": [
-        {
-          "level": 3,
-          "title": "interface 和 type 的区别",
-          "slug": "interface-和-type-的区别",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "基本用法",
-          "slug": "基本用法",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "类型别名",
-          "slug": "类型别名",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "继承",
-          "slug": "继承",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "implements",
-          "slug": "implements",
-          "children": []
-        }
-      ]
+      "title": "类的类型",
+      "slug": "类的类型",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "接口的声明",
+      "slug": "接口的声明",
+      "children": []
     }
   ],
   "git": {
