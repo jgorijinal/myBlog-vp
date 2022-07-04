@@ -150,6 +150,7 @@ export const themeData = {
         "/TS/class.md",
         "/TS/interface.md",
         "/TS/generics.md",
+        "/TS/module.md",
         "/TS/Vue3.md"
       ]
     },
@@ -172,6 +173,13 @@ export const themeData = {
         "/vue3UI/tabs.md",
         "/vue3UI/Tooltip.md",
         "/vue3UI/build.md"
+      ]
+    },
+    {
+      "text": "VueAdmin",
+      "collapsible": true,
+      "children": [
+        "/cms/code.md"
       ]
     }
   ],

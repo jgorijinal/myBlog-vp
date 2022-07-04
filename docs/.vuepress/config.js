@@ -173,6 +173,7 @@ module.exports = {
                     '/TS/class.md',
                     '/TS/interface.md',
                     '/TS/generics.md',
+                    '/TS/module.md',
                     '/TS/Vue3.md'
                 ]
             },
@@ -195,6 +196,13 @@ module.exports = {
                     '/vue3UI/tabs.md',
                     '/vue3UI/Tooltip.md',
                     '/vue3UI/build.md',
+                    ]
+            },
+            {
+                text: 'VueAdmin',
+                collapsible: true,
+                children: [
+                    '/cms/code.md'
                     ]
             },
             // {

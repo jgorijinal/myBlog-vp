@@ -8,26 +8,20 @@ export const data = {
   "headers": [
     {
       "level": 2,
-      "title": "基本使用",
-      "slug": "基本使用",
+      "title": "泛型接口",
+      "slug": "泛型接口",
       "children": []
     },
     {
       "level": 2,
-      "title": "类型继承",
-      "slug": "类型继承",
+      "title": "泛型类",
+      "slug": "泛型类",
       "children": []
     },
     {
       "level": 2,
-      "title": "类",
-      "slug": "类",
-      "children": []
-    },
-    {
-      "level": 2,
-      "title": "接口",
-      "slug": "接口",
+      "title": "泛型约束",
+      "slug": "泛型约束",
       "children": []
     }
   ],

@@ -1,5 +1,5 @@
 # 泛型
-泛型指使用时才定义类型，即类型可以像参数一样定义，主要解决类、接口、函数的复用性，让它们可以处理多种类型。`T`就是动态接受类型
+<!-- 泛型指使用时才定义类型，即类型可以像参数一样定义，主要解决类、接口、函数的复用性，让它们可以处理多种类型。`T`就是动态接受类型
 ## 基本使用
 ```ts
 function fn<T>(arg: T): T {
@@ -91,4 +91,33 @@ const article: ArticleInterface<boolean, comment> = {
     {content: '一段内容2', author: '作家2'}
   ]
 }; 
-```
+``` -->
+
+在定义函数时 , 我不决定这些参数的类型 
+
+而是让调用者已参数的形式告知 , 这里的参数应该是什么类型
+
+![图片](../.vuepress/public/images/fanxing.png)
+
+当然我们也可以传入多个类型: 
+
+![图片](../.vuepress/public/images/fan2.png)
+
+平时在开发中我们可能会看到一些常用的名称：
+* **T**：Type 的缩写，类型
+* **K**、V：key和value的缩写，键值对
+* **E**：Element的缩写，元素
+* **O**：Object的缩写，对象
+
+## 泛型接口
+在定义接口的时候我们也可以使用泛型
+
+![图片](../.vuepress/public/images/fi.png)
+## 泛型类 
+![图片](../.vuepress/public/images/fan3.png)
+## 泛型约束
+有时候希望传入的类型有某些共性，但是这些共性可能不是在同一种类型中
+* 比如 string 和 array 都是有 length 的，或者某些对象也是会有length属性的；
+* 那么只要是拥有length的属性都可以作为我们的参数类型，那么应该如何操作 ?
+
+![图片](../.vuepress/public/images/fff.png)

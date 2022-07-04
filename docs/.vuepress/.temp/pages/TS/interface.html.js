@@ -17,10 +17,52 @@ export const data = {
       "title": "索引类型",
       "slug": "索引类型",
       "children": []
+    },
+    {
+      "level": 2,
+      "title": "函数类型",
+      "slug": "函数类型",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "接口继承",
+      "slug": "接口继承",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "接口的实现",
+      "slug": "接口的实现",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "交叉类型",
+      "slug": "交叉类型",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "type 和 interface 的区别",
+      "slug": "type-和-interface-的区别",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "枚举类型",
+      "slug": "枚举类型",
+      "children": []
     }
   ],
   "git": {
-    "contributors": []
+    "contributors": [
+      {
+        "name": "jgoriginal",
+        "email": "932274204@qq.com",
+        "commits": 1
+      }
+    ]
   },
   "filePathRelative": "TS/interface.md"
 }
