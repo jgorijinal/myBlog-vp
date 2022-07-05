@@ -49,8 +49,14 @@ export const pagesComponents = {
   "v-53d95e5e": defineAsyncComponent(() => import(/* webpackChunkName: "v-53d95e5e" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/category_2/child2.html.vue")),
   // path: /category_2/
   "v-e34766f6": defineAsyncComponent(() => import(/* webpackChunkName: "v-e34766f6" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/category_2/index.html.vue")),
+  // path: /cms/axioos.html
+  "v-5eee594e": defineAsyncComponent(() => import(/* webpackChunkName: "v-5eee594e" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/cms/axioos.html.vue")),
   // path: /cms/code.html
   "v-4e09a76d": defineAsyncComponent(() => import(/* webpackChunkName: "v-4e09a76d" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/cms/code.html.vue")),
+  // path: /cms/hello.html
+  "v-ea1101f4": defineAsyncComponent(() => import(/* webpackChunkName: "v-ea1101f4" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/cms/hello.html.vue")),
+  // path: /cms/oooo.html
+  "v-cf98450c": defineAsyncComponent(() => import(/* webpackChunkName: "v-cf98450c" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/cms/oooo.html.vue")),
   // path: /css/grid.html
   "v-0bb319ee": defineAsyncComponent(() => import(/* webpackChunkName: "v-0bb319ee" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/css/grid.html.vue")),
   // path: /css/init.html

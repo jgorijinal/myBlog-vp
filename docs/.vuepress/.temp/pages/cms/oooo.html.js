@@ -1,0 +1,64 @@
+export const data = {
+  "key": "v-cf98450c",
+  "path": "/cms/oooo.html",
+  "title": "axios",
+  "lang": "zh-CN",
+  "frontmatter": {},
+  "excerpt": "",
+  "headers": [
+    {
+      "level": 2,
+      "title": "基本使用",
+      "slug": "基本使用",
+      "children": [
+        {
+          "level": 3,
+          "title": "请求方式",
+          "slug": "请求方式",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "配置选项",
+          "slug": "配置选项",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "axios.all([])",
+          "slug": "axios-all",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "拦截器",
+          "slug": "拦截器",
+          "children": []
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "title": "区分不同环境",
+      "slug": "区分不同环境",
+      "children": []
+    }
+  ],
+  "git": {
+    "contributors": []
+  },
+  "filePathRelative": "cms/oooo.md"
+}
+
+if (import.meta.webpackHot) {
+  import.meta.webpackHot.accept()
+  if (__VUE_HMR_RUNTIME__.updatePageData) {
+    __VUE_HMR_RUNTIME__.updatePageData(data)
+  }
+}
+
+if (import.meta.hot) {
+  import.meta.hot.accept(({ data }) => {
+    __VUE_HMR_RUNTIME__.updatePageData(data)
+  })
+}

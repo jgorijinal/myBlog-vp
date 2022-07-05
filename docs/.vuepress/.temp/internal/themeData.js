@@ -179,7 +179,8 @@ export const themeData = {
       "text": "VueAdmin",
       "collapsible": true,
       "children": [
-        "/cms/code.md"
+        "/cms/code.md",
+        "/cms/hello.md"
       ]
     }
   ],
