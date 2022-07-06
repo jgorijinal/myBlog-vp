@@ -51,6 +51,8 @@ export const pagesComponents = {
   "v-e34766f6": defineAsyncComponent(() => import(/* webpackChunkName: "v-e34766f6" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/category_2/index.html.vue")),
   // path: /cms/axioos.html
   "v-5eee594e": defineAsyncComponent(() => import(/* webpackChunkName: "v-5eee594e" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/cms/axioos.html.vue")),
+  // path: /cms/axiosF.html
+  "v-5757ac6a": defineAsyncComponent(() => import(/* webpackChunkName: "v-5757ac6a" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/cms/axiosF.html.vue")),
   // path: /cms/code.html
   "v-4e09a76d": defineAsyncComponent(() => import(/* webpackChunkName: "v-4e09a76d" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/cms/code.html.vue")),
   // path: /cms/hello.html

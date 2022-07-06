@@ -1,7 +1,7 @@
 export const data = {
   "key": "v-5eee594e",
   "path": "/cms/axioos.html",
-  "title": "axios",
+  "title": "axios的基本使用",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
@@ -45,7 +45,13 @@ export const data = {
     }
   ],
   "git": {
-    "contributors": []
+    "contributors": [
+      {
+        "name": "jgoriginal",
+        "email": "932274204@qq.com",
+        "commits": 1
+      }
+    ]
   },
   "filePathRelative": "cms/axioos.md"
 }

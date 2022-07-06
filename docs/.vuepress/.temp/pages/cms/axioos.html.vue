@@ -1,4 +1,4 @@
-<template><h1 id="axios" tabindex="-1"><a class="header-anchor" href="#axios" aria-hidden="true">#</a> axios</h1>
+<template><h1 id="axios的基本使用" tabindex="-1"><a class="header-anchor" href="#axios的基本使用" aria-hidden="true">#</a> axios的基本使用</h1>
 <h2 id="基本使用" tabindex="-1"><a class="header-anchor" href="#基本使用" aria-hidden="true">#</a> 基本使用</h2>
 <p>axios 的功能特点:</p>
 <ul>
@@ -31,23 +31,36 @@
 <h2 id="区分不同环境" tabindex="-1"><a class="header-anchor" href="#区分不同环境" aria-hidden="true">#</a> 区分不同环境</h2>
 <p>在开发中，有时候我们需要根据不同的环境设置不同的环境变量，常见的有三种环境：</p>
 <ul>
-<li>开发环境：development；</li>
-<li>生产环境：production；</li>
-<li>测试环境：test；
-如何区分环境变量呢？常见有三种方式：</li>
-<li>方式一：手动修改不同的变量；</li>
-<li>方式二(用得最多)：根据 process.env.NODE_ENV 的值进行区分；
-<img src="@source/.vuepress/public/images/envnode.png" alt="图片"></li>
-<li>方式三(也支持这种办法)：编写不同的环境变量配置文件；
-根目录下:
+<li>
+<p>开发环境：development；</p>
+</li>
+<li>
+<p>生产环境：production；</p>
+</li>
+<li>
+<p>测试环境：test；
+如何区分环境变量呢？常见有三种方式：</p>
+</li>
+<li>
+<p>方式一：手动修改不同的变量；</p>
+</li>
+<li>
+<p>方式二(用得最多)：根据 process.env.NODE_ENV 的值进行区分；
+<img src="@source/.vuepress/public/images/envnode.png" alt="图片"></p>
+</li>
+<li>
+<p>方式三(也支持这种办法)：编写不同的环境变量配置文件；</p>
+<p>根目录下:
 <img src="@source/.vuepress/public/images/pe1.png" alt="图片">
 <img src="@source/.vuepress/public/images/hhhh.png" alt="图片">
 <img src="@source/.vuepress/public/images/ed.png" alt="图片">
 <img src="@source/.vuepress/public/images/ep.png" alt="图片">
+<img src="@source/.vuepress/public/images/et.png" alt="图片">
 <img src="@source/.vuepress/public/images/999.png" alt="图片">
 <img src="@source/.vuepress/public/images/et.png" alt="图片">
 <img src="@source/.vuepress/public/images/oooo.png" alt="图片">
 打出来看看
-<img src="@source/.vuepress/public/images/pe.png" alt="图片"></li>
+<img src="@source/.vuepress/public/images/pe.png" alt="图片"></p>
+</li>
 </ul>
 </template>

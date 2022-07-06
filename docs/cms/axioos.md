@@ -1,4 +1,4 @@
-# axios
+# axios的基本使用
 
 ## 基本使用
 
@@ -51,11 +51,13 @@ axios 的也可以设置拦截器：拦截每次请求和响应
 - 方式二(用得最多)：根据 process.env.NODE_ENV 的值进行区分；
   ![图片](../.vuepress/public/images/envnode.png)
 - 方式三(也支持这种办法)：编写不同的环境变量配置文件；
+
   根目录下:
   ![图片](../.vuepress/public/images/pe1.png)
   ![图片](../.vuepress/public/images/hhhh.png)
   ![图片](../.vuepress/public/images/ed.png)
   ![图片](../.vuepress/public/images/ep.png)
+   ![图片](../.vuepress/public/images/et.png)
   ![图片](../.vuepress/public/images/999.png)
   ![图片](../.vuepress/public/images/et.png)
   ![图片](../.vuepress/public/images/oooo.png)

@@ -49,6 +49,8 @@ export const pagesData = {
   "v-e34766f6": () => import(/* webpackChunkName: "v-e34766f6" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/category_2/index.html.js").then(({ data }) => data),
   // path: /cms/axioos.html
   "v-5eee594e": () => import(/* webpackChunkName: "v-5eee594e" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/cms/axioos.html.js").then(({ data }) => data),
+  // path: /cms/axiosF.html
+  "v-5757ac6a": () => import(/* webpackChunkName: "v-5757ac6a" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/cms/axiosF.html.js").then(({ data }) => data),
   // path: /cms/code.html
   "v-4e09a76d": () => import(/* webpackChunkName: "v-4e09a76d" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/cms/code.html.js").then(({ data }) => data),
   // path: /cms/hello.html

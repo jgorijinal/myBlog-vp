@@ -1,5 +1,7 @@
 # axios
-
+```
+npm install axios -D
+```
 ## 基本使用
 
 axios 的功能特点:

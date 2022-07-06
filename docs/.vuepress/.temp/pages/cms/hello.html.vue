@@ -1,5 +1,6 @@
 <template><h1 id="axios" tabindex="-1"><a class="header-anchor" href="#axios" aria-hidden="true">#</a> axios</h1>
-<h2 id="基本使用" tabindex="-1"><a class="header-anchor" href="#基本使用" aria-hidden="true">#</a> 基本使用</h2>
+<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>npm install axios -D
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br></div></div><h2 id="基本使用" tabindex="-1"><a class="header-anchor" href="#基本使用" aria-hidden="true">#</a> 基本使用</h2>
 <p>axios 的功能特点:</p>
 <ul>
 <li>在浏览器中发送 XMLHttpRequests 请求</li>
