@@ -35,10 +35,22 @@ export const data = {
       "title": "拦截器- loading 组件的显示和隐藏",
       "slug": "拦截器-loading-组件的显示和隐藏",
       "children": []
+    },
+    {
+      "level": 2,
+      "title": "request请求的Promise封装和其他请求",
+      "slug": "request请求的promise封装和其他请求",
+      "children": []
     }
   ],
   "git": {
-    "contributors": []
+    "contributors": [
+      {
+        "name": "jgoriginal",
+        "email": "932274204@qq.com",
+        "commits": 1
+      }
+    ]
   },
   "filePathRelative": "cms/axiosF.md"
 }

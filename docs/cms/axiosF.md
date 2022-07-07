@@ -65,3 +65,15 @@ service/index.ts  创建实例
 ![图片](../.vuepress/public/images/ELloading3.png)
 ![图片](../.vuepress/public/images/ELloading4.png)
 
+## request请求的Promise封装和其他请求
+使用实例的request请求时想要通过 then 来获取 res (如下图) , 并且传入返回值的类型
+![图片](../.vuepress/public/images/requestreturn.png)
+
+封装 request 
+![图片](../.vuepress/public/images/promiserequest.png)
+
+responseInterceptor 的类型先这么改
+![图片](../.vuepress/public/images/9999.png)
+
+其他请求 :  (...展开 , config参数加上自己对应的的 method) 
+![图片](../.vuepress/public/images/else.png)

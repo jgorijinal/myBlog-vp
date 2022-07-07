@@ -58,4 +58,13 @@ service/index.ts  创建实例
 <img src="@source/.vuepress/public/images/ELloading2.png" alt="图片">
 <img src="@source/.vuepress/public/images/ELloading3.png" alt="图片">
 <img src="@source/.vuepress/public/images/ELloading4.png" alt="图片"></p>
+<h2 id="request请求的promise封装和其他请求" tabindex="-1"><a class="header-anchor" href="#request请求的promise封装和其他请求" aria-hidden="true">#</a> request请求的Promise封装和其他请求</h2>
+<p>使用实例的request请求时想要通过 then 来获取 res (如下图) , 并且传入返回值的类型
+<img src="@source/.vuepress/public/images/requestreturn.png" alt="图片"></p>
+<p>封装 request
+<img src="@source/.vuepress/public/images/promiserequest.png" alt="图片"></p>
+<p>responseInterceptor 的类型先这么改
+<img src="@source/.vuepress/public/images/9999.png" alt="图片"></p>
+<p>其他请求 :  (...展开 , config参数加上自己对应的的 method)
+<img src="@source/.vuepress/public/images/else.png" alt="图片"></p>
 </template>
