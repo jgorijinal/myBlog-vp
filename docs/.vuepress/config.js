@@ -174,7 +174,7 @@ module.exports = {
                     '/TS/interface.md',
                     '/TS/generics.md',
                     '/TS/module.md',
-                    '/TS/Vue3.md'
+                    // '/TS/Vue3.md'
                 ]
             },
             {
@@ -204,7 +204,8 @@ module.exports = {
                 children: [
                     '/cms/code.md',
                     '/cms/axioos.md',
-                    '/cms/axiosF.md'
+                    '/cms/axiosF.md',
+                    '/cms/1.md',
                     ]
             },
             // {

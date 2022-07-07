@@ -77,3 +77,9 @@ responseInterceptor 的类型先这么改
 
 其他请求 :  (...展开 , config参数加上自己对应的的 method) 
 ![图片](../.vuepress/public/images/else.png)
+
+但上上一张又到了 any 类型 , 这样并不好 , 试图传一个具体的 T 类型
+
+![图片](../.vuepress/public/images/t1.png)
+![图片](../.vuepress/public/images/t2.png)
+![图片](../.vuepress/public/images/t3.png)

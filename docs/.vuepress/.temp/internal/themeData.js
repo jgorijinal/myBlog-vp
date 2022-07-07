@@ -150,8 +150,7 @@ export const themeData = {
         "/TS/class.md",
         "/TS/interface.md",
         "/TS/generics.md",
-        "/TS/module.md",
-        "/TS/Vue3.md"
+        "/TS/module.md"
       ]
     },
     {
@@ -181,7 +180,8 @@ export const themeData = {
       "children": [
         "/cms/code.md",
         "/cms/axioos.md",
-        "/cms/axiosF.md"
+        "/cms/axiosF.md",
+        "/cms/1.md"
       ]
     }
   ],
@@ -211,4 +211,17 @@ export const themeData = {
   "openInNewWindow": "open in new window",
   "toggleDarkMode": "toggle dark mode",
   "toggleSidebar": "toggle sidebar"
+}
+
+if (import.meta.webpackHot) {
+  import.meta.webpackHot.accept()
+  if (__VUE_HMR_RUNTIME__.updateThemeData) {
+    __VUE_HMR_RUNTIME__.updateThemeData(themeData)
+  }
+}
+
+if (import.meta.hot) {
+  import.meta.hot.accept(({ themeData }) => {
+    __VUE_HMR_RUNTIME__.updateThemeData(themeData)
+  })
 }

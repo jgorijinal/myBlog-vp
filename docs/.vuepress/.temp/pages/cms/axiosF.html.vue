@@ -67,4 +67,8 @@ service/index.ts  创建实例
 <img src="@source/.vuepress/public/images/9999.png" alt="图片"></p>
 <p>其他请求 :  (...展开 , config参数加上自己对应的的 method)
 <img src="@source/.vuepress/public/images/else.png" alt="图片"></p>
+<p>但上上一张又到了 any 类型 , 这样并不好 , 试图传一个具体的 T 类型</p>
+<p><img src="@source/.vuepress/public/images/t1.png" alt="图片">
+<img src="@source/.vuepress/public/images/t2.png" alt="图片">
+<img src="@source/.vuepress/public/images/t3.png" alt="图片"></p>
 </template>
