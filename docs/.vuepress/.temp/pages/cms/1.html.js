@@ -23,10 +23,40 @@ export const data = {
       "title": "输入框规则的校验",
       "slug": "输入框规则的校验",
       "children": []
+    },
+    {
+      "level": 2,
+      "title": "记住密码 - 登录逻辑初步实现",
+      "slug": "记住密码-登录逻辑初步实现",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "记住密码 - 本地缓存",
+      "slug": "记住密码-本地缓存",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "Vuex中login模块(module)",
+      "slug": "vuex中login模块-module",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "账号登录和手机登录的区分",
+      "slug": "账号登录和手机登录的区分",
+      "children": []
     }
   ],
   "git": {
-    "contributors": []
+    "contributors": [
+      {
+        "name": "jgoriginal",
+        "email": "932274204@qq.com",
+        "commits": 1
+      }
+    ]
   },
   "filePathRelative": "cms/1.md"
 }
