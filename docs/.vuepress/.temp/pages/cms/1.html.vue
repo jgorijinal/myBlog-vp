@@ -115,4 +115,74 @@
 <p>el-tabs的v-model属性 , 控制 tabs
 <img src="@source/.vuepress/public/images/qufen1.png" alt="图片">
 <img src="@source/.vuepress/public/images/qufen2.png" alt="图片"></p>
+<h2 id="登陆逻辑和跨域访问" tabindex="-1"><a class="header-anchor" href="#登陆逻辑和跨域访问" aria-hidden="true">#</a> 登陆逻辑和跨域访问</h2>
+<p><img src="@source/.vuepress/public/images/loginservice1.png" alt="图片"></p>
+<p>封装了登录请求</p>
+<ul>
+<li>service/login/login.ts</li>
+</ul>
+<p><img src="@source/.vuepress/public/images/loginservice2.png" alt="图片"></p>
+<ul>
+<li>types.ts</li>
+</ul>
+<p><img src="@source/.vuepress/public/images/lt1.png" alt="图片"></p>
+<p>点击立即登录触发Vuex中logina模块里面的accountLoginAction</p>
+<p><img src="@source/.vuepress/public/images/laction.png" alt="图片"></p>
+<p>devServer解决跨域</p>
+<ul>
+<li>vue.config.js
+<img src="@source/.vuepress/public/images/vc1.png" alt="图片"></li>
+<li>service/request/config.ts
+<img src="@source/.vuepress/public/images/vc2.png" alt="图片"></li>
+</ul>
+<p>但发现login模块中触发action发起请求得到的 loginResult 的类型是 <strong>unknown</strong> , 这是因为上面在封装 login 请求时 post 的繁星里面没有传类型, 所以根据请求得到的值定义ts类性</p>
+<p><img src="@source/.vuepress/public/images/loginresult.png" alt="图片"></p>
+<ul>
+<li>service/login/login.ts
+<img src="@source/.vuepress/public/images/post.png" alt="图片"></li>
+</ul>
+<p>然后存放 token : 修改 state 的唯一的办法是提交 mutation</p>
+<p><img src="@source/.vuepress/public/images/commit5.png" alt="图片"></p>
+<h2 id="登陆成功其他获取信息-用户的信息-用户的菜单" tabindex="-1"><a class="header-anchor" href="#登陆成功其他获取信息-用户的信息-用户的菜单" aria-hidden="true">#</a> 登陆成功其他获取信息(用户的信息,用户的菜单)</h2>
+<p>登录获取token , 还要得到用户信息 userInfo , 并且也要得到用户对应的菜单 userMenus</p>
+<ul>
+<li>
+<p>service/request/index.ts  注意请求拦截里设置请求都要携带 token
+<img src="@source/.vuepress/public/images/token1.png" alt="图片"></p>
+</li>
+<li>
+<p>service/login/login.ts  登录中的请求API
+<img src="@source/.vuepress/public/images/serviceapi.png" alt="图片"></p>
+</li>
+<li>
+<p>store/login/login.ts  Vuex中 login 模块</p>
+</li>
+</ul>
+<p>userInfo 和 userMenus 都要存了本地存储里
+<img src="@source/.vuepress/public/images/ls1.png" alt="图片">
+<img src="@source/.vuepress/public/images/ls2.png" alt="图片"></p>
+<h2 id="登录跳转和其他页面跳转逻辑" tabindex="-1"><a class="header-anchor" href="#登录跳转和其他页面跳转逻辑" aria-hidden="true">#</a> 登录跳转和其他页面跳转逻辑</h2>
+<p>前置守卫登录的跳转 : 如果localStorage有token ,就直接显示页面, 如果没有 token,就他跳转到登录页面</p>
+<ul>
+<li>router/index.ts</li>
+</ul>
+<p><img src="@source/.vuepress/public/images/router555.png" alt="图片"></p>
+<p>Vuex里面的数据在用户刷新页面的时候, 会在内存中消失掉。但Vuex里面的数据我们不希望在刷新页面的时候消失掉, 所以再做一个操作</p>
+<p>还有一种情况 , Vuex里面的数据只是在登录的时候发请求 , 触发action , 提交mutation ,然后依次给state赋值 ,  但如果只是用地址栏移动如果不做登陆请求 , 那么Vuex里面是没有数据的 , 数据只在localStorage里面 , 所以要解决这个问题。</p>
+<p><img src="@source/.vuepress/public/images/store77.png" alt="图片"></p>
+<ul>
+<li>
+<p>store /index.ts
+<img src="@source/.vuepress/public/images/setupStore.png" alt="图片"></p>
+</li>
+<li>
+<p>main.ts
+<img src="@source/.vuepress/public/images/maints.png" alt="图片"></p>
+</li>
+<li>
+<p>store/login/login.ts
+<img src="@source/.vuepress/public/images/la8.png" alt="图片">
+<img src="@source/.vuepress/public/images/la9.png" alt="图片"></p>
+</li>
+</ul>
 </template>

@@ -47,6 +47,24 @@ export const data = {
       "title": "账号登录和手机登录的区分",
       "slug": "账号登录和手机登录的区分",
       "children": []
+    },
+    {
+      "level": 2,
+      "title": "登陆逻辑和跨域访问",
+      "slug": "登陆逻辑和跨域访问",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "登陆成功其他获取信息(用户的信息,用户的菜单)",
+      "slug": "登陆成功其他获取信息-用户的信息-用户的菜单",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "登录跳转和其他页面跳转逻辑",
+      "slug": "登录跳转和其他页面跳转逻辑",
+      "children": []
     }
   ],
   "git": {
@@ -54,7 +72,7 @@ export const data = {
       {
         "name": "jgoriginal",
         "email": "932274204@qq.com",
-        "commits": 1
+        "commits": 2
       }
     ]
   },
