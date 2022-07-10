@@ -1,34 +1,34 @@
 export const data = {
-  "key": "v-2cffe46c",
-  "path": "/webpack/babel.html",
-  "title": "babel",
+  "key": "v-2217eb26",
+  "path": "/cms/2.html",
+  "title": "项目 2",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
   "headers": [
     {
       "level": 2,
-      "title": "插件的使用",
-      "slug": "插件的使用",
+      "title": "Vuex的ts技巧和左侧菜单显示",
+      "slug": "vuex的ts技巧和左侧菜单显示",
       "children": []
     },
     {
       "level": 2,
-      "title": "Babel 的预设 preset",
-      "slug": "babel-的预设-preset",
+      "title": "菜单的折叠与展开切换",
+      "slug": "菜单的折叠与展开切换",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "权限管理和菜单动态路由",
+      "slug": "权限管理和菜单动态路由",
       "children": []
     }
   ],
   "git": {
-    "contributors": [
-      {
-        "name": "jgoriginal",
-        "email": "932274204@qq.com",
-        "commits": 1
-      }
-    ]
+    "contributors": []
   },
-  "filePathRelative": "webpack/babel.md"
+  "filePathRelative": "cms/2.md"
 }
 
 if (import.meta.webpackHot) {

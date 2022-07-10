@@ -181,7 +181,8 @@ export const themeData = {
         "/cms/code.md",
         "/cms/axioos.md",
         "/cms/axiosF.md",
-        "/cms/1.md"
+        "/cms/1.md",
+        "/cms/2.md"
       ]
     }
   ],
