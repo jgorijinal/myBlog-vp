@@ -210,6 +210,7 @@ module.exports = {
                     '/cms/axiosF.md',
                     '/cms/1.md',
                     '/cms/2.md',
+                    '/cms/3.md',
                     ]
             },
             // {
