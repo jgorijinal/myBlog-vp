@@ -17,4 +17,25 @@
 </ul>
 <p><img src="@source/.vuepress/public/images/form1.png" alt="图片">
 <img src="@source/.vuepress/public/images/form2.png" alt="图片"></p>
+<h2 id="用户页-hyform的其他-props-封装和配置文件" tabindex="-1"><a class="header-anchor" href="#用户页-hyform的其他-props-封装和配置文件" aria-hidden="true">#</a> 用户页 - HyForm的其他 props 封装和配置文件</h2>
+<ul>
+<li>
+<p>form.vue 其他的 props
+<img src="@source/.vuepress/public/images/fp1.png" alt="图片">
+<img src="@source/.vuepress/public/images/fp2.png" alt="图片"></p>
+</li>
+<li>
+<p>base-ui/types/index.ts
+<img src="@source/.vuepress/public/images/peizhileixing.png" alt="图片"></p>
+</li>
+<li>
+<p>user.vue  使用组件
+<img src="@source/.vuepress/public/images/user55.png" alt="图片"></p>
+</li>
+</ul>
+<p>当然 searchFormConfig 配置对象可以单独抽出来 , 放在一个配置文件中即可
+<img src="@source/.vuepress/public/images/sc1.png" alt="图片">
+<img src="@source/.vuepress/public/images/sc8.png" alt="图片"></p>
+<p>直接导入配置文件即可
+<img src="@source/.vuepress/public/images/sc9.png" alt="图片"></p>
 </template>

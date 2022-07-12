@@ -11,10 +11,22 @@ export const data = {
       "title": "用户页 - HyForm 的基本封装",
       "slug": "用户页-hyform-的基本封装",
       "children": []
+    },
+    {
+      "level": 2,
+      "title": "用户页 - HyForm的其他 props 封装和配置文件",
+      "slug": "用户页-hyform的其他-props-封装和配置文件",
+      "children": []
     }
   ],
   "git": {
-    "contributors": []
+    "contributors": [
+      {
+        "name": "jgoriginal",
+        "email": "932274204@qq.com",
+        "commits": 1
+      }
+    ]
   },
   "filePathRelative": "cms/3.md"
 }

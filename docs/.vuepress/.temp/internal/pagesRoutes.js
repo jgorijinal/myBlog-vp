@@ -26,7 +26,7 @@ const routeItems = [
   ["v-53d95e5e","/category_2/child2.html",{"title":"子 2"},["/category_2/child2","/category_2/child2.md"]],
   ["v-e34766f6","/category_2/",{"title":"category_2"},["/category_2/index.html","/category_2/README.md"]],
   ["v-20631287","/cms/1.html",{"title":"项目 1"},["/cms/1","/cms/1.md"]],
-  ["v-2217eb26","/cms/2.html",{"title":"项目 2"},["/cms/2","/cms/2.md"]],
+  ["v-2217eb26","/cms/2.html",{"title":""},["/cms/2","/cms/2.md"]],
   ["v-23ccc3c5","/cms/3.html",{"title":"项目 3"},["/cms/3","/cms/3.md"]],
   ["v-5eee594e","/cms/axioos.html",{"title":"axios的基本使用"},["/cms/axioos","/cms/axioos.md"]],
   ["v-5757ac6a","/cms/axiosF.html",{"title":"axios 封装"},["/cms/axiosF","/cms/axiosF.md"]],

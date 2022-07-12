@@ -71,4 +71,52 @@ views/main/analysis/dashboard/dashboard.vue <strong>dashboard 对应的组件</s
 <img src="@source/.vuepress/public/images/rw.png" alt="图片"></p>
 </li>
 </ul>
+<h2 id="点击刷新页面-404bug" tabindex="-1"><a class="header-anchor" href="#点击刷新页面-404bug" aria-hidden="true">#</a> 点击刷新页面 404bug</h2>
+<p><img src="@source/.vuepress/public/images/rbug.png" alt="图片"></p>
+<p>app.use(router)放到最后面</p>
+<h2 id="路径和菜单选中的映射关系" tabindex="-1"><a class="header-anchor" href="#路径和菜单选中的映射关系" aria-hidden="true">#</a> 路径和菜单选中的映射关系</h2>
+<p><img src="@source/.vuepress/public/images/了.png" alt="图片">
+选中状态是由 el-menu 的 default-active 属性控制
+<img src="@source/.vuepress/public/images/em1.png" alt="图片"></p>
+<ul>
+<li>
+<p>基本思路
+<img src="@source/.vuepress/public/images/jbsl.png" alt="图片"></p>
+</li>
+<li>
+<p>nav-menus.vue 左侧菜单组件
+<img src="@source/.vuepress/public/images/nm6.png" alt="图片"><br>
+<img src="@source/.vuepress/public/images/nm7.png" alt="图片"></p>
+</li>
+<li>
+<p>map-menu.ts 上面使用的 mapPathToMenu 封装函数
+<img src="@source/.vuepress/public/images/nm8.png" alt="图片"></p>
+</li>
+</ul>
+<p>还有 , 挡在地址栏里以路径 /main 输入按回车会报错 , 因为 /main 没有对应的菜单 ,所以读取不到 菜单.id , 所以报错</p>
+<p>所以需要从 /main 重定向到 /main/analysis/overview 第一个菜单 , 该怎么做呢 ???</p>
+<p><img src="@source/.vuepress/public/images/FM.png" alt="图片"></p>
+<p>然后来到路由守卫</p>
+<p><img src="@source/.vuepress/public/images/rrr.png" alt="图片"></p>
+<h2 id="路径和面包屑显示的匹配" tabindex="-1"><a class="header-anchor" href="#路径和面包屑显示的匹配" aria-hidden="true">#</a> 路径和面包屑显示的匹配</h2>
+<p><img src="@source/.vuepress/public/images/bub.png" alt="图片"> <img src="@source/.vuepress/public/images/bc.png" alt="图片"></p>
+<ul>
+<li>
+<p>breadcrumb.vue
+<img src="@source/.vuepress/public/images/eb1.png" alt="图片"></p>
+</li>
+<li>
+<p>types/index.ts
+<img src="@source/.vuepress/public/images/dbtype.png" alt="图片"></p>
+</li>
+<li>
+<p>nav-header.ts
+<img src="@source/.vuepress/public/images/bc1.png" alt="图片">
+<img src="@source/.vuepress/public/images/bc2.png" alt="图片"></p>
+</li>
+<li>
+<p>map-menus.ts mapPathToBreadcrumb 函数 遍历菜单, 比较 url 和 curentPath
+<img src="@source/.vuepress/public/images/bc5.png" alt="图片"></p>
+</li>
+</ul>
 </template>

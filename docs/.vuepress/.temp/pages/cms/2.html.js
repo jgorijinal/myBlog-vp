@@ -29,6 +29,24 @@ export const data = {
       "title": "页面映射展示",
       "slug": "页面映射展示",
       "children": []
+    },
+    {
+      "level": 2,
+      "title": "点击刷新页面 404bug",
+      "slug": "点击刷新页面-404bug",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "路径和菜单选中的映射关系",
+      "slug": "路径和菜单选中的映射关系",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "路径和面包屑显示的匹配",
+      "slug": "路径和面包屑显示的匹配",
+      "children": []
     }
   ],
   "git": {
@@ -36,7 +54,7 @@ export const data = {
       {
         "name": "jgoriginal",
         "email": "932274204@qq.com",
-        "commits": 1
+        "commits": 2
       }
     ]
   },
