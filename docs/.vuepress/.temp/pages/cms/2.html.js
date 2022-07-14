@@ -54,22 +54,9 @@ export const data = {
       {
         "name": "jgoriginal",
         "email": "932274204@qq.com",
-        "commits": 2
+        "commits": 3
       }
     ]
   },
   "filePathRelative": "cms/2.md"
-}
-
-if (import.meta.webpackHot) {
-  import.meta.webpackHot.accept()
-  if (__VUE_HMR_RUNTIME__.updatePageData) {
-    __VUE_HMR_RUNTIME__.updatePageData(data)
-  }
-}
-
-if (import.meta.hot) {
-  import.meta.hot.accept(({ data }) => {
-    __VUE_HMR_RUNTIME__.updatePageData(data)
-  })
 }

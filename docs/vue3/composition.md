@@ -58,7 +58,7 @@
 
 ### ref
 
-reactive API **对传入的类型是有要求的**, 它要求不许传入的是**一个对象或者数组类型**:
+reactive API **对传入的类型是有要求的**, 它要求必须传入的是**一个对象或者数组类型**:
 
 - 如果传入一个**基本类型, 如 string, number, boolean 会报一个警告**;
   ![图片](../.vuepress/public/images/reactiveError.png)

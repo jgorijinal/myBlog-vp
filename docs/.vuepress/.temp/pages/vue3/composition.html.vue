@@ -49,7 +49,7 @@
 <p>如果想在 setup 中定义的数据变成响应式的特性, 可以<strong>使用 reactive 函数</strong>, <strong>要求传入对象或者数组类型</strong></p>
 <p><img src="@source/.vuepress/public/images/reactive.png" alt="图片"></p>
 <h3 id="ref" tabindex="-1"><a class="header-anchor" href="#ref" aria-hidden="true">#</a> ref</h3>
-<p>reactive API <strong>对传入的类型是有要求的</strong>, 它要求不许传入的是<strong>一个对象或者数组类型</strong>:</p>
+<p>reactive API <strong>对传入的类型是有要求的</strong>, 它要求必须传入的是<strong>一个对象或者数组类型</strong>:</p>
 <ul>
 <li>如果传入一个<strong>基本类型, 如 string, number, boolean 会报一个警告</strong>;
 <img src="@source/.vuepress/public/images/reactiveError.png" alt="图片"></li>
