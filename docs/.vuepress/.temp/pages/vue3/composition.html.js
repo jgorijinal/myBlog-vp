@@ -154,9 +154,22 @@ export const data = {
       {
         "name": "jgoriginal",
         "email": "932274204@qq.com",
-        "commits": 8
+        "commits": 9
       }
     ]
   },
   "filePathRelative": "vue3/composition.md"
+}
+
+if (import.meta.webpackHot) {
+  import.meta.webpackHot.accept()
+  if (__VUE_HMR_RUNTIME__.updatePageData) {
+    __VUE_HMR_RUNTIME__.updatePageData(data)
+  }
+}
+
+if (import.meta.hot) {
+  import.meta.hot.accept(({ data }) => {
+    __VUE_HMR_RUNTIME__.updatePageData(data)
+  })
 }

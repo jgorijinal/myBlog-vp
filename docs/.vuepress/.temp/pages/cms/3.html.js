@@ -26,6 +26,12 @@ export const data = {
     },
     {
       "level": 2,
+      "title": "PageSearch的封装",
+      "slug": "pagesearch的封装",
+      "children": []
+    },
+    {
+      "level": 2,
       "title": "user数据的获取和 Vuex system模块中数据保存",
       "slug": "user数据的获取和-vuex-system模块中数据保存",
       "children": []
@@ -65,6 +71,12 @@ export const data = {
       "title": "elementPlus的中文国际化处理",
       "slug": "elementplus的中文国际化处理",
       "children": []
+    },
+    {
+      "level": 2,
+      "title": "PageContent的配置和组件抽取",
+      "slug": "pagecontent的配置和组件抽取",
+      "children": []
     }
   ],
   "git": {
@@ -72,7 +84,7 @@ export const data = {
       {
         "name": "jgoriginal",
         "email": "932274204@qq.com",
-        "commits": 2
+        "commits": 3
       }
     ]
   },

@@ -54,6 +54,13 @@
 <p><img src="@source/.vuepress/public/images/vm3.png" alt="图片">
 <img src="@source/.vuepress/public/images/vm4.png" alt="图片">
 <img src="@source/.vuepress/public/images/vm5.png" alt="图片"></p>
+<h2 id="pagesearch的封装" tabindex="-1"><a class="header-anchor" href="#pagesearch的封装" aria-hidden="true">#</a> PageSearch的封装</h2>
+<p><img src="@source/.vuepress/public/images/page1.png" alt="图片">
+page-search.vue
+<img src="@source/.vuepress/public/images/page2.png" alt="图片">
+<img src="@source/.vuepress/public/images/page3.png" alt="图片">
+user.vue  传入配置文件即可
+<img src="@source/.vuepress/public/images/upage.png" alt="图片"></p>
 <h2 id="user数据的获取和-vuex-system模块中数据保存" tabindex="-1"><a class="header-anchor" href="#user数据的获取和-vuex-system模块中数据保存" aria-hidden="true">#</a> user数据的获取和 Vuex system模块中数据保存</h2>
 <ul>
 <li>user.vue  在组件内调 system 模块的 action 获取用户列表数据</li>
@@ -149,4 +156,15 @@ table.vue</p>
 <img src="@source/.vuepress/public/images/eg1.png" alt="图片"></p>
 <p>App.vue
 <img src="@source/.vuepress/public/images/gapp.png" alt="图片"></p>
+<h2 id="pagecontent的配置和组件抽取" tabindex="-1"><a class="header-anchor" href="#pagecontent的配置和组件抽取" aria-hidden="true">#</a> PageContent的配置和组件抽取</h2>
+<p>HyTable 的静态的配置单独抽取出来</p>
+<p><img src="@source/.vuepress/public/images/pc1.png" alt="图片"></p>
+<p>content-config.ts HyTable 的配置文件
+<img src="@source/.vuepress/public/images/pc2.png" alt="图片"></p>
+<p>封装一个组件叫 PageContent  , HyTable的模板</p>
+<p><img src="@source/.vuepress/public/images/pc3.png" alt="图片"></p>
+<p><img src="@source/.vuepress/public/images/pc5.png" alt="图片">
+<img src="@source/.vuepress/public/images/pc6.png" alt="图片"></p>
+<p>使用时
+<img src="@source/.vuepress/public/images/pc7.png" alt="图片"></p>
 </template>

@@ -46,7 +46,8 @@ axios 的也可以设置拦截器：拦截每次请求和响应
 - 开发环境：development；
 - 生产环境：production；
 - 测试环境：test；
-  如何区分环境变量呢？常见有三种方式：
+
+如何区分环境变量呢？常见有三种方式：
 - 方式一：手动修改不同的变量；
 - 方式二(用得最多)：根据 process.env.NODE_ENV 的值进行区分；
   ![图片](../.vuepress/public/images/envnode.png)
