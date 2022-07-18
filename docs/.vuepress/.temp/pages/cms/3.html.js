@@ -84,7 +84,7 @@ export const data = {
       {
         "name": "jgoriginal",
         "email": "932274204@qq.com",
-        "commits": 3
+        "commits": 4
       }
     ]
   },

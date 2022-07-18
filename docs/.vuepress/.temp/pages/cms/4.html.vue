@@ -47,4 +47,52 @@ page-content组件上绑定 ref , 通过 ref 在 user.vue调函数</p>
 <li>user.vue  组件内使用 , 记得解构并 return
 <img src="@source/.vuepress/public/images/hu3.png" alt="图片"></li>
 </ul>
+<h2 id="el-pagination-分页器处理与数据请求" tabindex="-1"><a class="header-anchor" href="#el-pagination-分页器处理与数据请求" aria-hidden="true">#</a> el-pagination 分页器处理与数据请求</h2>
+<p><img src="@source/.vuepress/public/images/pagepage.png" alt="图片"></p>
+<p>先处理 total, 在page-content里吧获取到的total数据通过 props 传给 Hy-table , Hy-table在组件内部接受并绑定
+page-content.vue
+<img src="@source/.vuepress/public/images/total1.png" alt="图片">
+table..vue
+<img src="@source/.vuepress/public/images/total2.png" alt="图片"></p>
+<p>page-content.vue
+<img src="@source/.vuepress/public/images/fenye1.png" alt="图片">
+<img src="@source/.vuepress/public/images/fenye2.png" alt="图片">
+<img src="@source/.vuepress/public/images/fenye3.png" alt="图片">
+table.vue
+<img src="@source/.vuepress/public/images/fenye4.png" alt="图片">
+<img src="@source/.vuepress/public/images/fenye5.png" alt="图片"></p>
+<h2 id="pagecontent-动态添加-剩余的-插槽" tabindex="-1"><a class="header-anchor" href="#pagecontent-动态添加-剩余的-插槽" aria-hidden="true">#</a> pageContent 动态添加(剩余的)插槽</h2>
+<p>不能再page-content中把插槽写死 , 每个页面要有自己的可定制化的插槽</p>
+<p>对作用域插槽要有自己的理解</p>
+<p>page-content.vue
+<img src="@source/.vuepress/public/images/cc1.png" alt="图片">
+<img src="@source/.vuepress/public/images/cc2.png" alt="图片"></p>
+<p>goods.vue
+<img src="@source/.vuepress/public/images/cc4.png" alt="图片">
+<img src="@source/.vuepress/public/images/cc3.png" alt="图片"></p>
+<h2 id="菜单展开嵌套的进一步封装" tabindex="-1"><a class="header-anchor" href="#菜单展开嵌套的进一步封装" aria-hidden="true">#</a> 菜单展开嵌套的进一步封装</h2>
+<p><img src="@source/.vuepress/public/images/cp5.png" alt="图片"></p>
+<p><strong>需要两个属性 , el-table 的 row-key 和 tree-props 属性</strong></p>
+<p>menu.vue
+<img src="@source/.vuepress/public/images/menuvue.png" alt="图片"></p>
+<p>配置文件
+<img src="@source/.vuepress/public/images/cp1.png" alt="图片">
+table.vue
+<img src="@source/.vuepress/public/images/cp2.png" alt="图片"></p>
+<h2 id="用户按钮的权限管理" tabindex="-1"><a class="header-anchor" href="#用户按钮的权限管理" aria-hidden="true">#</a> 用户按钮的权限管理</h2>
+<p>用户登录服务器返回用户的 userMenus , 它的三级菜单里面有一大堆的权限按钮字符串, 用户如果有对应的权限可以拿到
+<img src="@source/.vuepress/public/images/menuii.png" alt="图片">
+先把 userMenus 中拿到所有的按钮权限字符串 , 把他们放到<strong>数组</strong>里面 ,  比如 <code>[system:user:create, system:user:delete...]</code>
+然后在pageContent里面调用一个hook 这个hook叫 usePermission(pageName ,&quot;哪一个权限字符串&quot; ),返回布尔值 , 然后能通过 v-if 条件判断能否显示按钮</p>
+<p><strong>utils/map-menus.ts</strong> 封装函数 mapMenuToPermissions 函数: 把 userMenus 里面三级菜单里面的permissions 放到数组里
+<img src="@source/.vuepress/public/images/mmp.png" alt="图片"></p>
+<p>store/login/login.ts
+<img src="@source/.vuepress/public/images/o1.png" alt="图片">
+<strong>封装 hook</strong> :  usePermission(pageName ,&quot;权限字符串&quot;), 返回布尔值 , 然后能通过 v-if 条件判断能否显示按钮</p>
+<p><img src="@source/.vuepress/public/images/o2.png" alt="图片"></p>
+<p>use-permissions.ts
+<img src="@source/.vuepress/public/images/o3.png" alt="图片">
+page-content.vue <strong>利用封装的hook , 传入pageName 和对应的权限字符串 (query/delete/update/create)</strong>, 并返回布尔值
+<img src="@source/.vuepress/public/images/o4.png" alt="图片">
+<img src="@source/.vuepress/public/images/o5.png" alt="图片"></p>
 </template>

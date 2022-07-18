@@ -29,10 +29,40 @@ export const data = {
       "title": "查询操作 - 根据条件查询结果",
       "slug": "查询操作-根据条件查询结果",
       "children": []
+    },
+    {
+      "level": 2,
+      "title": "el-pagination 分页器处理与数据请求",
+      "slug": "el-pagination-分页器处理与数据请求",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "pageContent 动态添加(剩余的)插槽",
+      "slug": "pagecontent-动态添加-剩余的-插槽",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "菜单展开嵌套的进一步封装",
+      "slug": "菜单展开嵌套的进一步封装",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "用户按钮的权限管理",
+      "slug": "用户按钮的权限管理",
+      "children": []
     }
   ],
   "git": {
-    "contributors": []
+    "contributors": [
+      {
+        "name": "jgoriginal",
+        "email": "932274204@qq.com",
+        "commits": 1
+      }
+    ]
   },
   "filePathRelative": "cms/4.md"
 }
