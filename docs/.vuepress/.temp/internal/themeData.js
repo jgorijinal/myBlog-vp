@@ -184,7 +184,8 @@ export const themeData = {
         "/cms/1.md",
         "/cms/2.md",
         "/cms/3.md",
-        "/cms/4.md"
+        "/cms/4.md",
+        "/cms/5.md"
       ]
     }
   ],

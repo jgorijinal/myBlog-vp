@@ -212,6 +212,7 @@ module.exports = {
                     '/cms/2.md',
                     '/cms/3.md',
                     '/cms/4.md',
+                    '/cms/5.md',
                     ]
             },
             // {

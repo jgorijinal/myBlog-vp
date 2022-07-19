@@ -55,6 +55,8 @@ export const pagesData = {
   "v-23ccc3c5": () => import(/* webpackChunkName: "v-23ccc3c5" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/cms/3.html.js").then(({ data }) => data),
   // path: /cms/4.html
   "v-25819c64": () => import(/* webpackChunkName: "v-25819c64" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/cms/4.html.js").then(({ data }) => data),
+  // path: /cms/5.html
+  "v-27367503": () => import(/* webpackChunkName: "v-27367503" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/cms/5.html.js").then(({ data }) => data),
   // path: /cms/axioos.html
   "v-5eee594e": () => import(/* webpackChunkName: "v-5eee594e" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/cms/axioos.html.js").then(({ data }) => data),
   // path: /cms/axiosF.html
