@@ -1,0 +1,1 @@
+const e={key:"v-4b29d755",path:"/TS/Vue3.html",title:"TS \u4E0E Vue \u7ED3\u5408",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[{level:2,title:"\u5C01\u88C5fetch\u8BF7\u6C42",slug:"\u5C01\u88C5fetch\u8BF7\u6C42",children:[]}],git:{contributors:[{name:"jgoriginal",email:"932274204@qq.com",commits:2}]},filePathRelative:"TS/Vue3.md"};export{e as data};

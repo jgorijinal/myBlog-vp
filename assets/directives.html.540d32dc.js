@@ -1,0 +1,1 @@
+const e={key:"v-7fb371a8",path:"/vue3/directives.html",title:"\u81EA\u5B9A\u4E49\u6307\u4EE4",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[],git:{contributors:[{name:"jgoriginal",email:"932274204@qq.com",commits:1}]},filePathRelative:"vue3/directives.md"};export{e as data};
