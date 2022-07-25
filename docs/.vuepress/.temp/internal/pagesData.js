@@ -57,6 +57,10 @@ export const pagesData = {
   "v-25819c64": () => import(/* webpackChunkName: "v-25819c64" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/cms/4.html.js").then(({ data }) => data),
   // path: /cms/5.html
   "v-27367503": () => import(/* webpackChunkName: "v-27367503" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/cms/5.html.js").then(({ data }) => data),
+  // path: /cms/6.html
+  "v-28eb4da2": () => import(/* webpackChunkName: "v-28eb4da2" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/cms/6.html.js").then(({ data }) => data),
+  // path: /cms/7.html
+  "v-2aa02641": () => import(/* webpackChunkName: "v-2aa02641" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/cms/7.html.js").then(({ data }) => data),
   // path: /cms/axioos.html
   "v-5eee594e": () => import(/* webpackChunkName: "v-5eee594e" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/cms/axioos.html.js").then(({ data }) => data),
   // path: /cms/axiosF.html
@@ -195,6 +199,8 @@ export const pagesData = {
   "v-6831bb92": () => import(/* webpackChunkName: "v-6831bb92" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue3/other.html.js").then(({ data }) => data),
   // path: /vue3/script-setup.html
   "v-812fd256": () => import(/* webpackChunkName: "v-812fd256" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue3/script-setup.html.js").then(({ data }) => data),
+  // path: /vue3/start.html
+  "v-1549f980": () => import(/* webpackChunkName: "v-1549f980" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue3/start.html.js").then(({ data }) => data),
   // path: /vue3/transition.html
   "v-a561730a": () => import(/* webpackChunkName: "v-a561730a" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue3/transition.html.js").then(({ data }) => data),
   // path: /vue3/v-model.html

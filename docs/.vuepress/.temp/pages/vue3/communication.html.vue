@@ -1,4 +1,53 @@
 <template><h1 id="组件通信" tabindex="-1"><a class="header-anchor" href="#组件通信" aria-hidden="true">#</a> 组件通信</h1>
+<h2 id="父子组件通信" tabindex="-1"><a class="header-anchor" href="#父子组件通信" aria-hidden="true">#</a> 父子组件通信</h2>
+<ul>
+<li>父组件传递给子组件: <strong>通过 props 属性</strong></li>
+<li>子组件传递给父组件: <strong>通过 $emit 触发事件</strong></li>
+</ul>
+<p><img src="@source/.vuepress/public/images/prop1.png" alt="图片"></p>
+<h2 id="非-prop-的-attribute" tabindex="-1"><a class="header-anchor" href="#非-prop-的-attribute" aria-hidden="true">#</a> 非 prop 的 attribute</h2>
+<ul>
+<li>当我们<strong>传递给一个组件某个属性</strong>，但是<strong>该属性并没有定义对应的 props 或者 emits 时</strong>，就称之为 非Prop的
+Attribute；</li>
+<li>常见的包括 class、style、id 属性等</li>
+</ul>
+<p><strong>Attribute继承</strong></p>
+<ul>
+<li>当<strong>组件有单个根节点</strong>时，<strong>非Prop的Attribute将自动添加到根节点的Attribute</strong></li>
+</ul>
+<h2 id="禁用attribute继承和多根节点" tabindex="-1"><a class="header-anchor" href="#禁用attribute继承和多根节点" aria-hidden="true">#</a> 禁用Attribute继承和多根节点</h2>
+<p>如果不希望组件的根元素继承 attribute，可以在组件中设置 <strong>inheritAttrs: false</strong></p>
+<ul>
+<li>禁用attribute继承的常见情况是<strong>需要将 attribute 应用于根元素之外的其他元素</strong></li>
+<li>可以通过 <strong>$attrs来访问所有的 非props的attribute</strong></li>
+</ul>
+<p><img src="@source/.vuepress/public/images/at1.png" alt="图片"></p>
+<p>多个根节点的attribute</p>
+<ul>
+<li><strong>多个根节点的attribute如果没有显示的绑定</strong>，那么会报警告，<strong>必须手动的指定要绑定到哪一个属性上</strong></li>
+</ul>
+<p><img src="@source/.vuepress/public/images/at2.png" alt="图片"></p>
+<h2 id="子组件传递给父组件" tabindex="-1"><a class="header-anchor" href="#子组件传递给父组件" aria-hidden="true">#</a> 子组件传递给父组件</h2>
+<p>什么情况下子组件需要传递内容到父组件呢？</p>
+<ul>
+<li>当<strong>子组件有一些事件发生的时候</strong>，比如在组件中发生了点击，父组件需要切换内容；</li>
+<li>子组件<strong>有一些内容想要传递给父组件的时候</strong></li>
+</ul>
+<p>那如何操作？</p>
+<ul>
+<li>首先，需要在<strong>子组件中定义好在某些情况下触发的事件名称</strong></li>
+<li>其次，在<strong>父组件中以v-on的方式传入要监听的事件名称，并且绑定到对应的方法中</strong></li>
+<li>最后，在<strong>子组件中发生某个事件的时候，根据事件名称触发对应的事件</strong></li>
+</ul>
+<h3 id="自定义事件的流程" tabindex="-1"><a class="header-anchor" href="#自定义事件的流程" aria-hidden="true">#</a> 自定义事件的流程</h3>
+<p><img src="@source/.vuepress/public/images/cpcp.png" alt="图片"></p>
+<h3 id="自定义事件的参数和验证" tabindex="-1"><a class="header-anchor" href="#自定义事件的参数和验证" aria-hidden="true">#</a> 自定义事件的参数和验证</h3>
+<ul>
+<li>自定义事件的时候，我们也可以传递一些参数给父组件：
+<img src="@source/.vuepress/public/images/gh1.png" alt="图片"></li>
+<li>在vue3当中，我们可以对传递的参数进行验证
+<img src="@source/.vuepress/public/images/gh2.png" alt="图片"></li>
+</ul>
 <h2 id="非父子组件通信" tabindex="-1"><a class="header-anchor" href="#非父子组件通信" aria-hidden="true">#</a> 非父子组件通信</h2>
 <p>除了<strong>父子组件通信</strong>之外, 还会有<strong>非父子组件之间的通信</strong></p>
 <p>主**要有两种方法</p>

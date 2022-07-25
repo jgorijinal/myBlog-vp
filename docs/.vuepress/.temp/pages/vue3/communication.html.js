@@ -8,6 +8,43 @@ export const data = {
   "headers": [
     {
       "level": 2,
+      "title": "父子组件通信",
+      "slug": "父子组件通信",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "非 prop 的 attribute",
+      "slug": "非-prop-的-attribute",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "禁用Attribute继承和多根节点",
+      "slug": "禁用attribute继承和多根节点",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "子组件传递给父组件",
+      "slug": "子组件传递给父组件",
+      "children": [
+        {
+          "level": 3,
+          "title": "自定义事件的流程",
+          "slug": "自定义事件的流程",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "自定义事件的参数和验证",
+          "slug": "自定义事件的参数和验证",
+          "children": []
+        }
+      ]
+    },
+    {
+      "level": 2,
       "title": "非父子组件通信",
       "slug": "非父子组件通信",
       "children": [
@@ -36,4 +73,17 @@ export const data = {
     ]
   },
   "filePathRelative": "vue3/communication.md"
+}
+
+if (import.meta.webpackHot) {
+  import.meta.webpackHot.accept()
+  if (__VUE_HMR_RUNTIME__.updatePageData) {
+    __VUE_HMR_RUNTIME__.updatePageData(data)
+  }
+}
+
+if (import.meta.hot) {
+  import.meta.hot.accept(({ data }) => {
+    __VUE_HMR_RUNTIME__.updatePageData(data)
+  })
 }

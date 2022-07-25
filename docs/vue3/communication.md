@@ -1,4 +1,45 @@
 # 组件通信
+## 父子组件通信
+* 父组件传递给子组件: **通过 props 属性**
+* 子组件传递给父组件: **通过 $emit 触发事件**
+
+![图片](../.vuepress/public/images/prop1.png)
+## 非 prop 的 attribute
+* 当我们**传递给一个组件某个属性**，但是**该属性并没有定义对应的 props 或者 emits 时**，就称之为 非Prop的
+Attribute；
+* 常见的包括 class、style、id 属性等
+
+**Attribute继承**
+* 当**组件有单个根节点**时，**非Prop的Attribute将自动添加到根节点的Attribute**
+## 禁用Attribute继承和多根节点
+如果不希望组件的根元素继承 attribute，可以在组件中设置 **inheritAttrs: false**
+* 禁用attribute继承的常见情况是**需要将 attribute 应用于根元素之外的其他元素**
+* 可以通过 **$attrs来访问所有的 非props的attribute**
+
+![图片](../.vuepress/public/images/at1.png)
+
+多个根节点的attribute
+* **多个根节点的attribute如果没有显示的绑定**，那么会报警告，**必须手动的指定要绑定到哪一个属性上**
+
+![图片](../.vuepress/public/images/at2.png)
+
+## 子组件传递给父组件
+什么情况下子组件需要传递内容到父组件呢？
+* 当**子组件有一些事件发生的时候**，比如在组件中发生了点击，父组件需要切换内容；
+* 子组件**有一些内容想要传递给父组件的时候**
+
+那如何操作？
+* 首先，需要在**子组件中定义好在某些情况下触发的事件名称**
+* 其次，在**父组件中以v-on的方式传入要监听的事件名称，并且绑定到对应的方法中**
+* 最后，在**子组件中发生某个事件的时候，根据事件名称触发对应的事件**
+### 自定义事件的流程
+![图片](../.vuepress/public/images/cpcp.png)
+
+### 自定义事件的参数和验证
+* 自定义事件的时候，我们也可以传递一些参数给父组件：
+![图片](../.vuepress/public/images/gh1.png)
+* 在vue3当中，我们可以对传递的参数进行验证
+![图片](../.vuepress/public/images/gh2.png)
 
 ## 非父子组件通信
 除了**父子组件通信**之外, 还会有**非父子组件之间的通信**

@@ -1,71 +1,73 @@
 <template><h1 id="options-api" tabindex="-1"><a class="header-anchor" href="#options-api" aria-hidden="true">#</a> Options API</h1>
-<h2 id="组件实例" tabindex="-1"><a class="header-anchor" href="#组件实例" aria-hidden="true">#</a> 组件实例</h2>
-<h3 id="refs" tabindex="-1"><a class="header-anchor" href="#refs" aria-hidden="true">#</a> $refs</h3>
-<p>某些情况下 , 我们在组件中想要获取到<strong>元素对象</strong>或者<strong>子组件实例</strong></p>
+<h2 id="计算属性-computed" tabindex="-1"><a class="header-anchor" href="#计算属性-computed" aria-hidden="true">#</a> 计算属性 computed</h2>
 <ul>
-<li>Vue 开发中不推荐进行 DOM 操作</li>
-<li>可以在<strong>元素</strong>或者<strong>组件</strong>绑定一个<code>ref</code>的<code>attribute</code>属性</li>
+<li>对于任何包含响应式数据的复杂逻辑，你都应该使用<strong>计算属性</strong></li>
+<li><strong>计算属性</strong>将被混入到组件实例中。所有 getter 和 setter 的 this 上下文自动地绑定为组件实例</li>
 </ul>
-<div class="language-vue ext-vue line-numbers-mode"><pre v-pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span> <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>title<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>comp</span> <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>comp<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>comp</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
-
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
-<span class="token keyword">import</span> comp <span class="token keyword">from</span> <span class="token string">'./components/comp.vue'</span>
-<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
-  <span class="token literal-property property">components</span><span class="token operator">:</span><span class="token punctuation">{</span>comp<span class="token punctuation">}</span><span class="token punctuation">,</span>
-  <span class="token function">mounted</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment">//访问元素</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>$refs<span class="token punctuation">.</span>title<span class="token punctuation">)</span>
-
-    <span class="token comment">// 访问组件实例</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>$refs<span class="token punctuation">.</span>comp<span class="token punctuation">.</span>$el<span class="token punctuation">)</span>
-    <span class="token comment">// 访问组件实例的数据, 方法</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>$refs<span class="token punctuation">.</span>comp<span class="token punctuation">.</span>message<span class="token punctuation">)</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>$refs<span class="token punctuation">.</span>comp<span class="token punctuation">.</span><span class="token function">sayHello</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
-</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br></div></div><h3 id="parent-和-root" tabindex="-1"><a class="header-anchor" href="#parent-和-root" aria-hidden="true">#</a> $parent 和 $root</h3>
+<p>计算属性的用法：</p>
 <ul>
-<li>$parent : 访问父元素, 没有就 null</li>
-<li>$root: 访问根元素</li>
+<li>选项：computed</li>
+<li>类型：<strong>{ [key: string]: Function | { get: Function, set: Function }</strong></li>
 </ul>
-<p><strong>注意</strong>: Vue3 <strong>移除了 <code>$children</code>的属性</strong> , 所以不可以使用了</p>
-<h3 id="el" tabindex="-1"><a class="header-anchor" href="#el" aria-hidden="true">#</a> $el</h3>
+<h2 id="计算属性-缓存" tabindex="-1"><a class="header-anchor" href="#计算属性-缓存" aria-hidden="true">#</a> 计算属性 缓存</h2>
 <ul>
-<li>
-<p>该组件实例的根节点</p>
-</li>
-<li>
-<p><code>$el</code> 直到组件挂载完成 <code>(mounted)</code> 之前都会是 <code>undefined</code></p>
-</li>
+<li>这是因为计算属性会基于它们的<strong>依赖关系</strong>进行缓存</li>
+<li>在<strong>数据不发生变化</strong>时，计算属性是不需要重新计算的</li>
+<li>但是如果<strong>依赖的数据发生变化</strong>，在使用时，计算属性依然<strong>会重新进行计算</strong></li>
 </ul>
-<h3 id="attrs" tabindex="-1"><a class="header-anchor" href="#attrs" aria-hidden="true">#</a> $attrs</h3>
-<h4 id="非props的attribute" tabindex="-1"><a class="header-anchor" href="#非props的attribute" aria-hidden="true">#</a> 非props的attribute</h4>
+<h2 id="计算属性的-setter和getter" tabindex="-1"><a class="header-anchor" href="#计算属性的-setter和getter" aria-hidden="true">#</a> 计算属性的 setter和getter</h2>
+<p>计算属性在大多数情况下，只需要一个 getter 方法即可，所以会将计算属性直接写成一个函数</p>
 <ul>
-<li>当我们<strong>传递给一个组件某个属性</strong> , 但是该属性并没有定义对应的<code>props</code>或者<code>emits</code>, 就称之为<strong>非props的attribute</strong></li>
-<li>常见的包括<strong>class , style , id属性等</strong></li>
+<li>但是，如果我们确实想设置计算属性的值该怎么办  ?</li>
+<li>这个时候也可以给计算属性设置一个 setter 的方法</li>
 </ul>
-<h4 id="attribute-继承" tabindex="-1"><a class="header-anchor" href="#attribute-继承" aria-hidden="true">#</a> attribute 继承</h4>
+<p><img src="@source/.vuepress/public/images/cgs.png" alt="图片"></p>
+<h2 id="侦听器-watch" tabindex="-1"><a class="header-anchor" href="#侦听器-watch" aria-hidden="true">#</a> 侦听器 watch</h2>
 <ul>
-<li>当<strong>组件有单个根节点时</strong> , <strong>非props的attribute将自动添加到根节点的Attribute</strong>中</li>
+<li>开发中我们在 data 返回的对象中定义了数据，这个数据通过插值语法等方式绑定到 template 中；</li>
+<li>当数据变化时，template 会自动进行更新来显示最新的数据；</li>
+<li>但是在某些情况下，我们希望在<strong>代码逻辑</strong>中监听某个数据的变化，这个时候就需要用<strong>侦听器 watch</strong> 来完成</li>
 </ul>
-<p>如果<strong>不希望组建的根元素继承attribute</strong>,可以在组件中设置 <strong><code>inheritAttrs:false</code></strong></p>
+<p>侦听器的用法如下：</p>
 <ul>
-<li>禁用attribute继承的<strong>常见情况</strong>是需要<strong>将attribute应用在根元素之外的其他元素上</strong></li>
-<li>可以<strong>通过<code>$attrs</code>来访问所有的非props的attribute</strong></li>
+<li>选项：watch</li>
+<li>类型：<strong>{ [key: string]: string | Function | Object | Array}</strong></li>
 </ul>
-<h4 id="多个根节点的attribute" tabindex="-1"><a class="header-anchor" href="#多个根节点的attribute" aria-hidden="true">#</a> 多个根节点的attribute</h4>
+<p>案例:
+举个例子 ：</p>
 <ul>
-<li><strong>多个根节点的attribute如果没有显示地绑定</strong>, 那么会报警告 , <strong>所以必须要手动地指定具体要绑到哪一个元素</strong></li>
+<li>比如现在我们希望用户在<strong>input中输入一个问题</strong>；</li>
+<li>每当用户输入了最新的内容，我们就获取到最新的内容，并且使用该问题去服务器查询答案；</li>
+<li>那么，我们就需要实时的去获取最新的数据变化；</li>
 </ul>
-<div class="language-vue ext-vue line-numbers-mode"><pre v-pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">:class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>$attrs.class<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>多个根节点<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>多个根节点<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
-</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div></template>
+<h2 id="侦听器watch-的配置选项" tabindex="-1"><a class="header-anchor" href="#侦听器watch-的配置选项" aria-hidden="true">#</a> 侦听器watch 的配置选项</h2>
+<p>当点击按钮的时候会修改 <strong>info.name</strong> 的值；</p>
+<ul>
+<li>这个时候我们使用watch来侦听info，可以侦听到吗？答案是不可以。</li>
+</ul>
+<p>这是因为默认情况下，watch 只是在侦听info的引用变化，对于内部属性的变化是不会做出响应的：</p>
+<ul>
+<li>这个时候我们可以使用一个选项 deep 进行更深层的侦听；</li>
+<li>注意说过 watch 里面侦听的属性对应的也可以是一个 Object</li>
+</ul>
+<p>还有另外一个属性，希望一开始的就会立即执行一次：</p>
+<ul>
+<li>这个时候我们使用 immediate 选项；</li>
+<li>这个时候无论后面数据是否有变化，侦听的函数都会优先执行一次</li>
+</ul>
+<p><img src="@source/.vuepress/public/images/w888.png" alt="图片"></p>
+<h2 id="监听器-watch-的其他方式" tabindex="-1"><a class="header-anchor" href="#监听器-watch-的其他方式" aria-hidden="true">#</a> 监听器 watch 的其他方式</h2>
+<p><strong>其他方式 (一)</strong></p>
+<p><img src="@source/.vuepress/public/images/w999.png" alt="图片"></p>
+<p><strong>其他方式(二)</strong></p>
+<p>另外一个是Vue3文档中没有提到的，但是Vue2文档中有提到的是侦听对象的属性：
+<img src="@source/.vuepress/public/images/www1.png" alt="图片"></p>
+<p><strong>还有另外一种方式就是使用 $watch 的API：</strong>
+我们可以在created的生命周期（后续会讲到）中，使用 this.$watch 来侦听；</p>
+<ul>
+<li>第一个参数是要侦听的源；</li>
+<li>第二个参数是侦听的回调函数callback；</li>
+<li>第三个参数是额外的其他选项，比如deep、immediate</li>
+</ul>
+<p><img src="@source/.vuepress/public/images/www2.png" alt="图片"></p>
+</template>

@@ -15,63 +15,63 @@ module.exports = {
         lastUpdated:false,
         sidebar: [
             // SidebarItem
-            {
-                text: 'Vue系列',
-                collapsible: true,
-                children: [
-                    {
-                        text: 'Vue和React对比',
-                        link: '/vue/character.md',
-                        children: [],
-                    },
-                    {
-                        text: 'Vue中的生命周期',
-                        link: '/vue/lifeCycle.md',
-                        children: [],
-                    },
-                    {
-                        text: 'Vue中的v-show和v-if的区别',
-                        link: '/vue/showIf.md',
-                        children: [],
-                    },
-                    {
-                        text: 'Vue中的computed和watch',
-                        link: '/vue/computedWatch.md',
-                        children: [],
-                    },
-                    {
-                        text: 'Vue组件之间的通信方式',
-                        link: '/vue/communication.md',
-                        children: [],
-                    },
-                    {
-                        text: 'Vue中常用的修饰符',
-                        link: '/vue/modifier.md',
-                        children: [],
-                    },
-                    {
-                        text: '使用Vue中的开发插件',
-                        link: '/vue/plugin.md',
-                        children: [],
-                    },
-                    {
-                        text: 'Vue中的slot插槽的使用',
-                        link: '/vue/slot.md',
-                        children: [],
-                    },
-                    {
-                        text: 'Vue中的表单的基本使用',
-                        link: '/vue/form.md',
-                        children: [],
-                    },
-                    {
-                        text: 'Vue中的动态组件',
-                        link: '/vue/dynamic.md',
-                        children: [],
-                    },
+            // {
+            //     text: 'Vue系列',
+            //     collapsible: true,
+            //     children: [
+            //         {
+            //             text: 'Vue和React对比',
+            //             link: '/vue/character.md',
+            //             children: [],
+            //         },
+            //         {
+            //             text: 'Vue中的生命周期',
+            //             link: '/vue/lifeCycle.md',
+            //             children: [],
+            //         },
+            //         {
+            //             text: 'Vue中的v-show和v-if的区别',
+            //             link: '/vue/showIf.md',
+            //             children: [],
+            //         },
+            //         {
+            //             text: 'Vue中的computed和watch',
+            //             link: '/vue/computedWatch.md',
+            //             children: [],
+            //         },
+            //         {
+            //             text: 'Vue组件之间的通信方式',
+            //             link: '/vue/communication.md',
+            //             children: [],
+            //         },
+            //         {
+            //             text: 'Vue中常用的修饰符',
+            //             link: '/vue/modifier.md',
+            //             children: [],
+            //         },
+            //         {
+            //             text: '使用Vue中的开发插件',
+            //             link: '/vue/plugin.md',
+            //             children: [],
+            //         },
+            //         {
+            //             text: 'Vue中的slot插槽的使用',
+            //             link: '/vue/slot.md',
+            //             children: [],
+            //         },
+            //         {
+            //             text: 'Vue中的表单的基本使用',
+            //             link: '/vue/form.md',
+            //             children: [],
+            //         },
+            //         {
+            //             text: 'Vue中的动态组件',
+            //             link: '/vue/dynamic.md',
+            //             children: [],
+            //         },
 
-                ],
-            },
+            //     ],
+            // },
             {
                 text: 'Vue3系列',
                 collapsible: true,
@@ -82,15 +82,15 @@ module.exports = {
                     '/vue3/dynamic.md',
                     '/vue3/async.md',
                     '/vue3/v-model.md',
+                    '/vue3/start.md',
                     '/vue3/options.md',
                     '/vue3/mixin.md',
                     '/vue3/directives.md',
                     '/vue3/chajian.md',
                     '/vue3/composition.md',
-                    '/vue3/script-setup.md',
+                    // '/vue3/script-setup.md',
                     '/vue3/h.md',
                     '/vue3/transition.md',
-            
                 ]
             },
             {
@@ -213,6 +213,8 @@ module.exports = {
                     '/cms/3.md',
                     '/cms/4.md',
                     '/cms/5.md',
+                    '/cms/6.md',
+                    '/cms/7.md',
                     ]
             },
             // {
