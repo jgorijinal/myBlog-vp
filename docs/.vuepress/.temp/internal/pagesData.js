@@ -81,16 +81,22 @@ export const pagesData = {
   "v-4244732a": () => import(/* webpackChunkName: "v-4244732a" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/closure.html.js").then(({ data }) => data),
   // path: /JS/function.html
   "v-73f5eeb4": () => import(/* webpackChunkName: "v-73f5eeb4" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/function.html.js").then(({ data }) => data),
+  // path: /JS/hanshu.html
+  "v-162395be": () => import(/* webpackChunkName: "v-162395be" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/hanshu.html.js").then(({ data }) => data),
   // path: /JS/hongwei.html
   "v-036a2e4b": () => import(/* webpackChunkName: "v-036a2e4b" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/hongwei.html.js").then(({ data }) => data),
   // path: /JS/module.html
   "v-12696d40": () => import(/* webpackChunkName: "v-12696d40" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/module.html.js").then(({ data }) => data),
+  // path: /JS/neicun.html
+  "v-f87371bc": () => import(/* webpackChunkName: "v-f87371bc" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/neicun.html.js").then(({ data }) => data),
   // path: /JS/promise.html
   "v-c60638ea": () => import(/* webpackChunkName: "v-c60638ea" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/promise.html.js").then(({ data }) => data),
   // path: /JS/proto.html
   "v-76dfbbc4": () => import(/* webpackChunkName: "v-76dfbbc4" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/proto.html.js").then(({ data }) => data),
   // path: /JS/reg.html
   "v-7cc72632": () => import(/* webpackChunkName: "v-7cc72632" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/reg.html.js").then(({ data }) => data),
+  // path: /JS/this.html
+  "v-589e312e": () => import(/* webpackChunkName: "v-589e312e" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/this.html.js").then(({ data }) => data),
   // path: /json-server%E4%B8%8Emock/
   "v-5b635b6e": () => import(/* webpackChunkName: "v-5b635b6e" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/json-server与mock/index.html.js").then(({ data }) => data),
   // path: /TS/as.html
