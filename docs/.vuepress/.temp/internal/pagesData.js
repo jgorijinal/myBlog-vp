@@ -47,10 +47,6 @@ export const pagesData = {
   "v-53d95e5e": () => import(/* webpackChunkName: "v-53d95e5e" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/category_2/child2.html.js").then(({ data }) => data),
   // path: /category_2/
   "v-e34766f6": () => import(/* webpackChunkName: "v-e34766f6" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/category_2/index.html.js").then(({ data }) => data),
-  // path: /css/grid.html
-  "v-0bb319ee": () => import(/* webpackChunkName: "v-0bb319ee" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/css/grid.html.js").then(({ data }) => data),
-  // path: /css/init.html
-  "v-9ff66338": () => import(/* webpackChunkName: "v-9ff66338" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/css/init.html.js").then(({ data }) => data),
   // path: /cms/1.html
   "v-20631287": () => import(/* webpackChunkName: "v-20631287" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/cms/1.html.js").then(({ data }) => data),
   // path: /cms/2.html
@@ -71,6 +67,10 @@ export const pagesData = {
   "v-5757ac6a": () => import(/* webpackChunkName: "v-5757ac6a" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/cms/axiosF.html.js").then(({ data }) => data),
   // path: /cms/code.html
   "v-4e09a76d": () => import(/* webpackChunkName: "v-4e09a76d" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/cms/code.html.js").then(({ data }) => data),
+  // path: /css/grid.html
+  "v-0bb319ee": () => import(/* webpackChunkName: "v-0bb319ee" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/css/grid.html.js").then(({ data }) => data),
+  // path: /css/init.html
+  "v-9ff66338": () => import(/* webpackChunkName: "v-9ff66338" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/css/init.html.js").then(({ data }) => data),
   // path: /JS/array.html
   "v-603fcf66": () => import(/* webpackChunkName: "v-603fcf66" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/array.html.js").then(({ data }) => data),
   // path: /JS/basic.html
@@ -79,6 +79,12 @@ export const pagesData = {
   "v-06d77c8e": () => import(/* webpackChunkName: "v-06d77c8e" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/class.html.js").then(({ data }) => data),
   // path: /JS/closure.html
   "v-4244732a": () => import(/* webpackChunkName: "v-4244732a" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/closure.html.js").then(({ data }) => data),
+  // path: /JS/es6.html
+  "v-715cb404": () => import(/* webpackChunkName: "v-715cb404" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/es6.html.js").then(({ data }) => data),
+  // path: /JS/es62.html
+  "v-267fcf62": () => import(/* webpackChunkName: "v-267fcf62" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/es62.html.js").then(({ data }) => data),
+  // path: /JS/es789.html
+  "v-5e4f4f3c": () => import(/* webpackChunkName: "v-5e4f4f3c" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/es789.html.js").then(({ data }) => data),
   // path: /JS/function.html
   "v-73f5eeb4": () => import(/* webpackChunkName: "v-73f5eeb4" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/function.html.js").then(({ data }) => data),
   // path: /JS/hanshu.html
@@ -87,6 +93,8 @@ export const pagesData = {
   "v-036a2e4b": () => import(/* webpackChunkName: "v-036a2e4b" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/hongwei.html.js").then(({ data }) => data),
   // path: /JS/jicheng.html
   "v-3567178c": () => import(/* webpackChunkName: "v-3567178c" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/jicheng.html.js").then(({ data }) => data),
+  // path: /JS/lei.html
+  "v-10e9ca36": () => import(/* webpackChunkName: "v-10e9ca36" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/lei.html.js").then(({ data }) => data),
   // path: /JS/module.html
   "v-12696d40": () => import(/* webpackChunkName: "v-12696d40" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/module.html.js").then(({ data }) => data),
   // path: /JS/neicun.html

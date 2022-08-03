@@ -75,9 +75,9 @@ Crockford)提出和推广的</li>
 <li>问题一: 构造函数会被调用两次: 一次在创建子类型原型对象的时候, 一次在创建子类型实例的时候.</li>
 <li>问题二: 父类型中的属性会有两份: 一份在原型对象中, 一份在子类型实例中.</li>
 </ul>
-<p>事实上, 我们现在可以利用寄生式继承将这两个问题给解决掉.</p>
+<p>事实上, 现在可以利用寄生式继承将这两个问题给解决掉.</p>
 <ul>
-<li>你需要先明确一点: 当我们在子类型的构造函数中调用父类型.call(this, 参数)这个函数的时候, 就会将父类型中
+<li>需要先明确一点: 当我们在子类型的构造函数中调用父类型.call(this, 参数)这个函数的时候, 就会将父类型中
 的属性和方法复制一份到了子类型中. 所以父类型本身里面的内容, 我们不再需要.</li>
 <li>这个时候, 我们还需要获取到一份父类型的原型对象中的属性和方法
 <img src="@source/.vuepress/public/images/lolo1.png" alt="图片"></li>
@@ -89,4 +89,24 @@ Crockford)提出和推广的</li>
 <h3 id="最终版" tabindex="-1"><a class="header-anchor" href="#最终版" aria-hidden="true">#</a> 最终版</h3>
 <p><img src="@source/.vuepress/public/images/p03.png" alt="图片">
 <img src="@source/.vuepress/public/images/p04.png" alt="图片"></p>
+<h2 id="对象的方法补充" tabindex="-1"><a class="header-anchor" href="#对象的方法补充" aria-hidden="true">#</a> 对象的方法补充</h2>
+<p><strong>hasOwnProperty</strong></p>
+<ul>
+<li>对象是否有某一个属于自己的属性（不是在原型上的属性）</li>
+</ul>
+<p><strong>in/for in 操作符</strong></p>
+<ul>
+<li>判断某个属性是否在某个对象或者对象的原型上</li>
+</ul>
+<p><img src="@source/.vuepress/public/images/duixiangqita1.png" alt="图片"></p>
+<p><strong>instanceof</strong></p>
+<ul>
+<li>用于检测<strong>构造函数的prototype</strong>，<strong>是否出现在某个实例对象的原型链上</strong></li>
+</ul>
+<p><img src="@source/.vuepress/public/images/duixiangqita2.png" alt="图片"></p>
+<p><strong>isPrototypeOf</strong></p>
+<ul>
+<li>用于检测<strong>某个对象</strong>，是否出现在<strong>某个实例对象的原型链</strong>上</li>
+</ul>
+<p><img src="@source/.vuepress/public/images/duixiangqita3.png" alt="图片"></p>
 </template>

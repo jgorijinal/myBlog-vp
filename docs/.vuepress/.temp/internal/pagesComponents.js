@@ -49,10 +49,6 @@ export const pagesComponents = {
   "v-53d95e5e": defineAsyncComponent(() => import(/* webpackChunkName: "v-53d95e5e" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/category_2/child2.html.vue")),
   // path: /category_2/
   "v-e34766f6": defineAsyncComponent(() => import(/* webpackChunkName: "v-e34766f6" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/category_2/index.html.vue")),
-  // path: /css/grid.html
-  "v-0bb319ee": defineAsyncComponent(() => import(/* webpackChunkName: "v-0bb319ee" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/css/grid.html.vue")),
-  // path: /css/init.html
-  "v-9ff66338": defineAsyncComponent(() => import(/* webpackChunkName: "v-9ff66338" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/css/init.html.vue")),
   // path: /cms/1.html
   "v-20631287": defineAsyncComponent(() => import(/* webpackChunkName: "v-20631287" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/cms/1.html.vue")),
   // path: /cms/2.html
@@ -73,6 +69,10 @@ export const pagesComponents = {
   "v-5757ac6a": defineAsyncComponent(() => import(/* webpackChunkName: "v-5757ac6a" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/cms/axiosF.html.vue")),
   // path: /cms/code.html
   "v-4e09a76d": defineAsyncComponent(() => import(/* webpackChunkName: "v-4e09a76d" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/cms/code.html.vue")),
+  // path: /css/grid.html
+  "v-0bb319ee": defineAsyncComponent(() => import(/* webpackChunkName: "v-0bb319ee" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/css/grid.html.vue")),
+  // path: /css/init.html
+  "v-9ff66338": defineAsyncComponent(() => import(/* webpackChunkName: "v-9ff66338" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/css/init.html.vue")),
   // path: /JS/array.html
   "v-603fcf66": defineAsyncComponent(() => import(/* webpackChunkName: "v-603fcf66" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/array.html.vue")),
   // path: /JS/basic.html
@@ -81,6 +81,12 @@ export const pagesComponents = {
   "v-06d77c8e": defineAsyncComponent(() => import(/* webpackChunkName: "v-06d77c8e" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/class.html.vue")),
   // path: /JS/closure.html
   "v-4244732a": defineAsyncComponent(() => import(/* webpackChunkName: "v-4244732a" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/closure.html.vue")),
+  // path: /JS/es6.html
+  "v-715cb404": defineAsyncComponent(() => import(/* webpackChunkName: "v-715cb404" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/es6.html.vue")),
+  // path: /JS/es62.html
+  "v-267fcf62": defineAsyncComponent(() => import(/* webpackChunkName: "v-267fcf62" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/es62.html.vue")),
+  // path: /JS/es789.html
+  "v-5e4f4f3c": defineAsyncComponent(() => import(/* webpackChunkName: "v-5e4f4f3c" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/es789.html.vue")),
   // path: /JS/function.html
   "v-73f5eeb4": defineAsyncComponent(() => import(/* webpackChunkName: "v-73f5eeb4" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/function.html.vue")),
   // path: /JS/hanshu.html
@@ -89,6 +95,8 @@ export const pagesComponents = {
   "v-036a2e4b": defineAsyncComponent(() => import(/* webpackChunkName: "v-036a2e4b" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/hongwei.html.vue")),
   // path: /JS/jicheng.html
   "v-3567178c": defineAsyncComponent(() => import(/* webpackChunkName: "v-3567178c" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/jicheng.html.vue")),
+  // path: /JS/lei.html
+  "v-10e9ca36": defineAsyncComponent(() => import(/* webpackChunkName: "v-10e9ca36" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/lei.html.vue")),
   // path: /JS/module.html
   "v-12696d40": defineAsyncComponent(() => import(/* webpackChunkName: "v-12696d40" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/module.html.vue")),
   // path: /JS/neicun.html
