@@ -99,6 +99,8 @@ export const pagesData = {
   "v-12696d40": () => import(/* webpackChunkName: "v-12696d40" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/module.html.js").then(({ data }) => data),
   // path: /JS/neicun.html
   "v-f87371bc": () => import(/* webpackChunkName: "v-f87371bc" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/neicun.html.js").then(({ data }) => data),
+  // path: /JS/ppromise.html
+  "v-1bfe53c1": () => import(/* webpackChunkName: "v-1bfe53c1" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/ppromise.html.js").then(({ data }) => data),
   // path: /JS/promise.html
   "v-c60638ea": () => import(/* webpackChunkName: "v-c60638ea" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/promise.html.js").then(({ data }) => data),
   // path: /JS/proto.html

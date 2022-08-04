@@ -34,7 +34,7 @@ var 没有块级作用域
 ![图片](../.vuepress/public/images/kuaiji1.png)
 ### if-switch-for 块级作用域
 ![图片](../.vuepress/public/images/if1.png)
-![图片](../.vuepress/public/images/switch1.png)
+![图片](../.vuepress/public/images/swtich1.png)
 ![图片](../.vuepress/public/images/for1.png)
 ### 块级作用域应用
 ![图片](../.vuepress/public/images/button4.png)

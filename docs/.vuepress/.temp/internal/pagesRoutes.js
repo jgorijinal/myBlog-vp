@@ -51,6 +51,7 @@ const routeItems = [
   ["v-10e9ca36","/JS/lei.html",{"title":"面向对象 - 类"},["/JS/lei","/JS/lei.md"]],
   ["v-12696d40","/JS/module.html",{"title":"模块"},["/JS/module","/JS/module.md"]],
   ["v-f87371bc","/JS/neicun.html",{"title":"JS 的内存管理"},["/JS/neicun","/JS/neicun.md"]],
+  ["v-1bfe53c1","/JS/ppromise.html",{"title":"Promise"},["/JS/ppromise","/JS/ppromise.md"]],
   ["v-c60638ea","/JS/promise.html",{"title":"Promise"},["/JS/promise","/JS/promise.md"]],
   ["v-76dfbbc4","/JS/proto.html",{"title":"原型"},["/JS/proto","/JS/proto.md"]],
   ["v-7cc72632","/JS/reg.html",{"title":"正则表达式"},["/JS/reg","/JS/reg.md"]],

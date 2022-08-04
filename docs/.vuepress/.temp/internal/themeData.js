@@ -64,9 +64,9 @@ export const themeData = {
         "/JS/es6.md",
         "/JS/es62.md",
         "/JS/es789.md",
+        "/JS/ppromise.md",
         "/JS/basic.md",
         "/JS/array.md",
-        "/JS/promise.md",
         "/JS/reg.md",
         "/JS/module.md",
         "/JS/hongwei.md"

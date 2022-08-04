@@ -5,7 +5,7 @@
 <li>在ES7中，可以通过 <strong>includes</strong> 来判断一个数组中是否包含一个指定的元素，根据情况，如果包含则返回 true，
 否则返回false</li>
 </ul>
-<p><img src="@source/.vuepress/public/images/inclueds0.png" alt="图片">
+<p><img src="@source/.vuepress/public/images/includes0.png" alt="图片">
 <img src="@source/.vuepress/public/images/inclueds1.png" alt="图片"></p>
 <h2 id="es7-–指数-乘方-exponentiation-运算符" tabindex="-1"><a class="header-anchor" href="#es7-–指数-乘方-exponentiation-运算符" aria-hidden="true">#</a> ES7 –指数(乘方) exponentiation 运算符</h2>
 <ul>
@@ -93,7 +93,23 @@
 <li>import meta：后续 ES Module模块化中总结</li>
 </ul>
 <h2 id="es12-finalizationregistry" tabindex="-1"><a class="header-anchor" href="#es12-finalizationregistry" aria-hidden="true">#</a> ES12 - FinalizationRegistry</h2>
+<p>FinalizationRegistry 对象可以让在对象被垃圾回收时请求一个回调</p>
+<ul>
+<li>FinalizationRegistry 提供了这样的一种方法：当一个在注册表中注册的对象被回收时，请求在某个时间点上调
+用一个清理回调。（清理回调有时被称为 finalizer ）</li>
+<li>可以通过调用 register 方法，注册任何你想要清理回调的对象，传入该对象和所含的值
+<img src="@source/.vuepress/public/images/fr1.png" alt="图片"></li>
+</ul>
 <h2 id="es12-weakrefs" tabindex="-1"><a class="header-anchor" href="#es12-weakrefs" aria-hidden="true">#</a> ES12 - WeakRefs</h2>
+<p>如果默认将一个对象赋值给另外一个引用，那么这个引用是一个强引用：</p>
+<ul>
+<li>如果我们希望是一个弱引用的话，可以使用 WeakRef
+<img src="@source/.vuepress/public/images/wr.png" alt="图片"></li>
+</ul>
 <h2 id="es12-logical-assignment-operators" tabindex="-1"><a class="header-anchor" href="#es12-logical-assignment-operators" aria-hidden="true">#</a> ES12 - logical assignment operators</h2>
+<p><img src="@source/.vuepress/public/images/logi.png" alt="图片"></p>
 <h2 id="es12-其他知识点" tabindex="-1"><a class="header-anchor" href="#es12-其他知识点" aria-hidden="true">#</a> ES12 其他知识点</h2>
+<ul>
+<li>String.replaceAll：字符串替换</li>
+</ul>
 </template>

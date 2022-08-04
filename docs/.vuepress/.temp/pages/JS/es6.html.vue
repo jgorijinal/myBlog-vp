@@ -34,7 +34,7 @@
 <img src="@source/.vuepress/public/images/kuaiji1.png" alt="图片"></p>
 <h3 id="if-switch-for-块级作用域" tabindex="-1"><a class="header-anchor" href="#if-switch-for-块级作用域" aria-hidden="true">#</a> if-switch-for 块级作用域</h3>
 <p><img src="@source/.vuepress/public/images/if1.png" alt="图片">
-<img src="@source/.vuepress/public/images/switch1.png" alt="图片">
+<img src="@source/.vuepress/public/images/swtich1.png" alt="图片">
 <img src="@source/.vuepress/public/images/for1.png" alt="图片"></p>
 <h3 id="块级作用域应用" tabindex="-1"><a class="header-anchor" href="#块级作用域应用" aria-hidden="true">#</a> 块级作用域应用</h3>
 <p><img src="@source/.vuepress/public/images/button4.png" alt="图片">

@@ -101,6 +101,8 @@ export const pagesComponents = {
   "v-12696d40": defineAsyncComponent(() => import(/* webpackChunkName: "v-12696d40" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/module.html.vue")),
   // path: /JS/neicun.html
   "v-f87371bc": defineAsyncComponent(() => import(/* webpackChunkName: "v-f87371bc" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/neicun.html.vue")),
+  // path: /JS/ppromise.html
+  "v-1bfe53c1": defineAsyncComponent(() => import(/* webpackChunkName: "v-1bfe53c1" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/ppromise.html.vue")),
   // path: /JS/promise.html
   "v-c60638ea": defineAsyncComponent(() => import(/* webpackChunkName: "v-c60638ea" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/promise.html.vue")),
   // path: /JS/proto.html
