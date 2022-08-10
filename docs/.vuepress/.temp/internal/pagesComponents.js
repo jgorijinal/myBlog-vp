@@ -75,18 +75,36 @@ export const pagesComponents = {
   "v-9ff66338": defineAsyncComponent(() => import(/* webpackChunkName: "v-9ff66338" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/css/init.html.vue")),
   // path: /JS/array.html
   "v-603fcf66": defineAsyncComponent(() => import(/* webpackChunkName: "v-603fcf66" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/array.html.vue")),
+  // path: /JS/asyncawait.html
+  "v-7559deb2": defineAsyncComponent(() => import(/* webpackChunkName: "v-7559deb2" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/asyncawait.html.vue")),
+  // path: /JS/baoguanli.html
+  "v-1e48451e": defineAsyncComponent(() => import(/* webpackChunkName: "v-1e48451e" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/baoguanli.html.vue")),
   // path: /JS/basic.html
   "v-55b2d8d0": defineAsyncComponent(() => import(/* webpackChunkName: "v-55b2d8d0" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/basic.html.vue")),
   // path: /JS/class.html
   "v-06d77c8e": defineAsyncComponent(() => import(/* webpackChunkName: "v-06d77c8e" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/class.html.vue")),
   // path: /JS/closure.html
   "v-4244732a": defineAsyncComponent(() => import(/* webpackChunkName: "v-4244732a" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/closure.html.vue")),
+  // path: /JS/cunchu.html
+  "v-b7be8050": defineAsyncComponent(() => import(/* webpackChunkName: "v-b7be8050" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/cunchu.html.vue")),
+  // path: /JS/diedaiqi.html
+  "v-530b47e8": defineAsyncComponent(() => import(/* webpackChunkName: "v-530b47e8" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/diedaiqi.html.vue")),
+  // path: /JS/dom.html
+  "v-2c9bd378": defineAsyncComponent(() => import(/* webpackChunkName: "v-2c9bd378" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/dom.html.vue")),
+  // path: /JS/dombom.html
+  "v-3067ec64": defineAsyncComponent(() => import(/* webpackChunkName: "v-3067ec64" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/dombom.html.vue")),
+  // path: /JS/error.html
+  "v-79ab2dfe": defineAsyncComponent(() => import(/* webpackChunkName: "v-79ab2dfe" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/error.html.vue")),
   // path: /JS/es6.html
   "v-715cb404": defineAsyncComponent(() => import(/* webpackChunkName: "v-715cb404" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/es6.html.vue")),
   // path: /JS/es62.html
   "v-267fcf62": defineAsyncComponent(() => import(/* webpackChunkName: "v-267fcf62" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/es62.html.vue")),
   // path: /JS/es789.html
   "v-5e4f4f3c": defineAsyncComponent(() => import(/* webpackChunkName: "v-5e4f4f3c" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/es789.html.vue")),
+  // path: /JS/eventloop.html
+  "v-d1c291f0": defineAsyncComponent(() => import(/* webpackChunkName: "v-d1c291f0" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/eventloop.html.vue")),
+  // path: /JS/fangdoujieliu.html
+  "v-0f3e649e": defineAsyncComponent(() => import(/* webpackChunkName: "v-0f3e649e" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/fangdoujieliu.html.vue")),
   // path: /JS/function.html
   "v-73f5eeb4": defineAsyncComponent(() => import(/* webpackChunkName: "v-73f5eeb4" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/function.html.vue")),
   // path: /JS/hanshu.html
@@ -95,10 +113,14 @@ export const pagesComponents = {
   "v-036a2e4b": defineAsyncComponent(() => import(/* webpackChunkName: "v-036a2e4b" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/hongwei.html.vue")),
   // path: /JS/jicheng.html
   "v-3567178c": defineAsyncComponent(() => import(/* webpackChunkName: "v-3567178c" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/jicheng.html.vue")),
+  // path: /JS/json.html
+  "v-397bf124": defineAsyncComponent(() => import(/* webpackChunkName: "v-397bf124" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/json.html.vue")),
   // path: /JS/lei.html
   "v-10e9ca36": defineAsyncComponent(() => import(/* webpackChunkName: "v-10e9ca36" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/lei.html.vue")),
   // path: /JS/module.html
   "v-12696d40": defineAsyncComponent(() => import(/* webpackChunkName: "v-12696d40" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/module.html.vue")),
+  // path: /JS/mokuaihua.html
+  "v-61734074": defineAsyncComponent(() => import(/* webpackChunkName: "v-61734074" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/mokuaihua.html.vue")),
   // path: /JS/neicun.html
   "v-f87371bc": defineAsyncComponent(() => import(/* webpackChunkName: "v-f87371bc" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/neicun.html.vue")),
   // path: /JS/ppromise.html
@@ -109,6 +131,8 @@ export const pagesComponents = {
   "v-76dfbbc4": defineAsyncComponent(() => import(/* webpackChunkName: "v-76dfbbc4" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/proto.html.vue")),
   // path: /JS/reg.html
   "v-7cc72632": defineAsyncComponent(() => import(/* webpackChunkName: "v-7cc72632" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/reg.html.vue")),
+  // path: /JS/shenkaobei.html
+  "v-12ef8b3e": defineAsyncComponent(() => import(/* webpackChunkName: "v-12ef8b3e" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/shenkaobei.html.vue")),
   // path: /JS/this.html
   "v-589e312e": defineAsyncComponent(() => import(/* webpackChunkName: "v-589e312e" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/this.html.vue")),
   // path: /JS/yuanxing.html

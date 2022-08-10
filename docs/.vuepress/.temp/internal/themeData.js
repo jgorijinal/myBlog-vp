@@ -65,11 +65,21 @@ export const themeData = {
         "/JS/es62.md",
         "/JS/es789.md",
         "/JS/ppromise.md",
+        "/JS/diedaiqi.md",
+        "/JS/asyncawait.md",
+        "/JS/eventloop.md",
+        "/JS/error.md",
+        "/JS/mokuaihua.md",
+        "/JS/json.md",
+        "/JS/cunchu.md",
+        "/JS/dombom.md",
+        "/JS/dom.md",
+        "/JS/fangdoujieliu.md",
+        "/JS/shenkaobei.md",
+        "/JS/baoguanli.md",
         "/JS/basic.md",
         "/JS/array.md",
-        "/JS/reg.md",
-        "/JS/module.md",
-        "/JS/hongwei.md"
+        "/JS/reg.md"
       ]
     },
     {
