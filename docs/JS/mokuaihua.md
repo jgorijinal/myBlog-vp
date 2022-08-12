@@ -196,7 +196,7 @@ export 关键字将一个模块中的变量、函数、类等导出
 * 这样方便指定统一的接口规范，也方便阅读；
 * 这个时候，我们就可以使用 export 和 import 结合使用
 
-![图片](../.vuepress/public/images/exportimpot.png)
+![图片](../.vuepress/public/images/exportimport.png)
 ### default 用法
 前面的导出功能都是有名字的导出（named exports）：
 * 在导出 export 时指定了名字；

@@ -238,7 +238,7 @@ module；</li>
 <li>这样方便指定统一的接口规范，也方便阅读；</li>
 <li>这个时候，我们就可以使用 export 和 import 结合使用</li>
 </ul>
-<p><img src="@source/.vuepress/public/images/exportimpot.png" alt="图片"></p>
+<p><img src="@source/.vuepress/public/images/exportimport.png" alt="图片"></p>
 <h3 id="default-用法" tabindex="-1"><a class="header-anchor" href="#default-用法" aria-hidden="true">#</a> default 用法</h3>
 <p>前面的导出功能都是有名字的导出（named exports）：</p>
 <ul>

@@ -107,7 +107,7 @@
 <img src="@source/.vuepress/public/images/wr.png" alt="图片"></li>
 </ul>
 <h2 id="es12-logical-assignment-operators" tabindex="-1"><a class="header-anchor" href="#es12-logical-assignment-operators" aria-hidden="true">#</a> ES12 - logical assignment operators</h2>
-<p><img src="@source/.vuepress/public/images/logi.png" alt="图片"></p>
+<p><img src="@source/.vuepress/public/images/logi1.png" alt="图片"></p>
 <h2 id="es12-其他知识点" tabindex="-1"><a class="header-anchor" href="#es12-其他知识点" aria-hidden="true">#</a> ES12 其他知识点</h2>
 <ul>
 <li>String.replaceAll：字符串替换</li>

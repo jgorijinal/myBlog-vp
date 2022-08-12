@@ -119,6 +119,21 @@ export const themeData = {
       ]
     },
     {
+      "text": "Element-ui",
+      "collapsible": true,
+      "children": [
+        "/elementui/jicheng.md"
+      ]
+    },
+    {
+      "text": "HRSass",
+      "collapsible": true,
+      "children": [
+        "/hrsass/start.md",
+        "/hrsass/login.md"
+      ]
+    },
+    {
       "text": "VueAdmin",
       "collapsible": true,
       "children": [

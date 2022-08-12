@@ -3,6 +3,12 @@ import { defineAsyncComponent } from 'vue'
 export const pagesComponents = {
   // path: /
   "v-8daa1a0e": defineAsyncComponent(() => import(/* webpackChunkName: "v-8daa1a0e" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/index.html.vue")),
+  // path: /category_2/child1.html
+  "v-522485bf": defineAsyncComponent(() => import(/* webpackChunkName: "v-522485bf" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/category_2/child1.html.vue")),
+  // path: /category_2/child2.html
+  "v-53d95e5e": defineAsyncComponent(() => import(/* webpackChunkName: "v-53d95e5e" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/category_2/child2.html.vue")),
+  // path: /category_2/
+  "v-e34766f6": defineAsyncComponent(() => import(/* webpackChunkName: "v-e34766f6" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/category_2/index.html.vue")),
   // path: /admin-project/animationList.html
   "v-36e3d6c4": defineAsyncComponent(() => import(/* webpackChunkName: "v-36e3d6c4" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/admin-project/animationList.html.vue")),
   // path: /admin-project/auth.html
@@ -43,12 +49,6 @@ export const pagesComponents = {
   "v-5a98d968": defineAsyncComponent(() => import(/* webpackChunkName: "v-5a98d968" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/admin-project/vite.html.vue")),
   // path: /admin-project/wangEditor.html
   "v-45aad488": defineAsyncComponent(() => import(/* webpackChunkName: "v-45aad488" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/admin-project/wangEditor.html.vue")),
-  // path: /category_2/child1.html
-  "v-522485bf": defineAsyncComponent(() => import(/* webpackChunkName: "v-522485bf" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/category_2/child1.html.vue")),
-  // path: /category_2/child2.html
-  "v-53d95e5e": defineAsyncComponent(() => import(/* webpackChunkName: "v-53d95e5e" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/category_2/child2.html.vue")),
-  // path: /category_2/
-  "v-e34766f6": defineAsyncComponent(() => import(/* webpackChunkName: "v-e34766f6" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/category_2/index.html.vue")),
   // path: /cms/1.html
   "v-20631287": defineAsyncComponent(() => import(/* webpackChunkName: "v-20631287" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/cms/1.html.vue")),
   // path: /cms/2.html
@@ -69,10 +69,16 @@ export const pagesComponents = {
   "v-5757ac6a": defineAsyncComponent(() => import(/* webpackChunkName: "v-5757ac6a" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/cms/axiosF.html.vue")),
   // path: /cms/code.html
   "v-4e09a76d": defineAsyncComponent(() => import(/* webpackChunkName: "v-4e09a76d" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/cms/code.html.vue")),
+  // path: /elementui/jicheng.html
+  "v-658e9812": defineAsyncComponent(() => import(/* webpackChunkName: "v-658e9812" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/elementui/jicheng.html.vue")),
   // path: /css/grid.html
   "v-0bb319ee": defineAsyncComponent(() => import(/* webpackChunkName: "v-0bb319ee" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/css/grid.html.vue")),
   // path: /css/init.html
   "v-9ff66338": defineAsyncComponent(() => import(/* webpackChunkName: "v-9ff66338" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/css/init.html.vue")),
+  // path: /hrsass/login.html
+  "v-4910ee6e": defineAsyncComponent(() => import(/* webpackChunkName: "v-4910ee6e" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/hrsass/login.html.vue")),
+  // path: /hrsass/start.html
+  "v-53774d15": defineAsyncComponent(() => import(/* webpackChunkName: "v-53774d15" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/hrsass/start.html.vue")),
   // path: /JS/array.html
   "v-603fcf66": defineAsyncComponent(() => import(/* webpackChunkName: "v-603fcf66" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/array.html.vue")),
   // path: /JS/asyncawait.html
