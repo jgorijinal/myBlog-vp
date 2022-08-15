@@ -181,5 +181,6 @@ axios 返回的数据中默认增加了一层**data 的包裹**, 需要在这里
 ![图片](../.vuepress/public/images/act2.png)
 #### 调用登录
 ![图片](../.vuepress/public/images/act3.png)
+不论执行try 还是catch  都去关闭转圈 , 在 finally 里面 loading 设为 false
 
 调用的是Vuex中子模块的 action，该模块我们进行了namespaced: true，所以引用 action 时需要带上**user/**, 并且在使用该方法时，直接使用 **`this['user/login']`**, 使用 this.user/login 语法是错误的

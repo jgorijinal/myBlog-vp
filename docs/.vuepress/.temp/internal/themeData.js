@@ -130,7 +130,10 @@ export const themeData = {
       "collapsible": true,
       "children": [
         "/hrsass/start.md",
-        "/hrsass/login.md"
+        "/hrsass/login.md",
+        "/hrsass/zhuye.md",
+        "/hrsass/luyou.md",
+        "/hrsass/zuzhijiagou.md"
       ]
     },
     {

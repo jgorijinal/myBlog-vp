@@ -235,6 +235,9 @@ module.exports = {
                 children: [
                     '/hrsass/start.md',
                     '/hrsass/login.md',
+                    '/hrsass/zhuye.md',
+                    '/hrsass/luyou.md',
+                    '/hrsass/zuzhijiagou.md',
                 ]
             },
             {

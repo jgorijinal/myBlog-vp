@@ -136,6 +136,7 @@ port = 8888
 <p>这里采用直接引入模块 action 的方式，后面要采用分模块的引用方式
 <img src="@source/.vuepress/public/images/act2.png" alt="图片"></p>
 <h4 id="调用登录" tabindex="-1"><a class="header-anchor" href="#调用登录" aria-hidden="true">#</a> 调用登录</h4>
-<p><img src="@source/.vuepress/public/images/act3.png" alt="图片"></p>
+<p><img src="@source/.vuepress/public/images/act3.png" alt="图片">
+不论执行try 还是catch  都去关闭转圈 , 在 finally 里面 loading 设为 false</p>
 <p>调用的是Vuex中子模块的 action，该模块我们进行了namespaced: true，所以引用 action 时需要带上<strong>user/</strong>, 并且在使用该方法时，直接使用 <strong><code>this['user/login']</code></strong>, 使用 this.user/login 语法是错误的</p>
 </template>
