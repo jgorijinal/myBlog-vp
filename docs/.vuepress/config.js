@@ -230,7 +230,7 @@ module.exports = {
                 ]
             },
             {
-                text: 'HRSass',
+                text: 'HRSaas',
                 collapsible: true,
                 children: [
                     '/hrsass/start.md',
@@ -238,6 +238,13 @@ module.exports = {
                     '/hrsass/zhuye.md',
                     '/hrsass/luyou.md',
                     '/hrsass/zuzhijiagou.md',
+                    '/hrsass/gongsi.md',
+                    '/hrsass/yuangong.md',
+                    '/hrsass/tupian.md',
+                    '/hrsass/quanxian.md',
+                    '/hrsass/shouye.md',
+                    '/hrsass/tab.md',
+                    '/hrsass/bushu.md',
                 ]
             },
             {

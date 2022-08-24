@@ -126,14 +126,21 @@ export const themeData = {
       ]
     },
     {
-      "text": "HRSass",
+      "text": "HRSaas",
       "collapsible": true,
       "children": [
         "/hrsass/start.md",
         "/hrsass/login.md",
         "/hrsass/zhuye.md",
         "/hrsass/luyou.md",
-        "/hrsass/zuzhijiagou.md"
+        "/hrsass/zuzhijiagou.md",
+        "/hrsass/gongsi.md",
+        "/hrsass/yuangong.md",
+        "/hrsass/tupian.md",
+        "/hrsass/quanxian.md",
+        "/hrsass/shouye.md",
+        "/hrsass/tab.md",
+        "/hrsass/bushu.md"
       ]
     },
     {

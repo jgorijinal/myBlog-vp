@@ -1,9 +1,9 @@
 <template><h1 id="面向对象-类" tabindex="-1"><a class="header-anchor" href="#面向对象-类" aria-hidden="true">#</a> 面向对象 - 类</h1>
 <p>按照前面的构造函数形式创建 类，不仅仅和编写普通的函数过于相似，而且代码并不容易理解。</p>
 <ul>
-<li>在 ES6（ECMAScript2015）新的标准中使用了 class 关键字来直接定义类</li>
-<li>但是类本质上依然是前面所讲的构造函数、原型链的<strong>语法糖</strong>而已</li>
-<li>所以学好了前面的构造函数、原型链更有利于我们理解类的概念和继承关系</li>
+<li>在 ES6（ECMAScript2015）新的标准中使用了 <strong>class 关键字</strong>来直接定义<strong>类</strong></li>
+<li>但是类本质上依然是<strong>构造函数、原型链</strong>的<strong>语法糖</strong>而已</li>
+<li>所以学好了前面的构造函数、原型链更有利于理解类的概念和继承关系</li>
 </ul>
 <p>如何使用 class 来定义一个类呢？</p>
 <ul>
