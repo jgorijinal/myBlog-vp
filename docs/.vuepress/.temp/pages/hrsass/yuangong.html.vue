@@ -439,7 +439,7 @@ Object<span class="token punctuation">.</span><span class="token function">keys<
 <h4 id="用户名和密码的修改-src-views-employees-detail-vue" tabindex="-1"><a class="header-anchor" href="#用户名和密码的修改-src-views-employees-detail-vue" aria-hidden="true">#</a> <strong>用户名和密码的修改</strong>  <strong><code>src/views/employees/detail.vue</code></strong></h4>
 <p><img src="@source/.vuepress/public/images/ym1.png" alt="图片">
 <strong>绑定表单数据</strong>
-<img src="@source/.vuepress/public/images/ym12.png" alt="图片"></p>
+<img src="@source/.vuepress/public/images/ym2.png" alt="图片"></p>
 <h2 id="_12-个人组件和岗位组件封装" tabindex="-1"><a class="header-anchor" href="#_12-个人组件和岗位组件封装" aria-hidden="true">#</a> 12. 个人组件和岗位组件封装</h2>
 <h3 id="_12-1-封装个人详情组件" tabindex="-1"><a class="header-anchor" href="#_12-1-封装个人详情组件" aria-hidden="true">#</a> 12.1 封装个人详情组件</h3>
 <p><img src="@source/.vuepress/public/images/userinfo0.png" alt="图片">

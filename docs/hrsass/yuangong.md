@@ -435,7 +435,7 @@ merges的顺序是没关系的，只要配置这两个属性，就可以导出�
 #### **用户名和密码的修改**  **`src/views/employees/detail.vue`**
 ![图片](../.vuepress/public/images/ym1.png)
 **绑定表单数据**
-![图片](../.vuepress/public/images/ym12.png)
+![图片](../.vuepress/public/images/ym2.png)
 ## 12. 个人组件和岗位组件封装
 ### 12.1 封装个人详情组件
 ![图片](../.vuepress/public/images/userinfo0.png)

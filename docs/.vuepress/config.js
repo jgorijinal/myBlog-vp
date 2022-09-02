@@ -72,6 +72,17 @@ module.exports = {
 
             //     ],
             // },
+            //     {
+            //     text: 'CSS系列',
+            //     collapsible: true,
+            //     children: [
+            //         // '/css/init.md',
+            //         // '/css/grid.md',
+            //         '/css/background.md',
+            //         '/css/san.md',
+            //         '/css/he.md',
+            //     ]
+            // },
             {
                 text: 'Vue3系列',
                 collapsible: true,
@@ -129,25 +140,19 @@ module.exports = {
                 
             //     ]
             // },
-            // {
-            //     text: 'Webpack系列',
-            //     collapsible: true,
-            //     children: [
-            //         '/webpack/start.md',
-            //         // '/webpack/else.md',
-            //         // '/webpack/babel.md',
-            //         // '/webpack/devServer.md',
+            {
+                text: 'Webpack系列',
+                collapsible: true,
+                children: [
+                    '/webpack/basic.md',
+                    // '/webpack/vuecli.md',
+                    // '/webpack/start.md',
+                    // '/webpack/else.md',
+                    // '/webpack/babel.md',
+                    // '/webpack/devServer.md',
                 
-            //     ]
-            // },
-            // {
-            //     text: 'CSS系列',
-            //     collapsible: true,
-            //     children: [
-            //         '/css/init.md',
-            //         '/css/grid.md',
-            //     ]
-            // },
+                ]
+            },
             {
                 text: 'JS系列',
                 collapsible: true,
@@ -222,13 +227,13 @@ module.exports = {
                     '/vue3UI/build.md',
                     ]
             },
-            {
-                text: 'Element-ui',
-                collapsible: true,
-                children: [
-                    '/elementui/jicheng.md',
-                ]
-            },
+            // {
+            //     text: 'Element-ui',
+            //     collapsible: true,
+            //     children: [
+            //         '/elementui/jicheng.md',
+            //     ]
+            // },
             {
                 text: 'HRSaas',
                 collapsible: true,
@@ -263,6 +268,18 @@ module.exports = {
                     '/cms/7.md',
                     ]
             },
+            {
+                text: '头条',
+                collapsible: true,
+                children: [
+                    '/toutiao/chushihua.md',
+                    '/toutiao/denglu.md',
+                    '/toutiao/geren.md',
+                    '/toutiao/wenzhang.md',
+                    '/toutiao/pindao.md',
+                    ]
+            },
+
             // {
             //     text: '脚手架项目',
             //     collapsible: true,

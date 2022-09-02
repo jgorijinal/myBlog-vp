@@ -52,6 +52,13 @@ export const themeData = {
       ]
     },
     {
+      "text": "Webpack系列",
+      "collapsible": true,
+      "children": [
+        "/webpack/basic.md"
+      ]
+    },
+    {
       "text": "JS系列",
       "collapsible": true,
       "children": [
@@ -119,13 +126,6 @@ export const themeData = {
       ]
     },
     {
-      "text": "Element-ui",
-      "collapsible": true,
-      "children": [
-        "/elementui/jicheng.md"
-      ]
-    },
-    {
       "text": "HRSaas",
       "collapsible": true,
       "children": [
@@ -157,6 +157,17 @@ export const themeData = {
         "/cms/5.md",
         "/cms/6.md",
         "/cms/7.md"
+      ]
+    },
+    {
+      "text": "头条",
+      "collapsible": true,
+      "children": [
+        "/toutiao/chushihua.md",
+        "/toutiao/denglu.md",
+        "/toutiao/geren.md",
+        "/toutiao/wenzhang.md",
+        "/toutiao/pindao.md"
       ]
     }
   ],
