@@ -277,6 +277,8 @@ module.exports = {
                     '/toutiao/geren.md',
                     '/toutiao/wenzhang.md',
                     '/toutiao/pindao.md',
+                    '/toutiao/sousuo.md',
+                    '/toutiao/xiangqing.md',
                     ]
             },
 

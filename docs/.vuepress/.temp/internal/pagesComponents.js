@@ -179,8 +179,12 @@ export const pagesComponents = {
   "v-5f4b0b72": defineAsyncComponent(() => import(/* webpackChunkName: "v-5f4b0b72" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/toutiao/geren.html.vue")),
   // path: /toutiao/pindao.html
   "v-4b354431": defineAsyncComponent(() => import(/* webpackChunkName: "v-4b354431" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/toutiao/pindao.html.vue")),
+  // path: /toutiao/sousuo.html
+  "v-09a94e5a": defineAsyncComponent(() => import(/* webpackChunkName: "v-09a94e5a" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/toutiao/sousuo.html.vue")),
   // path: /toutiao/wenzhang.html
   "v-4b9f51a2": defineAsyncComponent(() => import(/* webpackChunkName: "v-4b9f51a2" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/toutiao/wenzhang.html.vue")),
+  // path: /toutiao/xiangqing.html
+  "v-7e67cb4a": defineAsyncComponent(() => import(/* webpackChunkName: "v-7e67cb4a" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/toutiao/xiangqing.html.vue")),
   // path: /TS/as.html
   "v-222ca7e0": defineAsyncComponent(() => import(/* webpackChunkName: "v-222ca7e0" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/TS/as.html.vue")),
   // path: /TS/basic.html
