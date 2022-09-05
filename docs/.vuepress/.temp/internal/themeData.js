@@ -169,7 +169,10 @@ export const themeData = {
         "/toutiao/wenzhang.md",
         "/toutiao/pindao.md",
         "/toutiao/sousuo.md",
-        "/toutiao/xiangqing.md"
+        "/toutiao/xiangqing.md",
+        "/toutiao/pinglun.md",
+        "/toutiao/yonghu.md",
+        "/toutiao/bianji.md"
       ]
     }
   ],

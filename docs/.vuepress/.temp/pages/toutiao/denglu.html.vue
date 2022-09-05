@@ -166,4 +166,13 @@ toast2<span class="token punctuation">.</span><span class="token function">clear
 <li><s>让用户重新登录</s>，用户体验太差了</li>
 <li>使用 <code>refresh_token</code> 解决 <code>token</code> 过期</li>
 </ul>
+<p>概述：服务器生成token的过程中，会有两个时间，一个是token失效时间，一个是token刷新时间，刷新时间肯定比失效时间长，当用户的 <code>token</code> 过期时，你可以拿着过期的token去换取新的token，来保持用户的登陆状态，当然你这个过期token的过期时间必须在刷新时间之内，如果超出了刷新时间，那么返回的依旧是 401。</p>
+<p>处理流程：</p>
+<ol>
+<li>在axios的拦截器中加入token刷新逻辑</li>
+<li>当用户token过期时，去向服务器请求新的 token</li>
+<li>把旧的token替换为新的token</li>
+<li>然后继续用户当前的请求</li>
+</ol>
+<p><img src="@source/.vuepress/public/images/tokenguoqi.png" alt="图片"></p>
 </template>
