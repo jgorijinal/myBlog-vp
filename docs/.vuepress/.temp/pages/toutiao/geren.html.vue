@@ -60,7 +60,6 @@
 <h2 id="axios-请求拦截器-token-优化" tabindex="-1"><a class="header-anchor" href="#axios-请求拦截器-token-优化" aria-hidden="true">#</a> axios 请求拦截器 token 优化</h2>
 <p>项目中的接口除了登录之外大多数都需要提供 token 才有访问权限。</p>
 <p>通过接口文档可看以到，后端接口要求我们将 token 放到请求头 <code>Header</code> 中并以下面的格式发送。</p>
-<p><img src="assets/image-20200301214857543.png" alt="image-20200301214857543"></p>
 <blockquote>
 <p>字段名称：<code>Authorization</code></p>
 <p>字段值：<code>Bearer token</code>，注意 <code>Bearer</code> 和 <code>token</code> 之间有一个空格</p>

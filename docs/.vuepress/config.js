@@ -207,6 +207,35 @@ module.exports = {
                 ]
             },
             {
+                text: '微信小程序系列',
+                collapsible: true,
+                children: [
+                    '/xiaochengxu/renshi.md',   
+                    '/xiaochengxu/suzhu.md',
+                    '/xiaochengxu/jichu.md',
+                    '/xiaochengxu/jinjie.md',
+                    '/xiaochengxu/qingqiu.md',
+                    '/xiaochengxu/yemiandaohang.md',
+                    '/xiaochengxu/yemianshijian.md',
+                    '/xiaochengxu/shengmingzhouqi.md',
+                    '/xiaochengxu/xiaoxiangmu.md',
+                    ]
+            },
+            {
+                text: '微信小程序经验',
+                collapsible: true,
+                children: [
+                    '/xiaochengxu2/shiwu.md'
+                    ]
+            },
+            // {
+            //     text: 'http系列',
+            //     collapsible: true,
+            //     children: [
+            //         '/http/xieyi.md',
+            //     ]
+            // },
+            {
                 text: 'Vue2 UI',
                 collapsible: true,
                 children: [
@@ -284,7 +313,13 @@ module.exports = {
                     '/toutiao/bianji.md',
                     ]
             },
-
+            // {
+            //     text: '仿知乎专栏项目',
+            //     collapsible: true,
+            //     children: [
+            //         '/zhuanlanxiangmu/start.md'
+            //         ]
+            // },
             // {
             //     text: '脚手架项目',
             //     collapsible: true,

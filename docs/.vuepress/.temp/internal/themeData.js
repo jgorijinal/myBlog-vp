@@ -105,6 +105,28 @@ export const themeData = {
       ]
     },
     {
+      "text": "微信小程序系列",
+      "collapsible": true,
+      "children": [
+        "/xiaochengxu/renshi.md",
+        "/xiaochengxu/suzhu.md",
+        "/xiaochengxu/jichu.md",
+        "/xiaochengxu/jinjie.md",
+        "/xiaochengxu/qingqiu.md",
+        "/xiaochengxu/yemiandaohang.md",
+        "/xiaochengxu/yemianshijian.md",
+        "/xiaochengxu/shengmingzhouqi.md",
+        "/xiaochengxu/xiaoxiangmu.md"
+      ]
+    },
+    {
+      "text": "微信小程序经验",
+      "collapsible": true,
+      "children": [
+        "/xiaochengxu2/shiwu.md"
+      ]
+    },
+    {
       "text": "Vue2 UI",
       "collapsible": true,
       "children": [
@@ -171,7 +193,6 @@ export const themeData = {
         "/toutiao/sousuo.md",
         "/toutiao/xiangqing.md",
         "/toutiao/pinglun.md",
-        "/toutiao/yonghu.md",
         "/toutiao/bianji.md"
       ]
     }

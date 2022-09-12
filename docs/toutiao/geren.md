@@ -77,7 +77,6 @@ Vuex 退出登录 action 封装  src/store/user/index.js
 
 通过接口文档可看以到，后端接口要求我们将 token 放到请求头 `Header` 中并以下面的格式发送。
 
-![image-20200301214857543](assets/image-20200301214857543.png)
 
 > 字段名称：`Authorization`
 >

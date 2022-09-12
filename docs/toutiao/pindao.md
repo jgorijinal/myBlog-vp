@@ -93,11 +93,11 @@ Vant 中内置了 [Popup 弹出层](https://youzan.github.io/vant/#/zh-CN/popup)
 ![图片](../.vuepress/public/images/gl2.png)
 
 1. 首页组件的 `active` 传递给编辑组件 
-![图片](../.vuepress/public/images/gl3.png)
+![图片](../.vuepress/public/images/gaoliang3.png)
 2. 编辑组件用 `props` 接受 传过来的 `active` 
-![图片](../.vuepress/public/images/gl4.png)
+![图片](../.vuepress/public/images/gaoliang4.png)
 并且使用对应的**类名**改样式
-![图片](../.vuepress/public/images/gl5.png)
+![图片](../.vuepress/public/images/gaoliang5.png)
 
 
 ## 6. 展示推荐频道

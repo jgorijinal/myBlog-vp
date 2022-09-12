@@ -80,11 +80,11 @@
 <img src="@source/.vuepress/public/images/gl2.png" alt="图片"></p>
 <ol>
 <li>首页组件的 <code>active</code> 传递给编辑组件
-<img src="@source/.vuepress/public/images/gl3.png" alt="图片"></li>
+<img src="@source/.vuepress/public/images/gaoliang3.png" alt="图片"></li>
 <li>编辑组件用 <code>props</code> 接受 传过来的 <code>active</code>
-<img src="@source/.vuepress/public/images/gl4.png" alt="图片">
+<img src="@source/.vuepress/public/images/gaoliang4.png" alt="图片">
 并且使用对应的<strong>类名</strong>改样式
-<img src="@source/.vuepress/public/images/gl5.png" alt="图片"></li>
+<img src="@source/.vuepress/public/images/gaoliang5.png" alt="图片"></li>
 </ol>
 <h2 id="_6-展示推荐频道" tabindex="-1"><a class="header-anchor" href="#_6-展示推荐频道" aria-hidden="true">#</a> 6. 展示推荐频道</h2>
 <p>没有用来获取推荐频道的数据接口，但是我们有获取<strong>所有频道</strong>列表的数据接口</p>
