@@ -116,7 +116,10 @@ export const themeData = {
         "/xiaochengxu/yemiandaohang.md",
         "/xiaochengxu/yemianshijian.md",
         "/xiaochengxu/shengmingzhouqi.md",
-        "/xiaochengxu/xiaoxiangmu.md"
+        "/xiaochengxu/xiaoxiangmu.md",
+        "/xiaochengxu/zidingyizujian.md",
+        "/xiaochengxu/zujianshengming.md",
+        "/xiaochengxu/tongxin.md"
       ]
     },
     {
