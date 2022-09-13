@@ -119,7 +119,9 @@ export const themeData = {
         "/xiaochengxu/xiaoxiangmu.md",
         "/xiaochengxu/zidingyizujian.md",
         "/xiaochengxu/zujianshengming.md",
-        "/xiaochengxu/tongxin.md"
+        "/xiaochengxu/tongxin.md",
+        "/xiaochengxu/npm.md",
+        "/xiaochengxu/shujugongxiang.md"
       ]
     },
     {
