@@ -1,9 +1,15 @@
 <template><h1 id="composition-api" tabindex="-1"><a class="header-anchor" href="#composition-api" aria-hidden="true">#</a> Composition API</h1>
 <p><a href="https://staging-cn.vuejs.org/api/composition-api-setup.html#basic-usage" target="_blank" rel="noopener noreferrer">官网<ExternalLinkIcon/></a></p>
 <h2 id="options-api-的弊端" tabindex="-1"><a class="header-anchor" href="#options-api-的弊端" aria-hidden="true">#</a> Options API 的弊端</h2>
+<p><code>vue2</code> 中的开发形式被称为 <code>options API</code>, <code>options API</code> 存在</p>
 <ul>
-<li>Vue2 中<strong>编写组件的方式是 OPtions API</strong></li>
+<li>方便</li>
+<li>易学</li>
+<li>清晰</li>
 </ul>
+<p>等一些特点，但是也存在着一些问题。</p>
+<p>而其中最主要的一个问题就是：<strong>当你的组件变得越来越复杂时，组件的可读性会变得越来越差</strong></p>
+<p><strong>定义数据与使用数据被分割在组件的各个位置，导致我们需要不断地翻滚页面来查看具体的业务逻辑！</strong></p>
 <ol>
 <li>OPtions API 的最大的特点就是在<strong>对应的属性</strong>中编写<strong>对应的功能模块</strong></li>
 <li>比如<strong>data 定义数据</strong>, <strong>methods 中定义方法</strong>, <strong>computed 中定义计算属性</strong>, <strong>watch 中监听属性的改变</strong>, 也包括<strong>生命钩子函数</strong></li>
@@ -15,12 +21,8 @@
 <li>当我们<strong>实现某一个功能时</strong>, 这个功能<strong>对应的代码逻辑</strong>会被<strong>拆分到各个属性</strong>中</li>
 <li>当组件<strong>变得更大、更复杂时</strong>, <strong>逻辑关注点的列表</strong>就会增长, 那么同一个功能的逻辑就会被拆分地很分散, 这些代码难以阅读和理解</li>
 </ol>
-<!--
-- 所有逻辑放⼊`setup`函数,第⼀个参数是 `props` 对象
-- 通过 `ref` 、`reactive` 、`toRef`来创建响应式数据
-- 视图要⽤的变量为 setup 函数返回到对象属性
-- `watch`、`computed`是个函数
-- ⽣命周期钩⼦写法微调,xyz 变成 OnXyz,如 `mounted` 变成 `onMounted`。`created`和 `beforeCreate`不再需要 -->
+<p>而 <code>Composition API</code> 所期望解决的就是这么一个问题</p>
+<p>把定义数据与使用数据的逻辑放在一起进行处理，以达到<strong>更加易读，更加方便扩展的目的</strong>！</p>
 <h2 id="setup-函数" tabindex="-1"><a class="header-anchor" href="#setup-函数" aria-hidden="true">#</a> setup 函数</h2>
 <h3 id="setup-函数的参数" tabindex="-1"><a class="header-anchor" href="#setup-函数的参数" aria-hidden="true">#</a> setup 函数的参数</h3>
 <p>有两个参数</p>

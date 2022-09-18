@@ -128,7 +128,32 @@ export const themeData = {
       "text": "微信小程序经验",
       "collapsible": true,
       "children": [
-        "/xiaochengxu2/shiwu.md"
+        "/xiaochengxu2/shiwu.md",
+        "/xiaochengxu2/taolu.md"
+      ]
+    },
+    {
+      "text": "小程序音乐开发项目",
+      "collapsible": true,
+      "children": [
+        "/xiaochengxuyinyue/dajian.md",
+        "/xiaochengxuyinyue/shouye.md"
+      ]
+    },
+    {
+      "text": "Vue3后台",
+      "collapsible": true,
+      "children": [
+        "/vue-admin/dajian.md",
+        "/vue-admin/denglu.md",
+        "/vue-admin/layout.md"
+      ]
+    },
+    {
+      "text": "Element-ui",
+      "collapsible": true,
+      "children": [
+        "/elementui/jicheng.md"
       ]
     },
     {

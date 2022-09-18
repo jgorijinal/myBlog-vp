@@ -50,7 +50,7 @@
 ![图片](../.vuepress/public/images/zidingyi1.png)
 ### properties 属性 
 小程序组件中，properties 是组件的对外属性，**用来接收外界传递到组件中的数据**
-![图片](../.vuepress/public/images/properties.png)
+![图片](../.vuepress/public/images/properties1.png)
 #### 小案例
 实现 count 不能比 max 值 大 , 做一下简单的判断
 ![图片](../.vuepress/public/images/properties2.png)

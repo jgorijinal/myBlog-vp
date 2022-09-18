@@ -11,6 +11,12 @@ export const data = {
       "title": "点击 <navigator> 无法跳转",
       "slug": "点击-navigator-无法跳转",
       "children": []
+    },
+    {
+      "level": 2,
+      "title": "setData() 是同步的还是异步的",
+      "slug": "setdata-是同步的还是异步的",
+      "children": []
     }
   ],
   "git": {

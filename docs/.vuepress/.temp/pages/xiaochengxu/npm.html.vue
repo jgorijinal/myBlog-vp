@@ -34,8 +34,9 @@ npm 包有如下 3 个限制：</p>
 <p>在小程序中，实现 API Promise 化主要依赖于 <strong>miniprogram-api-promise</strong> 这个第三方的 npm 包</p>
 <div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>npm install --save miniprogram-api-promise@1.0.4
 </code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br></div></div><p>删除 miniprogram_npm 文件夹 , 然后点击重新构建 npm 模块
-(删除后, 重新构建)<img src="@source/.vuepress/public/images/mini1.png" alt="图片"></p>
-<p><a href="../.vuepress/public/images/pma1.png">图片</a></p>
+(删除后, 重新构建)</p>
+<p><img src="@source/.vuepress/public/images/mini1.png" alt="图片"></p>
+<p><img src="@source/.vuepress/public/images/pma1.png" alt="图片"></p>
 <h3 id="调用-promise-化之后的异步-api" tabindex="-1"><a class="header-anchor" href="#调用-promise-化之后的异步-api" aria-hidden="true">#</a> 调用 Promise 化之后的异步 API</h3>
-<p><a href="../.vuepress/public/images/pma2.png">图片</a></p>
+<p><img src="@source/.vuepress/public/images/pma2.png" alt="图片"></p>
 </template>

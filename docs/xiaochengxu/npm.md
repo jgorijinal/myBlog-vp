@@ -41,12 +41,14 @@ npm 包有如下 3 个限制：
 npm install --save miniprogram-api-promise@1.0.4
 ```
 删除 miniprogram_npm 文件夹 , 然后点击重新构建 npm 模块
-(删除后, 重新构建)![图片](../.vuepress/public/images/mini1.png)
+(删除后, 重新构建)
+
+![图片](../.vuepress/public/images/mini1.png)
 
 
-[图片](../.vuepress/public/images/pma1.png)
+![图片](../.vuepress/public/images/pma1.png)
 ### 调用 Promise 化之后的异步 API
-[图片](../.vuepress/public/images/pma2.png)
+![图片](../.vuepress/public/images/pma2.png)
 
 
 

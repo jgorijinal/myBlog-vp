@@ -6,4 +6,9 @@
 <li><strong>跳转的路径必须要在 app.json 里面的 pages 配置中声明</strong> !!!!!!!!!!!!! 无论是 tabBar 页面还是 非tabBar 页面</li>
 <li>tabBar页面的 open-type属性为 <strong>switchTab</strong>, 非tabBar 页面的 open-type 属性为 <strong>navigate</strong></li>
 </ol>
+<h2 id="setdata-是同步的还是异步的" tabindex="-1"><a class="header-anchor" href="#setdata-是同步的还是异步的" aria-hidden="true">#</a> setData() 是同步的还是异步的</h2>
+<ul>
+<li>setData() 在设置 data 上是<strong>同步</strong>的</li>
+<li>通过最新的数据对 wxml 进行渲染,  渲染的过程是<strong>异步</strong>的</li>
+</ul>
 </template>

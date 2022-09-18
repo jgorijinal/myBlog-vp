@@ -45,7 +45,7 @@
 <p><img src="@source/.vuepress/public/images/zidingyi1.png" alt="图片"></p>
 <h3 id="properties-属性" tabindex="-1"><a class="header-anchor" href="#properties-属性" aria-hidden="true">#</a> properties 属性</h3>
 <p>小程序组件中，properties 是组件的对外属性，<strong>用来接收外界传递到组件中的数据</strong>
-<img src="@source/.vuepress/public/images/properties.png" alt="图片"></p>
+<img src="@source/.vuepress/public/images/properties1.png" alt="图片"></p>
 <h4 id="小案例" tabindex="-1"><a class="header-anchor" href="#小案例" aria-hidden="true">#</a> 小案例</h4>
 <p>实现 count 不能比 max 值 大 , 做一下简单的判断
 <img src="@source/.vuepress/public/images/properties2.png" alt="图片"></p>
