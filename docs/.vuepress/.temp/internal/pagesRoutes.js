@@ -129,6 +129,7 @@ const routeItems = [
   ["v-2113fe30","/vue-admin/dajian.html",{"title":"搭建"},["/vue-admin/dajian","/vue-admin/dajian.md"]],
   ["v-7540c5d4","/vue-admin/denglu.html",{"title":"登录"},["/vue-admin/denglu","/vue-admin/denglu.md"]],
   ["v-13bcd74f","/vue-admin/layout.html",{"title":"项目架构之搭建 Layout架构 解决方案与实现"},["/vue-admin/layout","/vue-admin/layout.md"]],
+  ["v-6d3d9356","/vue-admin/tongyong.html",{"title":"通用功能开发"},["/vue-admin/tongyong","/vue-admin/tongyong.md"]],
   ["v-cd0741f4","/vue-manage/dajian.html",{"title":"搭建"},["/vue-manage/dajian","/vue-manage/dajian.md"]],
   ["v-54b9850a","/vue-router/animation.html",{"title":"过渡动画"},["/vue-router/animation","/vue-router/animation.md"]],
   ["v-6529e7d2","/vue-router/dynamicRouter.html",{"title":"动态路由"},["/vue-router/dynamicRouter","/vue-router/dynamicRouter.md"]],

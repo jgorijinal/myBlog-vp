@@ -249,6 +249,7 @@ module.exports = {
                     '/vue-admin/dajian.md',
                     '/vue-admin/denglu.md',
                     '/vue-admin/layout.md',
+                    '/vue-admin/tongyong.md',
                     ]
             },
             {
