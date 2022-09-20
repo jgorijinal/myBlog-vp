@@ -250,6 +250,8 @@ module.exports = {
                     '/vue-admin/denglu.md',
                     '/vue-admin/layout.md',
                     '/vue-admin/tongyong.md',
+                    '/vue-admin/mokuai.md',
+                    '/vue-admin/yonghu.md',
                     ]
             },
             {

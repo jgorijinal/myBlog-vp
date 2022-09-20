@@ -85,10 +85,65 @@ export const data = {
           "children": []
         }
       ]
+    },
+    {
+      "level": 2,
+      "title": "headerSearch 原理及方案分析",
+      "slug": "headersearch-原理及方案分析",
+      "children": [
+        {
+          "level": 3,
+          "title": "创建 headerSearch 组件",
+          "slug": "创建-headersearch-组件",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "检索数据源, 对路由表进行处理",
+          "slug": "检索数据源-对路由表进行处理",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "对检索数据源进行模糊搜索",
+          "slug": "对检索数据源进行模糊搜索",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "数据源重处理，生成 searchPool",
+          "slug": "数据源重处理-生成-searchpool",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "渲染检索数据 并 点击跳转",
+          "slug": "渲染检索数据-并-点击跳转",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "剩余问题处理",
+          "slug": "剩余问题处理",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "总结",
+          "slug": "总结",
+          "children": []
+        }
+      ]
     }
   ],
   "git": {
-    "contributors": []
+    "contributors": [
+      {
+        "name": "jgoriginal",
+        "email": "932274204@qq.com",
+        "commits": 1
+      }
+    ]
   },
   "filePathRelative": "vue-admin/tongyong.md"
 }

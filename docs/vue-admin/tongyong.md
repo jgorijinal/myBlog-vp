@@ -563,3 +563,438 @@ onUnmounted(() => {
 import Screenfull from '@/components/Screenfull'
 ```
 
+## headerSearch 原理及方案分析
+
+> 所谓 `headerSearch` 指 **页面搜索**
+
+**原理：**
+
+`headerSearch` 是复杂后台系统中非常常见的一个功能，它可以：**在指定搜索框中对当前应用中所有页面进行检索，以 `select` 的形式展示出被检索的页面，以达到快速进入的目的**
+
+那么明确好了 `headerSearch`  的作用之后，接下来我们来看一下对应的实现原理
+
+根据前面的目的可以发现，整个 `headerSearch` 其实可以分为三个核心的功能点：
+
+1. 根据指定内容对所有页面进行检索
+2. 以 `select` 形式展示检索出的页面
+3. 通过检索页面可快速进入对应页面
+
+那么围绕着这三个核心的功能点，我们想要分析它的原理就非常简单了：**根据指定内容检索所有页面，把检索出的页面以 `select` 展示，点击对应 `option` 可进入**
+
+**方案：**
+
+对照着三个核心功能点和原理，想要指定对应的实现方案是非常简单的一件事情了
+
+1. 创建 `headerSearch` 组件，用作样式展示和用户输入内容获取
+2. 获取所有的页面数据，用作被检索的数据源
+3. 根据用户输入内容在数据源中进行 [模糊搜索](https://fusejs.io/) 
+4. 把搜索到的内容以 `select` 进行展示
+5. 监听 `select` 的 `change` 事件，完成对应跳转
+
+### 创建 headerSearch 组件
+[Select 选择器](https://element-plus.gitee.io/zh-CN/component/select.html)
+
+多看一下属性, 比如:  default-first-option , filterable , remote , :remote-method , @change
+
+**创建 `components/headerSearch/index` 组件：**
+```vue
+<template>
+  <div class="header-search"  :class="{ show: isShow }">
+    <el-tooltip content="搜索" trigger="hover">
+      <el-icon :size="28" class="search-icon" @click.stop="onShowClick"><Search /></el-icon>
+    </el-tooltip>
+    <el-select
+      v-model="search"
+      class="header-search-select"
+      ref="headerSearchSelectRef"
+      placeholder="select"
+      default-first-option
+      filterable
+      remote
+      :remote-method="querySearch"
+      @change="onSelectChange"
+    >
+      <el-option
+        v-for="item in 4"
+        :key="item"
+        :label="item"
+        :value="item"
+      />
+    </el-select>
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+// 控制 search 显示/隐藏
+const isShow = ref(false)
+// el-select 实例
+const headerSearchSelectRef = ref(null)
+const onShowClick = () => {
+  isShow.value = !isShow.value
+  headerSearchSelectRef.value.focus()
+}
+// search 搜索值
+const search = ref('')
+// 搜索方法
+const querySearch = () => {
+  console.log('querySearch')
+}
+// 选中回调
+const onSelectChange = () => {
+  console.log('onSelectChange')
+}
+</script>
+
+<style lang="scss" scoped>
+  .header-search {
+  font-size: 0 !important;
+  .search-icon {
+    cursor: pointer;
+  }
+  .header-search-select {
+    font-size: 18px;
+    transition: width 0.2s;
+    width: 0;
+    overflow: hidden;
+    background: transparent;
+    border-radius: 0;
+    display: inline-block;
+    vertical-align: middle;
+    ::v-deep .el-input__inner {
+      border-radius: 0;
+      border: 0;
+      padding-left: 0;
+      padding-right: 0;
+      box-shadow: none !important;
+      border-bottom: 1px solid #d9d9d9;
+      vertical-align: middle;
+    }
+  }
+  &.show {
+    .header-search-select {
+      width: 210px;
+      margin-left: 10px;
+    }
+  }
+}
+</style>
+```
+在 `navbar` 中导入该组件
+
+```
+<header-search class="right-menu-item hover-effect"></header-search>
+import HeaderSearch from '@/components/HeaderSearch'
+```
+
+### 检索数据源, 对路由表进行处理
+在有了 `headerSearch` 之后，接下来就可以来处理对应的 **检索数据源**
+
+**检索数据源** 表示：**有哪些页面希望检索**
+
+那么对于当前的业务而言，希望被检索的页面其实就是左侧菜单中的页面，检索数据源即为：**左侧菜单对应的数据源**
+
+根据以上原理，可以得出以下代码：
+
+```vue
+<script setup>
+import { ref, computed } from 'vue'
+import { filterRouters, generateMenus } from '@/utils/route'
+import { useRouter } from 'vue-router'
+...
+// 检索数据源
+const router = useRouter()
+const searchPool = computed(() => {
+  const filterRoutes = filterRouters(router.getRoutes())
+  console.log(generateMenus(filterRoutes))
+  return generateMenus(filterRoutes)
+})
+console.log(searchPool)
+</script>
+```
+### 对检索数据源进行模糊搜索
+如果想要进行  [模糊搜索](https://fusejs.io/)  的话，那么需要依赖一个第三方的库  [fuse.js](https://fusejs.io/) 
+
+1. 安装 [fuse.js](https://fusejs.io/)
+
+   ```
+   npm install --save fuse.js@6.4.6
+   
+   ```
+
+2. 初始化 `Fuse`，更多初始化配置项 [可点击这里](https://fusejs.io/api/options.html)
+
+   ```js
+   import Fuse from 'fuse.js'
+   
+   /**
+    * 搜索库相关
+    */
+   const fuse = new Fuse(list, {
+       // 是否按优先级进行排序
+       shouldSort: true,
+       // 匹配长度超过这个值的才会被认为是匹配的
+       minMatchCharLength: 1,
+       // 将被搜索的键列表。 这支持嵌套路径、加权搜索、在字符串和对象数组中搜索。
+       // name：搜索的键
+       // weight：对应的权重
+       keys: [
+         {
+           name: 'title',
+           weight: 0.7
+         },
+         {
+           name: 'path',
+           weight: 0.3
+         }
+       ]
+     })
+   
+   
+   ```
+
+3. 参考 [Fuse Demo](https://fusejs.io/demo.html) 与 最终效果，可以得出，最终需要得到如下的检索数据源结构
+
+   ```json
+   [
+       {
+           "path":"/my",
+           "title":[
+               "个人中心"
+           ]
+       },
+       {
+           "path":"/user",
+           "title":[
+               "用户"
+           ]
+       },
+       {
+           "path":"/user/manage",
+           "title":[
+               "用户",
+               "用户管理"
+           ]
+       },
+       {
+           "path":"/user/info",
+           "title":[
+               "用户",
+               "用户信息"
+           ]
+       },
+       {
+           "path":"/article",
+           "title":[
+               "文章"
+           ]
+       },
+       {
+           "path":"/article/ranking",
+           "title":[
+               "文章",
+               "文章排名"
+           ]
+       },
+       {
+           "path":"/article/create",
+           "title":[
+               "文章",
+               "创建文章"
+           ]
+       }
+   ]
+   
+   ```
+
+4. 所以我们之前处理了的数据源并不符合我们的需要，所以我们需要对数据源进行重新处理
+
+### 数据源重处理，生成 searchPool
+在上面明确了最终期望得到数据源结构，那么接下来就对重新计算数据源，生成对应的 `searchPoll`
+
+创建 `compositions/HeaderSearch/FuseData.js`
+
+```js
+import path from 'path'
+import i18n from '@/i18n'
+/**
+ * 筛选出可供搜索的路由对象
+ * @param routes 路由表
+ * @param basePath 基础路径，默认为 /
+ * @param prefixTitle
+ */
+export const generateRoutes = (routes, basePath = '/', prefixTitle = []) => {
+  // 创建 result 数据
+  let res = []
+  // 循环 routes 路由
+  for (const route of routes) {
+    // 创建包含 path 和 title 的 item
+    const data = {
+      path: path.resolve(basePath, route.path),
+      title: [...prefixTitle]	
+    }
+    // 当前存在 meta 时，使用 i18n 解析国际化数据，组合成新的 title 内容
+    // 动态路由不允许被搜索
+    // 匹配动态路由的正则
+    const re = /.*\/:.*/
+    if (route.meta && route.meta.title && !re.exec(route.path)) {
+      const i18ntitle = i18n.global.t(`msg.route.${route.meta.title}`)
+      data.title = [...data.title, i18ntitle]
+      res.push(data)
+    }
+
+    // 存在 children 时，迭代调用
+    if (route.children) {
+      const tempRoutes = generateRoutes(route.children, data.path, data.title)
+      if (tempRoutes.length >= 1) {
+        res = [...res, ...tempRoutes]
+      }
+    }
+  }
+  return res
+}
+```
+在 `headerSearch` 中导入 `generateRoutes` 
+```vue
+<script setup>
+import { computed, ref } from 'vue'
+import { generateRoutes } from './FuseData'
+import Fuse from 'fuse.js'
+import { filterRouters } from '@/utils/route'
+import { useRouter } from 'vue-router'
+
+...
+
+// 检索数据源
+const router = useRouter()
+const searchPool = computed(() => {
+  const filterRoutes = filterRouters(router.getRoutes())
+  return generateRoutes(filterRoutes)
+})
+
+/**
+ * 搜索库相关
+ */
+const fuse = new Fuse(searchPool.value, {
+  // 是否按优先级进行排序
+  shouldSort: true,
+  // 匹配长度超过这个值的才会被认为是匹配的
+  minMatchCharLength: 1,
+  // 将被搜索的键列表。 这支持嵌套路径、加权搜索、在字符串和对象数组中搜索。
+  // name：搜索的键
+  // weight：对应的权重
+  keys: [
+    {
+      name: 'title',
+      weight: 0.7
+    },
+    {
+      name: 'path',
+      weight: 0.3
+    }
+  ]
+})
+</script>
+```
+
+通过 `querySearch` 测试搜索结果
+```js
+// 搜索方法
+const querySearch = query => {
+  console.log(fuse.search(query))
+}
+```
+
+### 渲染检索数据 并 点击跳转
+数据源处理完成之后，最后我们就只需要完成:
+
+1. 渲染检索出的数据
+2. 完成对应跳转
+
+那么下面我们按照步骤进行实现：
+
+1. 渲染检索出的数据
+
+   ```vue
+   <template>
+      ...
+     <el-option
+         v-for="option in searchOptions"
+         :key="option.item.path"
+         :label="option.item.title.join(' - ')"
+         :value="option.item.path"
+     ></el-option>
+   </template>
+   
+   <script setup>
+   ...
+   // 搜索结果
+   const searchOptions = ref([])
+   // 搜索方法
+   const querySearch = query => {
+     if (query !== '') {
+       searchOptions.value = fuse.search(query)
+     } else {
+       searchOptions.value = []
+     }
+   }
+   ...
+   </script>
+   
+   ```
+
+   
+
+2. 完成对应跳转
+
+```js
+   // 选中回调
+ const onSelectChange = (path) => {
+  router.push(path)
+}
+```
+
+### 剩余问题处理
+到这里 `headerSearch` 功能基本上就已经处理完成了，但是还存在一些小 `bug` ，那么最后这一小节就处理下这些剩余的 `bug`
+
+1. 在 `search` 打开时，点击 `body` 关闭 `search`
+2. 在 `search` 关闭时，清理 `searchOptions`
+3. `headerSearch` 应该具备国际化能力
+
+明确好问题之后，接下来进行处理
+
+首先先处理前前面两个问题：
+
+```js
+// close 函数 :关闭 搜索, 输入框失去焦点, searchOptions 设为[]
+const onClose = () => {
+  headerSearchSelectRef.value.blur()
+  isShow.value = false
+  searchOptions.value = []
+}
+// 监听 search 打开 , 处理 close 事件
+watch(isShow, () => {
+  if (isShow.value) {
+    document.addEventListener('click', onClose)
+  } else {
+    document.removeEventListener('click', onClose)
+  }
+})
+```
+   
+
+### 总结 
+整个 `headerSearch` 只需要把握住三个核心的关键点
+
+1. 根据指定内容对所有页面进行检索
+2. 以 `select` 形式展示检索出的页面
+3. 通过检索页面可快速进入对应页面
+
+保证大方向没有错误，那么具体的细节处理我们具体分析就可以了。
+
+关于细节的处理，可能比较复杂的地方有两个：
+
+1. 模糊搜索
+2. 检索数据源
+
+对于这两块，我们依赖于 `fuse.js` 进行了实现，大大简化了我们的业务处理流程。
