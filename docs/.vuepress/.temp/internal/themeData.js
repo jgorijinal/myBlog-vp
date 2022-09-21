@@ -133,14 +133,6 @@ export const themeData = {
       ]
     },
     {
-      "text": "小程序音乐开发项目",
-      "collapsible": true,
-      "children": [
-        "/xiaochengxuyinyue/dajian.md",
-        "/xiaochengxuyinyue/shouye.md"
-      ]
-    },
-    {
       "text": "Vue3后台",
       "collapsible": true,
       "children": [

@@ -93,7 +93,7 @@ Android 是安卓软件的宿主环境，<strong>脱离了宿主环境的软件�
 <p>实现如图的纵向滚动效果
 <img src="@source/.vuepress/public/images/scrollview.png" alt="图片"></p>
 <h3 id="swiper-和-swiper-item-组价-基本使用" tabindex="-1"><a class="header-anchor" href="#swiper-和-swiper-item-组价-基本使用" aria-hidden="true">#</a> swiper 和 swiper-item 组价 基本使用</h3>
-<p><img src="@source/.vuepress/public/images/swiper.png" alt="图片"></p>
+<p><img src="@source/.vuepress/public/images/swiper1.png" alt="图片"></p>
 <h4 id="swiper组件-的常用属性" tabindex="-1"><a class="header-anchor" href="#swiper组件-的常用属性" aria-hidden="true">#</a> swiper组件 的常用属性</h4>
 <p><a href="https://developers.weixin.qq.com/miniprogram/dev/component/swiper.html" target="_blank" rel="noopener noreferrer">swiper 属性<ExternalLinkIcon/></a></p>
 <p><img src="@source/.vuepress/public/images/swiper2.png" alt="图片"></p>

@@ -33,7 +33,6 @@
 * _page 表示请求第几页的数据
 * _limit 表示每页请求几条数据
 ### 定义 getShopList() 获取商铺列表数据
-![图片](../.vuepress/public/images/shenghuo01.png)
 ![图片](../.vuepress/public/images/shenghuo02.png)
 ### 渲染 UI 结构美化样式
 ![图片](../.vuepress/public/images/shenghuo04.png)

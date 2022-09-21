@@ -77,7 +77,7 @@ Android 是安卓软件的宿主环境，**脱离了宿主环境的软件是没�
 实现如图的纵向滚动效果
 ![图片](../.vuepress/public/images/scrollview.png)
 ### swiper 和 swiper-item 组价 基本使用
-![图片](../.vuepress/public/images/swiper.png)
+![图片](../.vuepress/public/images/swiper1.png)
 
 #### swiper组件 的常用属性
 [swiper 属性](https://developers.weixin.qq.com/miniprogram/dev/component/swiper.html)

@@ -41,8 +41,7 @@
 <li>_limit 表示每页请求几条数据</li>
 </ul>
 <h3 id="定义-getshoplist-获取商铺列表数据" tabindex="-1"><a class="header-anchor" href="#定义-getshoplist-获取商铺列表数据" aria-hidden="true">#</a> 定义 getShopList() 获取商铺列表数据</h3>
-<p><img src="@source/.vuepress/public/images/shenghuo01.png" alt="图片">
-<img src="@source/.vuepress/public/images/shenghuo02.png" alt="图片"></p>
+<p><img src="@source/.vuepress/public/images/shenghuo02.png" alt="图片"></p>
 <h3 id="渲染-ui-结构美化样式" tabindex="-1"><a class="header-anchor" href="#渲染-ui-结构美化样式" aria-hidden="true">#</a> 渲染 UI 结构美化样式</h3>
 <p><img src="@source/.vuepress/public/images/shenghuo04.png" alt="图片">
 <img src="@source/.vuepress/public/images/shenghuo03.png" alt="图片"></p>

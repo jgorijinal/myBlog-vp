@@ -461,4 +461,791 @@
 <span class="token punctuation">}</span>
 </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>、
 </code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br></div></div><p><img src="@source/.vuepress/public/images/excel22.png" alt="图片"></p>
+<h3 id="_4-文件拖入之后的数据解析处理" tabindex="-1"><a class="header-anchor" href="#_4-文件拖入之后的数据解析处理" aria-hidden="true">#</a> 4) 文件拖入之后的数据解析处理</h3>
+<p>想要了解 <strong>文件拖入</strong>，就必须要先能够了解 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/HTML_Drag_and_Drop_API" target="_blank" rel="noopener noreferrer">HTML_Drag_and_Drop（HTML 拖放 API）<ExternalLinkIcon/></a> 事件，这里主要使用到其中三个事件：</p>
+<ol>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/drop_event" target="_blank" rel="noopener noreferrer">drop (en-US)<ExternalLinkIcon/></a>：当元素或选中的文本在可释放目标上被释放时触发</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/dragover_event" target="_blank" rel="noopener noreferrer">dragover (en-US)<ExternalLinkIcon/></a>：当元素或选中的文本被拖到一个可释放目标上时触发</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/dragenter_event" target="_blank" rel="noopener noreferrer">dragenter (en-US)<ExternalLinkIcon/></a>：当拖拽元素或选中的文本到一个可释放目标时触发</li>
+</ol>
+<p>那么明确好了这三个事件之后，就可以实现对应的拖入代码逻辑</p>
+<div class="language-vue ext-vue line-numbers-mode"><pre v-pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">setup</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+<span class="token operator">...</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> getHeaderRow<span class="token punctuation">,</span> isExcel <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./utils'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> ElMessage <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'element-plus'</span>
+
+<span class="token operator">...</span>
+<span class="token doc-comment comment">/**
+ * 拖拽文本释放时触发
+ */</span>
+<span class="token keyword">const</span> <span class="token function-variable function">handleDrop</span> <span class="token operator">=</span> <span class="token parameter">e</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token comment">// 上传中跳过</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>loading<span class="token punctuation">.</span>value<span class="token punctuation">)</span> <span class="token keyword">return</span>
+  <span class="token keyword">const</span> files <span class="token operator">=</span> e<span class="token punctuation">.</span>dataTransfer<span class="token punctuation">.</span>files
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>files<span class="token punctuation">.</span>length <span class="token operator">!==</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    ElMessage<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">'必须要有一个文件'</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">const</span> rawFile <span class="token operator">=</span> files<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">isExcel</span><span class="token punctuation">(</span>rawFile<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    ElMessage<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">'文件必须是 .xlsx, .xls, .csv 格式'</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> <span class="token boolean">false</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">// 触发上传事件</span>
+  <span class="token function">upload</span><span class="token punctuation">(</span>rawFile<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token doc-comment comment">/**
+ * 拖拽悬停时触发
+ */</span>
+<span class="token keyword">const</span> <span class="token function-variable function">handleDragover</span> <span class="token operator">=</span> <span class="token parameter">e</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token comment">// https://developer.mozilla.org/zh-CN/docs/Web/API/DataTransfer/dropEffect</span>
+  <span class="token comment">// 在新位置生成源项的副本</span>
+  e<span class="token punctuation">.</span>dataTransfer<span class="token punctuation">.</span>dropEffect <span class="token operator">=</span> <span class="token string">'copy'</span>
+<span class="token punctuation">}</span>
+
+<span class="token operator">...</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br></div></div><p>在 <code>utils</code> 中生成 <code>isExcel</code> 方法</p>
+<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token function-variable function">isExcel</span> <span class="token operator">=</span> <span class="token parameter">file</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">\.(xlsx|xls|csv)$</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>file<span class="token punctuation">.</span>name<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h3 id="_5-文件拖入之后的数据解析处理" tabindex="-1"><a class="header-anchor" href="#_5-文件拖入之后的数据解析处理" aria-hidden="true">#</a> 5) 文件拖入之后的数据解析处理</h3>
+<p>那么到现在已经处理好了 <code>excel</code> 的数据解析操作。</p>
+<p>接下来可以实现对应的数据上传，完成 <code>excel</code> 导入功能</p>
+<ol>
+<li>
+<p>定义 <code>api/user-manage</code> 上传接口</p>
+<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token doc-comment comment">/**
+ * 批量导入
+ */</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token function-variable function">userBatchImport</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token function">request</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token literal-property property">url</span><span class="token operator">:</span> <span class="token string">'/user-manage/batch/import'</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">method</span><span class="token operator">:</span> <span class="token string">'POST'</span><span class="token punctuation">,</span>
+    data
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div></li>
+<li>
+<p>在 <code>onSuccess</code> 中调用接口上传数据，但是此处大家要注意两点内容：</p>
+<ol>
+<li><code>header</code> 头不需要上传</li>
+<li><code>results</code> 中 <code>key</code> 为中文，我们必须要按照接口要求进行上传</li>
+</ol>
+</li>
+<li>
+<p>所以我们需要处理 <code>results</code> 中的数据结构</p>
+</li>
+<li>
+<p>创建 <code>import/utils</code> 文件</p>
+<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token doc-comment comment">/**
+ * 导入数据对应表
+ */</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token constant">USER_RELATIONS</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token literal-property property">姓名</span><span class="token operator">:</span> <span class="token string">'username'</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">联系方式</span><span class="token operator">:</span> <span class="token string">'mobile'</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">角色</span><span class="token operator">:</span> <span class="token string">'role'</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">开通时间</span><span class="token operator">:</span> <span class="token string">'openTime'</span>
+<span class="token punctuation">}</span>
+
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div></li>
+<li>
+<p>创建数据解析方法，生成新数组 views/import/index.vue</p>
+</li>
+</ol>
+<div class="language-vue ext-vue line-numbers-mode"><pre v-pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">setup</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+<span class="token keyword">import</span> <span class="token punctuation">{</span> userBatchImport <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/api/user-manage'</span>
+<span class="token keyword">import</span> Upload <span class="token keyword">from</span> <span class="token string">'@/components/Upload/index.vue'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">USER_RELATIONS</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./utils'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> ElMessage <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'element-plus'</span>
+<span class="token keyword">import</span> router <span class="token keyword">from</span> <span class="token string">'@/router'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> useI18n <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue-i18n'</span>
+<span class="token operator">...</span>
+
+<span class="token comment">// 筛选数据</span>
+<span class="token keyword">const</span> <span class="token function-variable function">generateData</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">results</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+  results<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">item</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>item<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">key</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+      obj<span class="token punctuation">[</span><span class="token constant">USER_RELATIONS</span><span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">=</span> item<span class="token punctuation">[</span>key<span class="token punctuation">]</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    arr<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token keyword">return</span> arr
+<span class="token punctuation">}</span>
+  </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br></div></div><ol start="6">
+<li>完成数据上传即可</li>
+</ol>
+<div class="language-vue ext-vue line-numbers-mode"><pre v-pre class="language-vue"><code>   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">setup</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+    <span class="token keyword">import</span> <span class="token punctuation">{</span> userBatchImport <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/api/user-manage'</span>
+    <span class="token keyword">import</span> Upload <span class="token keyword">from</span> <span class="token string">'@/components/Upload/index.vue'</span>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">USER_RELATIONS</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./utils'</span>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span> ElMessage <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'element-plus'</span>
+    <span class="token keyword">import</span> router <span class="token keyword">from</span> <span class="token string">'@/router'</span>
+    <span class="token keyword">import</span> <span class="token punctuation">{</span> useI18n <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue-i18n'</span>
+   <span class="token doc-comment comment">/**
+    * 数据解析成功之后的回调
+    */</span>
+   <span class="token keyword">const</span> i18n <span class="token operator">=</span> <span class="token function">useI18n</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+   <span class="token keyword">const</span> <span class="token function-variable function">onSuccess</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span> header<span class="token punctuation">,</span> results <span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+     <span class="token keyword">const</span> updateData <span class="token operator">=</span> <span class="token function">generateData</span><span class="token punctuation">(</span>results<span class="token punctuation">)</span>
+     <span class="token keyword">await</span> <span class="token function">userBatchImport</span><span class="token punctuation">(</span>updateData<span class="token punctuation">)</span>
+     ElMessage<span class="token punctuation">.</span><span class="token function">success</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+       <span class="token literal-property property">message</span><span class="token operator">:</span> results<span class="token punctuation">.</span>length <span class="token operator">+</span> i18n<span class="token punctuation">.</span><span class="token function">t</span><span class="token punctuation">(</span><span class="token string">'msg.excel.importSuccess'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+       <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">'success'</span>
+     <span class="token punctuation">}</span><span class="token punctuation">)</span>
+     router<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token string">'/user/manage'</span><span class="token punctuation">)</span>
+   <span class="token punctuation">}</span>
+
+    <span class="token keyword">const</span> <span class="token function-variable function">generateData</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token operator">...</span>
+  </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br></div></div><h3 id="_6-处理剩余-bug" tabindex="-1"><a class="header-anchor" href="#_6-处理剩余-bug" aria-hidden="true">#</a> 6) 处理剩余 bug</h3>
+<p>截止到目前整个 <code>excel</code> 上传就已经处理完成了，只不过目前还存在两个小 bug 需要处理：</p>
+<ol>
+<li>上传之后的时间解析错误</li>
+<li>返回用户列表之后，数据不会自动刷新</li>
+</ol>
+<p><strong>上传之后的时间解析错误：</strong></p>
+<p>导致该问题出现的原因是因为 <strong>excel 导入解析时间会出现错误，</strong> 处理的方案也很简单，是一个固定方案，只需要进行固定的时间解析处理即可：</p>
+<ol>
+<li>
+<p>在 <code>import/utils</code> 中新增事件处理方法（固定方式直接使用即可）</p>
+<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token doc-comment comment">/**
+ * 解析 excel 导入的时间格式
+ */</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token function-variable function">formatDate</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">numb</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> time <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">(</span>numb <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">24</span> <span class="token operator">*</span> <span class="token number">3600000</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span>
+  time<span class="token punctuation">.</span><span class="token function">setYear</span><span class="token punctuation">(</span>time<span class="token punctuation">.</span><span class="token function">getFullYear</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">70</span><span class="token punctuation">)</span>
+  <span class="token keyword">const</span> year <span class="token operator">=</span> time<span class="token punctuation">.</span><span class="token function">getFullYear</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">''</span>
+  <span class="token keyword">const</span> month <span class="token operator">=</span> time<span class="token punctuation">.</span><span class="token function">getMonth</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span> <span class="token operator">+</span> <span class="token string">''</span>
+  <span class="token keyword">const</span> date <span class="token operator">=</span> time<span class="token punctuation">.</span><span class="token function">getDate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span> <span class="token operator">+</span> <span class="token string">''</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    year <span class="token operator">+</span>
+    <span class="token string">'-'</span> <span class="token operator">+</span>
+    <span class="token punctuation">(</span>month <span class="token operator">&lt;</span> <span class="token number">10</span> <span class="token operator">?</span> <span class="token string">'0'</span> <span class="token operator">+</span> month <span class="token operator">:</span> month<span class="token punctuation">)</span> <span class="token operator">+</span>
+    <span class="token string">'-'</span> <span class="token operator">+</span>
+    <span class="token punctuation">(</span>date <span class="token operator">&lt;</span> <span class="token number">10</span> <span class="token operator">?</span> <span class="token string">'0'</span> <span class="token operator">+</span> date <span class="token operator">:</span> date<span class="token punctuation">)</span>
+  <span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br></div></div></li>
+<li>
+<p>在 <code>generateData</code> 中针对 <code>openTime</code> 进行单独处理</p>
+</li>
+</ol>
+<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token comment">// 筛选数据</span>
+<span class="token keyword">const</span> <span class="token function-variable function">generateData</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">results</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+  results<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">item</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>item<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">key</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+      obj<span class="token punctuation">[</span><span class="token constant">USER_RELATIONS</span><span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">=</span> item<span class="token punctuation">[</span>key<span class="token punctuation">]</span>
+      <span class="token comment">// 处理 excel 的事件显示格斯</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token constant">USER_RELATIONS</span><span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">===</span> <span class="token string">'openTime'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        obj<span class="token punctuation">[</span><span class="token constant">USER_RELATIONS</span><span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">formatDate</span><span class="token punctuation">(</span>item<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span>
+    arr<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token keyword">return</span> arr
+<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br></div></div><p><strong>返回用户列表之后，数据不会自动刷新：</strong></p>
+<p>出现该问题的原因是因为：<strong><code>appmain</code> 中使用 <code>keepAlive</code> 进行了组件缓存</strong>。</p>
+<p>解决的方案也很简单，只需要：<strong>监听 <a href="https://v3.cn.vuejs.org/api/options-lifecycle-hooks.html#activated" target="_blank" rel="noopener noreferrer">onActivated<ExternalLinkIcon/></a> 事件，重新获取数据即可</strong></p>
+<p>在 <code>user-manage</code> 中：</p>
+<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> ref<span class="token punctuation">,</span> onActivated <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue'</span>
+
+<span class="token comment">// 处理导入用户后数据不重新加载的问题</span>
+<span class="token function">onActivated</span><span class="token punctuation">(</span>getListData<span class="token punctuation">)</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><h3 id="_7-excel-导入功能总结" tabindex="-1"><a class="header-anchor" href="#_7-excel-导入功能总结" aria-hidden="true">#</a> 7) excel 导入功能总结</h3>
+<p>到这里 <code>excel</code> 导入功能就已经实现完成，回顾一下整体的流程：</p>
+<ol>
+<li>创建 <code>excel</code> 导入页面</li>
+<li>点击 <code>excel</code> 导入按钮，进入该页面</li>
+<li>该页面提供两种文件导入形式</li>
+<li>选中文件之后，解析 <code>excel</code> 数据（核心）</li>
+<li>上传解析之后的数据</li>
+<li>返回 员工管理（用户列表） 页面</li>
+</ol>
+<p>游离于这些流程之外的，还包括额外的两个小 bug 的处理，特别是 <strong><code>excel</code> 的时间格式问题，</strong> 要格外注意，因为这是一个必然会出现的错误，当然处理方案也是固定的</p>
+<h2 id="辅助业务之用户删除" tabindex="-1"><a class="header-anchor" href="#辅助业务之用户删除" aria-hidden="true">#</a> 辅助业务之用户删除</h2>
+<p>完成了 <code>excel</code> 的用户导入之后，那么我们肯定会产生很多的无用数据，所以说接下来我们来完成一个辅助功能：<strong>删除用户（希望大家都可以在完成 <code>excel</code> 导入功能之后，删除掉无用数据，以方便其他的同学进行功能测试）</strong></p>
+<p>删除用户的功能比较简单，我们只需要 <strong>调用对应的接口即可</strong></p>
+<ol>
+<li>
+<p>在 <code>api/user-manage</code> 中指定删除接口</p>
+<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token doc-comment comment">/**
+ * 删除指定数据
+ */</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token function-variable function">deleteUser</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">id</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token function">request</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token literal-property property">url</span><span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">/user-manage/detele/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>id<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div></li>
+<li>
+<p>在 <code>views/user-manage</code> 中调用删除接口接口</p>
+<div class="language-html ext-html line-numbers-mode"><pre v-pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-button</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>danger<span class="token punctuation">"</span></span> <span class="token attr-name">size</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>mini<span class="token punctuation">"</span></span> <span class="token attr-name">@click</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>onRemoveClick(row)<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>{{
+              $t('msg.excel.remove')
+            }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-button</span><span class="token punctuation">></span></span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code> <span class="token keyword">import</span> <span class="token punctuation">{</span> ElMessageBox<span class="token punctuation">,</span> ElMessage <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'element-plus'</span>
+ <span class="token keyword">import</span> <span class="token punctuation">{</span> useI18n <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue-i18n'</span>
+ <span class="token operator">...</span>
+
+<span class="token doc-comment comment">/**
+ * 删除按钮点击事件
+ */</span>
+<span class="token keyword">const</span> i18n <span class="token operator">=</span> <span class="token function">useI18n</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> <span class="token function-variable function">onRemoveClick</span> <span class="token operator">=</span> <span class="token parameter">row</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  ElMessageBox<span class="token punctuation">.</span><span class="token function">confirm</span><span class="token punctuation">(</span>
+    i18n<span class="token punctuation">.</span><span class="token function">t</span><span class="token punctuation">(</span><span class="token string">'msg.excel.dialogTitle1'</span><span class="token punctuation">)</span> <span class="token operator">+</span>
+      row<span class="token punctuation">.</span>username <span class="token operator">+</span>
+      i18n<span class="token punctuation">.</span><span class="token function">t</span><span class="token punctuation">(</span><span class="token string">'msg.excel.dialogTitle2'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">'warning'</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+    <span class="token keyword">await</span> <span class="token function">deleteUser</span><span class="token punctuation">(</span>row<span class="token punctuation">.</span>_id<span class="token punctuation">)</span>
+    ElMessage<span class="token punctuation">.</span><span class="token function">success</span><span class="token punctuation">(</span>i18n<span class="token punctuation">.</span><span class="token function">t</span><span class="token punctuation">(</span><span class="token string">'msg.excel.removeSuccess'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token comment">// 重新渲染数据</span>
+    <span class="token function">getListData</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br></div></div></li>
+</ol>
+<h2 id="excel-导出" tabindex="-1"><a class="header-anchor" href="#excel-导出" aria-hidden="true">#</a> excel 导出</h2>
+<h3 id="_1-excel-导出原理与实现分析" tabindex="-1"><a class="header-anchor" href="#_1-excel-导出原理与实现分析" aria-hidden="true">#</a> 1) excel 导出原理与实现分析</h3>
+<p>对于 <code>excel</code> 导出而言还是先来分析一下它的业务逻辑：</p>
+<ol>
+<li>点击 <code>excel</code> 导出按钮</li>
+<li>展示 <code>dialog</code> 弹出层</li>
+<li>确定导出的 <code>excel</code> 文件名称</li>
+<li>点击导出按钮</li>
+<li>获取 <strong>所有用户列表数据</strong></li>
+<li>将 <code>json</code> 结构数据转化为 <code>excel</code> 数据，并下载</li>
+</ol>
+<p>有了 <code>excel</code> 导入的经验之后，再来看这样的一套业务逻辑，相信大家应该可以直接根据这样的一套业务逻辑得出 <code>excel</code> 导出的核心原理了：<strong>将 <code>json</code> 结构数据转化为 <code>excel</code> 数据，并下载</strong></p>
+<p>那么对应的实现方案也可以直接得出了：</p>
+<ol>
+<li>创建 <code>excel</code> 导出弹出层</li>
+<li>处理弹出层相关的业务</li>
+<li>点击导出按钮，将 <code>json</code> 结构数据转化为 <code>excel</code> 数据，并下载（核心）</li>
+</ol>
+<h3 id="_2-export2excel-组件" tabindex="-1"><a class="header-anchor" href="#_2-export2excel-组件" aria-hidden="true">#</a> 2) Export2Excel 组件</h3>
+<p>首先先去创建 <code>excel</code> 弹出层组件 <code>Export2Excel </code>  <a href="https://element-plus.gitee.io/zh-CN/component/dialog.html" target="_blank" rel="noopener noreferrer">el-dialog 弹出框<ExternalLinkIcon/></a></p>
+<ol>
+<li>创建 <code>views/user-manage/components/Export2Excel </code></li>
+</ol>
+<div class="language-vue ext-vue line-numbers-mode"><pre v-pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-dialog</span>
+    <span class="token attr-name">:title</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>$t(<span class="token punctuation">'</span>msg.excel.title<span class="token punctuation">'</span>)<span class="token punctuation">"</span></span>
+    <span class="token attr-name">:model-value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>modelValue<span class="token punctuation">"</span></span>
+    <span class="token attr-name">@close</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>closed<span class="token punctuation">"</span></span>
+    <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>30%<span class="token punctuation">"</span></span>
+  <span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-input</span> <span class="token attr-name">:placeholder</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>$t(<span class="token punctuation">'</span>msg.excel.placeholder<span class="token punctuation">'</span>)<span class="token punctuation">"</span></span> <span class="token attr-name">v-model</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>excelName<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-input</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span> <span class="token attr-name">#footer</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>dialog-footer<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-button</span> <span class="token attr-name">@click</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>closed<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>{{ $t('msg.excel.close') }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-button</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-button</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>primary<span class="token punctuation">"</span></span> <span class="token attr-name">@click</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>onConfirm<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>{{
+          $t('msg.excel.confirm')
+        }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-button</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-dialog</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">setup</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+<span class="token keyword">import</span> <span class="token punctuation">{</span> defineProps<span class="token punctuation">,</span> defineEmits<span class="token punctuation">,</span> ref <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> useI18n <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue-i18n'</span>
+<span class="token function">defineProps</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token literal-property property">modelValue</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">type</span><span class="token operator">:</span> Boolean<span class="token punctuation">,</span>
+    <span class="token keyword">default</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">required</span><span class="token operator">:</span> <span class="token boolean">true</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> emits <span class="token operator">=</span> <span class="token function">defineEmits</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'update:modelValue'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token keyword">const</span> i18n <span class="token operator">=</span> <span class="token function">useI18n</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> excelName <span class="token operator">=</span> <span class="token function">ref</span><span class="token punctuation">(</span>i18n<span class="token punctuation">.</span><span class="token function">t</span><span class="token punctuation">(</span><span class="token string">'msg.excel.defaultName'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">onConfirm</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token comment">// TODO: 业务</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 关闭</span>
+<span class="token keyword">const</span> <span class="token function-variable function">closed</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token function">emits</span><span class="token punctuation">(</span><span class="token string">'update:modelValue'</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
+<span class="token selector">.dialog-footer</span> <span class="token punctuation">{</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
+  <span class="token property">justify-content</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br></div></div><p>在 <code>user-manage</code> 中进行导入 <code>dialog</code> 组件</p>
+<ol>
+<li>指定 <code>excel</code>按钮 点击事件</li>
+</ol>
+<div class="language-html ext-html line-numbers-mode"><pre v-pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-button</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>success<span class="token punctuation">"</span></span> <span class="token attr-name">size</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>small<span class="token punctuation">"</span></span> <span class="token attr-name">@click</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>onToExcelClick<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+  {{$t('msg.excel.exportExcel')}}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-button</span><span class="token punctuation">></span></span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><ol start="2">
+<li>
+<p>导入 <code>ExportToExcel</code> 组件</p>
+<div class="language-vue ext-vue line-numbers-mode"><pre v-pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>export-to-excel</span> <span class="token attr-name">v-model</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>export2ExcelVisible<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+
+import ExportToExcel from './components/Export2Excel.vue'
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div></li>
+<li>
+<p>点击事件处理函数</p>
+<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token doc-comment comment">/**
+ * excel 导出点击事件
+ */</span>
+<span class="token keyword">const</span> export2ExcelVisible <span class="token operator">=</span> <span class="token function">ref</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> <span class="token function-variable function">onToExcelClick</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  export2ExcelVisible<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token boolean">true</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div></li>
+</ol>
+<h3 id="_3-导出前置业务处理" tabindex="-1"><a class="header-anchor" href="#_3-导出前置业务处理" aria-hidden="true">#</a> 3) 导出前置业务处理</h3>
+<p>现在来处理一些实现 <code>excel</code> 导出时的前置任务，具体有：</p>
+<ol>
+<li>指定 <code>input</code> 输入框 默认导出文件名称</li>
+<li>定义 <strong>获取全部用户</strong> 列表接口，并调用</li>
+</ol>
+<p>先处理第一步：<strong>指定 <code>input</code> 默认导出文件名称</strong></p>
+<ol>
+<li>指定 <code>input</code> 的双向绑定</li>
+</ol>
+<div class="language-html ext-html line-numbers-mode"><pre v-pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-input</span>
+      <span class="token attr-name">v-model</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>excelName<span class="token punctuation">"</span></span>
+      <span class="token attr-name">:placeholder</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>$t(<span class="token punctuation">'</span>msg.excel.placeholder<span class="token punctuation">'</span>)<span class="token punctuation">"</span></span>
+<span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-input</span><span class="token punctuation">></span></span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><ol start="2">
+<li>指定默认文件名 (需要监听语言的变化)</li>
+</ol>
+<div class="language-vue ext-vue line-numbers-mode"><pre v-pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">setup</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+<span class="token operator">...</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> useI18n <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue-i18n'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> watchSwitchLang <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/utils/i18n'</span>
+<span class="token operator">...</span>
+
+<span class="token keyword">const</span> i18n <span class="token operator">=</span> <span class="token function">useI18n</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">let</span> exportDefaultName <span class="token operator">=</span> i18n<span class="token punctuation">.</span><span class="token function">t</span><span class="token punctuation">(</span><span class="token string">'msg.excel.defaultName'</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> excelName <span class="token operator">=</span> <span class="token function">ref</span><span class="token punctuation">(</span>exportDefaultName<span class="token punctuation">)</span>
+<span class="token function">watchSwitchLang</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  exportDefaultName <span class="token operator">=</span> i18n<span class="token punctuation">.</span><span class="token function">t</span><span class="token punctuation">(</span><span class="token string">'msg.excel.defaultName'</span><span class="token punctuation">)</span>
+  excelName<span class="token punctuation">.</span>value <span class="token operator">=</span> i18n<span class="token punctuation">.</span><span class="token function">t</span><span class="token punctuation">(</span><span class="token string">'msg.excel.defaultName'</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br></div></div><p><strong>定义获取全部用户列表接口，并调用：</strong></p>
+<ol>
+<li>
+<p>在 <code>user-manage</code> 中定义获取全部数据接口</p>
+<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token doc-comment comment">/**
+ * 获取所有用户列表数据
+ */</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token function-variable function">getUserManageAllList</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token function">request</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token literal-property property">url</span><span class="token operator">:</span> <span class="token string">'/user-manage/all-list'</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div></li>
+<li>
+<p>调用接口数据，并指定 <code>loading</code></p>
+<div class="language-html ext-html line-numbers-mode"><pre v-pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-button</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>primary<span class="token punctuation">"</span></span> <span class="token attr-name">@click</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>onConfirm<span class="token punctuation">"</span></span> <span class="token attr-name">:loading</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>loading<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>{{
+	$t('msg.excel.confirm')
+}}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-button</span><span class="token punctuation">></span></span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div></li>
+</ol>
+<div class="language-vue ext-vue line-numbers-mode"><pre v-pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">setup</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+<span class="token operator">...</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> getUserManageAllList <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/api/user-manage'</span>
+
+<span class="token operator">...</span> 
+<span class="token keyword">const</span> loading <span class="token operator">=</span> <span class="token function">ref</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> <span class="token function-variable function">onConfirm</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>  <span class="token comment">// 确定按钮</span>
+  loading<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token boolean">true</span>
+  <span class="token keyword">const</span> res <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">getUserManageAllList</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span>
+
+  <span class="token comment">// TODO: 业务</span>
+
+  loading<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token boolean">true</span>
+  <span class="token function">closed</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 关闭</span>
+<span class="token keyword">const</span> <span class="token function-variable function">closed</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token function">emits</span><span class="token punctuation">(</span><span class="token string">'update:modelValue'</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br></div></div><h3 id="_4-实现-excel-导出逻辑" tabindex="-1"><a class="header-anchor" href="#_4-实现-excel-导出逻辑" aria-hidden="true">#</a> 4) 实现 excel 导出逻辑</h3>
+<p>那么万事俱备，到此时就可以来实现整个业务逻辑的最后步骤：</p>
+<ol>
+<li>将 <code>json</code> 结构数据转化为 <code>excel</code> 数据</li>
+<li>下载对应的 <code>excel</code> 数据</li>
+</ol>
+<p>对于这两步的逻辑而言，最复杂的莫过于 <strong>将 <code>json</code> 结构数据转化为 <code>excel</code> 数据</strong> 这一步的功能，不过万幸的是对于该操作的逻辑是 <strong>通用处理逻辑</strong>，搜索 <strong>Export2Excel</strong> 可以得到巨多的解决方案，所以此处 <strong>没有必要</strong> 手写对应的转换逻辑</p>
+<p>直接把该代码复制到 <code>src/utils</code> 文件夹下 Export2Excel.js</p>
+<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token comment">/* eslint-disable */</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> saveAs <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'file-saver'</span>
+<span class="token keyword">import</span> <span class="token constant">XLSX</span> <span class="token keyword">from</span> <span class="token string">'xlsx'</span>
+
+<span class="token keyword">function</span> <span class="token function">datenum</span><span class="token punctuation">(</span><span class="token parameter">v<span class="token punctuation">,</span> date1904</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>date1904<span class="token punctuation">)</span> v <span class="token operator">+=</span> <span class="token number">1462</span>
+  <span class="token keyword">var</span> epoch <span class="token operator">=</span> Date<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>epoch <span class="token operator">-</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span>Date<span class="token punctuation">.</span><span class="token constant">UTC</span><span class="token punctuation">(</span><span class="token number">1899</span><span class="token punctuation">,</span> <span class="token number">11</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token punctuation">(</span><span class="token number">24</span> <span class="token operator">*</span> <span class="token number">60</span> <span class="token operator">*</span> <span class="token number">60</span> <span class="token operator">*</span> <span class="token number">1000</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">sheet_from_array_of_arrays</span><span class="token punctuation">(</span><span class="token parameter">data<span class="token punctuation">,</span> opts</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">var</span> ws <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+  <span class="token keyword">var</span> range <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">s</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token literal-property property">c</span><span class="token operator">:</span> <span class="token number">10000000</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">r</span><span class="token operator">:</span> <span class="token number">10000000</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">e</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token literal-property property">c</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">r</span><span class="token operator">:</span> <span class="token number">0</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> <span class="token constant">R</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token constant">R</span> <span class="token operator">!=</span> data<span class="token punctuation">.</span>length<span class="token punctuation">;</span> <span class="token operator">++</span><span class="token constant">R</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> <span class="token constant">C</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token constant">C</span> <span class="token operator">!=</span> data<span class="token punctuation">[</span><span class="token constant">R</span><span class="token punctuation">]</span><span class="token punctuation">.</span>length<span class="token punctuation">;</span> <span class="token operator">++</span><span class="token constant">C</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>range<span class="token punctuation">.</span>s<span class="token punctuation">.</span>r <span class="token operator">></span> <span class="token constant">R</span><span class="token punctuation">)</span> range<span class="token punctuation">.</span>s<span class="token punctuation">.</span>r <span class="token operator">=</span> <span class="token constant">R</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>range<span class="token punctuation">.</span>s<span class="token punctuation">.</span>c <span class="token operator">></span> <span class="token constant">C</span><span class="token punctuation">)</span> range<span class="token punctuation">.</span>s<span class="token punctuation">.</span>c <span class="token operator">=</span> <span class="token constant">C</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>range<span class="token punctuation">.</span>e<span class="token punctuation">.</span>r <span class="token operator">&lt;</span> <span class="token constant">R</span><span class="token punctuation">)</span> range<span class="token punctuation">.</span>e<span class="token punctuation">.</span>r <span class="token operator">=</span> <span class="token constant">R</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>range<span class="token punctuation">.</span>e<span class="token punctuation">.</span>c <span class="token operator">&lt;</span> <span class="token constant">C</span><span class="token punctuation">)</span> range<span class="token punctuation">.</span>e<span class="token punctuation">.</span>c <span class="token operator">=</span> <span class="token constant">C</span>
+      <span class="token keyword">var</span> cell <span class="token operator">=</span> <span class="token punctuation">{</span>
+        <span class="token literal-property property">v</span><span class="token operator">:</span> data<span class="token punctuation">[</span><span class="token constant">R</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token constant">C</span><span class="token punctuation">]</span>
+      <span class="token punctuation">}</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>cell<span class="token punctuation">.</span>v <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token keyword">continue</span>
+      <span class="token keyword">var</span> cell_ref <span class="token operator">=</span> <span class="token constant">XLSX</span><span class="token punctuation">.</span>utils<span class="token punctuation">.</span><span class="token function">encode_cell</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        <span class="token literal-property property">c</span><span class="token operator">:</span> <span class="token constant">C</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">r</span><span class="token operator">:</span> <span class="token constant">R</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> cell<span class="token punctuation">.</span>v <span class="token operator">===</span> <span class="token string">'number'</span><span class="token punctuation">)</span> cell<span class="token punctuation">.</span>t <span class="token operator">=</span> <span class="token string">'n'</span>
+      <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> cell<span class="token punctuation">.</span>v <span class="token operator">===</span> <span class="token string">'boolean'</span><span class="token punctuation">)</span> cell<span class="token punctuation">.</span>t <span class="token operator">=</span> <span class="token string">'b'</span>
+      <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>cell<span class="token punctuation">.</span>v <span class="token keyword">instanceof</span> <span class="token class-name">Date</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        cell<span class="token punctuation">.</span>t <span class="token operator">=</span> <span class="token string">'n'</span>
+        cell<span class="token punctuation">.</span>z <span class="token operator">=</span> <span class="token constant">XLSX</span><span class="token punctuation">.</span><span class="token constant">SSF</span><span class="token punctuation">.</span>_table<span class="token punctuation">[</span><span class="token number">14</span><span class="token punctuation">]</span>
+        cell<span class="token punctuation">.</span>v <span class="token operator">=</span> <span class="token function">datenum</span><span class="token punctuation">(</span>cell<span class="token punctuation">.</span>v<span class="token punctuation">)</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> cell<span class="token punctuation">.</span>t <span class="token operator">=</span> <span class="token string">'s'</span>
+
+      ws<span class="token punctuation">[</span>cell_ref<span class="token punctuation">]</span> <span class="token operator">=</span> cell
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>range<span class="token punctuation">.</span>s<span class="token punctuation">.</span>c <span class="token operator">&lt;</span> <span class="token number">10000000</span><span class="token punctuation">)</span> ws<span class="token punctuation">[</span><span class="token string">'!ref'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token constant">XLSX</span><span class="token punctuation">.</span>utils<span class="token punctuation">.</span><span class="token function">encode_range</span><span class="token punctuation">(</span>range<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> ws
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">Workbook</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token punctuation">(</span><span class="token keyword">this</span> <span class="token keyword">instanceof</span> <span class="token class-name">Workbook</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Workbook</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>SheetNames <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>Sheets <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">s2ab</span><span class="token punctuation">(</span><span class="token parameter">s</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">var</span> buf <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayBuffer</span><span class="token punctuation">(</span>s<span class="token punctuation">.</span>length<span class="token punctuation">)</span>
+  <span class="token keyword">var</span> view <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Uint8Array</span><span class="token punctuation">(</span>buf<span class="token punctuation">)</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">!=</span> s<span class="token punctuation">.</span>length<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> view<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">charCodeAt</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token number">0xff</span>
+  <span class="token keyword">return</span> buf
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">const</span> export_json_to_excel <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>
+  multiHeader <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  header<span class="token punctuation">,</span>
+  data<span class="token punctuation">,</span>
+  filename<span class="token punctuation">,</span>
+  merges <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  autoWidth <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  bookType <span class="token operator">=</span> <span class="token string">'xlsx'</span>
+<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token comment">// 1. 设置文件名称</span>
+  filename <span class="token operator">=</span> filename <span class="token operator">||</span> <span class="token string">'excel-list'</span>
+  <span class="token comment">// 2. 把数据解析为数组，并把表头添加到数组的头部</span>
+  data <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token operator">...</span>data<span class="token punctuation">]</span>
+  data<span class="token punctuation">.</span><span class="token function">unshift</span><span class="token punctuation">(</span>header<span class="token punctuation">)</span>
+  <span class="token comment">// 3. 解析多表头，把多表头的数据添加到数组头部（二维数组）</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> multiHeader<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">></span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">--</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    data<span class="token punctuation">.</span><span class="token function">unshift</span><span class="token punctuation">(</span>multiHeader<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">// 4. 设置 Excel 表工作簿（第一张表格）名称</span>
+  <span class="token keyword">var</span> ws_name <span class="token operator">=</span> <span class="token string">'SheetJS'</span>
+  <span class="token comment">// 5. 生成工作簿对象</span>
+  <span class="token keyword">var</span> wb <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Workbook</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token comment">// 6. 将 data 数组（json格式）转化为 Excel 数据格式</span>
+  <span class="token keyword">var</span> ws <span class="token operator">=</span> <span class="token function">sheet_from_array_of_arrays</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+  <span class="token comment">// 7. 合并单元格相关（['A1:A2', 'B1:D1', 'E1:E2']）</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>merges<span class="token punctuation">.</span>length <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>ws<span class="token punctuation">[</span><span class="token string">'!merges'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> ws<span class="token punctuation">[</span><span class="token string">'!merges'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    merges<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">item</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+      ws<span class="token punctuation">[</span><span class="token string">'!merges'</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token constant">XLSX</span><span class="token punctuation">.</span>utils<span class="token punctuation">.</span><span class="token function">decode_range</span><span class="token punctuation">(</span>item<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">// 8. 单元格宽度相关</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>autoWidth<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">/*设置 worksheet 每列的最大宽度*/</span>
+    <span class="token keyword">const</span> colWidth <span class="token operator">=</span> data<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">row</span><span class="token punctuation">)</span> <span class="token operator">=></span>
+      row<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">val</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+        <span class="token comment">/*先判断是否为null/undefined*/</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>val <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">return</span> <span class="token punctuation">{</span>
+            <span class="token literal-property property">wch</span><span class="token operator">:</span> <span class="token number">10</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>val<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">charCodeAt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">255</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token comment">/*再判断是否为中文*/</span>
+          <span class="token keyword">return</span> <span class="token punctuation">{</span>
+            <span class="token literal-property property">wch</span><span class="token operator">:</span> val<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>length <span class="token operator">*</span> <span class="token number">2</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+          <span class="token keyword">return</span> <span class="token punctuation">{</span>
+            <span class="token literal-property property">wch</span><span class="token operator">:</span> val<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>length
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">)</span>
+    <span class="token comment">/*以第一行为初始值*/</span>
+    <span class="token keyword">let</span> result <span class="token operator">=</span> colWidth<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> colWidth<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> colWidth<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>length<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>result<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'wch'</span><span class="token punctuation">]</span> <span class="token operator">&lt;</span> colWidth<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'wch'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          result<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'wch'</span><span class="token punctuation">]</span> <span class="token operator">=</span> colWidth<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'wch'</span><span class="token punctuation">]</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    ws<span class="token punctuation">[</span><span class="token string">'!cols'</span><span class="token punctuation">]</span> <span class="token operator">=</span> result
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// 9. 添加工作表（解析后的 excel 数据）到工作簿</span>
+  wb<span class="token punctuation">.</span>SheetNames<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>ws_name<span class="token punctuation">)</span>
+  wb<span class="token punctuation">.</span>Sheets<span class="token punctuation">[</span>ws_name<span class="token punctuation">]</span> <span class="token operator">=</span> ws
+  <span class="token comment">// 10. 写入数据</span>
+  <span class="token keyword">var</span> wbout <span class="token operator">=</span> <span class="token constant">XLSX</span><span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span>wb<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">bookType</span><span class="token operator">:</span> bookType<span class="token punctuation">,</span>
+    <span class="token literal-property property">bookSST</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">'binary'</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token comment">// 11. 下载数据</span>
+  <span class="token function">saveAs</span><span class="token punctuation">(</span>
+    <span class="token keyword">new</span> <span class="token class-name">Blob</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token function">s2ab</span><span class="token punctuation">(</span>wbout<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+      <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">'application/octet-stream'</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>filename<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">.</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>bookType<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span>
+  <span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br><span class="line-number">78</span><br><span class="line-number">79</span><br><span class="line-number">80</span><br><span class="line-number">81</span><br><span class="line-number">82</span><br><span class="line-number">83</span><br><span class="line-number">84</span><br><span class="line-number">85</span><br><span class="line-number">86</span><br><span class="line-number">87</span><br><span class="line-number">88</span><br><span class="line-number">89</span><br><span class="line-number">90</span><br><span class="line-number">91</span><br><span class="line-number">92</span><br><span class="line-number">93</span><br><span class="line-number">94</span><br><span class="line-number">95</span><br><span class="line-number">96</span><br><span class="line-number">97</span><br><span class="line-number">98</span><br><span class="line-number">99</span><br><span class="line-number">100</span><br><span class="line-number">101</span><br><span class="line-number">102</span><br><span class="line-number">103</span><br><span class="line-number">104</span><br><span class="line-number">105</span><br><span class="line-number">106</span><br><span class="line-number">107</span><br><span class="line-number">108</span><br><span class="line-number">109</span><br><span class="line-number">110</span><br><span class="line-number">111</span><br><span class="line-number">112</span><br><span class="line-number">113</span><br><span class="line-number">114</span><br><span class="line-number">115</span><br><span class="line-number">116</span><br><span class="line-number">117</span><br><span class="line-number">118</span><br><span class="line-number">119</span><br><span class="line-number">120</span><br><span class="line-number">121</span><br><span class="line-number">122</span><br><span class="line-number">123</span><br><span class="line-number">124</span><br><span class="line-number">125</span><br><span class="line-number">126</span><br><span class="line-number">127</span><br><span class="line-number">128</span><br><span class="line-number">129</span><br><span class="line-number">130</span><br><span class="line-number">131</span><br><span class="line-number">132</span><br><span class="line-number">133</span><br><span class="line-number">134</span><br><span class="line-number">135</span><br><span class="line-number">136</span><br><span class="line-number">137</span><br><span class="line-number">138</span><br><span class="line-number">139</span><br><span class="line-number">140</span><br><span class="line-number">141</span><br><span class="line-number">142</span><br><span class="line-number">143</span><br><span class="line-number">144</span><br><span class="line-number">145</span><br><span class="line-number">146</span><br><span class="line-number">147</span><br></div></div><p>那么有了 <code>Export2Excel.js</code> 的代码之后 ，接下来还需要导入两个依赖库：</p>
+<ol>
+<li><a href="https://www.npmjs.com/package/xlsx" target="_blank" rel="noopener noreferrer">xlsx<ExternalLinkIcon/></a> （已下载）：<code>excel</code> 解析器和编译器</li>
+<li><a href="https://www.npmjs.com/package/file-saver" target="_blank" rel="noopener noreferrer">file-saver<ExternalLinkIcon/></a>：文件下载工具，通过 <code>npm i file-saver@2.0.5</code> 下载</li>
+</ol>
+<p>那么一切准备就绪，实现 <code>excel</code> 导出功能：</p>
+<ol>
+<li>动态导入 <code>Export2Excel.js</code></li>
+</ol>
+<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token comment">// 导入工具包</span>
+<span class="token keyword">const</span> excel <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'@/utils/Export2Excel'</span><span class="token punctuation">)</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><ol start="2">
+<li>
+<p>因为从服务端获取到的为 <code>json 数组对象</code> 结构，但是导出时的数据需要为 <strong>二维数组</strong>，所以需要有一个方法来把 <strong><code>json</code> 结构转化为 二维数组</strong></p>
+</li>
+<li>
+<p>创建转化方法</p>
+<p>1.创建 <code>views/user-manage/components/Export2ExcelConstants.js</code> 中英文对照表</p>
+<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token doc-comment comment">/**
+ * 导入数据对应表
+ */</span>
+ <span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token constant">USER_RELATIONS</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+   <span class="token literal-property property">姓名</span><span class="token operator">:</span> <span class="token string">'username'</span><span class="token punctuation">,</span>
+   <span class="token literal-property property">联系方式</span><span class="token operator">:</span> <span class="token string">'mobile'</span><span class="token punctuation">,</span>
+   <span class="token literal-property property">角色</span><span class="token operator">:</span> <span class="token string">'role'</span><span class="token punctuation">,</span>
+   <span class="token literal-property property">开通时间</span><span class="token operator">:</span> <span class="token string">'openTime'</span>
+ <span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><ol start="2">
+<li>创建数据解析方法</li>
+</ol>
+<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token comment">// 该方法负责将数组转化成二维数组, `json` 结构转化为 二维数组</span>
+<span class="token comment">// [{ username: '张三', mobile:1234567489...},{},{}]  =>  [[’张三'],[],[]]</span>
+ <span class="token keyword">const</span> <span class="token function-variable function">formatJson</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">headers<span class="token punctuation">,</span> rows</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+ <span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+ rows<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">item</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+ <span class="token keyword">const</span> arrItem <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>headers<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">key</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+   <span class="token comment">// role 角色特使处理</span>
+   <span class="token keyword">if</span> <span class="token punctuation">(</span>headers<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">===</span> <span class="token string">'role'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     <span class="token keyword">return</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>item<span class="token punctuation">[</span>headers<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">obj</span><span class="token punctuation">)</span> <span class="token operator">=></span> obj<span class="token punctuation">.</span>title<span class="token punctuation">)</span><span class="token punctuation">)</span>
+   <span class="token punctuation">}</span>
+   <span class="token keyword">return</span> item<span class="token punctuation">[</span>headers<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">]</span>
+   <span class="token punctuation">}</span><span class="token punctuation">)</span>
+   arr<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>arrItem<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> arr
+ <span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br></div></div></li>
+<li>
+<p>调用该方法，获取导出的二维数组数据</p>
+</li>
+</ol>
+<div class="language-vue ext-vue line-numbers-mode"><pre v-pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">setup</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+<span class="token operator">...</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">USER_RELATIONS</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./Export2ExcelConstants'</span>
+<span class="token operator">...</span>
+
+<span class="token keyword">const</span> loading <span class="token operator">=</span> <span class="token function">ref</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> <span class="token function-variable function">onConfirm</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  loading<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token boolean">true</span>
+  <span class="token keyword">const</span> res <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">getUserManageAllList</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">const</span> allUser <span class="token operator">=</span> res<span class="token punctuation">.</span>list
+  <span class="token function">formatJson</span><span class="token punctuation">(</span><span class="token constant">USER_RELATIONS</span><span class="token punctuation">,</span> allUser<span class="token punctuation">)</span>
+  <span class="token comment">// TODO: 业务</span>
+  loading<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token boolean">true</span>
+  <span class="token function">closed</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token operator">...</span>
+
+<span class="token comment">// 该方法负责将数组转化成二维数组, `json` 结构转化为 二维数组</span>
+<span class="token comment">// [{ username: '张三', mobile:1234567489...},{},{}]  =>  [[’张三'],[],[]]</span>
+<span class="token keyword">const</span> <span class="token function-variable function">formatJson</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">headers<span class="token punctuation">,</span> rows</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+  rows<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">item</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> arrItem <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>headers<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">key</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+      <span class="token comment">// role 角色特使处理</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>headers<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">===</span> <span class="token string">'role'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>item<span class="token punctuation">[</span>headers<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">obj</span><span class="token punctuation">)</span> <span class="token operator">=></span> obj<span class="token punctuation">.</span>title<span class="token punctuation">)</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+      <span class="token keyword">return</span> item<span class="token punctuation">[</span>headers<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">]</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    arr<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>arrItem<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> arr
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+</code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br></div></div><ol start="5">
+<li>调用 <code>export_json_to_excel</code> 方法，完成 <code>excel</code> 导出</li>
+</ol>
+<div class="language-vue ext-vue line-numbers-mode"><pre v-pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">setup</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+<span class="token keyword">import</span> <span class="token punctuation">{</span> defineProps<span class="token punctuation">,</span> defineEmits<span class="token punctuation">,</span> ref <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> useI18n <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue-i18n'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> watchSwitchLang <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/utils/i18n'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> getUserManageAllList <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/api/user-manage'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">USER_RELATIONS</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./Export2ExcelConstants'</span>
+<span class="token function">defineProps</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token literal-property property">modelValue</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">type</span><span class="token operator">:</span> Boolean<span class="token punctuation">,</span>
+    <span class="token keyword">default</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">required</span><span class="token operator">:</span> <span class="token boolean">true</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> emits <span class="token operator">=</span> <span class="token function">defineEmits</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'update:modelValue'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token keyword">const</span> i18n <span class="token operator">=</span> <span class="token function">useI18n</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">let</span> exportDefaultName <span class="token operator">=</span> i18n<span class="token punctuation">.</span><span class="token function">t</span><span class="token punctuation">(</span><span class="token string">'msg.excel.defaultName'</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> excelName <span class="token operator">=</span> <span class="token function">ref</span><span class="token punctuation">(</span>exportDefaultName<span class="token punctuation">)</span>
+<span class="token function">watchSwitchLang</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  exportDefaultName <span class="token operator">=</span> i18n<span class="token punctuation">.</span><span class="token function">t</span><span class="token punctuation">(</span><span class="token string">'msg.excel.defaultName'</span><span class="token punctuation">)</span>
+  excelName<span class="token punctuation">.</span>value <span class="token operator">=</span> i18n<span class="token punctuation">.</span><span class="token function">t</span><span class="token punctuation">(</span><span class="token string">'msg.excel.defaultName'</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token keyword">const</span> loading <span class="token operator">=</span> <span class="token function">ref</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> <span class="token function-variable function">onConfirm</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  loading<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token boolean">true</span>
+  <span class="token keyword">const</span> res <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">getUserManageAllList</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">const</span> allUser <span class="token operator">=</span> res<span class="token punctuation">.</span>list
+  <span class="token keyword">const</span> data <span class="token operator">=</span> <span class="token function">formatJson</span><span class="token punctuation">(</span><span class="token constant">USER_RELATIONS</span><span class="token punctuation">,</span> allUser<span class="token punctuation">)</span>
+  <span class="token keyword">const</span> excel <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'@/utils/Export2Excel'</span><span class="token punctuation">)</span>
+  excel<span class="token punctuation">.</span><span class="token function">export_json_to_excel</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token comment">// excel 表头</span>
+    <span class="token literal-property property">header</span><span class="token operator">:</span> Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span><span class="token constant">USER_RELATIONS</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token comment">// excel 数据（二维数组结构）</span>
+    data<span class="token punctuation">,</span>
+    <span class="token comment">// 文件名称</span>
+    <span class="token literal-property property">filename</span><span class="token operator">:</span> excelName<span class="token punctuation">.</span>value <span class="token operator">||</span> exportDefaultName<span class="token punctuation">,</span>
+    <span class="token comment">// 是否自动列宽</span>
+    <span class="token literal-property property">autoWidth</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token comment">// 文件类型</span>
+    <span class="token literal-property property">bookType</span><span class="token operator">:</span> <span class="token string">'xlsx'</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  loading<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token boolean">true</span>
+  <span class="token function">closed</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 关闭</span>
+<span class="token keyword">const</span> <span class="token function-variable function">closed</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token function">emits</span><span class="token punctuation">(</span><span class="token string">'update:modelValue'</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 该方法负责将数组转化成二维数组, `json` 结构转化为 二维数组</span>
+<span class="token comment">// [{ username: '张三', mobile:1234567489...},{},{}]  =>  [[’张三'],[],[]]</span>
+<span class="token keyword">const</span> <span class="token function-variable function">formatJson</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">headers<span class="token punctuation">,</span> rows</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+  rows<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">item</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> arrItem <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>headers<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">key</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+      <span class="token comment">// role 角色特使处理</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>headers<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">===</span> <span class="token string">'role'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>item<span class="token punctuation">[</span>headers<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">obj</span><span class="token punctuation">)</span> <span class="token operator">=></span> obj<span class="token punctuation">.</span>title<span class="token punctuation">)</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+      <span class="token keyword">return</span> item<span class="token punctuation">[</span>headers<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">]</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    arr<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>arrItem<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> arr
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+</code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br></div></div><h3 id="_5-excel-导出时的时间逻辑处理" tabindex="-1"><a class="header-anchor" href="#_5-excel-导出时的时间逻辑处理" aria-hidden="true">#</a> 5) excel 导出时的时间逻辑处理</h3>
+<p>因为服务端返回的 <code>openTime</code> 格式问题，所以我们需要在 <code>excel</code> 导出时对时间格式进行单独处理</p>
+<ol start="2">
+<li>
+<p>导入时间格式处理工具</p>
+<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> dateFilter <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/filters'</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br></div></div></li>
+<li>
+<p>对时间格式进行单独处理</p>
+</li>
+</ol>
+<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token comment">// 该方法负责将数组转化成二维数组, `json` 结构转化为 二维数组</span>
+<span class="token comment">// [{ username: '张三', mobile:1234567489...},{},{}]  =>  [[’张三'],[],[]]</span>
+<span class="token keyword">const</span> <span class="token function-variable function">formatJson</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">headers<span class="token punctuation">,</span> rows</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+  rows<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">item</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> arrItem <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>headers<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">key</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+      <span class="token comment">// role 角色特使处理</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>headers<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">===</span> <span class="token string">'role'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>item<span class="token punctuation">[</span>headers<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">obj</span><span class="token punctuation">)</span> <span class="token operator">=></span> obj<span class="token punctuation">.</span>title<span class="token punctuation">)</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>headers<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">===</span> <span class="token string">'openTime'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token function">dateFilter</span><span class="token punctuation">(</span>item<span class="token punctuation">[</span>headers<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+      <span class="token keyword">return</span> item<span class="token punctuation">[</span>headers<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">]</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    arr<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>arrItem<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token keyword">return</span> arr
+<span class="token punctuation">}</span>
+</code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br></div><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br></div></div><h3 id="_6-总结" tabindex="-1"><a class="header-anchor" href="#_6-总结" aria-hidden="true">#</a> 6) 总结</h3>
+<p>那么到这里我们的整个 <code>excel</code> 导出就算是实现完成了。</p>
+<p>整个 <code>excel</code> 导出遵循以下业务逻辑：</p>
+<ol>
+<li>创建 <code>excel</code> 导出弹出层</li>
+<li>处理弹出层相关的业务</li>
+<li>点击导出按钮，将 <code>json</code> 结构数据转化为 <code>excel</code> 数据
+<ol>
+<li><code>json</code> 数据转化为 <strong>二维数组</strong></li>
+<li>时间处理</li>
+<li>角色数组处理</li>
+</ol>
+</li>
+<li>下载 <code>excel</code> 数据</li>
+</ol>
+<p>其中 <strong>将 <code>json</code> 结构数据转化为 <code>excel</code> 数据</strong> 部分因为有通用的实现方式，所以没有必要进行手动的代码书写，毕竟 <strong>程序猿是最懒的群体嘛</strong></p>
+<h2 id="局部打印" tabindex="-1"><a class="header-anchor" href="#局部打印" aria-hidden="true">#</a> 局部打印</h2>
+<h3 id="_1-局部打印详情原理与实现分析" tabindex="-1"><a class="header-anchor" href="#_1-局部打印详情原理与实现分析" aria-hidden="true">#</a> 1) 局部打印详情原理与实现分析</h3>
 </template>
