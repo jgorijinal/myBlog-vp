@@ -252,6 +252,7 @@ module.exports = {
                     '/vue-admin/tongyong.md',
                     '/vue-admin/mokuai.md',
                     '/vue-admin/yonghu.md',
+                    '/vue-admin/quanxian.md',
                     ]
             },
             {

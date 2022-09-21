@@ -130,6 +130,7 @@ const routeItems = [
   ["v-7540c5d4","/vue-admin/denglu.html",{"title":"登录"},["/vue-admin/denglu","/vue-admin/denglu.md"]],
   ["v-13bcd74f","/vue-admin/layout.html",{"title":"项目架构之搭建 Layout架构 解决方案与实现"},["/vue-admin/layout","/vue-admin/layout.md"]],
   ["v-236cc505","/vue-admin/mokuai.html",{"title":"vue3+ElementPlus 基础模块实现"},["/vue-admin/mokuai","/vue-admin/mokuai.md"]],
+  ["v-46f8d1ea","/vue-admin/quanxian.html",{"title":"权限受控解决方案"},["/vue-admin/quanxian","/vue-admin/quanxian.md"]],
   ["v-6d3d9356","/vue-admin/tongyong.html",{"title":"通用功能开发"},["/vue-admin/tongyong","/vue-admin/tongyong.md"]],
   ["v-993075c6","/vue-admin/yonghu.html",{"title":"excel 、zip 与前端结合解决方案 - 用户管理页面实现"},["/vue-admin/yonghu","/vue-admin/yonghu.md"]],
   ["v-cd0741f4","/vue-manage/dajian.html",{"title":"搭建"},["/vue-manage/dajian","/vue-manage/dajian.md"]],

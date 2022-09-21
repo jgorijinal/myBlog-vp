@@ -126,6 +126,30 @@ export const data = {
           "title": "1) 局部打印详情原理与实现分析",
           "slug": "_1-局部打印详情原理与实现分析",
           "children": []
+        },
+        {
+          "level": 3,
+          "title": "2) 获取员工详情数据",
+          "slug": "_2-获取员工详情数据",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "3) 渲染详情结构",
+          "slug": "_3-渲染详情结构",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "4) 局部功能打印的实现",
+          "slug": "_4-局部功能打印的实现",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "总结",
+          "slug": "总结",
+          "children": []
         }
       ]
     }
@@ -135,7 +159,7 @@ export const data = {
       {
         "name": "jgoriginal",
         "email": "932274204@qq.com",
-        "commits": 1
+        "commits": 2
       }
     ]
   },

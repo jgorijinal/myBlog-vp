@@ -1306,8 +1306,334 @@ const formatJson = (headers, rows) => {
 其中 **将 `json` 结构数据转化为 `excel` 数据** 部分因为有通用的实现方式，所以没有必要进行手动的代码书写，毕竟 **程序猿是最懒的群体嘛**
 ## 局部打印
 ### 1) 局部打印详情原理与实现分析
- 
+最后一个功能 **员工详情打印**
 
+整个员工详情的打印逻辑分为两部分：
+
+1. 以表格的形式展示员工详情
+2. 打印详情表格
+
+其中 **以表格的形式展示员工详情** 部分需要使用到 [el-descriptions](https://element-plus.org/zh-CN/component/descriptions.html) 组件，并且想要利用该组件实现详情的表格效果还需要一些小的技巧
+
+而 **打印详情表格** 的功能就是建立在展示详情页面之上的
+
+当我们在浏览器右键时，其实可以直接看到对应的 **打印** 选项，但是这个打印选项是直接打印整个页面，不能指定打印页面中的某一部分
+
+所以说 **打印是浏览器本身的功能**，但是这个功能存在一定的小缺陷，那就是 **只能打印整个页面**
+
+而想要实现 **详情打印**，那么就需要在这个功能的基础之上做到指定打印具体的某一块视图，而这个功能已经有一个第三方的包 [vue-print-nb](https://github.com/Power-kxLee/vue-print-nb#vue3-version) 帮助进行了实现，所以只需要使用这个包即可完成打印功能
+
+那么明确好了原理之后，接下来步骤就呼之欲出
+
+1. 获取员工详情数据
+2. 在员工详情页面，渲染详情数据
+3. 利用  [vue-print-nb](https://github.com/Power-kxLee/vue-print-nb#vue3-version) 进行局部打印
+
+### 2) 获取员工详情数据 
+首先来获取对应的员工数据
+
+1. 在 `api/user-manage` 中定义获取用户详情接口
+   ```js
+   /**
+    * 获取用户详情
+    */
+   export const userDetail = (id) => {
+     return request({
+       url: `/user-manage/detail/${id}`
+     })
+   }
+   ```
+
+2. 在 `views/user-info` 中根据 `id` 获取接口详情数据，并进行国际化处理
+```vue
+<script setup>
+import { defineProps } from 'vue'
+import { userDetail } from '@/api/user-manage'
+import { watchSwitchLang } from '@/utils/i18n'
+const props = defineProps({
+  id: {
+    type: String,
+    required: true
+  }
+})
+const getUserDetail = async () => {
+  const res = await userDetail(props.id)
+  console.log(res)
+}
+getUserDetail()
+
+// 接口国际化处理
+watchSwitchLang(getUserDetail)
+</script>
+```
+3. 因为用户详情可以会以组件的形式进行呈现，所以对于此处需要得到的 `id` ，可以通过 [vue-router Props 传参](https://next.router.vuejs.org/zh/guide/essentials/passing-props.html#%E5%B8%83%E5%B0%94%E6%A8%A1%E5%BC%8F) 的形式进行
+4. 指定的路由表
+```js{5}
+{
+        path: '/user/info/:id',
+        name: 'userInfo',
+        component: () => import('@/views/user-info/index'),
+        props: true,
+        meta: {
+          title: 'userInfo'
+        }
+      }
+```
+2. 在 `views/user-manage` 中传递用户 `id
+```vue
+<el-button
+    type="primary"
+    size="mini"
+    @click="onShowClick(row._id)"
+>
+	{{ $t('msg.excel.show') }}
+</el-button>
+
+/**
+ * 查看按钮点击事件
+ */
+const onShowClick = id => {
+  router.push(`/user/info/${id}`)
+}
+```
+### 3) 渲染详情结构
+```vue
+<template>
+  <div class="user-info-container">
+    <el-card class="print-box">
+      <el-button type="primary">{{ $t('msg.userInfo.print') }}</el-button>
+    </el-card>
+    <el-card>
+      <div class="user-info-box">
+        <!-- 标题 -->
+        <h2 class="title">{{ $t('msg.userInfo.title') }}</h2>
+
+        <div class="header">
+          <!-- 头部渲染表格 -->
+          <el-descriptions :column="2" border>
+            <el-descriptions-item :label="$t('msg.userInfo.name')">{{
+              detailData.username
+            }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('msg.userInfo.sex')">{{
+              detailData.gender
+            }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('msg.userInfo.nation')">{{
+              detailData.nationality
+            }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('msg.userInfo.mobile')">{{
+              detailData.mobile
+            }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('msg.userInfo.province')">{{
+              detailData.province
+            }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('msg.userInfo.date')">{{
+              $filters.dateFilter(detailData.openTime)
+            }}</el-descriptions-item>
+            <el-descriptions-item :label="$t('msg.userInfo.remark')" :span="2">
+              <el-tag
+                class="remark"
+                size="small"
+                v-for="(item, index) in detailData.remark"
+                :key="index"
+                >{{ item }}</el-tag
+              >
+            </el-descriptions-item>
+            <el-descriptions-item
+              :label="$t('msg.userInfo.address')"
+              :span="2"
+              >{{ detailData.address }}</el-descriptions-item
+            >
+          </el-descriptions>
+          <!-- 头像渲染 -->
+          <el-image
+            class="avatar"
+            :src="detailData.avatar"
+            :preview-src-list="[detailData.avatar]"
+          ></el-image>
+        </div>
+        <div class="body">
+          <!-- 内容渲染表格 -->
+          <el-descriptions direction="vertical" :column="1" border>
+            <el-descriptions-item :label="$t('msg.userInfo.experience')">
+              <ul>
+                <li v-for="(item, index) in detailData.experience" :key="index">
+                  <span>
+                    {{ $filters.dateFilter(item.startTime, 'YYYY/MM') }}
+                    ----
+                    {{ $filters.dateFilter(item.endTime, 'YYYY/MM') }}</span
+                  >
+                  <span>{{ item.title }}</span>
+                  <span>{{ item.desc }}</span>
+                </li>
+              </ul>
+            </el-descriptions-item>
+            <el-descriptions-item :label="$t('msg.userInfo.major')">
+              {{ detailData.major }}
+            </el-descriptions-item>
+            <el-descriptions-item :label="$t('msg.userInfo.glory')">
+              {{ detailData.glory }}
+            </el-descriptions-item>
+          </el-descriptions>
+        </div>
+        <!-- 尾部签名 -->
+        <div class="foot">{{ $t('msg.userInfo.foot') }}</div>
+      </div>
+    </el-card>
+  </div>
+</template>
+
+<script setup>
+import { defineProps, ref } from 'vue'
+import { userDetail } from '@/api/user-manage'
+import { watchSwitchLang } from '@/utils/i18n'
+const props = defineProps({
+  id: {
+    type: String,
+    required: true
+  }
+})
+const detailData = ref([])
+const getUserDetail = async () => {
+  const res = await userDetail(props.id)
+  detailData.value = res
+}
+getUserDetail()
+
+// 接口国际化处理
+watchSwitchLang(getUserDetail)
+</script>
+
+<style lang="scss" scoped>
+.print-box {
+  margin-bottom: 20px;
+  text-align: right;
+}
+.user-info-box {
+  width: 1024px;
+  margin: 0 auto;
+  .title {
+    text-align: center;
+    margin-bottom: 18px;
+  }
+  .header {
+    display: flex;
+    ::v-deep .el-descriptions {
+      flex-grow: 1;
+    }
+    .avatar {
+      width: 187px;
+      box-sizing: border-box;
+      padding: 30px 20px;
+      border: 1px solid #ebeef5;
+      border-left: none;
+    }
+    .remark {
+      margin-right: 12px;
+    }
+  }
+  .body {
+    ul {
+      list-style: none;
+      li {
+        span {
+          margin-right: 62px;
+        }
+      }
+    }
+  }
+  .foot {
+    margin-top: 42px;
+    text-align: right;
+  }
+}
+</style>
+```
+### 4) 局部功能打印的实现
+局部详情打印功能我们需要借助 [vue-print-nb](https://github.com/Power-kxLee/vue-print-nb#vue3-version)，所以首先需要下载该插件
+
+```shell
+npm i vue3-print-nb@0.1.4
+```
+
+然后利用该工具完成下载功能：
+
+1. 指定 `printLoading` 按钮动画
+
+   ```
+   <el-button type="primary" :loading="printLoading">{{
+           $t('msg.userInfo.print')
+         }}</el-button>
+   
+   // 打印相关
+   const printLoading = ref(false)
+   ```
+
+2. 创建打印对象
+
+   ```js
+   const printObj = {
+     // 打印区域
+     id: 'userInfoBox',
+     // 打印标题
+     popTitle: 'imooc-vue-element-admin',
+     // 打印前
+     beforeOpenCallback(vue) {
+       printLoading.value = true
+     },
+     // 执行打印
+     openCallback(vue) {
+       printLoading.value = false
+     }
+   }
+   ```
+
+3. 指定打印区域 `id` 匹配
+
+   ```html
+   <div id="userInfoBox" class="user-info-box">
+   ```
+
+4. [vue-print-nb](https://github.com/Power-kxLee/vue-print-nb#vue3-version) 以指令的形式存在，所以我们需要创建对应指令
+
+5. 新建 `directives` 文件夹，创建 `index.js`
+
+6. 写入如下代码
+
+   ```js
+   import print from 'vue3-print-nb'
+   
+   export default app => {
+     app.use(print)
+   }
+   
+   ```
+
+7. 在 `main.js` 中导入该指令
+
+   ```js
+   import installDirective from '@/directives'
+
+   installDirective(app)
+   ```
+
+8. 将打印指令挂载到 `el-button` 中
+
+   ```html
+     <el-button type="primary" v-print="printObj" :loading="printLoading">{{
+           $t('msg.userInfo.print')
+         }}</el-button>
+   ```
+### 总结
+整个局部打印详情功能，整体的核心逻辑就是两块：
+
+1. 以表格的形式展示员工详情
+2. 打印详情表格
+
+其中第一部分使用  [el-descriptions](https://element-plus.org/zh-CN/component/descriptions.html) 组件配合一些小技巧即可实现
+
+而局部打印功能则需要借助 [vue-print-nb](https://github.com/Power-kxLee/vue-print-nb#vue3-version) 这个第三方库进行实现
+
+所以整个局部打印功能应该并不算复杂，实现这两部分即可轻松做到
 
 
 

@@ -257,6 +257,8 @@ export const pagesData = {
   "v-13bcd74f": () => import(/* webpackChunkName: "v-13bcd74f" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue-admin/layout.html.js").then(({ data }) => data),
   // path: /vue-admin/mokuai.html
   "v-236cc505": () => import(/* webpackChunkName: "v-236cc505" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue-admin/mokuai.html.js").then(({ data }) => data),
+  // path: /vue-admin/quanxian.html
+  "v-46f8d1ea": () => import(/* webpackChunkName: "v-46f8d1ea" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue-admin/quanxian.html.js").then(({ data }) => data),
   // path: /vue-admin/tongyong.html
   "v-6d3d9356": () => import(/* webpackChunkName: "v-6d3d9356" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue-admin/tongyong.html.js").then(({ data }) => data),
   // path: /vue-admin/yonghu.html
