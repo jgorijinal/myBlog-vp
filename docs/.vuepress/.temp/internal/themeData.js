@@ -142,7 +142,9 @@ export const themeData = {
         "/vue-admin/tongyong.md",
         "/vue-admin/mokuai.md",
         "/vue-admin/yonghu.md",
-        "/vue-admin/quanxian.md"
+        "/vue-admin/quanxian.md",
+        "/vue-admin/dongtaibiaoge.md",
+        "/vue-admin/fuwenben.md"
       ]
     },
     {
