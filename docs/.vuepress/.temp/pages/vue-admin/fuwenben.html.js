@@ -19,17 +19,16 @@ export const data = {
       "children": [
         {
           "level": 3,
-          "title": "markdown 实现",
-          "slug": "markdown-实现",
+          "title": "markdown 基本实现",
+          "slug": "markdown-基本实现",
           "children": []
-        }
-      ]
-    },
-    {
-      "level": 2,
-      "title": "markdown 提交",
-      "slug": "markdown-提交",
-      "children": [
+        },
+        {
+          "level": 3,
+          "title": "markdown 文章提交",
+          "slug": "markdown-文章提交",
+          "children": []
+        },
         {
           "level": 3,
           "title": "markdown 文章编辑",
@@ -46,7 +45,13 @@ export const data = {
     }
   ],
   "git": {
-    "contributors": []
+    "contributors": [
+      {
+        "name": "jgoriginal",
+        "email": "932274204@qq.com",
+        "commits": 1
+      }
+    ]
   },
   "filePathRelative": "vue-admin/fuwenben.md"
 }

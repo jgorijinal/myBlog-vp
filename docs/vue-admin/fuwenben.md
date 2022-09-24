@@ -63,7 +63,7 @@ const activeName = ref("markdown");
 1. `markdown` 编辑器：[tui.editor](https://github.com/nhn/tui.editor)
 2. 富文本编辑器：[wangEditor](https://github.com/wangeditor-team/wangEditor)
 
-### markdown 实现
+### markdown 基本实现
 
 我们通过 [tui.editor](https://github.com/nhn/tui.editor) 实现 `markdown` 的编辑功能：
 
@@ -159,7 +159,7 @@ watchSwitchLang(() => {
   mkEditor.setHTML(htmlStr)
 })
 ```
-## markdown 提交
+### markdown 文章提交
 1. 在 `api/article.js` 中，定义创建文章接口
 
    ```js

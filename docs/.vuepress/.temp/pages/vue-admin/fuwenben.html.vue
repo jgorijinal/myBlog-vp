@@ -57,7 +57,7 @@
 <li><code>markdown</code> 编辑器：<a href="https://github.com/nhn/tui.editor" target="_blank" rel="noopener noreferrer">tui.editor<ExternalLinkIcon/></a></li>
 <li>富文本编辑器：<a href="https://github.com/wangeditor-team/wangEditor" target="_blank" rel="noopener noreferrer">wangEditor<ExternalLinkIcon/></a></li>
 </ol>
-<h3 id="markdown-实现" tabindex="-1"><a class="header-anchor" href="#markdown-实现" aria-hidden="true">#</a> markdown 实现</h3>
+<h3 id="markdown-基本实现" tabindex="-1"><a class="header-anchor" href="#markdown-基本实现" aria-hidden="true">#</a> markdown 基本实现</h3>
 <p>我们通过 <a href="https://github.com/nhn/tui.editor" target="_blank" rel="noopener noreferrer">tui.editor<ExternalLinkIcon/></a> 实现 <code>markdown</code> 的编辑功能：</p>
 <ol>
 <li>
@@ -146,7 +146,7 @@
   <span class="token function">initEditor</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
   mkEditor<span class="token punctuation">.</span><span class="token function">setHTML</span><span class="token punctuation">(</span>htmlStr<span class="token punctuation">)</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span>
-</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><h2 id="markdown-提交" tabindex="-1"><a class="header-anchor" href="#markdown-提交" aria-hidden="true">#</a> markdown 提交</h2>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><h3 id="markdown-文章提交" tabindex="-1"><a class="header-anchor" href="#markdown-文章提交" aria-hidden="true">#</a> markdown 文章提交</h3>
 <ol>
 <li>
 <p>在 <code>api/article.js</code> 中，定义创建文章接口</p>
