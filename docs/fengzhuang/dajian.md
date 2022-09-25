@@ -669,11 +669,236 @@ const clickItem = (item) => {
 ## 省市区选择组件
 需求:  三个**下拉框**, 没有填前一个就不能填下一个
 
+### github 获取省市区 json 数据
+获取省市区数据 [Administrative-divisions-of-China github 省市区](https://github.com/modood/Administrative-divisions-of-China)
 
+![图片](../.vuepress/public/images/pca2.png)
 
+![图片](../.vuepress/public/images/pca1.png)
+安装解压后把 “省份、城市、区县” 三级联动数据 pca-code.json 粘贴到自己的项目中
 
+![图片](../.vuepress/public/images/pca4.png)
 
+views/chooseArea/index.vue 
+```vue 
+<template>
+  <div>省市区页面</div>
+</template>
 
+<script setup lang='ts'>
+import allArea from '../../components/chooseArea/lib/pca-code.json'
+console.log(allArea)
+</script>
+```
+![图片](../.vuepress/public/images/pca3.png)
 
+### 巧用 watch 来实现三级联动效果
+![图片](../.vuepress/public/images/pca5.png)
+
+最后处理一下细节: 换省份, 那么后面的都要清空需要重新选择, 换城市也是如此
+```vue
+<template>
+  <div>
+    <el-select v-model="province" placeholder="请选择省份" size="default" clearable>
+      <el-option
+        v-for="item in allAreas"
+        :key="item.code"
+        :label="item.name"
+        :value="item.code"
+      />
+    </el-select>
+    <el-select :disabled="!province" v-model="city" placeholder="请选择省份" size="default" clearable>
+      <el-option
+        v-for="item in cities"
+        :key="item.code"
+        :label="item.name"
+        :value="item.code"
+      />
+    </el-select>
+    <el-select :disabled="!province || !city" v-model="area" placeholder="请选择省份" size="default" clearable>
+      <el-option
+        v-for="item in areas"
+        :key="item.code"
+        :label="item.name"
+        :value="item.code"
+      />
+    </el-select>
+  </div>
+</template>
+
+<script setup lang="ts">
+import allAreas from "../lib/pca-code.json";
+import { ref, watch } from "vue";
+
+// 下拉框选中的 省份 的值
+const province = ref<string>("");
+// 下拉框选中的 城市 的值
+const city = ref<string>("");
+// 下拉框选中的 区域 的值
+const area = ref<string>("");
+
+// 选择完省份后, 需要展示的 城市
+const cities = ref<any>([]);
+watch(province, (newValue) => {
+  if (newValue) {
+    cities.value = allAreas.find((item) => item.code === newValue)?.children;
+  }
+  // 只要省份一变化, 那么城市和区域都置空
+  city.value = "";
+  area.value = "";
+});
+
+// 选择完省份, 城市之后, 需要展示的区域
+const areas = ref<any>([]);
+watch(city, (newValue) => {
+  if (newValue) {
+    areas.value = cities.value.find((item) => item.code === newValue)?.children;
+  }
+  // 只要城市一变化, 那么把区域置空
+  area.value = "";
+});
+</script>
+```
+### 给父组件传递选择完的数据
+现在给 ref 数据 定义 ts 具体类型(上面图方便直接使用了 any), 并且选择完 省 , 市, 区 需要把数据分分发给父组件
+
+怎么判断省,市,区全部选择完 ?  **需要 watch 监听 `区` 的选择 (因为在最后)**
+
+```vue{51-59,91-116}
+<template>
+  <div>
+    <el-select
+      v-model="province"
+      placeholder="请选择省份"
+      size="default"
+      clearable
+    >
+      <el-option
+        v-for="item in allAreas"
+        :key="item.code"
+        :label="item.name"
+        :value="item.code"
+      />
+    </el-select>
+    <el-select
+      :disabled="!province"
+      v-model="city"
+      placeholder="请选择省份"
+      size="default"
+      clearable
+    >
+      <el-option
+        v-for="item in cities"
+        :key="item.code"
+        :label="item.name"
+        :value="item.code"
+      />
+    </el-select>
+    <el-select
+      :disabled="!province || !city"
+      v-model="area"
+      placeholder="请选择省份"
+      size="default"
+      clearable
+    >
+      <el-option
+        v-for="item in areas"
+        :key="item.code"
+        :label="item.name"
+        :value="item.code"
+      />
+    </el-select>
+  </div>
+</template>
+
+<script setup lang="ts">
+import allAreas from "../lib/pca-code.json";
+import { ref, watch } from "vue";
+
+export interface AreaItem {
+  name: string;
+  code: string;
+  children?: AreaItem[];
+}
+export interface Data {
+  name: string;
+  code: string;
+}
+const emits = defineEmits(["change"]);
+// 下拉框选中的 省份 的值
+const province = ref<string>("");
+// 下拉框选中的 城市 的值
+const city = ref<string>("");
+// 下拉框选中的 区域 的值
+const area = ref<string>("");
+
+// 选择完省份后, 需要展示的 城市
+const cities = ref<AreaItem[]>([]);
+watch(province, (newValue) => {
+  if (newValue) {
+    cities.value = allAreas.find((item) => item.code === newValue)?.children!;
+  }
+  // 只要省份一变化, 那么城市和区域都置空
+  city.value = "";
+  area.value = "";
+});
+
+// 选择完省份, 城市之后, 需要展示的区域
+const areas = ref<AreaItem[]>([]);
+watch(city, (newValue) => {
+  if (newValue) {
+    areas.value = cities.value.find(
+      (item) => item.code === newValue
+    )?.children!;
+  }
+  // 只要城市一变化, 那么把区域置空
+  area.value = "";
+});
+
+watch(area, (value) => {
+  // 参数 value 是最新的 区
+  if (value) {
+    // 因为清空数据也会触发这里 watch, 所以必须添加条件为 'value 存在时'
+    const provinceData: Data = {
+      code: province.value,
+      name:
+        province.value &&
+        allAreas.find((item) => item.code === province.value)!.name,
+    };
+    const cityData: Data = {
+      code: city.value,
+      name:
+        city.value &&
+        cities.value.find((item) => item.code === city.value)!.name,
+    };
+    const areaData: Data = {
+      code: value,
+      name: value && areas.value.find((item) => item.code === value)!.name,
+    };
+    const result = { // 把数据合并
+      province: provinceData,
+      city: cityData,
+      area: areaData,
+    };
+    emits("change", result);
+  }
+});
+</script>
+```
+
+在父组件监听 change 事件 
+```vue
+<template>
+  <choose-area @change="change"></choose-area>
+</template>
+
+<script setup lang="ts">
+import ChooseArea from "../../components/chooseArea/src/index.vue";
+const change = (result) => {
+  console.log(result);
+};
+</script>
+```
+![图片](../.vuepress/public/images/hhhh1.png)
 
 

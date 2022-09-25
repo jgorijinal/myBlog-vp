@@ -78,11 +78,36 @@ export const data = {
       "level": 2,
       "title": "省市区选择组件",
       "slug": "省市区选择组件",
-      "children": []
+      "children": [
+        {
+          "level": 3,
+          "title": "github 获取省市区 json 数据",
+          "slug": "github-获取省市区-json-数据",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "巧用 watch 来实现三级联动效果",
+          "slug": "巧用-watch-来实现三级联动效果",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "给父组件传递选择完的数据",
+          "slug": "给父组件传递选择完的数据",
+          "children": []
+        }
+      ]
     }
   ],
   "git": {
-    "contributors": []
+    "contributors": [
+      {
+        "name": "jgoriginal",
+        "email": "932274204@qq.com",
+        "commits": 1
+      }
+    ]
   },
   "filePathRelative": "fengzhuang/dajian.md"
 }
