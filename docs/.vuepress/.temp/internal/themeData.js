@@ -144,8 +144,14 @@ export const themeData = {
         "/vue-admin/yonghu.md",
         "/vue-admin/quanxian.md",
         "/vue-admin/dongtaibiaoge.md",
-        "/vue-admin/fuwenben.md",
-        "/vue-admin/bushu.md"
+        "/vue-admin/fuwenben.md"
+      ]
+    },
+    {
+      "text": "基于Element Plus二次封装组件",
+      "collapsible": true,
+      "children": [
+        "/fengzhuang/dajian.md"
       ]
     },
     {

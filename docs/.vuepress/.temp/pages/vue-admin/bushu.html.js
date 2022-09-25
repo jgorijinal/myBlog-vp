@@ -1,13 +1,19 @@
 export const data = {
   "key": "v-46d2f20c",
   "path": "/vue-admin/bushu.html",
-  "title": "数据可视化",
+  "title": "部署",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
   "headers": [],
   "git": {
-    "contributors": []
+    "contributors": [
+      {
+        "name": "jgoriginal",
+        "email": "932274204@qq.com",
+        "commits": 1
+      }
+    ]
   },
   "filePathRelative": "vue-admin/bushu.md"
 }

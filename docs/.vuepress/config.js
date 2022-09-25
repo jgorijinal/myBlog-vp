@@ -258,6 +258,13 @@ module.exports = {
                     ]
             },
             {
+                text: '基于Element Plus二次封装组件',
+                collapsible: true,
+                children: [
+                    '/fengzhuang/dajian.md',
+                    ]
+            },
+            {
                 text: 'Element-ui',
                 collapsible: true,
                 children: [
