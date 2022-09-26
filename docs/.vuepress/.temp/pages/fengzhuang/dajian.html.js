@@ -1,7 +1,7 @@
 export const data = {
   "key": "v-ec0589b6",
   "path": "/fengzhuang/dajian.html",
-  "title": "搭建环境",
+  "title": "初级组件 上",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
@@ -98,6 +98,12 @@ export const data = {
           "children": []
         }
       ]
+    },
+    {
+      "level": 2,
+      "title": "app.use() 全局注册组件",
+      "slug": "app-use-全局注册组件",
+      "children": []
     }
   ],
   "git": {
@@ -105,7 +111,7 @@ export const data = {
       {
         "name": "jgoriginal",
         "email": "932274204@qq.com",
-        "commits": 1
+        "commits": 2
       }
     ]
   },

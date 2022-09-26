@@ -151,7 +151,8 @@ export const themeData = {
       "text": "基于Element Plus二次封装组件",
       "collapsible": true,
       "children": [
-        "/fengzhuang/dajian.md"
+        "/fengzhuang/dajian.md",
+        "/fengzhuang/chuxia.md"
       ]
     },
     {

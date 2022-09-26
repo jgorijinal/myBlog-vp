@@ -1,4 +1,4 @@
-# 搭建环境
+# 初级组件 上 
 
 ## 搭建 Vite 项目
 
@@ -125,7 +125,7 @@ const app = createApp(App);
 // 注册全局图标 浪费一点性能
 for (const [key, component] of Object.entries(Icons)) {
   // 注册全部组件 el-icon-xxx 的形式
-  app.component(`el-icon-${toLine(key)}`, component);
+  app.component(`el-icon${toLine(key)}`, component);
 }
 ...
 ```
@@ -134,9 +134,11 @@ for (const [key, component] of Object.entries(Icons)) {
 
 ```ts
 // 驼峰命名 变成 横岗链接的写法
-export const toLine = (value: string) => {
-  return value.replace(/(A-Z)g/, "-$1").toLowerCase();
-};
+export const toLine = (value:string) => {
+    return value.replace( /[A-Z]/g, function( i ) {
+        return '-' + i.toLowerCase();
+    })
+}
 ```
 
 给图标一个默认大小, src 创建 styles 文件夹, 创建 index.scss 写入全局样式 , 不要忘记 main.js 引入样式表
@@ -539,7 +541,7 @@ const visible = ref<boolean>(false);
         :key="index"
       >
         <div class="icon">
-          <component :is="`el-icon-${toLine(item)}`"></component>
+          <component :is="`el-icon${toLine(item)}`"></component>
         </div>
         <div class="text">{{ item }}</div>
       </div>
@@ -657,7 +659,7 @@ const close = () => {
 
 // 点击图标
 const clickItem = (item) => {
-  const iconName = `<el-icon-${toLine(item)} />`
+  const iconName = `<el-icon${toLine(item)} />`
   // 复制功能的 hooks
   useCopy(iconName)
   // 关闭对话框
@@ -901,4 +903,63 @@ const change = (result) => {
 ```
 ![图片](../.vuepress/public/images/hhhh1.png)
 
+## app.use() 全局注册组件
+需求: 全局组件注册, 并且有可以按需引入
+
+![图片](../.vuepress/public/images/qj1.png)
+
+每个组件对应有一个入口文件index.ts , 并且 components 文件夹对应有一个总入口文件 index.ts
+
+
+chooseArea/index.ts  
+```ts
+import ChooseArea from './src/index.vue'
+import { App } from 'vue'
+
+// 可以通过 app.use() 形式使用
+export default {
+  install(app: App) {
+    app.component('choose-area',ChooseArea)
+  }
+}
+```
+chooseIcon/index.ts 
+```ts 
+import ChooseIcon from './src/index.vue'
+import { App } from 'vue'
+
+export default {
+  install(app: App) {
+    app.component('choose-icon',ChooseIcon)
+  }
+}
+```
+
+总入口文件 components/index.ts
+```ts
+import chooseIcon from './chooseIcon'
+import chooseArea from './chooseArea'
+import { App } from 'vue';
+
+const components = [
+  chooseArea,
+  chooseIcon
+]
+export default {
+  install(app:App) {
+    components.forEach(component => {  // 遍历并 app.use()
+      app.use(component)
+    })
+  }
+}
+```
+
+在 main.js 又来一个 app.use() 
+```js
+import myComponents from "./components";
+...
+const app = createApp(App);
+app.use(myComponents)
+...
+```
 

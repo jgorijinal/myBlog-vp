@@ -262,6 +262,7 @@ module.exports = {
                 collapsible: true,
                 children: [
                     '/fengzhuang/dajian.md',
+                    '/fengzhuang/chuxia.md',
                     ]
             },
             {
