@@ -85,6 +85,8 @@ export const pagesComponents = {
   "v-ad803f64": defineAsyncComponent(() => import(/* webpackChunkName: "v-ad803f64" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/fengzhuang/chuxia.html.vue")),
   // path: /fengzhuang/dajian.html
   "v-ec0589b6": defineAsyncComponent(() => import(/* webpackChunkName: "v-ec0589b6" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/fengzhuang/dajian.html.vue")),
+  // path: /fengzhuang/zhongshang.html
+  "v-1ba55b3a": defineAsyncComponent(() => import(/* webpackChunkName: "v-1ba55b3a" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/fengzhuang/zhongshang.html.vue")),
   // path: /hrsass/bushu.html
   "v-25322e6c": defineAsyncComponent(() => import(/* webpackChunkName: "v-25322e6c" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/hrsass/bushu.html.vue")),
   // path: /hrsass/gongsi.html

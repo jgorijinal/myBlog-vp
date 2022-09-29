@@ -152,7 +152,8 @@ export const themeData = {
       "collapsible": true,
       "children": [
         "/fengzhuang/dajian.md",
-        "/fengzhuang/chuxia.md"
+        "/fengzhuang/chuxia.md",
+        "/fengzhuang/zhongshang.md"
       ]
     },
     {

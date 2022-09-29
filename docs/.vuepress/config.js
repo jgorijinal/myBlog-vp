@@ -263,6 +263,7 @@ module.exports = {
                 children: [
                     '/fengzhuang/dajian.md',
                     '/fengzhuang/chuxia.md',
+                    '/fengzhuang/zhongshang.md',
                     ]
             },
             {

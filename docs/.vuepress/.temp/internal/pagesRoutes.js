@@ -43,6 +43,7 @@ const routeItems = [
   ["v-658e9812","/elementui/jicheng.html",{"title":"element-ui"},["/elementui/jicheng","/elementui/jicheng.md"]],
   ["v-ad803f64","/fengzhuang/chuxia.html",{"title":"初级组件 - 下"},["/fengzhuang/chuxia","/fengzhuang/chuxia.md"]],
   ["v-ec0589b6","/fengzhuang/dajian.html",{"title":"初级组件 上"},["/fengzhuang/dajian","/fengzhuang/dajian.md"]],
+  ["v-1ba55b3a","/fengzhuang/zhongshang.html",{"title":"中级组件"},["/fengzhuang/zhongshang","/fengzhuang/zhongshang.md"]],
   ["v-25322e6c","/hrsass/bushu.html",{"title":"部署"},["/hrsass/bushu","/hrsass/bushu.md"]],
   ["v-ceaf0e38","/hrsass/gongsi.html",{"title":"公司和角色"},["/hrsass/gongsi","/hrsass/gongsi.md"]],
   ["v-4910ee6e","/hrsass/login.html",{"title":"登录模块"},["/hrsass/login","/hrsass/login.md"]],

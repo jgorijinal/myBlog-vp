@@ -62,15 +62,21 @@ export const data = {
         },
         {
           "level": 3,
-          "title": "完善 list 组件 并融合进通知菜单",
-          "slug": "完善-list-组件-并融合进通知菜单",
+          "title": "完善 list 组件 点击时分发事件,  并融合进通知菜单",
+          "slug": "完善-list-组件-点击时分发事件-并融合进通知菜单",
           "children": []
         }
       ]
     }
   ],
   "git": {
-    "contributors": []
+    "contributors": [
+      {
+        "name": "jgoriginal",
+        "email": "932274204@qq.com",
+        "commits": 1
+      }
+    ]
   },
   "filePathRelative": "fengzhuang/chuxia.md"
 }

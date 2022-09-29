@@ -534,4 +534,38 @@ const activeName = ref<string>(props.list[0].title);
 </style>
 ```
 
-### 完善 list 组件 并融合进通知菜单
+### 完善 list 组件 点击时分发事件,  并融合进通知菜单
+点击列表的某一项 , 或者点击底部操作按钮都要分发事件通知给父组件
+
+![图片](../.vuepress/public/images/fenfa1.png)
+```vue{17-24}
+<script setup lang="ts">
+import { ref, PropType } from "vue";
+import { ListOptions, ActionOptions,ListItem } from "./types";
+const props = defineProps({
+  list: {
+    type: Array as PropType<ListOptions[]>,
+    required: true,
+  },
+  actions: {
+    type: Array as PropType<ActionOptions[]>,
+    default: () => [],
+  },
+});
+// 选中的 tab
+const activeName = ref<string>(props.list[0].title);
+
+const emits = defineEmits(['clickListItem','clickAction'])
+// 点击列表某一项. 派发事件
+const clickListItem = (listItem:ListItem,index:number) => {
+  emits('clickListItem', {index,listItem})
+}
+const clickAction = (i:number,action:ActionOptions) => {
+  emits('clickAction', {index:i,action})
+}
+</script>
+```
+并在父组件监听一下事件 , 接受传递多来的结果 
+
+![图片](../.vuepress/public/images/fenfa2.png)
+![图片](../.vuepress/public/images/fenfa3.png)
