@@ -1267,7 +1267,7 @@ const deleteAction = (scope) => {
 也是从配置选项开始出发, 之前已经定义好了slot 属性
 
 types.ts
-```vue{10-11}
+```ts{10-11}
 export interface tableOptions {
   // 表头
   label: string
@@ -1288,6 +1288,8 @@ export interface tableOptions {
 
 **组件内部:** v-if="!options.slot"  和 v-else 判断一下, 传入 slot 属性的配置项
 ![图片](../.vuepress/public/images/to6.png)
+**上面代码优化一下:**
+![图片](../.vuepress/public/images/you1.png)
 
 然后在父组件已经可以通过 具名插槽,作用域插槽 随便自定义格式
 ```vue
@@ -1312,8 +1314,160 @@ export interface tableOptions {
 ![图片](../.vuepress/public/images/to7.png)
 
 ### 为表格加上 loading 效果
+先思考一下什么时候显示 loading 效果 ?
+
+表格的具体数据 data 是父组件通过 props 传过来的, 那么显示 loading 动画的时机是没有传给来 data 数据的时候 (压根没有传来 data 或者 传了但传了个空数组)
+```js
+const isLoading = computed(()=>{
+  return !props.data || props.data.length  === 0
+})
+```
+
+并且需要拓展一下加载中 loading 动画的其他配置项
+![图片](../.vuepress/public/images/loa1.png)
+
+```vue{4-9,51-71,83-86}
+<template>
+  <el-table
+    :data="data"
+    v-loading="isLoading"
+    :element-loading-text="elementLoadingText"
+    :element-loading-spinner="elementLoadingSpinner"
+    :element-loading-back="elementLoadingBack"
+    :element-loading-svg="elementLoadingSvg"
+    :element-loading-svg-view-box="elementLoadingSvgViewBox"
+  >
+    <template v-for="option in tableOptions" :key="option.label">
+      <el-table-column
+        v-if="!option.slot"
+        :prop="option.prop"
+        :align="option.align"
+        :label="option.label"
+      >
+      </el-table-column>
+      <el-table-column
+        v-else
+        :prop="option.prop"
+        :align="option.align"
+        :label="option.label"
+      >
+        <template #default="scope">
+          <slot :name="option.slot" :scope="scope"></slot>
+        </template>
+      </el-table-column>
+    </template>
+    <el-table-column :label="actionOption!.label">
+      <template #default="scope">
+        <slot name="action" :scope="scope"></slot>
+      </template>
+    </el-table-column>
+  </el-table>
+</template>
+
+<script setup lang="ts">
+import { tableOptions } from "./types";
+import { PropType, computed } from "vue";
+const props = defineProps({
+  // 表格的配置
+  options: {
+    type: Array as PropType<tableOptions[]>,
+    required: true,
+  },
+  //表格数据
+  data: {
+    type: Array as PropType<any[]>,
+  },
+  // 加载文案
+  elementLoadingText: {
+    type: String,
+    default: "加载中",
+  },
+  // 加载图表名
+  elementLoadingSpinner: {
+    type: String,
+  },
+  // 加载背景颜色
+  elementLoadingBack: {
+    type: String,
+  },
+  // 加载 svg
+  elementLoadingSvg: {
+    type: String,
+  },
+  // 加载 svg 的配置
+  elementLoadingSvgViewBox: {
+    type: String,
+  },
+});
+
+// 过滤操作项之外的配置数据 , computed + filter 过滤一下
+const tableOptions = computed(() => {
+  return props.options.filter((item) => !item.action);
+});
+// 找到配置项的配置数据 , computed + find 找一下
+const actionOption = computed(() => {
+  return props.options.find((item) => item.action);
+});2
+
+// 加载动画
+const isLoading = computed(() => {
+  return !props.data || props.data.length === 0;
+});
+</script>
+```
+### 实现可编辑单元格功能
+需求:
+* 实现单元格的编辑功能
+
+配置选项开始出发, 如果加上属性 editable: true 那就使用编辑功能
+
+types.ts
+```ts{14-15}
+export interface tableOptions {
+  // 表头
+  label: string
+  // 字段名称
+  prop?: string
+  // 列宽度
+  width?:string
+  // 对齐方式
+  align?: 'left' | 'center' | 'right'
+  // 自定义列表末班名称
+  slot?: string,
+  // 是否要有操作项
+  action?: boolean,
+  // 可编辑性
+  editable?:boolean
+}
+```
+
+1. 首先显示 编辑图标
+![图片](../.vuepress/public/images/editable1.png)
+
+2. 现在最关键的一步, 实现在点击编辑按钮时, **只在当前单元格**显示输入框 , 怎么做? 
+![图片](../.vuepress/public/images/elscope.png)
+
+想要标记每一个不同单元格可以把 `scope.$index` 和 `scope.column.id`  相加, **形成每一个单元格的唯一的标识**
+```
+console.log(scope.$index + scope.column.id) // 0el-table_1_column_1
+```
+
+所以当点击编辑按钮时  , 用 ref 响应式 标记一下当前单元格**唯一的标识**, 并且模板上通过 `v-if` 判断显示
+
+![图片](../.vuepress/public/images/currentcell1.png)
+![图片](../.vuepress/public/images/currentcell2.png)
+效果如下: 
+![图片](../.vuepress/public/images/xianshishurukuang.png)
 
 
+3. 显示真实的输入框和 √ / ×
+* 点击 √ / × , 需要重置currentCell 标识, 并且分发事件个父组件
+
+![图片](../.vuepress/public/images/goucha1.png)
+![图片](../.vuepress/public/images/goucha2.png)
+
+效果如下: 
+![图片](../.vuepress/public/images/goucha3.png)
 
 
 

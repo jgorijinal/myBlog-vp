@@ -108,6 +108,12 @@ export const data = {
           "title": "为表格加上 loading 效果",
           "slug": "为表格加上-loading-效果",
           "children": []
+        },
+        {
+          "level": 3,
+          "title": "实现可编辑单元格功能",
+          "slug": "实现可编辑单元格功能",
+          "children": []
         }
       ]
     }
@@ -117,7 +123,7 @@ export const data = {
       {
         "name": "jgoriginal",
         "email": "932274204@qq.com",
-        "commits": 1
+        "commits": 2
       }
     ]
   },
