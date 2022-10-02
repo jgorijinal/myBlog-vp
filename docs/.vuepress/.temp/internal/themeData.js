@@ -82,6 +82,8 @@ export const themeData = {
         "/JS/dombom.md",
         "/JS/dom.md",
         "/JS/fangdoujieliu.md",
+        "/JS/digui.md",
+        "/JS/kuayu.md",
         "/JS/shenkaobei.md",
         "/JS/baoguanli.md",
         "/JS/basic.md",
@@ -102,6 +104,13 @@ export const themeData = {
         "/TS/interface.md",
         "/TS/generics.md",
         "/TS/module.md"
+      ]
+    },
+    {
+      "text": "Git系列",
+      "collapsible": true,
+      "children": [
+        "/git/start.md"
       ]
     },
     {

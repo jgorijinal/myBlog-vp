@@ -177,6 +177,8 @@ module.exports = {
                     '/JS/dombom.md',
                     '/JS/dom.md',
                     '/JS/fangdoujieliu.md',
+                    '/JS/digui.md',
+                    '/JS/kuayu.md',
                     '/JS/shenkaobei.md',
                     '/JS/baoguanli.md',
                     '/JS/basic.md',
@@ -204,6 +206,13 @@ module.exports = {
                     '/TS/generics.md',
                     '/TS/module.md',
                     // '/TS/Vue3.md'
+                ]
+            },
+            {
+                text: 'Git系列',
+                collapsible: true,
+                children: [
+                    '/git/start.md'
                 ]
             },
             {
