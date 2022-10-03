@@ -35,7 +35,36 @@
 * JSONP: 出现的早, 兼容性好(兼容低版本IE) 是前端程序员被迫想出来的一种临时解决方案. 缺点是只支持 GET 请求, 不支持 POST 请求
 
 * CORS: 出现的较晚, 属于跨域 Ajax 请求的根本解决方案, 支持 GET 和 POST 请求, 缺点是不兼容低版本浏览器
-## JSONP
+## JSONP 实现原理
+由于浏览器同源策略的限制, 网页中无法通过 ajax 请求非同源的接口数据。 但是` <script> ` 标签不受浏览器同源策略的影响,  可以通过 src 属性,
+请求非同源的 js 脚本
+
+就是通过 `<script>` 标签的 src 属性, 请求跨域的数据接口, 并通过 **函数调用**的形式, 接受跨域接口响应过来的数据。
+
+### **将函数的定义和调用分离为 2 个 script 标签**
+
+![图片](../.vuepress/public/images/scr1.png)
+![图片](../.vuepress/public/images/scr2.png)
+
+### 将函数的调用抽离为单独的 JS 文件
+
+![图片](../.vuepress/public/images/jsonp1.png)
+### 通过 callback 指定回调函数的名称
+![图片](../.vuepress/public/images/jsonp2.png)
+### 总结
+1. 定义回调函数
+2. 用 `<script>`标签请求接口, 这个接口呢希望他啊能够返回一个函数的调用, 至于他要调用一个什么样的函数, 可以通过查询字符串的形式告诉服务器
+3. 服务器根据传递过去的函数名字返回一个函数的调用
+
+
+### JSONP 的缺点
+由于 JSONP 是通过 `<script>` 标签的 src 属性, 来实现跨域数据获取的, 所以 ,**JSONP 只支持 GET 请求, 不支持 POST 请求**
+
+注意 : **JSONP 和 Ajax 之间没有任何关系**, 不能把 JSONP 的请求数据的方式叫做 Ajax, 因为 JSONP 没有用到, XMLHttpRequest 这个对象
+
+
+
+
 
 
 

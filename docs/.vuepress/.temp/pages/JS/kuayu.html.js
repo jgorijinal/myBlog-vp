@@ -33,13 +33,50 @@ export const data = {
     },
     {
       "level": 2,
-      "title": "JSONP",
-      "slug": "jsonp",
-      "children": []
+      "title": "JSONP 实现原理",
+      "slug": "jsonp-实现原理",
+      "children": [
+        {
+          "level": 3,
+          "title": "将函数的定义和调用分离为 2 个 script 标签",
+          "slug": "将函数的定义和调用分离为-2-个-script-标签",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "将函数的调用抽离为单独的 JS 文件",
+          "slug": "将函数的调用抽离为单独的-js-文件",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "通过 callback 指定回调函数的名称",
+          "slug": "通过-callback-指定回调函数的名称",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "总结",
+          "slug": "总结",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "JSONP 的缺点",
+          "slug": "jsonp-的缺点",
+          "children": []
+        }
+      ]
     }
   ],
   "git": {
-    "contributors": []
+    "contributors": [
+      {
+        "name": "jgoriginal",
+        "email": "932274204@qq.com",
+        "commits": 1
+      }
+    ]
   },
   "filePathRelative": "JS/kuayu.md"
 }
