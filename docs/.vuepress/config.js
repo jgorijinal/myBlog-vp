@@ -209,6 +209,20 @@ module.exports = {
                 ]
             },
             {
+                text: 'Node系列',
+                collapsible: true,
+                children: [
+                    '/node/start.md',
+                    '/node/fs.md',
+                    '/node/path.md',
+                    '/node/http.md',
+                    '/node/mokuaihua.md',
+                    '/node/express.md',
+                    '/node/zhongjianjian.md',
+                    '/node/jiekou.md',
+                ]
+            },
+            {
                 text: 'Git系列',
                 collapsible: true,
                 children: [

@@ -8,6 +8,112 @@ export const data = {
   "headers": [
     {
       "level": 2,
+      "title": "事件基础",
+      "slug": "事件基础",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "操作 DOM",
+      "slug": "操作-dom",
+      "children": [
+        {
+          "level": 3,
+          "title": "改变元素内容",
+          "slug": "改变元素内容",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "innerHTML 和 innerText 区别",
+          "slug": "innerhtml-和-innertext-区别",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "常见元素的属性操作",
+          "slug": "常见元素的属性操作",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "表单元素的属性操作",
+          "slug": "表单元素的属性操作",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "样式属性操作",
+          "slug": "样式属性操作",
+          "children": []
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "title": "注册事件(绑定事件)",
+      "slug": "注册事件-绑定事件",
+      "children": [
+        {
+          "level": 3,
+          "title": "删除事件(解绑事件)",
+          "slug": "删除事件-解绑事件",
+          "children": []
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "title": "DOM 事件流",
+      "slug": "dom-事件流",
+      "children": [
+        {
+          "level": 3,
+          "title": "事件对象",
+          "slug": "事件对象",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "事件对象的常见属性",
+          "slug": "事件对象的常见属性",
+          "children": []
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "title": "事件委托",
+      "slug": "事件委托",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "常用的鼠标事件",
+      "slug": "常用的鼠标事件",
+      "children": [
+        {
+          "level": 3,
+          "title": "禁用鼠标右键菜单",
+          "slug": "禁用鼠标右键菜单",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "禁用鼠标选中",
+          "slug": "禁用鼠标选中",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "鼠标事件对象",
+          "slug": "鼠标事件对象",
+          "children": []
+        }
+      ]
+    },
+    {
+      "level": 2,
       "title": "EventTarget",
       "slug": "eventtarget",
       "children": []

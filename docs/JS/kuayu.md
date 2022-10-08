@@ -55,8 +55,11 @@
 1. 定义回调函数
 2. 用 `<script>`标签请求接口, 这个接口呢希望他啊能够返回一个函数的调用, 至于他要调用一个什么样的函数, 可以通过查询字符串的形式告诉服务器
 3. 服务器根据传递过去的函数名字返回一个函数的调用
-
-
+### 使用 jquery 发送 jsonp 请求
+![图片](../.vuepress/public/images/jq1.png)
+![图片](../.vuepress/public/images/jq2.png)
+#### 自定义回调函数名字
+![图片](../.vuepress/public/images/jq3.png)
 ### JSONP 的缺点
 由于 JSONP 是通过 `<script>` 标签的 src 属性, 来实现跨域数据获取的, 所以 ,**JSONP 只支持 GET 请求, 不支持 POST 请求**
 

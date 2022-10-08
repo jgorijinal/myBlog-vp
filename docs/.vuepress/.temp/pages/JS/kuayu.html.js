@@ -62,6 +62,12 @@ export const data = {
         },
         {
           "level": 3,
+          "title": "使用 jquery 发送 jsonp 请求",
+          "slug": "使用-jquery-发送-jsonp-请求",
+          "children": []
+        },
+        {
+          "level": 3,
           "title": "JSONP 的缺点",
           "slug": "jsonp-的缺点",
           "children": []
@@ -74,7 +80,7 @@ export const data = {
       {
         "name": "jgoriginal",
         "email": "932274204@qq.com",
-        "commits": 1
+        "commits": 2
       }
     ]
   },

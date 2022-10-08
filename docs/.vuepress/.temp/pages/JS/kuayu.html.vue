@@ -50,6 +50,11 @@
 <li>用 <code>&lt;script&gt;</code>标签请求接口, 这个接口呢希望他啊能够返回一个函数的调用, 至于他要调用一个什么样的函数, 可以通过查询字符串的形式告诉服务器</li>
 <li>服务器根据传递过去的函数名字返回一个函数的调用</li>
 </ol>
+<h3 id="使用-jquery-发送-jsonp-请求" tabindex="-1"><a class="header-anchor" href="#使用-jquery-发送-jsonp-请求" aria-hidden="true">#</a> 使用 jquery 发送 jsonp 请求</h3>
+<p><img src="@source/.vuepress/public/images/jq1.png" alt="图片">
+<img src="@source/.vuepress/public/images/jq2.png" alt="图片"></p>
+<h4 id="自定义回调函数名字" tabindex="-1"><a class="header-anchor" href="#自定义回调函数名字" aria-hidden="true">#</a> 自定义回调函数名字</h4>
+<p><img src="@source/.vuepress/public/images/jq3.png" alt="图片"></p>
 <h3 id="jsonp-的缺点" tabindex="-1"><a class="header-anchor" href="#jsonp-的缺点" aria-hidden="true">#</a> JSONP 的缺点</h3>
 <p>由于 JSONP 是通过 <code>&lt;script&gt;</code> 标签的 src 属性, 来实现跨域数据获取的, 所以 ,<strong>JSONP 只支持 GET 请求, 不支持 POST 请求</strong></p>
 <p>注意 : <strong>JSONP 和 Ajax 之间没有任何关系</strong>, 不能把 JSONP 的请求数据的方式叫做 Ajax, 因为 JSONP 没有用到, XMLHttpRequest 这个对象</p>
