@@ -9,8 +9,36 @@
 ```js
 const path = require('path')
 ```
+```js
+const path = require("path");
 
-## 路径拼接
+const basePath = "./User/why";
+const filename = "abc.txt";
+
+
+// join 路径拼接
+// 直接拼接
+console.log(path.join(basePath, filename));  //  \User\why\abc.txt
+// resolve 路径拼接
+// resolve 会拼接的是 /或 ./ 或 ../ 开头的路径, 查找拼接(比较智能)
+console.log(path.resolve(basePath, filename));  //  C:\Users\86188\Desktop\node-demo\User\why\abc.txt
+```
+获取路径信息
+```js
+const path = require("path");
+
+const filePath = '/User/why/abc.txt'
+
+// 目录名
+console.log(path.dirname(filePath))  // /User/why
+// 文件名
+console.log(path.basename(filePath)) // abc.txt
+// 文件名后缀
+console.log(path.extname(filePath))  // .txt
+```
+## webpack 中的使用
+![图片](../.vuepress/public/images/pathqita.png)
+<!-- ## 路径拼接
 ### path.join() 语法格式
 ```
 path.join([...paths])
@@ -63,4 +91,4 @@ const fpath = '/a/b/c/index.html' // 问价内存放路径
 const fext = path.extname(fpath)
 console.log(fext)  // 输出 .html
 ```
-
+ -->

@@ -8,46 +8,19 @@ export const data = {
   "headers": [
     {
       "level": 2,
-      "title": "路径拼接",
-      "slug": "路径拼接",
-      "children": [
-        {
-          "level": 3,
-          "title": "path.join() 语法格式",
-          "slug": "path-join-语法格式",
-          "children": []
-        }
-      ]
-    },
-    {
-      "level": 2,
-      "title": "获取路径中的文件名",
-      "slug": "获取路径中的文件名",
-      "children": [
-        {
-          "level": 3,
-          "title": "path.basename() 语法格式",
-          "slug": "path-basename-语法格式",
-          "children": []
-        }
-      ]
-    },
-    {
-      "level": 2,
-      "title": "获取路径中文件扩展名",
-      "slug": "获取路径中文件扩展名",
-      "children": [
-        {
-          "level": 3,
-          "title": "path.extname() 语法格式",
-          "slug": "path-extname-语法格式",
-          "children": []
-        }
-      ]
+      "title": "webpack 中的使用",
+      "slug": "webpack-中的使用",
+      "children": []
     }
   ],
   "git": {
-    "contributors": []
+    "contributors": [
+      {
+        "name": "jgoriginal",
+        "email": "932274204@qq.com",
+        "commits": 1
+      }
+    ]
   },
   "filePathRelative": "node/path.md"
 }

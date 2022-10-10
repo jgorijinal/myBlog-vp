@@ -1,4 +1,95 @@
 # 模块化
+什么是模块化?
+
+![图片](../.vuepress/public/images/mk1.png)
+
+
+## 没有模块化带来的问题
+![图片](../.vuepress/public/images/guifan1.png)
+```js
+// IIFE
+var moduleBar = (function () {
+  var name = 'frank'
+  var age = 18
+  return {
+    name: name,
+    age:age
+  }
+})()
+
+console.log(moduleBar.name)
+```
+## CommonJS 和 Node 关系
+![图片](../.vuepress/public/images/guifan2.png)
+## Node 中 CommonJS 的本质是对象引用的赋值
+实际上是**对象的引用赋值**, 指向同一个内存地址
+
+通过 exports 导出
+![图片](../.vuepress/public/images/benzhi1.png)
+
+## module.exports 又是什么
+**本质上是 module.exports 在导出**
+![图片](../.vuepress/public/images/benzhi2.png)
+## require 导入细节
+require 导入规则:
+![图片](../.vuepress/public/images/req01.png)
+![图片](../.vuepress/public/images/req02.png)
+
+## 模块加载过程
+要知道 , 模块加载是**同步**的
+![图片](../.vuepress/public/images/req03.png)
+![图片](../.vuepress/public/images/req3.png)
+
+那如果有循环引入 ,那么加载过程怎样 ?
+![图片](../.vuepress/public/images/tu1.png)
+![图片](../.vuepress/public/images/tu2.png)
+## CommonJS 规范缺点
+![图片](../.vuepress/public/images/cjquedian1.png)
+## CommonJS 的加载过程
+![图片](../.vuepress/public/images/cmj1.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ## -------------------------------
 ## Node 中模块的分类
 * **内置模块** (例如:fs, path , http 等)
 * **自定义模块** (用户创建的每个 .js 文件, 都是自定义模块)
@@ -176,8 +267,7 @@ npm i 包名     # 核心依赖包(被记录到 dependencies 节点)
 npm i 包名 -g  # 全局安装
 
 npm uninstall 包名 -g # 卸载全局安装的包
-```
-### 规范的包结构
+``` -->
 
 
 

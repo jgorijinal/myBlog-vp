@@ -8,63 +8,50 @@ export const data = {
   "headers": [
     {
       "level": 2,
-      "title": "读取指定文件内容",
-      "slug": "读取指定文件内容",
-      "children": [
-        {
-          "level": 3,
-          "title": "fs.readFile() 语法格式",
-          "slug": "fs-readfile-语法格式",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "fs.readFile() 实例代码",
-          "slug": "fs-readfile-实例代码",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "判断文件是否读取成功",
-          "slug": "判断文件是否读取成功",
-          "children": []
-        }
-      ]
-    },
-    {
-      "level": 2,
-      "title": "向指定文件写入内容",
-      "slug": "向指定文件写入内容",
-      "children": [
-        {
-          "level": 3,
-          "title": "fs.writeFile() 的语法格式",
-          "slug": "fs-writefile-的语法格式",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "判断是否写入成功",
-          "slug": "判断是否写入成功",
-          "children": []
-        }
-      ]
-    },
-    {
-      "level": 2,
-      "title": "练习",
-      "slug": "练习",
+      "title": "fs的三种操作方式",
+      "slug": "fs的三种操作方式",
       "children": []
     },
     {
       "level": 2,
-      "title": "路径动态拼接的问题 __dirname",
-      "slug": "路径动态拼接的问题-dirname",
+      "title": "文件描述符",
+      "slug": "文件描述符",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "文件的读写",
+      "slug": "文件的读写",
+      "children": [
+        {
+          "level": 3,
+          "title": "flag 选项",
+          "slug": "flag-选项",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "encoding 选项",
+          "slug": "encoding-选项",
+          "children": []
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "title": "文件夹操作",
+      "slug": "文件夹操作",
       "children": []
     }
   ],
   "git": {
-    "contributors": []
+    "contributors": [
+      {
+        "name": "jgoriginal",
+        "email": "932274204@qq.com",
+        "commits": 1
+      }
+    ]
   },
   "filePathRelative": "node/fs.md"
 }

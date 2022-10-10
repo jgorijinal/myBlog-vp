@@ -20,13 +20,38 @@ export const data = {
     },
     {
       "level": 2,
-      "title": "给 node 传递参数",
+      "title": "给 Node 传递参数",
       "slug": "给-node-传递参数",
       "children": []
+    },
+    {
+      "level": 2,
+      "title": "Node 全局对象",
+      "slug": "node-全局对象",
+      "children": [
+        {
+          "level": 3,
+          "title": "特殊的全局对象",
+          "slug": "特殊的全局对象",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "global 全局对象",
+          "slug": "global-全局对象",
+          "children": []
+        }
+      ]
     }
   ],
   "git": {
-    "contributors": []
+    "contributors": [
+      {
+        "name": "jgoriginal",
+        "email": "932274204@qq.com",
+        "commits": 1
+      }
+    ]
   },
   "filePathRelative": "node/start.md"
 }

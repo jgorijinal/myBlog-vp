@@ -8,163 +8,61 @@ export const data = {
   "headers": [
     {
       "level": 2,
-      "title": "Node 中模块的分类",
-      "slug": "node-中模块的分类",
-      "children": [
-        {
-          "level": 3,
-          "title": "加载模块",
-          "slug": "加载模块",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "使用 require() 方法注意点",
-          "slug": "使用-require-方法注意点",
-          "children": []
-        }
-      ]
-    },
-    {
-      "level": 2,
-      "title": "模块作用域",
-      "slug": "模块作用域",
-      "children": [
-        {
-          "level": 3,
-          "title": "module 对象",
-          "slug": "module-对象",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "module.exports 对象",
-          "slug": "module-exports-对象",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "exports 对象",
-          "slug": "exports-对象",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "exports 和 module.exports 使用误区",
-          "slug": "exports-和-module-exports-使用误区",
-          "children": []
-        }
-      ]
-    },
-    {
-      "level": 2,
-      "title": "模块化规范 CommonJS",
-      "slug": "模块化规范-commonjs",
+      "title": "没有模块化带来的问题",
+      "slug": "没有模块化带来的问题",
       "children": []
     },
     {
       "level": 2,
-      "title": "npm 与 包",
-      "slug": "npm-与-包",
+      "title": "CommonJS 和 Node 关系",
+      "slug": "commonjs-和-node-关系",
       "children": []
     },
     {
       "level": 2,
-      "title": "安装包",
-      "slug": "安装包",
-      "children": [
-        {
-          "level": 3,
-          "title": "安装指定版本",
-          "slug": "安装指定版本",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "卸载包",
-          "slug": "卸载包",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "语义化版本规范",
-          "slug": "语义化版本规范",
-          "children": []
-        }
-      ]
+      "title": "Node 中 CommonJS 的本质是对象引用的赋值",
+      "slug": "node-中-commonjs-的本质是对象引用的赋值",
+      "children": []
     },
     {
       "level": 2,
-      "title": "包管理配置文件",
-      "slug": "包管理配置文件",
-      "children": [
-        {
-          "level": 3,
-          "title": "创建 package.json 文件",
-          "slug": "创建-package-json-文件",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "dependencies 节点",
-          "slug": "dependencies-节点",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "devDependencies 节点",
-          "slug": "devdependencies-节点",
-          "children": []
-        }
-      ]
+      "title": "module.exports 又是什么",
+      "slug": "module-exports-又是什么",
+      "children": []
     },
     {
       "level": 2,
-      "title": "下载包速度慢的问题",
-      "slug": "下载包速度慢的问题",
-      "children": [
-        {
-          "level": 3,
-          "title": "切换 npm 的下包镜像源",
-          "slug": "切换-npm-的下包镜像源",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "nrm 切换下包服务器",
-          "slug": "nrm-切换下包服务器",
-          "children": []
-        }
-      ]
+      "title": "require 导入细节",
+      "slug": "require-导入细节",
+      "children": []
     },
     {
       "level": 2,
-      "title": "包的分类",
-      "slug": "包的分类",
-      "children": [
-        {
-          "level": 3,
-          "title": "项目包",
-          "slug": "项目包",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "全局包",
-          "slug": "全局包",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "规范的包结构",
-          "slug": "规范的包结构",
-          "children": []
-        }
-      ]
+      "title": "模块加载过程",
+      "slug": "模块加载过程",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "CommonJS 规范缺点",
+      "slug": "commonjs-规范缺点",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "CommonJS 的加载过程",
+      "slug": "commonjs-的加载过程",
+      "children": []
     }
   ],
   "git": {
-    "contributors": []
+    "contributors": [
+      {
+        "name": "jgoriginal",
+        "email": "932274204@qq.com",
+        "commits": 1
+      }
+    ]
   },
   "filePathRelative": "node/mokuaihua.md"
 }

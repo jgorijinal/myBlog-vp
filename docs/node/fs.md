@@ -1,5 +1,82 @@
 # fs 文件系统模块
-fs 模块是用拉埃操作文件的模块
+## fs的三种操作方式
+![图片](../.vuepress/public/images/fs1.png)
+#### 同步操作
+![图片](../.vuepress/public/images/fs2.png)
+
+终端会打出
+```
+后续需要执行的代码
+Stats {
+  dev: 1745203973,
+  mode: 33206,
+  nlink: 1,
+  uid: 0,
+  gid: 0,
+  rdev: 0,
+  blksize: 4096,
+  ino: 20547673300363388,
+  size: 25,
+  blocks: 0,
+  atimeMs: 1665300898547.661,
+  mtimeMs: 1665300898444.702,
+  ctimeMs: 1665300898444.702,
+  birthtimeMs: 1665300886624.2046,
+  atime: 2022-10-09T07:34:58.548Z,
+  mtime: 2022-10-09T07:34:58.445Z,
+  ctime: 2022-10-09T07:34:58.445Z,
+  birthtime: 2022-10-09T07:34:46.624Z
+}
+```
+#### 异步操作
+![图片](../.vuepress/public/images/fs3.png)
+#### promise 的方式
+![图片](../.vuepress/public/images/fs4.png)
+## 文件描述符
+![图片](../.vuepress/public/images/fd02.png)
+![图片](../.vuepress/public/images/fd01.png)
+## 文件的读写
+![图片](../.vuepress/public/images/dx1.png)
+### flag 选项
+flag 的值很多: 
+![图片](../.vuepress/public/images/flag1.png)
+例: 
+![图片](../.vuepress/public/images/xr1.png)
+### encoding 选项
+![图片](../.vuepress/public/images/dq1.png)
+## 文件夹操作
+#### 创建文件夹
+![图片](../.vuepress/public/images/cjjj.png)
+#### 读取文件夹中的所有文件
+![图片](../.vuepress/public/images/dq111.png)
+![图片](../.vuepress/public/images/wjj1.png)
+#### 重命名
+![图片](../.vuepress/public/images/rename1.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- fs 模块是用拉埃操作文件的模块
 
 例如:
 * `fs.readFile()` 方法, 用来读取指定文件的内容
@@ -147,7 +224,7 @@ fs.readFile(__dirname + '/file/1.txt', 'utf8', function (err, dataStr) {
   console.log('文件读取成功, 内容是:' + result)
 })
 ```
-```
+``` -->
 
 
 
