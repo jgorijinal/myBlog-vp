@@ -144,12 +144,9 @@ module.exports = {
                 text: 'Webpack系列',
                 collapsible: true,
                 children: [
-                    '/webpack/basic.md',
-                    // '/webpack/vuecli.md',
-                    // '/webpack/start.md',
-                    // '/webpack/else.md',
-                    // '/webpack/babel.md',
-                    // '/webpack/devServer.md',
+                    '/webpack/start1.md',
+                    '/webpack/start2.md',
+                    '/webpack/plugin1.md'
                 
                 ]
             },

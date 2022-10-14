@@ -55,7 +55,9 @@ export const themeData = {
       "text": "Webpack系列",
       "collapsible": true,
       "children": [
-        "/webpack/basic.md"
+        "/webpack/start1.md",
+        "/webpack/start2.md",
+        "/webpack/plugin1.md"
       ]
     },
     {

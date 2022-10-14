@@ -1,5 +1,76 @@
 # express
+![图片](../.vuepress/public/images/exp1.png)
+## 安装
+![图片](../.vuepress/public/images/exp5.png)
 ## 基本使用
+![图片](../.vuepress/public/images/exp2.png)
+![图片](../.vuepress/public/images/exp3.png)
+## 认识中间件
+![图片](../.vuepress/public/images/hd1.png)
+![图片](../.vuepress/public/images/jj1.png)
+
+## 应用中间件 - 自己编写
+![图片](../.vuepress/public/images/jj2.png)
+### 普通中间件
+![图片](../.vuepress/public/images/jj3.png)
+### path 路径匹配的中间件
+![图片](../.vuepress/public/images/jj5.png)
+### path 和 method 匹配的中间件
+![图片](../.vuepress/public/images/jj6.png)
+### 连续注册多个中间件
+![图片](../.vuepress/public/images/next.png)
+## 中间件的应用
+![图片](../.vuepress/public/images/yyy0.png)
+### 编写解析 request body 中间件
+![图片](../.vuepress/public/images/yyy1.png)
+### json, urlencoded 解析
+![图片](../.vuepress/public/images/yyy3.png)
+其中 `express.urlencoded({extended: true})`
+* `true` : 那么对 urlencoded 进行解析时, 它使用的是第三方库 qs
+* `false` : 那么对urlencoded 进行解析时, 使用的是 Node 内置的模块 querystring
+### form-data 解析
+需要使用 express 官方推出的第三方库 **multer**
+```shell
+npm install multer
+```
+![图片](../.vuepress/public/images/multer1.png)
+### form-data 上传文件
+![图片](../.vuepress/public/images/multer2.png)
+### 第三方中间件
+![图片](../.vuepress/public/images/morgan1.png)
+## 客户端发送请求的方式
+![图片](../.vuepress/public/images/morgan1.png)
+### request 参数解析 - params, query
+![图片](../.vuepress/public/images/qupa1.png)
+## 响应数据
+![图片](../.vuepress/public/images/xy1.png)
+![图片](../.vuepress/public/images/xy2.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ## 基本使用
 ### 安装 express
 ```
 npm i express@4.17.1
@@ -197,7 +268,7 @@ app.use('/api', userRouter)
 
 
 
-
+ -->
 
 
 

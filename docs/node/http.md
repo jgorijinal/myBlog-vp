@@ -1,5 +1,89 @@
 # http 模块
-创建 web 服务器
+先安装一个工具 nodemon - 每次修改完代码, nodemon 会自动重启整个服务器 
+```shell
+npm install nodemon
+```
+![图片](../.vuepress/public/images/ht1.png)
+## 创建服务器
+![图片](../.vuepress/public/images/tp2.png)
+**创建 server 的两种方式**
+![图片](../.vuepress/public/images/tp1.png)
+## 监听端口号和主机
+![图片](../.vuepress/public/images/tp3.png)
+
+## request 对象 
+### request 对象 - url
+最最基本的用法
+![图片](../.vuepress/public/images/req1.png)
+
+但是如果地址是 /login?username=why&password=123 ,(明文传输) 并且是个 POST 请求, 如何分析?
+
+使用内置模块 url 和 querystring
+![图片](../.vuepress/public/images/req2.png)
+### request 对象 - method
+![图片](../.vuepress/public/images/met2.png)
+
+现在想要拿到 post 请求中 body 里面的数据
+
+![图片](../.vuepress/public/images/met1.png)
+### request 对象 - header 属性
+![图片](../.vuepress/public/images/head1.png)
+![图片](../.vuepress/public/images/head2.png)
+![图片](../.vuepress/public/images/head3.png)
+## response 对象
+### response 对象 - 状态码
+![图片](../.vuepress/public/images/hcode1.png)
+
+**设置状态码两种方式:**
+![图片](../.vuepress/public/images/hcode2.png)
+### response 对象 - 响应 header
+**设置响应 header 的两种方式**
+![图片](../.vuepress/public/images/header1.png)
+
+## http 中发送网络请求
+![图片](../.vuepress/public/images/http22.png)
+## 文件上传 - 错误示范
+![图片](../.vuepress/public/images/file1.png)
+![图片](../.vuepress/public/images/cshangchuan1.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 创建 web 服务器
 
 先导入
 ```js
@@ -168,4 +252,4 @@ if(url === '/') {
   fpath = path.join(__dirname , './clock',url)
 }
 ```
-
+ -->

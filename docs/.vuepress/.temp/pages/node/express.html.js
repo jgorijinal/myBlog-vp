@@ -8,108 +8,108 @@ export const data = {
   "headers": [
     {
       "level": 2,
-      "title": "基本使用",
-      "slug": "基本使用",
-      "children": [
-        {
-          "level": 3,
-          "title": "安装 express",
-          "slug": "安装-express",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "创建基本的 web 服务器",
-          "slug": "创建基本的-web-服务器",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "监听 GET / POST 请求",
-          "slug": "监听-get-post-请求",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "把内容响应给客户端",
-          "slug": "把内容响应给客户端",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "获取 URL 中携带的查询参数",
-          "slug": "获取-url-中携带的查询参数",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "获取 url 中的动态参数",
-          "slug": "获取-url-中的动态参数",
-          "children": []
-        }
-      ]
-    },
-    {
-      "level": 2,
-      "title": "托管静态资源",
-      "slug": "托管静态资源",
-      "children": [
-        {
-          "level": 3,
-          "title": "express.static()",
-          "slug": "express-static",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "托管多个静态资源目录",
-          "slug": "托管多个静态资源目录",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "挂载路径前缀",
-          "slug": "挂载路径前缀",
-          "children": []
-        }
-      ]
-    },
-    {
-      "level": 2,
-      "title": "nodemon",
-      "slug": "nodemon",
+      "title": "安装",
+      "slug": "安装",
       "children": []
     },
     {
       "level": 2,
-      "title": "路由",
-      "slug": "路由",
+      "title": "基本使用",
+      "slug": "基本使用",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "认识中间件",
+      "slug": "认识中间件",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "应用中间件 - 自己编写",
+      "slug": "应用中间件-自己编写",
       "children": [
         {
           "level": 3,
-          "title": "Express 中的路由",
-          "slug": "express-中的路由",
+          "title": "普通中间件",
+          "slug": "普通中间件",
           "children": []
         },
         {
           "level": 3,
-          "title": "路由的匹配过程",
-          "slug": "路由的匹配过程",
+          "title": "path 路径匹配的中间件",
+          "slug": "path-路径匹配的中间件",
           "children": []
         },
         {
           "level": 3,
-          "title": "最简单用法",
-          "slug": "最简单用法",
+          "title": "path 和 method 匹配的中间件",
+          "slug": "path-和-method-匹配的中间件",
           "children": []
         },
         {
           "level": 3,
-          "title": "模块化路由",
-          "slug": "模块化路由",
+          "title": "连续注册多个中间件",
+          "slug": "连续注册多个中间件",
           "children": []
         }
       ]
+    },
+    {
+      "level": 2,
+      "title": "中间件的应用",
+      "slug": "中间件的应用",
+      "children": [
+        {
+          "level": 3,
+          "title": "编写解析 request body 中间件",
+          "slug": "编写解析-request-body-中间件",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "json, urlencoded 解析",
+          "slug": "json-urlencoded-解析",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "form-data 解析",
+          "slug": "form-data-解析",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "form-data 上传文件",
+          "slug": "form-data-上传文件",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "第三方中间件",
+          "slug": "第三方中间件",
+          "children": []
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "title": "客户端发送请求的方式",
+      "slug": "客户端发送请求的方式",
+      "children": [
+        {
+          "level": 3,
+          "title": "request 参数解析 - params, query",
+          "slug": "request-参数解析-params-query",
+          "children": []
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "title": "响应数据",
+      "slug": "响应数据",
+      "children": []
     }
   ],
   "git": {

@@ -8,77 +8,71 @@ export const data = {
   "headers": [
     {
       "level": 2,
-      "title": "创建最基本的 web 服务器",
-      "slug": "创建最基本的-web-服务器",
-      "children": [
-        {
-          "level": 3,
-          "title": "基本步骤",
-          "slug": "基本步骤",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "req 请求对象",
-          "slug": "req-请求对象",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "res 响应对象",
-          "slug": "res-响应对象",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "解决中文乱码问题",
-          "slug": "解决中文乱码问题",
-          "children": []
-        }
-      ]
-    },
-    {
-      "level": 2,
-      "title": "根据不同的 url 响应不同的 html 内容",
-      "slug": "根据不同的-url-响应不同的-html-内容",
+      "title": "创建服务器",
+      "slug": "创建服务器",
       "children": []
     },
     {
       "level": 2,
-      "title": "案例",
-      "slug": "案例",
+      "title": "监听端口号和主机",
+      "slug": "监听端口号和主机",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "request 对象",
+      "slug": "request-对象",
       "children": [
         {
           "level": 3,
-          "title": "1. 导入需要的模块",
-          "slug": "_1-导入需要的模块",
+          "title": "request 对象 - url",
+          "slug": "request-对象-url",
           "children": []
         },
         {
           "level": 3,
-          "title": "2. 创建基本的 web 服务器",
-          "slug": "_2-创建基本的-web-服务器",
+          "title": "request 对象 - method",
+          "slug": "request-对象-method",
           "children": []
         },
         {
           "level": 3,
-          "title": "3. 将资源的请求 url 地址映射为文件的存放路径",
-          "slug": "_3-将资源的请求-url-地址映射为文件的存放路径",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "4. 读取文件的内容响应给客户端",
-          "slug": "_4-读取文件的内容响应给客户端",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "5. 优化资源的请求路径",
-          "slug": "_5-优化资源的请求路径",
+          "title": "request 对象 - header 属性",
+          "slug": "request-对象-header-属性",
           "children": []
         }
       ]
+    },
+    {
+      "level": 2,
+      "title": "response 对象",
+      "slug": "response-对象",
+      "children": [
+        {
+          "level": 3,
+          "title": "response 对象 - 状态码",
+          "slug": "response-对象-状态码",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "response 对象 - 响应 header",
+          "slug": "response-对象-响应-header",
+          "children": []
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "title": "http 中发送网络请求",
+      "slug": "http-中发送网络请求",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "文件上传 - 错误示范",
+      "slug": "文件上传-错误示范",
+      "children": []
     }
   ],
   "git": {
