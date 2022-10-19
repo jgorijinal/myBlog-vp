@@ -146,7 +146,11 @@ module.exports = {
                 children: [
                     '/webpack/start1.md',
                     '/webpack/start2.md',
-                    '/webpack/plugin1.md'
+                    '/webpack/plugin1.md',
+                    // '/webpack/sourcemap.md',
+                    '/webpack/babel2.md',
+                    // '/webpack/eslint.md'
+                    '/webpack/devServerHMR.md'
                 
                 ]
             },
@@ -265,6 +269,13 @@ module.exports = {
             //         '/xiaochengxuyinyue/shouye.md'
             //         ]
             // },
+            {
+                text: '记账项目',
+                collapsible: true,
+                children: [
+                    '/jizhang/dajian.md',
+                    '/jizhang/zujian.md',                ]
+            },
             {
                 text: 'Vue3后台',
                 collapsible: true,

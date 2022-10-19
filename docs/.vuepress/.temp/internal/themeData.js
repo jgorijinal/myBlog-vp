@@ -57,7 +57,9 @@ export const themeData = {
       "children": [
         "/webpack/start1.md",
         "/webpack/start2.md",
-        "/webpack/plugin1.md"
+        "/webpack/plugin1.md",
+        "/webpack/babel2.md",
+        "/webpack/devServerHMR.md"
       ]
     },
     {
@@ -157,6 +159,14 @@ export const themeData = {
       "children": [
         "/xiaochengxu2/shiwu.md",
         "/xiaochengxu2/taolu.md"
+      ]
+    },
+    {
+      "text": "记账项目",
+      "collapsible": true,
+      "children": [
+        "/jizhang/dajian.md",
+        "/jizhang/zujian.md"
       ]
     },
     {
