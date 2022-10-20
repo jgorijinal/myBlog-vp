@@ -29,10 +29,47 @@ export const data = {
       "title": "tabs 标签页 组件",
       "slug": "tabs-标签页-组件",
       "children": []
+    },
+    {
+      "level": 2,
+      "title": "InputPad 数字按键 组件",
+      "slug": "inputpad-数字按键-组件",
+      "children": [
+        {
+          "level": 3,
+          "title": "初步实现布局",
+          "slug": "初步实现布局",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "Vant 引入日期选择器 和 弹出层 组件",
+          "slug": "vant-引入日期选择器-和-弹出层-组件",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "改数字按键的需求 并且完成数字检查",
+          "slug": "改数字按键的需求-并且完成数字检查",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "点击提交派发事件",
+          "slug": "点击提交派发事件",
+          "children": []
+        }
+      ]
     }
   ],
   "git": {
-    "contributors": []
+    "contributors": [
+      {
+        "name": "jgoriginal",
+        "email": "932274204@qq.com",
+        "commits": 1
+      }
+    ]
   },
   "filePathRelative": "jizhang/zujian.md"
 }

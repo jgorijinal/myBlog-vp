@@ -396,6 +396,258 @@ tab.vue
 }
 </style>
 ```
+## InputPad 数字按键 组件
+![图片](../.vuepress/public/images/ipad1.png)
+### 初步实现布局
+```vue
+<template>
+  <div class="inputPad">
+    <div class="notes">
+      <span class="date">
+        <img :src="dateSvg" alt="">
+        <span class="dateText">2025-04-12</span>
+      </span>
+      <span class="amount">123456</span>
+    </div>
+    <div class="pad">
+      <button v-for="button in buttons" @click="button.clickFn">{{button.text}}</button>
+    </div>
+  </div>
+</template>
+<script lang="ts" setup>
+import dateSvg from '../assets/icons/date.svg'
+// 数字按键规则, v-for 循环显示
+const buttons = [
+  { text: '1', clickFn: () => { } },
+  { text: '2', clickFn: () => { } },
+  { text: '3', clickFn: () => { } },
+  { text: 'del', clickFn: () => { } },
+  { text: '4', clickFn: () => { } },
+  { text: '5', clickFn: () => { } },
+  { text: '6', clickFn: () => { } },
+  { text: '+', clickFn: () => { } },
+  { text: '7', clickFn: () => { } },
+  { text: '8', clickFn: () => { } },
+  { text: '9', clickFn: () => { } },
+  { text: '-', clickFn: () => { } },
+  { text: '.', clickFn: () => { } },
+  { text: '0', clickFn: () => { } },
+  { text: '清空', clickFn: () => { } },
+  { text: '提交', clickFn: () => { } },
+]
+</script>
+<style lang="scss" scoped>
+.inputPad{
+  .notes {
+    display: flex;
+    padding:8px;
+    border-top:1px solid rgb(225, 224, 224); ;
+    justify-content: space-between;
+    .date {
+      display: flex;
+      img{
+      width:30px;
+      height:30px;
+      margin-right:8px;
+    }
+    .dateText{
+      display: flex;
+      align-items: center;
+      color:gray;
+      font-size:14px;
+    }
+    }
+    .amount {
+      display: flex;
+      align-items: center;
+      color:#00b894;
+      font-size:22px;
+    }
+  }
+  .pad{
+    font-size: 18px;
+    display: flex;
+    flex-wrap: wrap;
+    border-top:1px solid rgb(225, 224, 224);
+    button {
+      border:none;
+      border-right:1px solid rgb(225, 224, 224);
+      border-bottom:1px solid rgb(225, 224, 224);
+      padding:16px;
+      width:25%;
+      color:#636e72;
+      background-color:white;
+      transition:all 0.25s ease;
+      &:nth-child(4n) {
+        border-right:none;
+      }
+      &:hover,&:active {
+        background-color: #feedb0;
+        border-right:1px solid #feedb0;
+      border-bottom:1px solid #feedb0;
+      }
+    }
+  }
+}
+</style>
+```
+### Vant 引入日期选择器 和 弹出层 组件
+![图片](../.vuepress/public/images/riqi1.png)
+
+[Vant 安装](https://vant-contrib.gitee.io/vant/#/zh-CN/quickstart#tong-guo-npm-an-zhuang)
+[Vant 按需引入组件方法](https://vant-contrib.gitee.io/vant/#/zh-CN/quickstart#fang-fa-er.-an-xu-yin-ru-zu-jian-yang-shi)
+
+utils/formatDate.js 先封装日期格式转换工具函数
+```shell
+npm i dayjs
+```
+```ts
+import dayjs from 'dayjs'
+
+// 加载中文语言包
+import 'dayjs/locale/zh-cn'
+
+// 配置使用中文语言包
+dayjs.locale('zh-cn')
+
+const DATE_TIME_FORMAT = "YYYY-MM-DD"
+
+export default function formateDate(date:Date,format:string = DATE_TIME_FORMAT) {
+  return dayjs(date).format(format)
+}
+```
+
+使用 日期选择器 和 弹出层 组件 
+```vue{4,13-24}
+<template>
+  <div class="inputPad">
+    <div class="notes">
+      <span class="date" @click="popupVisible = true">
+        <img :src="dateSvg" alt="">
+        <span class="dateText">{{formatDate(currentDate)}}</span>
+      </span>
+      <span class="amount">123456</span>
+    </div>
+    <div class="pad">
+      <button v-for="button in buttons" @click="button.clickFn">{{button.text}}</button>
+    </div>
+    <!--弹出层 - 日期选择器-->
+    <van-popup v-model:show="popupVisible" position="bottom">
+      <van-datetime-picker
+          :value="currentDate"
+          type="date"
+          title="请选择年月日"
+          :min-date="minDate"
+          :max-date="maxDate"
+          @confirm = "clickConfirmHandle"
+          @cancel = "clickCancelHandle"
+      />
+    </van-popup>
+  </div>
+</template>
+<script lang="ts" setup>
+import dateSvg from '../assets/icons/date.svg'
+import { ref } from 'vue';
+import formatDate from '../utils/formatDate'
+const buttons = [
+  { text: '1', clickFn: () => { } },
+  { text: '2', clickFn: () => { } },
+  { text: '3', clickFn: () => { } },
+  ...
+  ...
+]
+// 弹出层
+const popupVisible = ref(false)
+// 选择的日期
+const currentDate = ref(new Date(2021, 0, 17));
+const minDate = new Date(2020, 0, 1)
+const maxDate = new Date(2025, 10, 1)
+
+// 日期选择 - 点击确认
+const clickConfirmHandle = (date:Date) => {
+  console.log(date)
+  currentDate.value = date
+  popupVisible.value = false
+}
+// 日期选择 - 点击取消
+const clickCancelHandle = () => {
+  popupVisible.value = false
+}
+</script>
+```
+### 改数字按键的需求 并且完成数字检查
+![图片](../.vuepress/public/images/sz.png)
+
+布局细节:
+* 使用 `grid` 布局
+![图片](../.vuepress/public/images/sz1.png)
+
+数字检查细节:
+* 一开始就有 `0`
+* 一开始`0`之后不能再连续输入 `0`, 但小数点之后的 `0`可以重复
+* 一开始`0`, 再选 1~9 会把`0`去掉, 但`.`除外
+* `.`之后不能再有个 `.`
+
+```js
+const buttons = [
+  { text: '1', clickFn: () => { appendText('1')} },
+  { text: '2', clickFn: () => { appendText('2')} },
+  { text: '3', clickFn: () => { appendText('3')} },
+  { text: '4', clickFn: () => { appendText('4')} },
+  { text: '5', clickFn: () => { appendText('5')} },
+  { text: '6', clickFn: () => { appendText('6')} },
+  { text: '7', clickFn: () => { appendText('7')} },
+  { text: '8', clickFn: () => { appendText('8')} },
+  { text: '9', clickFn: () => { appendText('9')} },
+  { text: '0', clickFn: () => { appendText('0')} },
+  { text: '·', clickFn: () => { appendText('.')} },
+  { text: '清空', clickFn: () => {amount.value = '0' } },
+  { text: '提交', clickFn: () => { console.log('提交')} },
+]
+// 总金额
+const amount = ref('0')
+// 按键逻辑
+const appendText = (str:string) => {
+  if (str === '.') {
+    if (amount.value.indexOf('.') > -1) {
+      return 
+    }
+  }
+  if (amount.value === '0') {
+    if (str === '.') {
+      amount.value += str
+      return 
+    }
+    amount.value = ''  
+    amount.value += str
+    return 
+  }
+  if (amount.value.length === 16) {
+    return
+  }
+  amount.value += str
+}
+```
+### 点击提交派发事件
+目前提交条件的细节还没有添加, 后面使用时需要自己定制
+```js
+const emits = defineEmits(['click-submit'])
+
+const buttons = [
+  ...
+  { 
+    text: '提交', 
+    clickFn: () => { 
+      emits('click-submit' , amount.value)
+    }},
+]
+
+const amount = ref('0')
+```
+并且父组件监听此事件
+```vue
+  <inputPad @click-submit="submitHandle"/>
+```
 
 
 
