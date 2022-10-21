@@ -12,15 +12,15 @@ const rules = [
   { key: 'tagName', pattern: /^.{1,4}$/, message: '请填入1~4个字符' },
   { key: 'emoji', required: true, message: '必填' },
 ]
-
+// validate 函数需要封装
 const errors = validate(formData, rules)
 // 可以得出 errors 的数据结构为
 // const errors = {
-//   'tagName': ['错误1', '错误2'],
-//   'emoji':['错误3', '错误4']
+//   'tagName': ['错误信息 1', '错误信息 2'],
+//   'emoji':['错误信息 3', '错误信息 4']
 // }
 ```
-根据 表单数据 `formData` 和 验证规则 `rules`, 封装一个 `validate` 工具函数返回对应的 `errors`,
+根据 **表单数据 `formData` 和 验证规则 `rules**`, **需要封装一个 `validate` 工具函数**返回其表单验证对应的 `errors` 错误信息,
 然后可以再根据结果 errors 在模板上渲染
 
 ### 实现表单验证函数
@@ -30,7 +30,7 @@ utils/validate.ts
 export interface FData {
   [k: string]: string | number | undefined | null
 }
-// 每个验证规则 Rule 每个规则的 key 必须是 FData的属性值, 所以使用泛型
+// 每个验证规则 Rule 每个规则的 key 必须是 FData 的属性值, 所以这里使用泛型
 export interface Rule<T>  {
   key: keyof T
   message: string
@@ -62,7 +62,7 @@ export const validate = <T extends FData>(formData: T, rules: Rules<T>) => {
   return errors
 }
 ```
-### 使用校验函数
+### 使用校验函数并渲染模板
 **点击确定**时触发此校验函数
 ```vue
 <script>
@@ -71,6 +71,7 @@ const formData = reactive({
   tagName: '',
   emoji:''
 })
+// 表单数据 ts 类型
 type FormData =  {
   tagName:string
   emoji:string

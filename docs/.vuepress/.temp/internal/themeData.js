@@ -59,7 +59,8 @@ export const themeData = {
         "/webpack/start2.md",
         "/webpack/plugin1.md",
         "/webpack/babel2.md",
-        "/webpack/devServerHMR.md"
+        "/webpack/devServerHMR.md",
+        "/webpack/fenli.md"
       ]
     },
     {
@@ -167,7 +168,7 @@ export const themeData = {
       "children": [
         "/jizhang/dajian.md",
         "/jizhang/zujian.md",
-        "/jizhang/yewugon.md"
+        "/jizhang/yewu.md"
       ]
     },
     {

@@ -1,9 +1,13 @@
-<template><h1 id="plugin" tabindex="-1"><a class="header-anchor" href="#plugin" aria-hidden="true">#</a> plugin</h1>
+<template><h1 id="plugin" tabindex="-1"><a class="header-anchor" href="#plugin" aria-hidden="true">#</a> plugin；</h1>
+<p><code>loader</code> 是文件加载器</p>
 <ul>
-<li>Loader 是用于 <strong>特定的模块类型</strong>(处理或转换某一个文件) 进行转换；</li>
-<li>Plugin 可以用于 <strong>执行更加广泛的任务</strong>(应用场景更多) ，比如打包优化、资源管理、环境变量注入等；</li>
+<li>功能：能够对文件进行编译、优化、混淆（压缩）等 , 用于 <strong>特定的模块类型</strong>(处理或转换某一个文件) 进行转换，比如 babel-loader , vue-loader</li>
+<li>运行时机：在创建最终产物之前运行
+<code>plugin</code> 是 webpack 插件</li>
+<li>功能：能实现更多功能，比如定义全局变量、Code Split、加速编译等 , 打包优化、资源管理、环境变量注入...</li>
+<li>运行时机：在整个打包过程（以及前后）都能运行
+<img src="@source/.vuepress/public/images/plu1.png" alt="图片"></li>
 </ul>
-<p><img src="@source/.vuepress/public/images/plu1.png" alt="图片"></p>
 <h2 id="cleanwebpackplugin" tabindex="-1"><a class="header-anchor" href="#cleanwebpackplugin" aria-hidden="true">#</a> CleanWebpackPlugin</h2>
 <p>在前面，每次修改了一些配置，重新打包时，都需要手动删除dist文件夹：</p>
 <ul>

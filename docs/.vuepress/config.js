@@ -150,7 +150,8 @@ module.exports = {
                     // '/webpack/sourcemap.md',
                     '/webpack/babel2.md',
                     // '/webpack/eslint.md'
-                    '/webpack/devServerHMR.md'
+                    '/webpack/devServerHMR.md',
+                    '/webpack/fenli.md'
                 
                 ]
             },

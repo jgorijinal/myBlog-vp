@@ -25,15 +25,21 @@ export const data = {
         },
         {
           "level": 3,
-          "title": "使用校验函数",
-          "slug": "使用校验函数",
+          "title": "使用校验函数并渲染模板",
+          "slug": "使用校验函数并渲染模板",
           "children": []
         }
       ]
     }
   ],
   "git": {
-    "contributors": []
+    "contributors": [
+      {
+        "name": "jgoriginal",
+        "email": "932274204@qq.com",
+        "commits": 1
+      }
+    ]
   },
   "filePathRelative": "jizhang/yewu.md"
 }
