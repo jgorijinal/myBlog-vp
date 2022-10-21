@@ -166,7 +166,8 @@ export const themeData = {
       "collapsible": true,
       "children": [
         "/jizhang/dajian.md",
-        "/jizhang/zujian.md"
+        "/jizhang/zujian.md",
+        "/jizhang/yewugon.md"
       ]
     },
     {

@@ -274,7 +274,9 @@ module.exports = {
                 collapsible: true,
                 children: [
                     '/jizhang/dajian.md',
-                    '/jizhang/zujian.md',                ]
+                    '/jizhang/zujian.md',
+                    '/jizhang/yewu.md',
+                ]
             },
             {
                 text: 'Vue3后台',

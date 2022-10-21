@@ -60,6 +60,12 @@ export const data = {
           "children": []
         }
       ]
+    },
+    {
+      "level": 2,
+      "title": "emojiSelecte 表情选择器 组件",
+      "slug": "emojiselecte-表情选择器-组件",
+      "children": []
     }
   ],
   "git": {
@@ -67,7 +73,7 @@ export const data = {
       {
         "name": "jgoriginal",
         "email": "932274204@qq.com",
-        "commits": 1
+        "commits": 2
       }
     ]
   },
