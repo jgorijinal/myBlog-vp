@@ -97,3 +97,31 @@ const onSubmit = (e:Event) => {
 
 并且在模板上绑定进行渲染
 ![图片](../.vuepress/public/images/errors2.png)
+## 封装 dayjs 函数
+封装一些项目中使用到的 dayjs函数
+```js
+import dayjs from 'dayjs'
+
+// 上个月
+export function getLastMonth() {
+  return {
+    startDate: dayjs().subtract(1, 'month').startOf('month').format('YYYY-MM-DD'),
+    endDate:dayjs().subtract(1, 'month').endOf('month').format('YYYY-MM-DD')
+  }
+}
+
+// 本月
+export function getThisMonth(){
+  return {
+    startDate: dayjs().startOf('month').format('YYYY-MM-DD'),
+    endDate:dayjs().endOf('month').format('YYYY-MM-DD'),
+  }
+}
+// 今年
+export function getThisYear(){
+  return {
+    startDate: dayjs().startOf('year').format('YYYY-MM-DD'),
+    endDate:dayjs().endOf('year').format('YYYY-MM-DD'),
+  }
+}
+```

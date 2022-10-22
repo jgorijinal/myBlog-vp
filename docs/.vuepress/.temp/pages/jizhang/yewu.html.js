@@ -30,6 +30,12 @@ export const data = {
           "children": []
         }
       ]
+    },
+    {
+      "level": 2,
+      "title": "封装 dayjs 函数",
+      "slug": "封装-dayjs-函数",
+      "children": []
     }
   ],
   "git": {
@@ -37,7 +43,7 @@ export const data = {
       {
         "name": "jgoriginal",
         "email": "932274204@qq.com",
-        "commits": 1
+        "commits": 2
       }
     ]
   },

@@ -303,13 +303,13 @@ module.exports = {
                     '/fengzhuang/zhongshang.md',
                     ]
             },
-            {
-                text: 'Element-ui',
-                collapsible: true,
-                children: [
-                    '/elementui/jicheng.md',
-                ]
-            },
+            // {
+            //     text: 'Element-ui',
+            //     collapsible: true,
+            //     children: [
+            //         '/elementui/jicheng.md',
+            //     ]
+            // },
             // {
             //     text: 'uni-app商城',
             //     collapsible: true,

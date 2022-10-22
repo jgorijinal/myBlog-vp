@@ -196,13 +196,6 @@ export const themeData = {
       ]
     },
     {
-      "text": "Element-ui",
-      "collapsible": true,
-      "children": [
-        "/elementui/jicheng.md"
-      ]
-    },
-    {
       "text": "Vue2 UI",
       "collapsible": true,
       "children": [

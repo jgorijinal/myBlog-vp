@@ -66,6 +66,12 @@ export const data = {
       "title": "emojiSelecte 表情选择器 组件",
       "slug": "emojiselecte-表情选择器-组件",
       "children": []
+    },
+    {
+      "level": 2,
+      "title": "date-picker 日期选择器组件",
+      "slug": "date-picker-日期选择器组件",
+      "children": []
     }
   ],
   "git": {
