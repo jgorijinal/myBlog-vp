@@ -72,6 +72,43 @@ export const data = {
       "title": "date-picker 日期选择器组件",
       "slug": "date-picker-日期选择器组件",
       "children": []
+    },
+    {
+      "level": 2,
+      "title": "chart 统计图表组件",
+      "slug": "chart-统计图表组件",
+      "children": [
+        {
+          "level": 3,
+          "title": "实现 select 控件",
+          "slug": "实现-select-控件",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "useEchart hook 的封装",
+          "slug": "useechart-hook-的封装",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "baseEchart 组件的封装",
+          "slug": "baseechart-组件的封装",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "lineEchart 折线图的封装",
+          "slug": "lineechart-折线图的封装",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "pieEchart 饼图的封装",
+          "slug": "pieechart-饼图的封装",
+          "children": []
+        }
+      ]
     }
   ],
   "git": {
@@ -79,7 +116,7 @@ export const data = {
       {
         "name": "jgoriginal",
         "email": "932274204@qq.com",
-        "commits": 3
+        "commits": 4
       }
     ]
   },

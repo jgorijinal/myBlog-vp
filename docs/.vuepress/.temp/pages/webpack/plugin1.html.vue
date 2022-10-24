@@ -1,9 +1,11 @@
-<template><h1 id="plugin" tabindex="-1"><a class="header-anchor" href="#plugin" aria-hidden="true">#</a> plugin；</h1>
+<template><h1 id="plugin" tabindex="-1"><a class="header-anchor" href="#plugin" aria-hidden="true">#</a> plugin</h1>
 <p><code>loader</code> 是文件加载器</p>
 <ul>
 <li>功能：能够对文件进行编译、优化、混淆（压缩）等 , 用于 <strong>特定的模块类型</strong>(处理或转换某一个文件) 进行转换，比如 babel-loader , vue-loader</li>
-<li>运行时机：在创建最终产物之前运行
-<code>plugin</code> 是 webpack 插件</li>
+<li>运行时机：在创建最终产物之前运行</li>
+</ul>
+<p><code>plugin</code> 是 webpack 插件</p>
+<ul>
 <li>功能：能实现更多功能，比如定义全局变量、Code Split、加速编译等 , 打包优化、资源管理、环境变量注入...</li>
 <li>运行时机：在整个打包过程（以及前后）都能运行
 <img src="@source/.vuepress/public/images/plu1.png" alt="图片"></li>
@@ -14,7 +16,7 @@
 <li>可以借助于一个插件来帮助我们完成，这个插件就是 <strong><code>CleanWebpackPlugin</code></strong></li>
 </ul>
 <p>首先，先安装这个插件：</p>
-<div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token function">npm</span> <span class="token function">install</span> clean-webpack-plugin -D
+<div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token function">npm</span> <span class="token function">install</span> clean-webpack-plugin -D 
 </code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br></div></div><ul>
 <li>之后在插件中配置：</li>
 </ul>

@@ -36,6 +36,44 @@ export const data = {
       "title": "封装 dayjs 函数",
       "slug": "封装-dayjs-函数",
       "children": []
+    },
+    {
+      "level": 2,
+      "title": "axios 封装",
+      "slug": "axios-封装",
+      "children": [
+        {
+          "level": 3,
+          "title": "基本使用",
+          "slug": "基本使用",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "axios 拦截器的使用",
+          "slug": "axios-拦截器的使用",
+          "children": []
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "title": "登录",
+      "slug": "登录",
+      "children": [
+        {
+          "level": 3,
+          "title": "登录之后的路由跳转到原来页面功能",
+          "slug": "登录之后的路由跳转到原来页面功能",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "登录鉴权(路由守卫)",
+          "slug": "登录鉴权-路由守卫",
+          "children": []
+        }
+      ]
     }
   ],
   "git": {
@@ -43,7 +81,7 @@ export const data = {
       {
         "name": "jgoriginal",
         "email": "932274204@qq.com",
-        "commits": 2
+        "commits": 3
       }
     ]
   },

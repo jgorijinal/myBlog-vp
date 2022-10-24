@@ -1,7 +1,7 @@
 export const data = {
   "key": "v-456ef816",
   "path": "/webpack/plugin1.html",
-  "title": "plugin；",
+  "title": "plugin",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",

@@ -1,7 +1,8 @@
-# plugin；
+# plugin
 `loader` 是文件加载器
 * 功能：能够对文件进行编译、优化、混淆（压缩）等 , 用于 **特定的模块类型**(处理或转换某一个文件) 进行转换，比如 babel-loader , vue-loader
 * 运行时机：在创建最终产物之前运行
+
 `plugin` 是 webpack 插件
 * 功能：能实现更多功能，比如定义全局变量、Code Split、加速编译等 , 打包优化、资源管理、环境变量注入...
 * 运行时机：在整个打包过程（以及前后）都能运行
@@ -12,7 +13,7 @@
 
 首先，先安装这个插件：
 ```shell
-npm install clean-webpack-plugin -D
+npm install clean-webpack-plugin -D 
 ```
 
 * 之后在插件中配置：

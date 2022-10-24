@@ -909,4 +909,238 @@ const clickDateEndPicker = () => {
 }
 </style>
 ```
+## chart 统计图表组件
+### 实现 select 控件
+![图片](../.vuepress/public/images/eselect1.png)
 
+select 选择完选项后, 发起事件通知父组件
+```vue
+<template>
+  <div class="eren-chart-container">
+    <div class="eren-chart-select">
+      <span>类型</span>
+      <!--select 控件-->
+      <select :value="modelValue" @change="selectChange">
+        <option disabled value="">请选择</option>
+        <option value="expense">支出</option>
+        <option value="income">收入</option>
+      </select>
+    </div>
+    <!--图表-->
+  </div>
+</template>
+<script setup lang="ts">
+import { ref} from 'vue'
+// 开始时间, 结束时间, 支出/收入类型 v-model 绑定
+interface chartsProps {
+  startDate: string
+  endDate: string
+  modelValue:string
+}
+const props = defineProps<chartsProps>()
+const emits = defineEmits(['update:modelValue'])
+
+// 支出,收入切换动作
+const selectChange = (e:any) => {
+  // console.log(e.target.value) // 支出,收入
+  emits('update:modelValue',e.target.value)
+}
+</script>
+<style lang="scss" scoped>
+.eren-chart-container{
+  padding:8px;
+  .eren-chart-select{
+    display: flex;
+    align-items: center;
+    select{
+      margin-left:10px; 
+    width:80px;
+    height:30px;
+    border:1px solid #3465e0;
+  }
+  }
+}
+</style>
+```
+### useEchart hook 的封装
+```ts
+import * as echarts from 'echarts'
+
+export default function useEchart(el: HTMLDivElement) {
+  // 初始化实例 
+  const echartInstance = echarts.init(el)
+  // 设置配置&绘制 函数
+  const setOptions = (options: echarts.EChartsOption) => {
+    echartInstance.setOption(options)
+  }
+  // 浏览器窗口大小变化时. 自动调整 echart 的大小
+  window.addEventListener('resize', () => {
+    echartInstance.resize()
+  })
+  // 可以让外部自己调用 调整echart 函数
+  const updateSize = () => {
+    echartInstance.resize()
+  }
+  return {
+    echartInstance,
+    setOptions,
+    updateSize
+  }
+}
+```
+### baseEchart 组件的封装
+细节:
+* 这个是图表的模板
+* 因为根据传入的配置项 `options` 来绘制不同内容, 并且还可接受 width, height
+* 但是配置项 options 的数据可能会变, 每当变化时需重新调用 setOptions 方法, 所以使用了 **`watchEffect`**
+```vue
+<template>
+  <div class="base-echart">
+    <div ref="echartDivRef" :style="{ width:width, height:height }"></div>
+  </div>
+</template>
+<script setup lang="ts">
+import { withDefaults,ref, onMounted } from 'vue'
+import useEchart from '../../../hooks/useEchart'
+import { EChartsOption } from 'echarts'
+
+interface baseEchartProps {
+  width?: string
+  height?: string
+  options:EChartsOption
+}
+const props = withDefaults(defineProps<baseEchartProps>(), {
+  width: '100vw',
+  height: '300px'
+})
+const echartDivRef = ref<HTMLDivElement>()
+
+onMounted(() => {
+  const { echartInstance, setOptions, updateSize } = useEchart(echartDivRef.value!)
+  setOptions(props.options)
+})
+</script>
+<style lang="scss" scoped>
+</style>
+```
+### lineEchart 折线图的封装
+[折线图官网 option 配置](https://echarts.apache.org/examples/zh/editor.html?c=area-stack)
+
+细节:
+* 基于在上面已封装好的 baseEchart 进行二次封装
+* 接受x 轴数据 `xLabels` 和 y 轴数据 `values`, 在外部可以直接用 `v-bind `绑定包含前面这些属性的对象
+* 因为 props 数据随时可能会发生变化, 所以使用 `computed 计算属性` 返回 options 配置项
+```vue{38,55}
+<template>
+  <div>
+    <base-echart :options="options"></base-echart>
+  </div>
+</template>
+<script setup lang="ts">
+import baseEchart from './base-echart.vue'
+import { EChartsOption } from 'echarts'
+import { computed } from 'vue'
+// x轴,y轴 数据
+export interface LineEchartProps {
+  xLabels: string[]
+  values:string[]
+}
+const props = defineProps<LineEchartProps>()
+// props数据有可能随时会变, 所以使用 computed 计算属性
+const options = computed(() => {
+  return {
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      type: 'cross',
+      label: {
+        backgroundColor: '#6a7985'
+      }
+    }
+  },
+  // grid: {
+  //   left: '3%',
+  //   right: '4%',
+  //   bottom: '3%',
+  //   containLabel: true
+  // },
+  xAxis: [
+    {
+      type: 'category',
+      boundaryGap: false,
+      data: props.xLabels
+    }
+  ],
+  yAxis: [
+    {
+      type: 'value'
+    }
+  ],
+  series: [
+    {
+      name: 'Email',
+      type: 'line',
+      stack: 'Total',
+      areaStyle: {},
+      emphasis: {
+        focus: 'series'
+      },
+      data:props.values
+    }
+  ]
+} as EChartsOption
+})
+</script>
+<style lang="scss" scoped>
+</style>
+```
+### pieEchart 饼图的封装
+[饼图 option 配置](https://echarts.apache.org/examples/zh/editor.html?c=pie-simple)
+
+细节:
+* 也是基于上面已经做好的 baseEchart 进行二次封装
+* 接受 `{name:string,value:string}[]` 数组为 props, 并且记得还要使用 `computed` 返回 options 配置项
+
+```vue{26}
+<template>
+  <div class="pie-echart">
+    <base-echart :options="options"></base-echart>
+  </div>
+</template>
+<script setup lang="ts">
+import baseEchart from './base-echart.vue'
+import { EChartsOption } from 'echarts'
+import { computed } from 'vue'
+
+export interface IDateType {
+  name: string
+  value:string
+}
+const props = defineProps<{
+  pieData: IDateType[]
+}>()
+// props数据有可能随时会变, 所以使用 computed 计算属性
+const options = computed(() => {
+  return {
+    series: [
+    {
+      name: 'Access From',
+      type: 'pie',
+      grid:[
+        {left:0,top:0,right:0}
+        ],
+      radius: '50%',
+      data: props.pieData,
+      emphasis: {
+        itemStyle: {
+          shadowBlur: 10,
+          shadowOffsetX: 0,
+          shadowColor: 'rgba(0, 0, 0, 0.5)'
+        }
+      }
+    }
+  ]
+} as EChartsOption
+})
+</script>
+```

@@ -125,3 +125,153 @@ export function getThisYear(){
   }
 }
 ```
+## axios 封装
+```shell
+npm install axios
+```
+### 基本使用
+* 使用了 `class类` 封装
+```ts
+import axios, {AxiosInstance,AxiosRequestConfig } from 'axios'
+
+type JSONValue = string | number | null | boolean | JSONValue[] | { [key: string]: JSONValue };
+
+export class http {
+  instance:AxiosInstance
+  constructor(baseURL: string) {
+    this.instance = axios.create({
+      baseURL
+    }) 
+  }
+  // 得到的数据类型<R>通过泛型传递给下面请求 request<R>
+  get<R = any>(url: string, query?: Record<string, string>,config?:AxiosRequestConfig) {
+    return this.instance.request<R>({ ...config, url, params: query, method:'GET' })
+  }
+  post<R = any>(url: string, data?: Record<string, JSONValue>, config?: AxiosRequestConfig) { 
+    return this.instance.request<R>({ ...config, url, data, method:'POST' })
+  }
+  patch<R = any>(url: string, data?: Record<string, JSONValue>, config?: AxiosRequestConfig) { 
+    return this.instance.request<R>({ ...config, url, data, method:'PATCH' })
+  }
+  delete<R = any>(url: string, query?: Record<string, JSONValue>,config?:AxiosRequestConfig) {
+    return this.instance.request<R>({ ...config, url, params: query, method:'DELETE' })
+  }
+}
+```
+### axios 拦截器的使用
+* 请求头统一注入 token
+* 响应拦截器如果失败 -> 那么一定要 `throw error` 或者 `return Promise.reject(error)` , 不能 return error
+* 响应成功直接返回 res.data
+```ts{27-49}
+import axios, {AxiosInstance,AxiosRequestConfig,AxiosError } from 'axios'
+type JSONValue = string | number | null | boolean | JSONValue[] | { [key: string]: JSONValue };
+
+export default class Http {
+  instance:AxiosInstance
+  constructor(baseURL: string) {
+    this.instance = axios.create({
+      baseURL
+    }) 
+  }
+  get<R = any>(url: string, query?: Record<string, string>,config?:AxiosRequestConfig) {
+    return this.instance.request<R>({ ...config, url, params: query, method:'GET' })
+  }
+  post<R = any>(url: string, data?: Record<string, JSONValue>, config?: AxiosRequestConfig) { 
+    return this.instance.request<R>({ ...config, url, data, method:'POST' })
+  }
+  patch<R = any>(url: string, data?: Record<string, JSONValue>, config?: AxiosRequestConfig) { 
+    return this.instance.request<R>({ ...config, url, data, method:'PATCH' })
+  }
+  delete<R = any>(url: string, query?: Record<string, JSONValue>,config?:AxiosRequestConfig) {
+    return this.instance.request<R>({ ...config, url, params: query, method:'DELETE' })
+  }
+}
+
+export const http = new Http('/api/v1')
+
+http.instance.interceptors.request.use((config) => {
+  // 请求头统一注入 token
+  const token = storage.getItem('jwt')
+  if (token) {
+    config.headers!['Authorization'] = `Bearer ${token}`
+  }
+  return config
+}, (error) => {
+  return Promise.reject(error)
+})
+
+http.instance.interceptors.response.use((response) => {
+  // 直接返回 response.data
+  return response.data
+}, (error:AxiosError) => {
+  // 直接断言成 AxiosError 类型, 那就就可以愉快的使用代码提示
+  if (error.response?.status === 429) {
+    // TODO: 弹出错误提示
+    console.log('请求过于频发, 请稍后再试')
+  }
+  // TODO: 弹出错误提示
+  return Promise.reject(error)
+})
+```
+## 登录
+
+### 登录之后的路由跳转到原来页面功能
+* 方案一 : 可以保存到 localStorage
+* 方案二 : 或者可以使用 querystring
+* 但不能使用 Vuex 或者 pinia, 因为刷新页面数据会被清除掉, 所以可以使用上面两种方案
+
+这里使用第二种方案:  querystring 的方法
+
+* 登录到 login 页面时, 并把当前路由的 url 路径保存到 login 的 `query` 中
+```js
+const router = useRouter()
+
+router.push({
+  name:'login',
+  query:{
+    redirectRoute: router.currentRoute.value.fullPath 
+  }
+})
+```
+![图片](../.vuepress/public/images/currentRoute1.png)
+
+* 在登录页登录成功后，使用传过来的参数 `redirectRoute`，即原页面路径, 进行跳转
+```js
+const route = useRoute()
+const router = useRouter()
+const redirectRoute = route.query.redirectRoute
+
+router.push({
+  path: decodeURIComponent(redirectRoute)
+})
+```
+### 登录鉴权(路由守卫)
+主要逻辑:
+* 登录之后**不能**访问 login 页面, 其他页面正常通行
+* 未登录只**能访问白名单**页面(如 login页面...数组), 其他路由**提示并跳转到登录页**
+```ts
+import router from './router'
+import storage from './utils/storage'
+import { Toast } from 'vant';
+import 'vant/es/toast/style';
+
+const whiteList = ['/welcome','/login','/start']
+router.beforeEach((to, from, next) => {
+  if (storage.getItem('jwt')) {
+    // 已登录
+    if (to.path === '/login') {
+      next('/start')
+    } else {
+      next()
+    }
+  } else {
+    // 未登录
+    if (whiteList.includes(to.path)) {
+      next()
+    } else {
+      Toast.fail("请您先登录哦");
+      next('/login')
+    }
+  }
+})
+```
