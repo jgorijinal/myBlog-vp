@@ -270,7 +270,8 @@ router.beforeEach((to, from, next) => {
       next()
     } else {
       Toast.fail("请您先登录哦");
-      next('/login')
+      // 返回到原来想要访问的页面
+      next(`/login?redirectRoute=${to.path}`)
     }
   }
 })
