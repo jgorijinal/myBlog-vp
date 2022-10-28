@@ -74,6 +74,43 @@ export const data = {
           "children": []
         }
       ]
+    },
+    {
+      "level": 2,
+      "title": "长按编辑",
+      "slug": "长按编辑",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "尝试 pinia",
+      "slug": "尝试-pinia",
+      "children": [
+        {
+          "level": 3,
+          "title": "封装 登录操作",
+          "slug": "封装-登录操作",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "封装 获取当前用户信息操作",
+          "slug": "封装-获取当前用户信息操作",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "使用 pinia 报错",
+          "slug": "使用-pinia-报错",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "封装 退出登录操作",
+          "slug": "封装-退出登录操作",
+          "children": []
+        }
+      ]
     }
   ],
   "git": {
@@ -81,7 +118,7 @@ export const data = {
       {
         "name": "jgoriginal",
         "email": "932274204@qq.com",
-        "commits": 4
+        "commits": 5
       }
     ]
   },

@@ -249,13 +249,15 @@ router.push({
 主要逻辑:
 * 登录之后**不能**访问 login 页面, 其他页面正常通行
 * 未登录只**能访问白名单**页面(如 login页面...数组), 其他路由**提示并跳转到登录页**
+
+permissions.ts
 ```ts
 import router from './router'
 import storage from './utils/storage'
 import { Toast } from 'vant';
 import 'vant/es/toast/style';
 
-const whiteList = ['/welcome','/login','/start']
+const whiteList = ['/welcome','/welcome/1','/welcome/2','/welcome/3','/welcome/4','/login','/start']
 router.beforeEach((to, from, next) => {
   if (storage.getItem('jwt')) {
     // 已登录
@@ -276,3 +278,78 @@ router.beforeEach((to, from, next) => {
   }
 })
 ```
+## 长按编辑
+* 监听 `onTouchstart` 和 `onTouchend` 事件, 在 onTouchend **删除监听器**
+
+```vue
+<template>
+  <div @touchstart="onTouchStart(tag.id)" 
+     @touchend="onTouchend"  
+  ></div>
+</template>
+<script>
+// 长按跳转
+const longPress = (id:number) => {
+  // 长按后执行函数
+  // activeName.value === '支出' ? router.push(`/tag/${id}/edit?kind=expenses`)  : router.push(`/tag/${id}/edit?kind=income`)
+}
+let timer:any = null
+const onTouchStart = (id:number) => {
+  timer = setTimeout(() => {
+    longPress(id)
+  },400)
+}
+const onTouchend = () => {
+  clearTimeout(timer)
+}
+</script>
+``` 
+
+## 尝试 pinia
+[pinia 中文文档](https://pinia.web3doc.top/getting-started.html)
+### 封装 登录操作
+小问题:
+* 状态管理中想要使用 rotuer 和 route
+
+store/index.ts
+```js
+import router from './router' // 引入 router 实例
+
+const route = router.currentRoute.value 
+// currentRoute 类型：Ref<RouteLocationNormalized>
+// 当前路由地址。只读的
+```
+[currentRoute](https://router.vuejs.org/zh/api/#currentroute)
+![图片](../.vuepress/public/images/pinia1.png)
+
+### 封装 获取当前用户信息操作
+* 实现用 axios 请求拦截器中在请求头里统一注入 token
+* pinia 的 actions 中封装获取当前用户信息操作
+* 那么什么时候该调用? 
+* 路由守卫(全局前置): (1) 已登录(有token) (2)去的不是登录页面 (3)`JSON.stringify(store的userInfo) === '{}'` 即没有用户资料'
+
+store/useStore.ts
+![图片](../.vuepress/public/images/uinfo3.png)
+![图片](../.vuepress/public/images/uinfo1.png)
+
+permission.js 路由守卫
+![图片](../.vuepress/public/images/uinfo2.png)
+### 使用 pinia 报错
+* 原因：在 main.ts 文件中，是先引入permission.ts文件然后再将 pinia 挂载到app上的，如果在permission.ts文件中全局调用了store，这样会导致pinia实例还没挂载，所以不能全局调用。 
+
+* 解决方法：取消全局调用，在用的地方局部调用即可
+![图片](../.vuepress/public/images/pinia3.png)
+![图片](../.vuepress/public/images/pinia4.png)
+解决办法: 局部调用
+![图片](../.vuepress/public/images/pinia5.png)
+
+###  封装 退出登录操作
+* 清除缓存
+* 重置 pinia 数据
+* 跳转到登录页面
+
+![图片](../.vuepress/public/images/tc01.png)
+
+
+
+

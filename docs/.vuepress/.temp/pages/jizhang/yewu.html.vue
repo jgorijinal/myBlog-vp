@@ -236,12 +236,13 @@ router<span class="token punctuation">.</span><span class="token function">push<
 <li>登录之后<strong>不能</strong>访问 login 页面, 其他页面正常通行</li>
 <li>未登录只<strong>能访问白名单</strong>页面(如 login页面...数组), 其他路由<strong>提示并跳转到登录页</strong></li>
 </ul>
+<p>permissions.ts</p>
 <div class="language-typescript ext-ts line-numbers-mode"><pre v-pre class="language-typescript"><code><span class="token keyword">import</span> router <span class="token keyword">from</span> <span class="token string">'./router'</span>
 <span class="token keyword">import</span> storage <span class="token keyword">from</span> <span class="token string">'./utils/storage'</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span> Toast <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vant'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token string">'vant/es/toast/style'</span><span class="token punctuation">;</span>
 
-<span class="token keyword">const</span> whiteList <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'/welcome'</span><span class="token punctuation">,</span><span class="token string">'/login'</span><span class="token punctuation">,</span><span class="token string">'/start'</span><span class="token punctuation">]</span>
+<span class="token keyword">const</span> whiteList <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'/welcome'</span><span class="token punctuation">,</span><span class="token string">'/welcome/1'</span><span class="token punctuation">,</span><span class="token string">'/welcome/2'</span><span class="token punctuation">,</span><span class="token string">'/welcome/3'</span><span class="token punctuation">,</span><span class="token string">'/welcome/4'</span><span class="token punctuation">,</span><span class="token string">'/login'</span><span class="token punctuation">,</span><span class="token string">'/start'</span><span class="token punctuation">]</span>
 router<span class="token punctuation">.</span><span class="token function">beforeEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span>to<span class="token punctuation">,</span> from<span class="token punctuation">,</span> next<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
   <span class="token keyword">if</span> <span class="token punctuation">(</span>storage<span class="token punctuation">.</span><span class="token function">getItem</span><span class="token punctuation">(</span><span class="token string">'jwt'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment">// 已登录</span>
@@ -261,4 +262,76 @@ router<span class="token punctuation">.</span><span class="token function">befor
     <span class="token punctuation">}</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span>
-</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br></div></div></template>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br></div></div><h2 id="长按编辑" tabindex="-1"><a class="header-anchor" href="#长按编辑" aria-hidden="true">#</a> 长按编辑</h2>
+<ul>
+<li>监听 <code>onTouchstart</code> 和 <code>onTouchend</code> 事件, 在 onTouchend <strong>删除监听器</strong></li>
+</ul>
+<div class="language-vue ext-vue line-numbers-mode"><pre v-pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">@touchstart</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>onTouchStart(tag.id)<span class="token punctuation">"</span></span> 
+     <span class="token attr-name">@touchend</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>onTouchend<span class="token punctuation">"</span></span>  
+  <span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+<span class="token comment">// 长按跳转</span>
+<span class="token keyword">const</span> <span class="token function-variable function">longPress</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token literal-property property">id</span><span class="token operator">:</span>number</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token comment">// 长按后执行函数</span>
+  <span class="token comment">// activeName.value === '支出' ? router.push(`/tag/${id}/edit?kind=expenses`)  : router.push(`/tag/${id}/edit?kind=income`)</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">let</span> <span class="token literal-property property">timer</span><span class="token operator">:</span>any <span class="token operator">=</span> <span class="token keyword">null</span>
+<span class="token keyword">const</span> <span class="token function-variable function">onTouchStart</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token literal-property property">id</span><span class="token operator">:</span>number</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  timer <span class="token operator">=</span> <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+    <span class="token function">longPress</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token number">400</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">const</span> <span class="token function-variable function">onTouchend</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token function">clearTimeout</span><span class="token punctuation">(</span>timer<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br></div></div><h2 id="尝试-pinia" tabindex="-1"><a class="header-anchor" href="#尝试-pinia" aria-hidden="true">#</a> 尝试 pinia</h2>
+<p><a href="https://pinia.web3doc.top/getting-started.html" target="_blank" rel="noopener noreferrer">pinia 中文文档<ExternalLinkIcon/></a></p>
+<h3 id="封装-登录操作" tabindex="-1"><a class="header-anchor" href="#封装-登录操作" aria-hidden="true">#</a> 封装 登录操作</h3>
+<p>小问题:</p>
+<ul>
+<li>状态管理中想要使用 rotuer 和 route</li>
+</ul>
+<p>store/index.ts</p>
+<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token keyword">import</span> router <span class="token keyword">from</span> <span class="token string">'./router'</span> <span class="token comment">// 引入 router 实例</span>
+
+<span class="token keyword">const</span> route <span class="token operator">=</span> router<span class="token punctuation">.</span>currentRoute<span class="token punctuation">.</span>value 
+<span class="token comment">// currentRoute 类型：Ref&lt;RouteLocationNormalized></span>
+<span class="token comment">// 当前路由地址。只读的</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><p><a href="https://router.vuejs.org/zh/api/#currentroute" target="_blank" rel="noopener noreferrer">currentRoute<ExternalLinkIcon/></a>
+<img src="@source/.vuepress/public/images/pinia1.png" alt="图片"></p>
+<h3 id="封装-获取当前用户信息操作" tabindex="-1"><a class="header-anchor" href="#封装-获取当前用户信息操作" aria-hidden="true">#</a> 封装 获取当前用户信息操作</h3>
+<ul>
+<li>实现用 axios 请求拦截器中在请求头里统一注入 token</li>
+<li>pinia 的 actions 中封装获取当前用户信息操作</li>
+<li>那么什么时候该调用?</li>
+<li>路由守卫(全局前置): (1) 已登录(有token) (2)去的不是登录页面 (3)<code>JSON.stringify(store的userInfo) === '{}'</code> 即没有用户资料'</li>
+</ul>
+<p>store/useStore.ts
+<img src="@source/.vuepress/public/images/uinfo3.png" alt="图片">
+<img src="@source/.vuepress/public/images/uinfo1.png" alt="图片"></p>
+<p>permission.js 路由守卫
+<img src="@source/.vuepress/public/images/uinfo2.png" alt="图片"></p>
+<h3 id="使用-pinia-报错" tabindex="-1"><a class="header-anchor" href="#使用-pinia-报错" aria-hidden="true">#</a> 使用 pinia 报错</h3>
+<ul>
+<li>
+<p>原因：在 main.ts 文件中，是先引入permission.ts文件然后再将 pinia 挂载到app上的，如果在permission.ts文件中全局调用了store，这样会导致pinia实例还没挂载，所以不能全局调用。</p>
+</li>
+<li>
+<p>解决方法：取消全局调用，在用的地方局部调用即可
+<img src="@source/.vuepress/public/images/pinia3.png" alt="图片">
+<img src="@source/.vuepress/public/images/pinia4.png" alt="图片">
+解决办法: 局部调用
+<img src="@source/.vuepress/public/images/pinia5.png" alt="图片"></p>
+</li>
+</ul>
+<h3 id="封装-退出登录操作" tabindex="-1"><a class="header-anchor" href="#封装-退出登录操作" aria-hidden="true">#</a> 封装 退出登录操作</h3>
+<ul>
+<li>清除缓存</li>
+<li>重置 pinia 数据</li>
+<li>跳转到登录页面</li>
+</ul>
+<p><img src="@source/.vuepress/public/images/tc01.png" alt="图片"></p>
+</template>
