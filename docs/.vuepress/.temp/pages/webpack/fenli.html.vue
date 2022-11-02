@@ -22,7 +22,7 @@
 </ul>
 <p>context的作用是用于解析入口（entry point）和加载器（loader）：</p>
 <ul>
-<li>默认是 webpack 的启动目录</li>
+<li>默认是 webpack 的启动目录(package.json 中脚本中的的启动路径)</li>
 <li>另外推荐在配置中传入一个值</li>
 </ul>
 <p><img src="@source/.vuepress/public/images/qf2.png" alt="图片"></p>
@@ -35,6 +35,13 @@
 <p>封装 resolveApp 函数
 <img src="@source/.vuepress/public/images/resolveapp1.png" alt="图片">
 <img src="@source/.vuepress/public/images/resolveapp2.png" alt="图片"></p>
+<h3 id="合并" tabindex="-1"><a class="header-anchor" href="#合并" aria-hidden="true">#</a> 合并</h3>
+<p><strong>合并</strong>公共配置 和 开发/生产配置</p>
+<div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token function">npm</span> <span class="token function">install</span> webpack-merge -D
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br></div></div><p>要注意 webpack 是跑在 <strong>Node 环境</strong>当中, 所以要使用 <strong>Common JS 规范导入导入</strong></p>
+<p>config/webpack.dev.conf.js 要merge一下
+<img src="@source/.vuepress/public/images/merge1.png" alt="图片"></p>
+<p>config/webpack.prod.conf.js 当然也要merge一下</p>
 <h2 id="认识代码分离" tabindex="-1"><a class="header-anchor" href="#认识代码分离" aria-hidden="true">#</a> 认识代码分离</h2>
 <p>代码分离（Code Splitting）是webpack一个非常重要的特性：</p>
 <ul>

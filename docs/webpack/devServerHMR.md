@@ -1,19 +1,21 @@
 # devServer 和 HMR
+## 为什么要搭建本地服务器 ? 
 目前我们开发的代码，为了运行需要有两个操作：
 * 操作一：npm run build，编译相关的代码；
 * 操作二：通过live server或者直接通过浏览器，打开index.html代码，查看效果；
-这个过程经常操作会影响我们的开发效率，我们希望可以做到，当文件发生变化时，可以自动的完成 编译 和 展示；
+
+这个过程经常操作会影响我们的开发效率，我们希望可以做到，当文件发生变化时，可以**自动的完成 编译 和 展示**
 
 为了完成自动编译，webpack提供了几种可选的方式：
-* webpack watch mode；
-* webpack-dev-server；
+* webpack watch mode 
+* webpack-dev-server (常用)
 * webpack-dev-middleware
 
 一个个学一下
-## Webpack watch
+## Webpack watch(不常用)
 webpack 给我们提供了 watch 模式：
 * 在该模式下，webpack依赖图中的所有文件，只要有一个发生了更新，那么代码将被重新编译；
-* 我们不需要手动去运行 npm run build 指令了；
+* 我们不需要手动去运行 npm run build 指令了； (不会自动编译)
 
 如何开启watch呢？两种方式：
 * 方式一：在导出的配置中，添加 watch: true；
@@ -22,59 +24,64 @@ webpack 给我们提供了 watch 模式：
 ![图片](../.vuepress/public/images/ww1.png)
 
 这里选择 方式二，在 package.json 的 scripts 中添加一个 watch 的脚本
-## webpack-dev-server
+## webpack-dev-server (掌握)
 上面的方式可以监听到文件的变化，但是事实上它本身是没有自动刷新浏览器的功能的：
-* 当然，目前我们可以在VSCode中使用live-server来完成这样的功能；
+* 当然，目前我们可以在VSCode中使用live-server 来完成这样的功能；
 * 但是，我们希望在不使用 live-server的情况下，可以具备live reloading（实时重新加载）的功能；
+
+webpack-dev-server 的主要作用 : **会自动地打包, 但不会生成本地的文件, 会直接将将打包的代码放到内存里面, 然后直接搭建一个服务器**
 
 安装 `webpack-dev-server`
 ```shell
 npm install --save-dev webpack-dev-server
 ```
-添加一个新的 scripts 脚本
+修改配置文件, 添加一个新的 scripts 脚本
 ![图片](../.vuepress/public/images/ww3.png)
 
 webpack-dev-server 在编译之后不会写入到任何输出文件。而是将 bundle 文件保留在内存中：
-* 事实上webpack-dev-server使用了一个库叫memfs（memory-fs webpack自己写的）
+* 事实上webpack-dev-server使用了一个库叫memfs（memory-fs webpack 自己写的）
 
 执行 `npm run serve`
+
 ![图片](../.vuepress/public/images/ww4.png)
 
 到现在 webpack.config.js 里没有配任何关于 webpack-dev-server 的配置
 
-## 认识 模块热替换（HMR）
-什么是HMR呢？
-* HMR的全称是Hot Module Replacement，翻译为模块热替换；
+## 认识 模块热替换（HMR） 
+什么是 `HMR` 呢？
+* `HMR` 的全称是 `Hot Module Replacement`，翻译 **为模块热替换**；
 * 模块热替换是指在 应用程序运行过程中，替换、添加、删除模块，而无需重新刷新整个页面；
 
-HMR通过如下几种方式，来提高开发的速度：
-* **不重新加载整个页面**，这样可以保留某些应用程序的状态不丢失；
-* 只更新需要变化的内容，节省开发的时间；
-* 修改了css、js源代码，会立即在浏览器更新，相当于直接在浏览器的devtools中直接修改样式；
+`HMR` 通过如下几种方式，来提高开发的速度：
+* **不重新加载整个页面**，**这样可以保留某些应用程序的状态不丢失**
+* **只更新需要变化的内容，节省开发的时间；**
+* **修改了css、js源代码，会立即在浏览器更新**，相当于直接在浏览器的 devtools 中直接修改样式；
 
-如何使用 HMR 呢？
-* 默认情况下，webpack-dev-server 已经支持 HMR，我们只需要开启即可；
-* 在不开启HMR的情况下，当我们修改了源代码之后，整个页面会自动刷新，使用的是live reloading
+如何使用 `HMR` 呢？
+* 默认情况下，webpack-dev-server **已经支持** `HMR`，我们只需要开启即可；
+* 在不开启 `HMR` 的情况下，当我们修改了源代码之后，整个页面会自动刷新，使用的是 live reloading
 ### 开启 HMR
-修改 webpack 的配置
+修改 webpack 的配置 (**默认会设置为 true**)
 
 ![图片](../.vuepress/public/images/ww5.png)
+
 浏览器可以看到如下效果
 ![图片](../.vuepress/public/images/ww6.png)
-但是你会发现，当我们修改了某一个模块的代码时，依然是刷新的整个页面：
-* 这是因为我们需要去指定哪些模块发生更新时，进行 HMR
+
+**但是你会发现，当我们修改了某一个模块的代码时，依然是刷新的整个页面：**
+* 这是因为我们需要去 main.js主入口文件 **手动地指定**哪些模块发生更新时，进行 HMR
 
 ![图片](../.vuepress/public/images/hmr1.png)
 ## 框架的 HMR
-有一个问题：在开发其他项目时，我们是否需要经常手动去写入 module.hot.accpet相关的API呢？
+有一个问题：在开发其他项目时，我们是否需要经常手动去写入 module.hot.accpet 相关的API呢？
 * 比如开发Vue、React项目，我们修改了组件，希望进行热更新，这个时候应该如何去操作呢？
 * 事实上社区已经针对这些有很成熟的解决方案了：
-* 比如vue开发中，我们使用 vue-loader，此 loader 支持vue组件的HMR，提供开箱即用的体验；
-* 比如react开发中，有 React Hot Loader，实时调整react组件（目前React官方已经弃用了，改成使用reactrefresh）；
+* 比如vue开发中，我们使用 vue-loader，此 loader 支持 vue 组件的 HMR，提供开箱即用的体验；
+* 比如react开发中，有 React Hot Loader，实时调整 react 组件（目前 React 官方已经弃用了，改成使用react-refresh）；
 
-接下来分别对React、Vue实现一下HMR功能
+接下来分别对 React、Vue 实现一下HMR功能
 
-### React 的 HMR
+<!-- ### React 的 HMR
 在之前，React是借助于React Hot Loader来实现的HMR，目前已经改成使用react-refresh来实现了。
 
 安装实现HMR相关的依赖：
@@ -83,10 +90,11 @@ HMR通过如下几种方式，来提高开发的速度：
 ```shell
 npm install -D @pmmmwh/react-refresh-webpack-plugin react-refresh
 ```
-修改webpack.config.js和babel.config.js文件：
+修改webpack.config.js和babel.config.js文件： -->
 ### Vue 的 HMR
 Vue的加载我们需要使用vue-loader，而vue-loader加载的组件默认会帮助我们进行HMR的处理。
-安装加载vue所需要的依赖：
+
+安装加载 vue 所需要的依赖：
 ```shell
 npm install vue-loader vue-template-compiler -D
 ```
@@ -124,30 +132,32 @@ devServer 中 contentBase对于我们直接访问打包后的资源其实并没�
 当然在 devServer 中还有一个可以监听 contentBase 发生变化后重新编译的一个属性：`watchContentBase`
 
 ![图片](../.vuepress/public/images/cbase1.png)
-## hotOnly、host配置
+## hotOnly、host 配置
 hotOnly是当代码编译失败时，是否刷新整个页面：
 * 默认情况下当代码编译失败修复后，我们会重新刷新整个页面；
-* 如果不希望重新刷新整个页面，可以设置hotOnly为true；
-host设置主机地址：
-* 默认值是localhost；
+* 如果不希望重新刷新整个页面，可以设置 hotOnly 为 true；
+
+host 设置主机地址：
+* 默认值是 localhost；
 * 如果希望其他地方也可以访问，可以设置为 0.0.0.0；
+
 localhost 和 0.0.0.0 的区别：
-* localhost：本质上是一个域名，通常情况下会被解析成127.0.0.1;
-* 127.0.0.1：回环地址(Loop Back Address)，表达的意思其实是我们主机自己发出去的包，直接被自己接收;
+* **localhost**：本质上是一个域名，通常情况下会被解析成127.0.0.1;
+* **127.0.0.1**：回环地址(Loop Back Address)，表达的意思其实是我们主机自己发出去的包，直接被自己接收;
    * 正常的数据库包经常 应用层 - 传输层 - 网络层 - 数据链路层 - 物理层 ;
    * 而回环地址，是在网络层直接就被获取到了，是不会经常数据链路层和物理层的; 
    * 比如我们监听 127.0.0.1时，在同一个网段下的主机中，通过ip地址是不能访问的;
-* 0.0.0.0：监听IPV4上所有的地址，再根据端口找到不同的应用程序;
+* **0.0.0.0**：监听IPV4上所有的地址，再根据端口找到不同的应用程序;
    * 比如我们监听 0.0.0.0时，在同一个网段下的主机中，通过ip地址是可以访问的;
 ## port、open、compress
-port 设置监听的端口，默认情况下是 8080
+port 设置监听的端口，默认情况下是 `8080`
 
-open是否打开浏览器：
-* 默认值是false，设置为true会打开浏览器；
+open是否打开浏览器： 
+* 默认值是 `false`，设置为 `true` 会打开浏览器；
 * 也可以设置为类似于 Google Chrome等值；
 
 **compress** 是否为静态文件开启 gzip compression：
-* 默认值是 false ，可以设置为 true；
+* 默认值是 `false` ，可以设置为 `true`
 
 ![图片](../.vuepress/public/images/gz11.png)
 ## Proxy 代理

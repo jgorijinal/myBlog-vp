@@ -52,12 +52,20 @@ export const themeData = {
       ]
     },
     {
+      "text": "Pinia系列",
+      "collapsible": true,
+      "children": [
+        "/pinia/start.md"
+      ]
+    },
+    {
       "text": "Webpack系列",
       "collapsible": true,
       "children": [
         "/webpack/start1.md",
         "/webpack/start2.md",
         "/webpack/plugin1.md",
+        "/webpack/sourcemap.md",
         "/webpack/babel2.md",
         "/webpack/devServerHMR.md",
         "/webpack/fenli.md"
@@ -163,12 +171,12 @@ export const themeData = {
       ]
     },
     {
-      "text": "记账项目",
+      "text": "旅途",
       "collapsible": true,
       "children": [
-        "/jizhang/dajian.md",
-        "/jizhang/zujian.md",
-        "/jizhang/yewu.md"
+        "/hongyuan/start.md",
+        "/hongyuan/service.md",
+        "/hongyuan/start2.md"
       ]
     },
     {
@@ -184,6 +192,15 @@ export const themeData = {
         "/vue-admin/quanxian.md",
         "/vue-admin/dongtaibiaoge.md",
         "/vue-admin/fuwenben.md"
+      ]
+    },
+    {
+      "text": "记账项目",
+      "collapsible": true,
+      "children": [
+        "/jizhang/dajian.md",
+        "/jizhang/zujian.md",
+        "/jizhang/yewu.md"
       ]
     },
     {

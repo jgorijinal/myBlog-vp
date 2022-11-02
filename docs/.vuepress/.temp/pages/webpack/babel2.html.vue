@@ -226,7 +226,7 @@ n 之后我们可以运行 npx tsc来编译自己的ts代码：</p>
 <li>我们执行 npm run type-check 可以对 ts 代码的类型进行检测；</li>
 <li>我们执行 npm run type-check-watch 可以实时的检测类型错误；</li>
 </ul>
-<p><img src="@source/.vuepress/public/images/tsc1.png" alt="图片"></p>
+<p><img src="@source/.vuepress/public/images/tsc2.png" alt="图片"></p>
 <h2 id="webpack中配置vue加载" tabindex="-1"><a class="header-anchor" href="#webpack中配置vue加载" aria-hidden="true">#</a> Webpack中配置vue加载</h2>
 <ul>
 <li>安装相关的依赖：</li>

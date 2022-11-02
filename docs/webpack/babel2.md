@@ -236,7 +236,7 @@ npm install @babel/preset-typescript -D
 * 我们执行 npm run type-check 可以对 ts 代码的类型进行检测；
 * 我们执行 npm run type-check-watch 可以实时的检测类型错误；
 
-![图片](../.vuepress/public/images/tsc1.png)
+![图片](../.vuepress/public/images/tsc2.png)
 
 ## Webpack中配置vue加载
 * 安装相关的依赖：

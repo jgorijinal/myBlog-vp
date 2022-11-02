@@ -132,6 +132,14 @@ module.exports = {
                 
                 ]
             },
+            {
+                text: 'Pinia系列',
+                collapsible: true,
+                children: [
+                    '/pinia/start.md',
+                
+                ]
+            },
             // {
             //     text: 'TS系列',
             //     collapsible: true,
@@ -147,9 +155,8 @@ module.exports = {
                     '/webpack/start1.md',
                     '/webpack/start2.md',
                     '/webpack/plugin1.md',
-                    // '/webpack/sourcemap.md',
+                    '/webpack/sourcemap.md',
                     '/webpack/babel2.md',
-                    // '/webpack/eslint.md'
                     '/webpack/devServerHMR.md',
                     '/webpack/fenli.md'
                 
@@ -271,12 +278,12 @@ module.exports = {
             //         ]
             // },
             {
-                text: '记账项目',
+                text: '旅途',
                 collapsible: true,
                 children: [
-                    '/jizhang/dajian.md',
-                    '/jizhang/zujian.md',
-                    '/jizhang/yewu.md',
+                    '/hongyuan/start.md',
+                    '/hongyuan/service.md',
+                    '/hongyuan/start2.md',
                 ]
             },
             {
@@ -293,6 +300,15 @@ module.exports = {
                     '/vue-admin/dongtaibiaoge.md',
                     '/vue-admin/fuwenben.md',
                     ]
+            },
+            {
+                text: '记账项目',
+                collapsible: true,
+                children: [
+                    '/jizhang/dajian.md',
+                    '/jizhang/zujian.md',
+                    '/jizhang/yewu.md',
+                ]
             },
             {
                 text: '基于Element Plus二次封装组件',

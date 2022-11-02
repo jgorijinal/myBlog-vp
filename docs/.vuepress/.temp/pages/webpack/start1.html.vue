@@ -76,7 +76,7 @@
 字体等）；</li>
 </ul>
 <p>然后遍历图结构，打包一个个模块（根据文件的不同使用不同的loader来解析）
-<img src="@source/.vuepress/public/images/wpi5.png" alt="图片"></p>
+<img src="@source/.vuepress/public/images/wpi1.png" alt="图片"></p>
 <h2 id="css-loader" tabindex="-1"><a class="header-anchor" href="#css-loader" aria-hidden="true">#</a> css-loader</h2>
 <h3 id="css-loader-的使用" tabindex="-1"><a class="header-anchor" href="#css-loader-的使用" aria-hidden="true">#</a> css-loader 的使用</h3>
 <p>编写案例代码</p>

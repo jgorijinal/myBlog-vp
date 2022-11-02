@@ -8,14 +8,20 @@ export const data = {
   "headers": [
     {
       "level": 2,
-      "title": "Webpack watch",
-      "slug": "webpack-watch",
+      "title": "为什么要搭建本地服务器 ?",
+      "slug": "为什么要搭建本地服务器",
       "children": []
     },
     {
       "level": 2,
-      "title": "webpack-dev-server",
-      "slug": "webpack-dev-server",
+      "title": "Webpack watch(不常用)",
+      "slug": "webpack-watch-不常用",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "webpack-dev-server (掌握)",
+      "slug": "webpack-dev-server-掌握",
       "children": []
     },
     {
@@ -36,12 +42,6 @@ export const data = {
       "title": "框架的 HMR",
       "slug": "框架的-hmr",
       "children": [
-        {
-          "level": 3,
-          "title": "React 的 HMR",
-          "slug": "react-的-hmr",
-          "children": []
-        },
         {
           "level": 3,
           "title": "Vue 的 HMR",
@@ -70,8 +70,8 @@ export const data = {
     },
     {
       "level": 2,
-      "title": "hotOnly、host配置",
-      "slug": "hotonly、host配置",
+      "title": "hotOnly、host 配置",
+      "slug": "hotonly、host-配置",
       "children": []
     },
     {

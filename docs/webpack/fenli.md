@@ -19,7 +19,7 @@
 * 这是因为入口文件其实是和另一个属性时有关的 context；
 
 context的作用是用于解析入口（entry point）和加载器（loader）：
-* 默认是 webpack 的启动目录
+* 默认是 webpack 的启动目录(package.json 中脚本中的的启动路径)
 * 另外推荐在配置中传入一个值
 
 ![图片](../.vuepress/public/images/qf2.png)
@@ -32,6 +32,19 @@ context的作用是用于解析入口（entry point）和加载器（loader）�
 封装 resolveApp 函数
 ![图片](../.vuepress/public/images/resolveapp1.png)
 ![图片](../.vuepress/public/images/resolveapp2.png)
+### 合并
+**合并**公共配置 和 开发/生产配置
+
+```shell
+npm install webpack-merge -D
+```
+要注意 webpack 是跑在 **Node 环境**当中, 所以要使用 **Common JS 规范导入导入**
+
+config/webpack.dev.conf.js 要merge一下
+![图片](../.vuepress/public/images/merge1.png)
+
+config/webpack.prod.conf.js 当然也要merge一下
+
 ## 认识代码分离
 代码分离（Code Splitting）是webpack一个非常重要的特性：
 * 它主要的目的是将代码分离到不同的bundle中，之后我们可以按需加载，或者并行加载这些文件；

@@ -74,7 +74,7 @@ webpack到底是如何对我们的项目进行打包的呢？
 字体等）；
 
 然后遍历图结构，打包一个个模块（根据文件的不同使用不同的loader来解析）
-![图片](../.vuepress/public/images/wpi5.png)
+![图片](../.vuepress/public/images/wpi1.png)
 ## css-loader 
 ### css-loader 的使用
 编写案例代码

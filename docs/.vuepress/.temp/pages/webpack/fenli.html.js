@@ -22,6 +22,12 @@ export const data = {
           "title": "配置文件的分离",
           "slug": "配置文件的分离",
           "children": []
+        },
+        {
+          "level": 3,
+          "title": "合并",
+          "slug": "合并",
+          "children": []
         }
       ]
     },
