@@ -1,4 +1,4 @@
-# 组件
+# 业务
 ## tabBar 标签栏
 ![图片](../.vuepress/public/images/htb1.png)
 ```vue
@@ -506,7 +506,7 @@ cityStore.fetchAllCitiesData()
 const { allCities } = storeToRefs(cityStore)
 
 // 激活的标签页 城市数据
-const currentGroup = computed(()=> allCities.value[tabActive.value])
+// const currentGroup = computed(()=> allCities.value[tabActive.value])
 </script>
 <style lang="less" scoped>
 .content {
@@ -516,6 +516,330 @@ const currentGroup = computed(()=> allCities.value[tabActive.value])
 .city-top {
   position:relative;
   z-index:9;
+}
+</style>
+```
+### 城市页面 - 列表数据添加热门城市标签(索引动态映射)
+![图片](../.vuepress/public/images/suoyin1.png)
+
+热门标签的索引值在这里设为 `#`
+
+city-group.vue
+![图片](../.vuepress/public/images/suoyin11.png)
+### 城市页面 - 点击城市回退并回显效果
+
+像 **城市** 这类数据用户选择完之后大概率在别的组件或者页面中**经常会被使用**
+
+所以这里就使用 **Pinia**  保存当前用户所选城市
+
+store/modules/city.js  **先在 Pinia 中添加当前城市的默认数据**
+![图片](../.vuepress/public/images/hxhx1.png)
+
+city-group.vue **点击城市时在 Pinia 保存数据, 并且回退**
+![图片](../.vuepress/public/images/hxhx2.png)
+
+**然后在首页中缺数据并回显**
+### 最终代码
+city-group.vue 最终代码
+```vue
+<template>
+  <div class="city-group">
+    <van-index-bar :index-list="indexList">
+      <!--热门城市-->
+      <van-index-anchor index="#">热门</van-index-anchor>
+      <div class="hotCity">
+        <template v-for="hotCity,index in currentGroup.hotCities" :key="index">
+          <div class="hotCity-item" @click="cityClick(hotCity)">{{hotCity.cityName}}</div>
+        </template>
+      </div>
+      <template v-for="(group, index) in currentGroup?.cities" :key="index">
+        <!--城市数据-->
+        <van-index-anchor :index="group.group" />
+        <template v-for="(city, index) in group.cities" :key="index">
+          <van-cell :title="city.cityName"  @click="cityClick(city)"/>
+        </template>
+      </template>
+    </van-index-bar>
+  </div>
+</template>
+<script setup>
+import { computed } from 'vue'
+import  useCityStore from "@/store/modules/city"
+import { useRouter } from 'vue-router';
+const props = defineProps({
+  // 城市数据
+  currentGroup: {
+    type: Object,
+    default: () => ({}),
+  },
+});
+
+// 索引值
+const indexList = computed(() => {
+  const alphabetList = props.currentGroup.cities.map(item => item.group)
+  return ['#', ...alphabetList] 
+})
+
+// pinia 中的 cityStore
+const cityStore = useCityStore()
+// 点击城市
+const router = useRouter()
+const cityClick = (city) => {
+  cityStore.currentCity = city
+  router.back()
+}
+
+</script>
+<style lang="less" scoped>
+.hotCity {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding:0 10px;
+  padding-right: 20px;
+  &-item {
+    width:78px;
+    margin:6px 0;
+    height:28px;
+    text-align: center;
+    line-height: 28px;
+    background-color: #fff4ec;
+    border-radius:16px;
+  }
+}
+</style>
+```
+
+**city.vue**
+
+```vue
+<template>
+  <div class="city">
+    <div class="city-top">
+      <!--搜索框-->
+    <form action="/">
+      <van-search
+        v-model="searchValue"
+        show-action
+        shape="round"
+        placeholder="请输入搜索关键词"
+        @search="onSearch"
+        @cancel="onCancel"
+      />
+    </form>
+    <!--标签页-->
+    <van-tabs v-model:active="tabActive" color="#ff9854">
+      <template v-for="value,key,index in allCities" :key="key">
+        <van-tab :title="value.title" :name="key"></van-tab>
+      </template>
+    </van-tabs>
+    </div>
+    <!--城市内容-->
+    <div class="content">
+      <template v-for="value,key,index in allCities" :key="index">
+        <city-group v-show="key === tabActive" :current-group="value" />
+      </template>
+    </div>
+  </div>
+</template>
+<script setup>
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import useCityStore from '@/store/modules/city'
+import { storeToRefs } from 'pinia';
+import cityGroup from './cpns/city-group.vue';
+// 搜索值
+const searchValue = ref("");
+const router = useRouter();
+// 搜索
+const onSearch = () => {
+  console.log("搜索");
+};
+// 点击取消
+const onCancel = () => {
+  console.log("取消");
+  router.back();
+}; 
+// 激活的标签页索引 -> 没有配 van-tab的 name 属性的话是索引值, 如果传了 name 就是 name 属性
+const tabActive = ref()
+// pinia 城市数据
+const cityStore = useCityStore()
+cityStore.fetchAllCitiesData()
+const { allCities } = storeToRefs(cityStore)
+
+// 激活的标签页 城市数据
+// const currentGroup = computed(()=> allCities.value[tabActive.value])
+</script>
+<style lang="less" scoped>
+.content {
+  height:calc(100vh - 98px);
+  overflow-y: auto;
+}
+.city-top {
+  position:relative;
+  z-index:9;
+}
+</style>
+```
+
+### 选择日期范围
+![图片](../.vuepress/public/images/rqrq1.png)
+
+[Calendar 日历](https://vant-contrib.gitee.io/vant/#/zh-CN/calendar) 组件
+
+**utils/format-date.js** **封装日期处理工具函数**
+![图片](../.vuepress/public/images/rq2.png)
+
+```vue
+<template>
+   ...
+  <!--选择日期范围-->
+  <div class="section item date-range" @click="calendarVisible = true">
+      <div class="start">
+        <div class="date">
+          <span class="tip">入住</span>
+          <span class="time">{{startDate}}</span>
+        </div>
+        <div class="stay">共 {{diffDays}} 晚</div>
+      </div>
+      <div class="end">
+        <div class="date">
+          <span class="tip">离店</span>
+          <span class="time">{{endDate}}</span>
+        </div>
+      </div>
+    </div>
+    <van-calendar 
+      v-model:show="calendarVisible" 
+      @confirm="onConfirm" 
+      color="#ff9854"
+      type="range" 
+      :round="false"
+    />
+  </div>
+</template>
+<script setup>
+...
+import { formatDate,getDiffDays } from '@/utils/format-date';
+...
+import { ref } from 'vue'
+
+...
+// 日期范围 
+const nowDate = new Date()
+const newDate = new Date().setDate((new Date().getDate() + 1))
+const startDate = ref(formatDate(nowDate))
+const endDate = ref(formatDate(newDate))
+// 相差的天数
+const diffDays = ref(getDiffDays(nowDate, newDate))
+
+// 日历显示/隐藏
+const calendarVisible = ref(false)
+// 日历点击了确定
+const onConfirm = (value) => {
+  startDate.value = formatDate(value[0])
+  endDate.value = formatDate(value[1])
+
+  calendarVisible.value = false
+
+  diffDays.value = getDiffDays(value[0],value[1])
+}
+
+</script>
+```
+### 热门搜索建议 - 数据请求和展示 (Pinia)
+![图片](../.vuepress/public/images/sug1.png)
+
+网络请求的话**不建议**在单独的组件里面去调 , 所以就使用 **Pinia** 做状态管理实现分层结构
+
+**service/modules/home.js  先封装api接口**
+```js
+import hyRequest from '@/service/request'
+
+// 获取热门搜素建议 
+export  function getHotSuggest(){
+  return hyRequest.get({
+    url:'/home/hotSuggests'
+  })
+}
+```
+
+**store/modules/home.js  Pinia 状态管理: useHomeStore**
+![图片](../.vuepress/public/images/sug2.png)
+
+home.vue **然后在首页, 也就是 home.vue , 在进入页面的时候就性需要发起网络请求, 所以调用 action**
+
+![图片](../.vuepress/public/images/sug3.png)
+
+home-search-box.vue **然后进行模板展示**
+![图片](../.vuepress/public/images/sug5.png)
+### 点击搜索按钮 -> 跳转搜索页面, 携带参数
+点击搜索按钮后, 要跳转到另一个搜索页面
+
+想要**跳转页面时,** 如果还**有一些参数要携带的话**, 那么可以在 **`$route` 的 `query` 属性**上面携带这些参数苏
+
+![图片](../.vuepress/public/images/sstz1.png)
+
+## 分类列表组件 home-categories
+![图片](../.vuepress/public/images/fl01.png)
+
+具体数据都要发请求得到, 所以**也使用 Pinia**
+
+service/modules/home.js  **api接口**
+![图片](../.vuepress/public/images/fl02.png)
+
+store/modules/home.js  **pinia 封装 action 动作**
+![图片](../.vuepress/public/images/fl03.png)
+
+home.vue **一进首页时, 调用 action 发起网络请求**
+![图片](../.vuepress/public/images/fl04.png)
+
+**封装成组件**
+
+* **小技巧: 隐藏滚动条 ->  `.el::-webkit-scrollbar { width: 0 !important }`**
+
+home-categories.vue 
+```vue
+<template>
+  <div class="home-categories">
+    <template v-for="item in categories" :key="item.id">
+      <div class="home-categories-item">
+        <img :src="item.pictureUrl" alt="">
+        <span class="text">{{item.title}}</span>
+      </div>
+    </template>
+  </div>
+</template>
+<script setup>
+import useHomeStore from '@/store/modules/home';
+import { storeToRefs } from 'pinia';
+
+const homeStore = useHomeStore()
+const { categories } = storeToRefs(homeStore)
+
+</script>
+<style lang="less" scoped>
+.home-categories {
+  display: flex;
+  overflow-x: auto;
+  padding:16px 4px;
+  &::-webkit-scrollbar { width: 0 !important }
+  &-item {
+    width:70px;
+    display: flex;
+    flex-direction: column; 
+    flex-shrink: 0;
+    justify-content: center;
+    align-items: center;
+    padding:4px;
+    img{
+      width:30px;
+    }
+    .text{
+      margin-top:6px;
+      font-size: 14px;
+    }
+  }
 }
 </style>
 ```
