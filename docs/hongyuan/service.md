@@ -1,4 +1,4 @@
-# 网络封装封装
+# 网络请求封装
 service 文件夹目录结构: 
 ![图片](../.vuepress/public/images/laxios.png)
 

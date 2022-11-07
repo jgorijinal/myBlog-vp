@@ -1,4 +1,4 @@
-<template><h1 id="网络封装封装" tabindex="-1"><a class="header-anchor" href="#网络封装封装" aria-hidden="true">#</a> 网络封装封装</h1>
+<template><h1 id="网络请求封装" tabindex="-1"><a class="header-anchor" href="#网络请求封装" aria-hidden="true">#</a> 网络请求封装</h1>
 <p>service 文件夹目录结构:
 <img src="@source/.vuepress/public/images/laxios.png" alt="图片"></p>
 <p>service/request/config.js <strong>config 配置项</strong></p>

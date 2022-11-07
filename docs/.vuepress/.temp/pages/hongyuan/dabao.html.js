@@ -1,21 +1,15 @@
 export const data = {
-  "key": "v-0e09661e",
-  "path": "/hongyuan/service.html",
-  "title": "网络请求封装",
+  "key": "v-30067f33",
+  "path": "/hongyuan/dabao.html",
+  "title": "打包",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
   "headers": [],
   "git": {
-    "contributors": [
-      {
-        "name": "jgoriginal",
-        "email": "932274204@qq.com",
-        "commits": 1
-      }
-    ]
+    "contributors": []
   },
-  "filePathRelative": "hongyuan/service.md"
+  "filePathRelative": "hongyuan/dabao.md"
 }
 
 if (import.meta.webpackHot) {

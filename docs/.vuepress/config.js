@@ -84,6 +84,13 @@ module.exports = {
             //     ]
             // },
             {
+                text: 'HTML系列',
+                collapsible: true,
+                children: [
+                    '/html/start.md',
+                ]
+            },
+            {
                 text: 'Vue3系列',
                 collapsible: true,
                 children: [
@@ -284,10 +291,12 @@ module.exports = {
                     '/hongyuan/start.md',
                     '/hongyuan/service.md',
                     '/hongyuan/start2.md',
+                    '/hongyuan/yewu2.md',
+                    '/hongyuan/yewu3.md',
                 ]
             },
             {
-                text: 'Vue3后台',
+                text: 'Vue3后台管理项目',
                 collapsible: true,
                 children: [
                     '/vue-admin/dajian.md',
@@ -302,7 +311,7 @@ module.exports = {
                     ]
             },
             {
-                text: '记账项目',
+                text: '日常记账项目',
                 collapsible: true,
                 children: [
                     '/jizhang/dajian.md',
@@ -372,7 +381,7 @@ module.exports = {
                     ]
             },
             {
-                text: 'HRSaas',
+                text: 'HRSaas项目',
                 collapsible: true,
                 children: [
                     '/hrsass/start.md',
@@ -390,7 +399,7 @@ module.exports = {
                 ]
             },
             {
-                text: 'VueAdmin',
+                text: 'Vue3 + TS 后台管理项目',
                 collapsible: true,
                 children: [
                     '/cms/code.md',
@@ -406,7 +415,7 @@ module.exports = {
                     ]
             },
             {
-                text: '头条',
+                text: '每日头条项目',
                 collapsible: true,
                 children: [
                     '/toutiao/chushihua.md',

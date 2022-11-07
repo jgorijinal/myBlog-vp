@@ -5,6 +5,13 @@ export const themeData = {
   "lastUpdated": false,
   "sidebar": [
     {
+      "text": "HTML系列",
+      "collapsible": true,
+      "children": [
+        "/html/start.md"
+      ]
+    },
+    {
       "text": "Vue3系列",
       "collapsible": true,
       "children": [
@@ -176,11 +183,13 @@ export const themeData = {
       "children": [
         "/hongyuan/start.md",
         "/hongyuan/service.md",
-        "/hongyuan/start2.md"
+        "/hongyuan/start2.md",
+        "/hongyuan/yewu2.md",
+        "/hongyuan/yewu3.md"
       ]
     },
     {
-      "text": "Vue3后台",
+      "text": "Vue3后台管理项目",
       "collapsible": true,
       "children": [
         "/vue-admin/dajian.md",
@@ -195,7 +204,7 @@ export const themeData = {
       ]
     },
     {
-      "text": "记账项目",
+      "text": "日常记账项目",
       "collapsible": true,
       "children": [
         "/jizhang/dajian.md",
@@ -234,7 +243,7 @@ export const themeData = {
       ]
     },
     {
-      "text": "HRSaas",
+      "text": "HRSaas项目",
       "collapsible": true,
       "children": [
         "/hrsass/start.md",
