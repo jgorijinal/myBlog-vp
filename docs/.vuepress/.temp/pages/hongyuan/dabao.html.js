@@ -7,7 +7,13 @@ export const data = {
   "excerpt": "",
   "headers": [],
   "git": {
-    "contributors": []
+    "contributors": [
+      {
+        "name": "jgoriginal",
+        "email": "932274204@qq.com",
+        "commits": 1
+      }
+    ]
   },
   "filePathRelative": "hongyuan/dabao.md"
 }

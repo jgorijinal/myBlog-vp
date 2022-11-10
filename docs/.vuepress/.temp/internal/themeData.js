@@ -12,6 +12,20 @@ export const themeData = {
       ]
     },
     {
+      "text": "CSS系列",
+      "collapsible": true,
+      "children": [
+        "/css/start.md",
+        "/css/text.md",
+        "/css/jicheng.md",
+        "/css/hezi.md",
+        "/css/beijing.md",
+        "/css/ewai.md",
+        "/css/fudong.md",
+        "/css/flex.md"
+      ]
+    },
+    {
       "text": "Vue3系列",
       "collapsible": true,
       "children": [
@@ -178,7 +192,7 @@ export const themeData = {
       ]
     },
     {
-      "text": "旅途",
+      "text": "旅途项目",
       "collapsible": true,
       "children": [
         "/hongyuan/start.md",
@@ -261,7 +275,7 @@ export const themeData = {
       ]
     },
     {
-      "text": "VueAdmin",
+      "text": "Vue3 + TS 后台管理项目",
       "collapsible": true,
       "children": [
         "/cms/code.md",
@@ -277,7 +291,7 @@ export const themeData = {
       ]
     },
     {
-      "text": "头条",
+      "text": "每日头条项目",
       "collapsible": true,
       "children": [
         "/toutiao/chushihua.md",

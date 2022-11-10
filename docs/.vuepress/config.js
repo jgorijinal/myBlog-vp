@@ -72,22 +72,30 @@ module.exports = {
 
             //     ],
             // },
-            //     {
-            //     text: 'CSS系列',
-            //     collapsible: true,
-            //     children: [
-            //         // '/css/init.md',
-            //         // '/css/grid.md',
-            //         '/css/background.md',
-            //         '/css/san.md',
-            //         '/css/he.md',
-            //     ]
-            // },
             {
                 text: 'HTML系列',
                 collapsible: true,
                 children: [
                     '/html/start.md',
+                ]
+            },
+            {
+                text: 'CSS系列',
+                collapsible: true,
+                children: [
+                    // '/css/init.md',
+                    // '/css/grid.md',
+                    // '/css/background.md',
+                    // '/css/san.md',
+                    // '/css/he.md',
+                    '/css/start.md',
+                    '/css/text.md',
+                    '/css/jicheng.md',
+                    '/css/hezi.md',
+                    '/css/beijing.md',
+                    '/css/ewai.md',
+                    '/css/fudong.md',
+                    '/css/flex.md',
                 ]
             },
             {
@@ -285,7 +293,7 @@ module.exports = {
             //         ]
             // },
             {
-                text: '旅途',
+                text: '旅途项目',
                 collapsible: true,
                 children: [
                     '/hongyuan/start.md',
