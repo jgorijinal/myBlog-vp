@@ -1,4 +1,4 @@
-# DOM
+<!-- # DOM
 浏览器是用来展示网页的，而网页中最重要的就是里面各种的标签元素，JavaScrip t很多时候是需要操作这些元素的
 * JavaScript 如何操作元素呢？通过Document Object Model（DOM，文档对象模型）
 * DOM 给我们提供了一系列的模型和对象，可以方便的来操作 Web 页面
@@ -167,6 +167,7 @@ document.addEventListener('selectstart', function(e){
 4. 核心原理: 每次鼠标移动获取最新的鼠标位置, 把这个 x 和 y 坐标作为图片的 top 和 left 就可以了
 
 ![图片](../.vuepress/public/images/tianshi1.png)
+ -->
 
 
 
@@ -190,8 +191,7 @@ document.addEventListener('selectstart', function(e){
 
 
 
-
-
+<!-- 
 ## EventTarget
 因为继承自 EventTarget，所以也可以使用 EventTarget 的方法
 ![图片](../.vuepress/public/images/et66.png)
@@ -253,4 +253,248 @@ Capture）；
 * preventDefault：取消事件的默认行为；
 * stopPropagation：阻止事件的进一步传递
 
-事件类型 : [https://developer.mozilla.org/zh-CN/docs/Web/Events](https://developer.mozilla.org/zh-CN/docs/Web/Events)
+事件类型 : [https://developer.mozilla.org/zh-CN/docs/Web/Events](https://developer.mozilla.org/zh-CN/docs/Web/Events) -->
+
+# DOM
+DOM相当于是JavaScript和HTML、CSS之间的桥梁
+* 通过浏览器提供给我们的 **DOM API**，可以**对元素以及其中的内容**做任何事情；
+
+类型之间有如下的继承关系：
+![图片](../.vuepress/public/images/ddx1.png)
+
+## document对象
+Document节点表示的整个载入的网页，它的实例是全局的document对象：
+* 对DOM的所有操作都是**从 document 对象开始**的；
+* 它是**DOM的 入口点**，可以从document开始去访问任何节点元素；
+
+对于最顶层的html、head、body元素，我们可以直接在document对象中获取到：
+* **html元素**：`<html>` = document.documentElement
+* **body元素**：`<body>` = document.body
+* **head元素**：`<head>` = document.head
+* **文档声明**：`<!DOCTYPE html>` = document.doctype
+
+![图片](../.vuepress/public/images/dot1.png)
+
+## 节点（Node）之间的导航（navigator）
+如果我们获取到**一个节点（Node）**后，可以根据这个节点去获取其他的节点，称之为**节点之间的导航**
+
+节点之间存在如下的关系：
+* 父节点：**parentNode**
+* 前兄弟节点：**previousSibling**
+* 后兄弟节点：**nextSibling**
+* 子节点：**childNodes**
+* 第一个子节点：**firstChild**
+* 第二个子节点：**lastChild**
+
+![图片](../.vuepress/public/images/nnn1.png)
+
+
+## 元素（Element）之间的导航（navigator）
+如果获取到**一个元素（Element）**后 ，可以根据**这个元素去获取其他的元素**，称之为元素之间的导航
+
+节点之间存在如下的关系：
+* 父元素：**parentElement**
+* 前兄弟节点：**previousElementSibling**
+* 后兄弟节点：**nextElementSibling**
+* 子节点：**children**
+* 第一个子节点：**firstElementChild**
+* 第二个子节点：**lastElementChild**
+
+![图片](../.vuepress/public/images/nnn2.png)
+## 获取元素的方法
+DOM 提供了获取元素的方法：
+
+![图片](../.vuepress/public/images/nnn3.png)
+
+开发中如何选择呢？
+* 目前最常用的是**querySelector和querySelectAll**；
+* **getElementById**偶尔也会使用或者在适配一些低版本浏览器时；
+## 节点的属性
+### nodeType
+nodeType属性：
+* nodeType 属性提供了一种获取节点类型的方法；
+* 它有一个数值型值（numeric value）；
+
+常见的节点类型有如下：
+![图片](../.vuepress/public/images/nt1.png)
+[https://developer.mozilla.org/zh-CN/docs/Web/API/Node/nodeType](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/nodeType)
+### nodeName、tagName
+* nodeName：获取node节点的名字；
+* tagName：获取元素的标签名词；
+![图片](../.vuepress/public/images/nodename1.png)
+
+**tagName 和 nodeName 之间有什么不同呢？**
+* tagName 属性仅适用于 Element 节点
+* nodeName 是为任意 Node 定义的
+   * 对于元素，它的意义与 tagName 相同，所以使用哪一个都是可以的
+   * 对于其他节点类型（text，comment 等），它拥有一个对应节点类型的字符串
+
+### innerHTML、textContent
+**innerHTML 属性**
+* 将元素中的 HTML 获取为字符串形式；
+* 设置元素中的内容；
+
+**outerHTML 属性**
+* 包含了元素的完整 HTML
+* innerHTML**加上元素本身一样**；
+
+**textContent 属性**
+* 仅仅获取元素中的文本内容；
+
+**innerHTML和textContent的区别：**
+* 使用 innerHTML，我们将其 **“作为 HTML”插入**，带有所有 HTML 标签
+* 使用 textContent，我们将其 **“作为文本”插入**，所有符号（symbol）均按字面意义处理
+
+
+### 其他属性
+**hidden属性：也是一个全局属性，可以用于设置元素隐藏。**
+![图片](../.vuepress/public/images/hid1.png)
+**DOM 元素还有其他属性：**
+
+* value
+   * `<input>，<select> 和 <textarea>`（HTMLInputElement，HTMLSelectElement……）的 value
+* href
+   * `<a href="...">`（HTMLAnchorElement）的 href
+* id
+   * 所有元素（HTMLElement）的 “id” 特性（attribute）的值
+## 元素的 attribute
+### attribute的分类
+* **标准的attribute**：某些attribute属性是标准的，比如id、class、href、type、value等
+* **非标准的attribute**：某些attribute属性是自定义的，比如abc、age、height等
+
+![图片](../.vuepress/public/images/abute1.png)
+
+### attribute的操作
+* **elem.hasAttribute(name)** — 检查特性是否存在。
+* **elem.getAttribute(name)** — 获取这个特性值。
+* **elem.setAttribute(name, value)** — 设置这个特性值。
+* **elem.removeAttribute(name)** — 移除这个特性。
+* **attributes** - attr对象的集合，具有name、value属性；
+
+
+attribute具备以下特征：
+* 它们的**名字是大小写不敏感的（id 与 ID 相同）**
+* 它们的值总是**字符串类型**的
+
+## 元素的属性（property）
+对于**标准的attribute**，会在DOM对象上创建**与其对应的property属性**：
+
+![图片](../.vuepress/public/images/proper1.png)
+
+在大多数情况下，它们是相互作用的
+* 改变property，通过attribute获取的值，会随着改变；
+* 通过attribute操作修改，property的值会随着改变；
+
+**除非特别情况，大多数情况下，设置、获取attribute，推荐使用property的方式：**
+* 这是因为它**默认情况下是有类型**的
+
+![图片](../.vuepress/public/images/chc1.png)
+
+### HTML5的data-*自定义属性
+它们也是可以在dataset属性中获取到的：
+
+![图片](../.vuepress/public/images/dataset01.png)
+
+### 元素的className和classList
+元素的class attribute，对应的property并非叫class，**而是 className**
+* 这是因为JavaScript早期是不允许使用class这种关键字来作为对象的属性，所以DOM规范使用了className；
+* 虽然现在JavaScript已经没有这样的限制，但是并不推荐，并且依然在使用className这个名称；
+
+可以对className进行赋值，它会替换整个类中的字符串。
+![图片](../.vuepress/public/images/classname1.png)
+
+如果我们需要添加或者移除单个的 class，那么**可以使用classList属性**
+
+elem.classList 是一个特殊的对象：
+* **elem.classList.add (class)** ：添加一个类
+* **elem.classList.remove(class)**：添加/移除类。
+* **elem.classList.toggle(class)** ：如果类不存在就添加类，存在就移除它。
+* **elem.classList.contains(class)**：检查给定类，返回 true/false。
+
+**classList是可迭代对象，可以通过for of进行遍历**
+### 元素的 style 属性
+如果需要单独修改某一个CSS属性，那么可以通过style来操作：
+* **对于多词（multi-word）属性，使用驼峰式 camelCase**
+
+![图片](../.vuepress/public/images/yuan1.png)
+
+如果我们将值设置为**空字符串**，那么会使用**CSS的默认样式**：
+
+![图片](../.vuepress/public/images/yuan2.png)
+
+多个样式的写法，我们需要使用cssText属性：
+* 不推荐这种用法，因为它会替换整个字符串；
+![图片](../.vuepress/public/images/yuan3.png)
+
+### 元素style的读取 - getComputedStyle
+
+如果我们需要读取样式：
+* 对于内联样式，是可以通过style.*的方式读取到的;
+* 对于style、css文件中的样式，是读取不到的；
+
+可以通过**getComputedStyle的全局函数**来实现
+
+![图片](../.vuepress/public/images/cs1.png)
+## 元素常见操作
+### 创建元素
+* 步骤一：创建一个元素
+* 步骤二：插入元素到 DOM 的某一个位置
+
+![图片](../.vuepress/public/images/chuang1.png)
+
+### 插入元素
+* node.append(...nodes or strings) —— 在 node 末尾 插入节点或字符串，
+* node.prepend(...nodes or strings) —— 在 node 开头 插入节点或字符串，
+* node.before(...nodes or strings) —— 在 node 前面 插入节点或字符串，
+* node.after(...nodes or strings) —— 在 node 后面 插入节点或字符串，
+* node.replaceWith(...nodes or strings) —— 将 node 替换为给定的节点或字符串。
+
+![图片](../.vuepress/public/images/charu1.png)
+### 移除和克隆元素
+**移除元素我们可以调用元素本身的remove方法：**
+
+![图片](../.vuepress/public/images/yichu1.png)
+
+**如果我们想要复制一个现有的元素，可以通过cloneNode方法：**
+* 可以传入一个Boolean类型的值，来决定是否是深度克隆；
+* 深度克隆会克隆对应元素的子元素，否则不会；
+
+![图片](../.vuepress/public/images/yichu2.png)
+
+### 旧的元素操作方法
+在很多地方也会看到一些旧的操作方法：
+* parentElem.appendChild(node)：
+   * 在parentElem的父元素最后位置添加一个子元素
+* parentElem.insertBefore(node, nextSibling)：
+   * 在parentElem的nextSibling前面插入一个子元素；
+* parentElem.replaceChild(node, oldChild)：
+   * 在parentElem中，新元素替换之前的oldChild元素；
+* parentElem.removeChild(node)：
+   * 在parentElem中，移除某一个元素；
+## 元素的大小, 滚动
+* clientWidth：contentWith+padding（不包含滚动条）
+* clientHeight：contentHeight+padding
+* clientTop：border-top的宽度
+* clientLeft：border-left的宽度
+* offsetWidth：元素完整的宽度
+* offsetHeight：元素完整的高度
+* offsetLeft：距离父元素的x
+* offsetHeight：距离父元素的y
+* scrollHeight：整个可滚动的区域高度
+* scrollTop：滚动部分的高度
+
+![图片](../.vuepress/public/images/daxiao1.png)
+
+## window的大小、滚动
+**window的width和height**
+* innerWidth、innerHeight：获取window窗口的宽度和高度（包含滚动条）
+* outerWidth、outerHeight：获取window窗口的整个宽度和高度（包括调试工具、工具栏）
+* documentElement.clientHeight、documentElement.clientWidth：获取html的宽度和高度（不包含滚动条）
+
+**window的滚动位置：**
+* scrollX：X轴滚动的位置（别名pageXOffset）
+* scrollY：Y轴滚动的位置（别名pageYOffset）
+
+**也有提供对应的滚动方法：**
+* 方法 scrollBy(x,y) ：将页面滚动至 相对于当前位置的 (x, y) 位置；
+* 方法 scrollTo(pageX,pageY) 将页面滚动至 绝对坐标；

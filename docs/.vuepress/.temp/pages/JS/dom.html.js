@@ -8,144 +8,150 @@ export const data = {
   "headers": [
     {
       "level": 2,
-      "title": "事件基础",
-      "slug": "事件基础",
+      "title": "document对象",
+      "slug": "document对象",
       "children": []
     },
     {
       "level": 2,
-      "title": "操作 DOM",
-      "slug": "操作-dom",
+      "title": "节点（Node）之间的导航（navigator）",
+      "slug": "节点-node-之间的导航-navigator",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "元素（Element）之间的导航（navigator）",
+      "slug": "元素-element-之间的导航-navigator",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "获取元素的方法",
+      "slug": "获取元素的方法",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "节点的属性",
+      "slug": "节点的属性",
       "children": [
         {
           "level": 3,
-          "title": "改变元素内容",
-          "slug": "改变元素内容",
+          "title": "nodeType",
+          "slug": "nodetype",
           "children": []
         },
         {
           "level": 3,
-          "title": "innerHTML 和 innerText 区别",
-          "slug": "innerhtml-和-innertext-区别",
+          "title": "nodeName、tagName",
+          "slug": "nodename、tagname",
           "children": []
         },
         {
           "level": 3,
-          "title": "常见元素的属性操作",
-          "slug": "常见元素的属性操作",
+          "title": "innerHTML、textContent",
+          "slug": "innerhtml、textcontent",
           "children": []
         },
         {
           "level": 3,
-          "title": "表单元素的属性操作",
-          "slug": "表单元素的属性操作",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "样式属性操作",
-          "slug": "样式属性操作",
+          "title": "其他属性",
+          "slug": "其他属性",
           "children": []
         }
       ]
     },
     {
       "level": 2,
-      "title": "注册事件(绑定事件)",
-      "slug": "注册事件-绑定事件",
+      "title": "元素的 attribute",
+      "slug": "元素的-attribute",
       "children": [
         {
           "level": 3,
-          "title": "删除事件(解绑事件)",
-          "slug": "删除事件-解绑事件",
+          "title": "attribute的分类",
+          "slug": "attribute的分类",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "attribute的操作",
+          "slug": "attribute的操作",
           "children": []
         }
       ]
     },
     {
       "level": 2,
-      "title": "DOM 事件流",
-      "slug": "dom-事件流",
+      "title": "元素的属性（property）",
+      "slug": "元素的属性-property",
       "children": [
         {
           "level": 3,
-          "title": "事件对象",
-          "slug": "事件对象",
+          "title": "HTML5的data-*自定义属性",
+          "slug": "html5的data-自定义属性",
           "children": []
         },
         {
           "level": 3,
-          "title": "事件对象的常见属性",
-          "slug": "事件对象的常见属性",
+          "title": "元素的className和classList",
+          "slug": "元素的classname和classlist",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "元素的 style 属性",
+          "slug": "元素的-style-属性",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "元素style的读取 - getComputedStyle",
+          "slug": "元素style的读取-getcomputedstyle",
           "children": []
         }
       ]
     },
     {
       "level": 2,
-      "title": "事件委托",
-      "slug": "事件委托",
-      "children": []
-    },
-    {
-      "level": 2,
-      "title": "常用的鼠标事件",
-      "slug": "常用的鼠标事件",
+      "title": "元素常见操作",
+      "slug": "元素常见操作",
       "children": [
         {
           "level": 3,
-          "title": "禁用鼠标右键菜单",
-          "slug": "禁用鼠标右键菜单",
+          "title": "创建元素",
+          "slug": "创建元素",
           "children": []
         },
         {
           "level": 3,
-          "title": "禁用鼠标选中",
-          "slug": "禁用鼠标选中",
+          "title": "插入元素",
+          "slug": "插入元素",
           "children": []
         },
         {
           "level": 3,
-          "title": "鼠标事件对象",
-          "slug": "鼠标事件对象",
+          "title": "移除和克隆元素",
+          "slug": "移除和克隆元素",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "旧的元素操作方法",
+          "slug": "旧的元素操作方法",
           "children": []
         }
       ]
     },
     {
       "level": 2,
-      "title": "EventTarget",
-      "slug": "eventtarget",
+      "title": "元素的大小, 滚动",
+      "slug": "元素的大小-滚动",
       "children": []
     },
     {
       "level": 2,
-      "title": "Node 节点",
-      "slug": "node-节点",
-      "children": []
-    },
-    {
-      "level": 2,
-      "title": "Document",
-      "slug": "document",
-      "children": []
-    },
-    {
-      "level": 2,
-      "title": "Element",
-      "slug": "element",
-      "children": []
-    },
-    {
-      "level": 2,
-      "title": "事件冒泡和事件捕获",
-      "slug": "事件冒泡和事件捕获",
-      "children": []
-    },
-    {
-      "level": 2,
-      "title": "事件对象 event",
-      "slug": "事件对象-event",
+      "title": "window的大小、滚动",
+      "slug": "window的大小、滚动",
       "children": []
     }
   ],
