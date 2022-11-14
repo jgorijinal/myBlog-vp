@@ -114,7 +114,7 @@
 <li>可以设置任意整数（正整数、负整数、0），值越小就越排在前面</li>
 <li>默认值是 0</li>
 </ul>
-<p><img src="@source/.vuepress/public/images/order1.png" alt="图片"></p>
+<p><img src="@source/.vuepress/public/images/order.png" alt="图片"></p>
 <h3 id="align-self" tabindex="-1"><a class="header-anchor" href="#align-self" aria-hidden="true">#</a> align-self</h3>
 <p>flex items 可以通过 <strong>align-self</strong> 覆盖 flex container 设置的 align-items</p>
 <ul>

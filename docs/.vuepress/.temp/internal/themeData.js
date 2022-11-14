@@ -22,7 +22,10 @@ export const themeData = {
         "/css/beijing.md",
         "/css/ewai.md",
         "/css/fudong.md",
-        "/css/flex.md"
+        "/css/flex.md",
+        "/css/ewai2.md",
+        "/css/ewai3.md",
+        "/css/shipei.md"
       ]
     },
     {

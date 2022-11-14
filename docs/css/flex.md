@@ -86,7 +86,7 @@ order 决定了 flex items 的排布顺序
 * 可以设置任意整数（正整数、负整数、0），值越小就越排在前面
 * 默认值是 0
 
-![图片](../.vuepress/public/images/order1.png)
+![图片](../.vuepress/public/images/order.png)
 
 ### align-self
 flex items 可以通过 **align-self** 覆盖 flex container 设置的 align-items

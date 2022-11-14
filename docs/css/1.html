@@ -6,44 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="./1.css" />
+    <script>
+      function setRemUnit(){
+        const htmlEl = document.documentElement
+        const htmlWidth  = htmlEl.clientWidth
+        const unit = htmlWidth / 10  // 一般会除以 10
+        htmlEl.style.fontSize = unit + 'px'
+      }
+      // 一开始默认调一次
+      setRemUnit()
+      // 监听浏览器大小变化, 实时执行函数
+      window.addEventListener('resize' , setRemUnit)
+
+
+    </script>
     <style>
-      .content {
-        width: 1190px;
-        margin: 0 auto;
-        background-color: blue;
-      }
       .box {
-        margin-right: -10px;
-      }
-      .item {
-        width: 290px;
-        margin-bottom: 10px;
-        float: left;
-        background-color: blueviolet;
-        margin-right: 10px;
-      }
-      .left {
-        height: 370px;
-      }
-      .right {
-        height: 180px;
+        width:18
       }
     </style>
   </head>
   <body>
-    <div class="content">
-      <div class="box">
-        <div class="item left"></div>
-        <div class="item left"></div>
-        <div class="item right"></div>
-        <div class="item right"></div>
-        <div class="item right"></div>
-        <div class="item right"></div>
-        <div class="item right"></div>
-        <div class="item right"></div>
-        <div class="item right"></div>
-        <div class="item right"></div>
-      </div>
+    <div class="box">
+      box
     </div>
   </body>
 </html>

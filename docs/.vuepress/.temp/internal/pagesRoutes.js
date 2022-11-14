@@ -38,6 +38,8 @@ const routeItems = [
   ["v-3895be74","/css/background.html",{"title":"背景"},["/css/background","/css/background.md"]],
   ["v-575fa460","/css/beijing.html",{"title":"CSS设置背景"},["/css/beijing","/css/beijing.md"]],
   ["v-4be67d5a","/css/ewai.html",{"title":"额外知识"},["/css/ewai","/css/ewai.md"]],
+  ["v-3485e386","/css/ewai2.html",{"title":"额外知识 (2)"},["/css/ewai2","/css/ewai2.md"]],
+  ["v-363abc25","/css/ewai3.html",{"title":"额外知识 (3)"},["/css/ewai3","/css/ewai3.md"]],
   ["v-56af9d1b","/css/flex.html",{"title":"flex 布局"},["/css/flex","/css/flex.md"]],
   ["v-0ebfac7e","/css/fudong.html",{"title":"浮动"},["/css/fudong","/css/fudong.md"]],
   ["v-0bb319ee","/css/grid.html",{"title":"Grid 栅格"},["/css/grid","/css/grid.md"]],
@@ -46,8 +48,10 @@ const routeItems = [
   ["v-9ff66338","/css/init.html",{"title":"样式初始化"},["/css/init","/css/init.md"]],
   ["v-66b96224","/css/jicheng.html",{"title":"继承 - 层叠 - 元素类型"},["/css/jicheng","/css/jicheng.md"]],
   ["v-6990a8fe","/css/san.html",{"title":"三大特性 层叠性、继承性、优先级"},["/css/san","/css/san.md"]],
+  ["v-d5e91a58","/css/shipei.html",{"title":"移动端适配"},["/css/shipei","/css/shipei.md"]],
   ["v-2074b47c","/css/start.html",{"title":"CSS"},["/css/start","/css/start.md"]],
   ["v-fcef0f32","/css/text.html",{"title":"text  - font - 选择器"},["/css/text","/css/text.md"]],
+  ["v-45905cc6","/css/zongjie.html",{"title":"总结"},["/css/zongjie","/css/zongjie.md"]],
   ["v-658e9812","/elementui/jicheng.html",{"title":"element-ui"},["/elementui/jicheng","/elementui/jicheng.md"]],
   ["v-ad803f64","/fengzhuang/chuxia.html",{"title":"初级组件 - 下"},["/fengzhuang/chuxia","/fengzhuang/chuxia.md"]],
   ["v-ec0589b6","/fengzhuang/dajian.html",{"title":"初级组件 上"},["/fengzhuang/dajian","/fengzhuang/dajian.md"]],
@@ -244,7 +248,6 @@ const routeItems = [
   ["v-f4814c68","/xiaochengxuyinyue/shouye.html",{"title":"首页 - 音乐页面"},["/xiaochengxuyinyue/shouye","/xiaochengxuyinyue/shouye.md"]],
   ["v-1e38101a","/zhuanlanxiangmu/start.html",{"title":"起步"},["/zhuanlanxiangmu/start","/zhuanlanxiangmu/start.md"]],
   ["v-3706649a","/404.html",{"title":""},["/404"]],
-  ["v-45905cc6","/css/zongjie.html",{"title":"总结"},["/css/zongjie","/css/zongjie.md"]],
 ]
 
 export const pagesRoutes = routeItems.reduce(
