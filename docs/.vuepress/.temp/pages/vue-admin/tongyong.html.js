@@ -134,6 +134,55 @@ export const data = {
           "children": []
         }
       ]
+    },
+    {
+      "level": 2,
+      "title": "tagsView 多页签导航 原理方案分析",
+      "slug": "tagsview-多页签导航-原理方案分析",
+      "children": [
+        {
+          "level": 3,
+          "title": "创建 tags 数据源",
+          "slug": "创建-tags-数据源",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "生成 tagsView 组件",
+          "slug": "生成-tagsview-组件",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "tagsView 国际化处理",
+          "slug": "tagsview-国际化处理",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "contextMenu 展示处理",
+          "slug": "contextmenu-展示处理",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "contextMenu 事件处理",
+          "slug": "contextmenu-事件处理",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "contextMenu 的关闭行为",
+          "slug": "contextmenu-的关闭行为",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "处理基于路由的动态过渡",
+          "slug": "处理基于路由的动态过渡",
+          "children": []
+        }
+      ]
     }
   ],
   "git": {
