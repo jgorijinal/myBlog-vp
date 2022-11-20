@@ -1356,4 +1356,157 @@ console<span class="token punctuation">.</span><span class="token function">log<
   <span class="token property">opacity</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
   <span class="token property">transform</span><span class="token punctuation">:</span> <span class="token function">translateX</span><span class="token punctuation">(</span>30px<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div></template>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><p>整个 tagsView 整体来看就是三块大的内容：</p>
+<ul>
+<li>tags：tagsView 组件</li>
+<li>contextMenu：contextMenu 组件</li>
+<li>view：appmain 组件</li>
+</ul>
+<p>再加上一部分的数据处理即可</p>
+<h2 id="guide-引导页" tabindex="-1"><a class="header-anchor" href="#guide-引导页" aria-hidden="true">#</a> Guide 引导页</h2>
+<p>对于引导页来说，市面上有很多现成的轮子，所以我们不需要手动的去进行以上内容的处理，我们这里可以直接使用 driver.js 进行引导页处理。</p>
+<p>基于 driver.js 我们的实现方案如下：</p>
+<ol>
+<li>创建 Guide 组件：用于处理 icon 展示</li>
+<li>初始化 driver.js</li>
+<li>指定 driver.js 的 steps</li>
+</ol>
+<h3 id="生成-guide-组件" tabindex="-1"><a class="header-anchor" href="#生成-guide-组件" aria-hidden="true">#</a> 生成 guide 组件</h3>
+<div class="language-vue ext-vue line-numbers-mode"><pre v-pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>guide<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-tooltip</span>
+        <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>box-item<span class="token punctuation">"</span></span>
+        <span class="token attr-name">effect</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>dark<span class="token punctuation">"</span></span>
+        <span class="token attr-name">:content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>$t(<span class="token punctuation">'</span>msg.navBar.guide<span class="token punctuation">'</span>)<span class="token punctuation">"</span></span>
+        <span class="token attr-name">placement</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>bottom<span class="token punctuation">"</span></span>
+      <span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-icon</span> <span class="token attr-name">:size</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>28<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Guide</span> <span class="token punctuation">/></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-icon</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-tooltip</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">setup</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>scss<span class="token punctuation">"</span></span> <span class="token attr-name">scoped</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
+<span class="token selector">.guide</span> <span class="token punctuation">{</span>
+  <span class="token property">cursor</span><span class="token punctuation">:</span>pointer<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br></div></div><p>并在 首页引入</p>
+<h3 id="guide-业务逻辑处理" tabindex="-1"><a class="header-anchor" href="#guide-业务逻辑处理" aria-hidden="true">#</a> Guide 业务逻辑处理</h3>
+<p>导入 <strong>driver.js</strong></p>
+<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>npm i driver.js@0.9.8
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br></div></div><p>在 guide.vue 中初始化 driiver</p>
+<div class="language-vue ext-vue line-numbers-mode"><pre v-pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">setup</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+<span class="token keyword">import</span> Driver <span class="token keyword">from</span> <span class="token string">'driver.js'</span>
+<span class="token keyword">import</span> <span class="token string">'driver.js/dist/driver.min.css'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> onMounted <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> useI18n <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue-i18n'</span>
+
+<span class="token keyword">const</span> i18n <span class="token operator">=</span> <span class="token function">useI18n</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">let</span> driver <span class="token operator">=</span> <span class="token keyword">null</span>
+<span class="token function">onMounted</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  driver <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Driver</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token comment">// 禁止点击蒙版关闭</span>
+    <span class="token literal-property property">allowClose</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">closeBtnText</span><span class="token operator">:</span> i18n<span class="token punctuation">.</span><span class="token function">t</span><span class="token punctuation">(</span><span class="token string">'msg.guide.close'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">nextBtnText</span><span class="token operator">:</span> i18n<span class="token punctuation">.</span><span class="token function">t</span><span class="token punctuation">(</span><span class="token string">'msg.guide.next'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">prevBtnText</span><span class="token operator">:</span> i18n<span class="token punctuation">.</span><span class="token function">t</span><span class="token punctuation">(</span><span class="token string">'msg.guide.prev'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br></div></div><ol start="3">
+<li>创建 步骤 steps.js</li>
+</ol>
+<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token comment">// 此处不要导入 @/i18n 使用 i18n.global ，因为我们在 router 中 layout 不是按需加载，</span>
+<span class="token comment">// 所以会在 Guide 会在 I18n 初始化完成之前被直接调用。导致 i18n 为 undefined</span>
+<span class="token keyword">const</span> <span class="token function-variable function">steps</span> <span class="token operator">=</span> <span class="token parameter">i18n</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token literal-property property">element</span><span class="token operator">:</span> <span class="token string">'#guide-start'</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">popover</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token literal-property property">title</span><span class="token operator">:</span> i18n<span class="token punctuation">.</span><span class="token function">t</span><span class="token punctuation">(</span><span class="token string">'msg.guide.guideTitle'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">description</span><span class="token operator">:</span> i18n<span class="token punctuation">.</span><span class="token function">t</span><span class="token punctuation">(</span><span class="token string">'msg.guide.guideDesc'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">position</span><span class="token operator">:</span> <span class="token string">'bottom-right'</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token literal-property property">element</span><span class="token operator">:</span> <span class="token string">'#guide-hamburger'</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">popover</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token literal-property property">title</span><span class="token operator">:</span> i18n<span class="token punctuation">.</span><span class="token function">t</span><span class="token punctuation">(</span><span class="token string">'msg.guide.hamburgerTitle'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">description</span><span class="token operator">:</span> i18n<span class="token punctuation">.</span><span class="token function">t</span><span class="token punctuation">(</span><span class="token string">'msg.guide.hamburgerDesc'</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token literal-property property">element</span><span class="token operator">:</span> <span class="token string">'#guide-breadcrumb'</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">popover</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token literal-property property">title</span><span class="token operator">:</span> i18n<span class="token punctuation">.</span><span class="token function">t</span><span class="token punctuation">(</span><span class="token string">'msg.guide.breadcrumbTitle'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">description</span><span class="token operator">:</span> i18n<span class="token punctuation">.</span><span class="token function">t</span><span class="token punctuation">(</span><span class="token string">'msg.guide.breadcrumbDesc'</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token literal-property property">element</span><span class="token operator">:</span> <span class="token string">'#guide-search'</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">popover</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token literal-property property">title</span><span class="token operator">:</span> i18n<span class="token punctuation">.</span><span class="token function">t</span><span class="token punctuation">(</span><span class="token string">'msg.guide.searchTitle'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">description</span><span class="token operator">:</span> i18n<span class="token punctuation">.</span><span class="token function">t</span><span class="token punctuation">(</span><span class="token string">'msg.guide.searchDesc'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">position</span><span class="token operator">:</span> <span class="token string">'bottom-right'</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token literal-property property">element</span><span class="token operator">:</span> <span class="token string">'#guide-full'</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">popover</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token literal-property property">title</span><span class="token operator">:</span> i18n<span class="token punctuation">.</span><span class="token function">t</span><span class="token punctuation">(</span><span class="token string">'msg.guide.fullTitle'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">description</span><span class="token operator">:</span> i18n<span class="token punctuation">.</span><span class="token function">t</span><span class="token punctuation">(</span><span class="token string">'msg.guide.fullDesc'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">position</span><span class="token operator">:</span> <span class="token string">'bottom-right'</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token comment">// {</span>
+    <span class="token comment">//   element: '#guide-theme',</span>
+    <span class="token comment">//   popover: {</span>
+    <span class="token comment">//     title: i18n.t('msg.guide.themeTitle'),</span>
+    <span class="token comment">//     description: i18n.t('msg.guide.themeDesc'),</span>
+    <span class="token comment">//     position: 'bottom-right'</span>
+    <span class="token comment">//   }</span>
+    <span class="token comment">// },</span>
+    <span class="token punctuation">{</span>
+      <span class="token literal-property property">element</span><span class="token operator">:</span> <span class="token string">'#guide-lang'</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">popover</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token literal-property property">title</span><span class="token operator">:</span> i18n<span class="token punctuation">.</span><span class="token function">t</span><span class="token punctuation">(</span><span class="token string">'msg.guide.langTitle'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">description</span><span class="token operator">:</span> i18n<span class="token punctuation">.</span><span class="token function">t</span><span class="token punctuation">(</span><span class="token string">'msg.guide.langDesc'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">position</span><span class="token operator">:</span> <span class="token string">'bottom-right'</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token literal-property property">element</span><span class="token operator">:</span> <span class="token string">'#guide-tags'</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">popover</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token literal-property property">title</span><span class="token operator">:</span> i18n<span class="token punctuation">.</span><span class="token function">t</span><span class="token punctuation">(</span><span class="token string">'msg.guide.tagTitle'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">description</span><span class="token operator">:</span> i18n<span class="token punctuation">.</span><span class="token function">t</span><span class="token punctuation">(</span><span class="token string">'msg.guide.tagDesc'</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token literal-property property">element</span><span class="token operator">:</span> <span class="token string">'#guide-sidebar'</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">popover</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token literal-property property">title</span><span class="token operator">:</span> i18n<span class="token punctuation">.</span><span class="token function">t</span><span class="token punctuation">(</span><span class="token string">'msg.guide.sidebarTitle'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">description</span><span class="token operator">:</span> i18n<span class="token punctuation">.</span><span class="token function">t</span><span class="token punctuation">(</span><span class="token string">'msg.guide.sidebarDesc'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">position</span><span class="token operator">:</span> <span class="token string">'right-center'</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> steps
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br></div></div><ol start="4">
+<li>局部区域出现白屏 在 styles/index.scss 加上一下属性</li>
+</ol>
+<div class="language-css ext-css line-numbers-mode"><pre v-pre class="language-css"><code><span class="token selector">div#driver-highlighted-element-stage, div#driver-page-overlay</span> <span class="token punctuation">{</span>
+  <span class="token property">background</span><span class="token punctuation">:</span> transparent <span class="token important">!important</span><span class="token punctuation">;</span>
+  <span class="token property">outline</span><span class="token punctuation">:</span> 5000px solid <span class="token function">rgba</span><span class="token punctuation">(</span>0<span class="token punctuation">,</span> 0<span class="token punctuation">,</span> 0<span class="token punctuation">,</span> .75<span class="token punctuation">)</span> <span class="token important">!important</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><ol start="5">
+<li>为引导高亮区域增加 ID</li>
+</ol>
+<p>比如</p>
+<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>&lt;breadcrumb id="guide-breadcrumb" class="breadcrumb-container" />
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br></div></div><p>....</p>
+<div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>&lt;tags-view id="guide-tags">&lt;/tags-view>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br></div></div><p>.... 加上 id</p>
+</template>

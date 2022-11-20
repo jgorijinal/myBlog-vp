@@ -1491,3 +1491,177 @@ watch(visible, (value) => {
   transform: translateX(30px);
 }
 ```
+
+整个 tagsView 整体来看就是三块大的内容：
+
+* tags：tagsView 组件
+* contextMenu：contextMenu 组件
+* view：appmain 组件
+
+再加上一部分的数据处理即可
+
+## Guide 引导页
+对于引导页来说，市面上有很多现成的轮子，所以我们不需要手动的去进行以上内容的处理，我们这里可以直接使用 driver.js 进行引导页处理。
+
+基于 driver.js 我们的实现方案如下：
+
+1. 创建 Guide 组件：用于处理 icon 展示
+2. 初始化 driver.js
+3. 指定 driver.js 的 steps
+
+### 生成 guide 组件
+```vue
+<template>
+  <div class="guide">
+    <el-tooltip
+        class="box-item"
+        effect="dark"
+        :content="$t('msg.navBar.guide')"
+        placement="bottom"
+      >
+      <el-icon :size="28"><Guide /></el-icon>
+      </el-tooltip>
+  </div>
+</template>
+<script setup>
+</script>
+<style lang="scss" scoped>
+.guide {
+  cursor:pointer;
+}
+</style>
+```
+并在 首页引入
+
+### Guide 业务逻辑处理
+导入 **driver.js**
+
+```
+npm i driver.js@0.9.8
+```
+
+在 guide.vue 中初始化 driiver
+```vue
+<script setup>
+import Driver from 'driver.js'
+import 'driver.js/dist/driver.min.css'
+import { onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const i18n = useI18n()
+
+let driver = null
+onMounted(() => {
+  driver = new Driver({
+    // 禁止点击蒙版关闭
+    allowClose: false,
+    closeBtnText: i18n.t('msg.guide.close'),
+    nextBtnText: i18n.t('msg.guide.next'),
+    prevBtnText: i18n.t('msg.guide.prev')
+  })
+})
+</script>
+```
+3. 创建 步骤 steps.js
+
+```js
+// 此处不要导入 @/i18n 使用 i18n.global ，因为我们在 router 中 layout 不是按需加载，
+// 所以会在 Guide 会在 I18n 初始化完成之前被直接调用。导致 i18n 为 undefined
+const steps = i18n => {
+  return [
+    {
+      element: '#guide-start',
+      popover: {
+        title: i18n.t('msg.guide.guideTitle'),
+        description: i18n.t('msg.guide.guideDesc'),
+        position: 'bottom-right'
+      }
+    },
+    {
+      element: '#guide-hamburger',
+      popover: {
+        title: i18n.t('msg.guide.hamburgerTitle'),
+        description: i18n.t('msg.guide.hamburgerDesc')
+      }
+    },
+    {
+      element: '#guide-breadcrumb',
+      popover: {
+        title: i18n.t('msg.guide.breadcrumbTitle'),
+        description: i18n.t('msg.guide.breadcrumbDesc')
+      }
+    },
+    {
+      element: '#guide-search',
+      popover: {
+        title: i18n.t('msg.guide.searchTitle'),
+        description: i18n.t('msg.guide.searchDesc'),
+        position: 'bottom-right'
+      }
+    },
+    {
+      element: '#guide-full',
+      popover: {
+        title: i18n.t('msg.guide.fullTitle'),
+        description: i18n.t('msg.guide.fullDesc'),
+        position: 'bottom-right'
+      }
+    },
+    // {
+    //   element: '#guide-theme',
+    //   popover: {
+    //     title: i18n.t('msg.guide.themeTitle'),
+    //     description: i18n.t('msg.guide.themeDesc'),
+    //     position: 'bottom-right'
+    //   }
+    // },
+    {
+      element: '#guide-lang',
+      popover: {
+        title: i18n.t('msg.guide.langTitle'),
+        description: i18n.t('msg.guide.langDesc'),
+        position: 'bottom-right'
+      }
+    },
+    {
+      element: '#guide-tags',
+      popover: {
+        title: i18n.t('msg.guide.tagTitle'),
+        description: i18n.t('msg.guide.tagDesc')
+      }
+    },
+    {
+      element: '#guide-sidebar',
+      popover: {
+        title: i18n.t('msg.guide.sidebarTitle'),
+        description: i18n.t('msg.guide.sidebarDesc'),
+        position: 'right-center'
+      }
+    }
+  ]
+}
+export default steps
+```
+
+
+
+4. 局部区域出现白屏 在 styles/index.scss 加上一下属性
+```css
+div#driver-highlighted-element-stage, div#driver-page-overlay {
+  background: transparent !important;
+  outline: 5000px solid rgba(0, 0, 0, .75) !important;
+}
+```
+
+
+5. 为引导高亮区域增加 ID
+
+比如
+```
+<breadcrumb id="guide-breadcrumb" class="breadcrumb-container" />
+```
+....
+```
+<tags-view id="guide-tags"></tags-view>
+```
+.... 加上 id
