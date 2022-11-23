@@ -113,6 +113,10 @@ export const pagesComponents = {
   "v-1ba55b3a": defineAsyncComponent(() => import(/* webpackChunkName: "v-1ba55b3a" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/fengzhuang/zhongshang.html.vue")),
   // path: /git/start.html
   "v-5e7f3f4d": defineAsyncComponent(() => import(/* webpackChunkName: "v-5e7f3f4d" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/git/start.html.vue")),
+  // path: /gongcheng/mokuaihua.html
+  "v-3d7d7eae": defineAsyncComponent(() => import(/* webpackChunkName: "v-3d7d7eae" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/gongcheng/mokuaihua.html.vue")),
+  // path: /gongcheng/webpack.html
+  "v-55119a1c": defineAsyncComponent(() => import(/* webpackChunkName: "v-55119a1c" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/gongcheng/webpack.html.vue")),
   // path: /hongyuan/dabao.html
   "v-30067f33": defineAsyncComponent(() => import(/* webpackChunkName: "v-30067f33" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/hongyuan/dabao.html.vue")),
   // path: /hongyuan/service.html

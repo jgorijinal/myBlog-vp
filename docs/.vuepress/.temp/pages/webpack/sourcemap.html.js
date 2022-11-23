@@ -1,7 +1,7 @@
 export const data = {
   "key": "v-78d56b33",
   "path": "/webpack/sourcemap.html",
-  "title": "模块化原理和 sourcemap",
+  "title": "sourcemap",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
@@ -21,9 +21,83 @@ export const data = {
     },
     {
       "level": 2,
-      "title": "Webpack 的模块化",
-      "slug": "webpack-的模块化",
-      "children": []
+      "title": "认识 source-map",
+      "slug": "认识-source-map",
+      "children": [
+        {
+          "level": 3,
+          "title": "如何使用 source-map",
+          "slug": "如何使用-source-map",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "分析 source-map",
+          "slug": "分析-source-map",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "生成 source-map",
+          "slug": "生成-source-map",
+          "children": []
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "title": "devtool 的值",
+      "slug": "devtool-的值",
+      "children": [
+        {
+          "level": 3,
+          "title": "source-map",
+          "slug": "source-map",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "eval-source-map",
+          "slug": "eval-source-map",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "inline-source-map",
+          "slug": "inline-source-map",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "cheap-source-map",
+          "slug": "cheap-source-map",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "cheap-module-source-map",
+          "slug": "cheap-module-source-map",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "hidden-source-map",
+          "slug": "hidden-source-map",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "nosources-source-map值",
+          "slug": "nosources-source-map值",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "多个值的组合",
+          "slug": "多个值的组合",
+          "children": []
+        }
+      ]
     }
   ],
   "git": {

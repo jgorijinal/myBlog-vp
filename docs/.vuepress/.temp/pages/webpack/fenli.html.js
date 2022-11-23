@@ -59,6 +59,42 @@ export const data = {
           "title": "SplitChunks 自定义配置",
           "slug": "splitchunks-自定义配置",
           "children": []
+        },
+        {
+          "level": 3,
+          "title": "动态导入 (dynamic import)",
+          "slug": "动态导入-dynamic-import",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "动态导入的文件命名",
+          "slug": "动态导入的文件命名",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "代码的懒加载",
+          "slug": "代码的懒加载",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "Prefetch 和 Preload",
+          "slug": "prefetch-和-preload",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "optimization.chunkIds配置",
+          "slug": "optimization-chunkids配置",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "optimization. runtimeChunk配置",
+          "slug": "optimization-runtimechunk配置",
+          "children": []
         }
       ]
     }

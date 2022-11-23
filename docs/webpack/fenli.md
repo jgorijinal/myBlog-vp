@@ -84,5 +84,85 @@ Webpack 提供了 SplitChunksPlugin 默认的配置，我们也可以手动来�
 ![图片](../.vuepress/public/images/optimization1.png)
 
 ### SplitChunks 自定义配置
+![图片](../.vuepress/public/images/splitc1.png)
+![图片](../.vuepress/public/images/splitc2.png)
 ![图片](../.vuepress/public/images/splitchunk1.png)
 ![图片](../.vuepress/public/images/splitchunk2.png)
+
+### 动态导入 (dynamic import)
+另外一个代码拆分的方式是动态导入时，webpack提供了两种实现动态导入的方式：
+* 第一种，**使用ECMAScript中的 import() 语法来完成，也是目前推荐的方式**
+* 第二种，使用webpack遗留的 require.ensure，目前已经不推荐使用；
+
+比如有一个模块 bar.js：
+* 该模块我们希望在代码运行过程中来加载它（比如判断一个条件成立时加载）；
+* 因为我们并不确定这个模块中的代码一定会用到，所以最好拆分成一个独立的js文件；
+* 这样可以保证不用到该内容时，浏览器不需要加载和处理该文件的 js 代码；
+* 这个时候我们就可以使用动态导入
+
+注意：使用动态导入bar.js：
+* 在 webpack 中，通过动态导入获取到一个对象
+* 真正导出的内容，在改对象的**default属性**中，所以我们需要做一个简单的解构；
+
+### 动态导入的文件命名
+动态导入的文件命名：
+* 因为动态导入通常是一定会打包成独立的文件的，所以并不会再cacheGroups中进行配置；
+* 那么它的命名我们通常会在output中，通过 chunkFilename 属性来命名；
+
+![图片](../.vuepress/public/images/dtd1.png)
+
+但是，会发现默认情况下获取到的 `[name]` 是和id的名称保持一致的
+* 如果我们希望修改 **name** 的值，可以通过magic comments（魔法注释）的方式；
+
+![图片](../.vuepress/public/images/dtd2.png)
+
+### 代码的懒加载
+动态import使用最多的一个场景是懒加载（比如路由懒加载）：
+
+**真正用到的时候加载**
+
+### Prefetch 和 Preload
+
+webpack v4.6.0+ 增加了对预获取和预加载的支持。
+
+在声明 import 时，使用下面这些内置指令，来告知浏览器：
+* **prefetch(预获取)**：将来某些导航下可能需要的资源
+* **preload(预加载)**：当前导航下可能需要资源 
+
+![图片](../.vuepress/public/images/preload2.png)
+
+与 prefetch 指令相比，preload 指令有许多不同之处：
+* preload chunk 会在父 chunk 加载时，以并行方式开始加载。prefetch chunk 会在父 chunk 加载结束后开始加载
+* preload chunk 具有中等优先级，并立即下载。prefetch chunk 在浏览器闲置时下载
+* preload chunk 会在父 chunk 中立即请求，用于当下时刻。prefetch chunk 会用于未来的某个时刻
+
+### optimization.chunkIds配置
+optimization.chunkIds配置用于告知webpack模块的id采用什么算法生成。
+
+有三个比较常见的值：
+* natural：按照数字的顺序使用id；
+* named：development下的默认值，一个可读的名称的id；
+* deterministic：确定性的，在不同的编译中不变的短数字id
+   * 在webpack4 中是没有这个值的；
+   * 那个时候如果使用 natural，那么在一些编译发生变化时，就会有问题；
+最佳实践：
+* 开发过程中，推荐使用 named；
+* 打包过程中，推荐使用 deterministic；
+
+### optimization. runtimeChunk配置
+配置runtime相关的代码是否抽取到一个单独的chunk中：
+* runtime相关的代码指的是在运行环境中，对模块进行解析、加载、模块信息相关的代码；
+* 比如我们的component、bar两个通过import函数相关的代码加载，就是通过runtime代码完成的；
+
+抽离出来后，有利于浏览器缓存的策略：
+* 比如我们修改了业务代码（main），那么runtime和component、bar的chunk是不需要重新加载的；
+* 比如我们修改了component、bar的代码，那么main中的代码是不需要重新加载的；
+
+设置的值：
+* true/multiple：针对每个入口打包一个runtime文件；
+* single：打包一个runtime文件；
+* 对象：name属性决定runtimeChunk的名称；
+
+![图片](../.vuepress/public/images/opt1.png)
+
+

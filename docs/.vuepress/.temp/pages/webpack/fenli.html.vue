@@ -84,6 +84,89 @@
 </ul>
 <p><img src="@source/.vuepress/public/images/optimization1.png" alt="图片"></p>
 <h3 id="splitchunks-自定义配置" tabindex="-1"><a class="header-anchor" href="#splitchunks-自定义配置" aria-hidden="true">#</a> SplitChunks 自定义配置</h3>
-<p><img src="@source/.vuepress/public/images/splitchunk1.png" alt="图片">
+<p><img src="@source/.vuepress/public/images/splitc1.png" alt="图片">
+<img src="@source/.vuepress/public/images/splitc2.png" alt="图片">
+<img src="@source/.vuepress/public/images/splitchunk1.png" alt="图片">
 <img src="@source/.vuepress/public/images/splitchunk2.png" alt="图片"></p>
+<h3 id="动态导入-dynamic-import" tabindex="-1"><a class="header-anchor" href="#动态导入-dynamic-import" aria-hidden="true">#</a> 动态导入 (dynamic import)</h3>
+<p>另外一个代码拆分的方式是动态导入时，webpack提供了两种实现动态导入的方式：</p>
+<ul>
+<li>第一种，<strong>使用ECMAScript中的 import() 语法来完成，也是目前推荐的方式</strong></li>
+<li>第二种，使用webpack遗留的 require.ensure，目前已经不推荐使用；</li>
+</ul>
+<p>比如有一个模块 bar.js：</p>
+<ul>
+<li>该模块我们希望在代码运行过程中来加载它（比如判断一个条件成立时加载）；</li>
+<li>因为我们并不确定这个模块中的代码一定会用到，所以最好拆分成一个独立的js文件；</li>
+<li>这样可以保证不用到该内容时，浏览器不需要加载和处理该文件的 js 代码；</li>
+<li>这个时候我们就可以使用动态导入</li>
+</ul>
+<p>注意：使用动态导入bar.js：</p>
+<ul>
+<li>在 webpack 中，通过动态导入获取到一个对象</li>
+<li>真正导出的内容，在改对象的<strong>default属性</strong>中，所以我们需要做一个简单的解构；</li>
+</ul>
+<h3 id="动态导入的文件命名" tabindex="-1"><a class="header-anchor" href="#动态导入的文件命名" aria-hidden="true">#</a> 动态导入的文件命名</h3>
+<p>动态导入的文件命名：</p>
+<ul>
+<li>因为动态导入通常是一定会打包成独立的文件的，所以并不会再cacheGroups中进行配置；</li>
+<li>那么它的命名我们通常会在output中，通过 chunkFilename 属性来命名；</li>
+</ul>
+<p><img src="@source/.vuepress/public/images/dtd1.png" alt="图片"></p>
+<p>但是，会发现默认情况下获取到的 <code>[name]</code> 是和id的名称保持一致的</p>
+<ul>
+<li>如果我们希望修改 <strong>name</strong> 的值，可以通过magic comments（魔法注释）的方式；</li>
+</ul>
+<p><img src="@source/.vuepress/public/images/dtd2.png" alt="图片"></p>
+<h3 id="代码的懒加载" tabindex="-1"><a class="header-anchor" href="#代码的懒加载" aria-hidden="true">#</a> 代码的懒加载</h3>
+<p>动态import使用最多的一个场景是懒加载（比如路由懒加载）：</p>
+<p><strong>真正用到的时候加载</strong></p>
+<h3 id="prefetch-和-preload" tabindex="-1"><a class="header-anchor" href="#prefetch-和-preload" aria-hidden="true">#</a> Prefetch 和 Preload</h3>
+<p>webpack v4.6.0+ 增加了对预获取和预加载的支持。</p>
+<p>在声明 import 时，使用下面这些内置指令，来告知浏览器：</p>
+<ul>
+<li><strong>prefetch(预获取)</strong>：将来某些导航下可能需要的资源</li>
+<li><strong>preload(预加载)</strong>：当前导航下可能需要资源</li>
+</ul>
+<p><img src="@source/.vuepress/public/images/preload2.png" alt="图片"></p>
+<p>与 prefetch 指令相比，preload 指令有许多不同之处：</p>
+<ul>
+<li>preload chunk 会在父 chunk 加载时，以并行方式开始加载。prefetch chunk 会在父 chunk 加载结束后开始加载</li>
+<li>preload chunk 具有中等优先级，并立即下载。prefetch chunk 在浏览器闲置时下载</li>
+<li>preload chunk 会在父 chunk 中立即请求，用于当下时刻。prefetch chunk 会用于未来的某个时刻</li>
+</ul>
+<h3 id="optimization-chunkids配置" tabindex="-1"><a class="header-anchor" href="#optimization-chunkids配置" aria-hidden="true">#</a> optimization.chunkIds配置</h3>
+<p>optimization.chunkIds配置用于告知webpack模块的id采用什么算法生成。</p>
+<p>有三个比较常见的值：</p>
+<ul>
+<li>natural：按照数字的顺序使用id；</li>
+<li>named：development下的默认值，一个可读的名称的id；</li>
+<li>deterministic：确定性的，在不同的编译中不变的短数字id
+<ul>
+<li>在webpack4 中是没有这个值的；</li>
+<li>那个时候如果使用 natural，那么在一些编译发生变化时，就会有问题；
+最佳实践：</li>
+</ul>
+</li>
+<li>开发过程中，推荐使用 named；</li>
+<li>打包过程中，推荐使用 deterministic；</li>
+</ul>
+<h3 id="optimization-runtimechunk配置" tabindex="-1"><a class="header-anchor" href="#optimization-runtimechunk配置" aria-hidden="true">#</a> optimization. runtimeChunk配置</h3>
+<p>配置runtime相关的代码是否抽取到一个单独的chunk中：</p>
+<ul>
+<li>runtime相关的代码指的是在运行环境中，对模块进行解析、加载、模块信息相关的代码；</li>
+<li>比如我们的component、bar两个通过import函数相关的代码加载，就是通过runtime代码完成的；</li>
+</ul>
+<p>抽离出来后，有利于浏览器缓存的策略：</p>
+<ul>
+<li>比如我们修改了业务代码（main），那么runtime和component、bar的chunk是不需要重新加载的；</li>
+<li>比如我们修改了component、bar的代码，那么main中的代码是不需要重新加载的；</li>
+</ul>
+<p>设置的值：</p>
+<ul>
+<li>true/multiple：针对每个入口打包一个runtime文件；</li>
+<li>single：打包一个runtime文件；</li>
+<li>对象：name属性决定runtimeChunk的名称；</li>
+</ul>
+<p><img src="@source/.vuepress/public/images/opt1.png" alt="图片"></p>
 </template>

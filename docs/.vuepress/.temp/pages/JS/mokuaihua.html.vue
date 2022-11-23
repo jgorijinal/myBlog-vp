@@ -273,5 +273,8 @@ module；</li>
 <li>它包含了这个模块的信息，比如说这个模块的URL；</li>
 <li>在ES11（ES2020）中新增的特性；</li>
 </ul>
-<h3 id="" tabindex="-1"><a class="header-anchor" href="#" aria-hidden="true">#</a> </h3>
+<h3 id="esm-和-cjs-对比" tabindex="-1"><a class="header-anchor" href="#esm-和-cjs-对比" aria-hidden="true">#</a> ESM 和 CJS 对比</h3>
+<p>CommonJS 导出的是值得拷贝 , ESM 导出的是值得引用</p>
+<p>CommonJS 能导出一个对象 , ESM 可以到处多个值</p>
+<p>CommonJS 是同步加载 , ESM 是异步加载</p>
 </template>

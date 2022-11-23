@@ -167,34 +167,6 @@ export const themeData = {
       ]
     },
     {
-      "text": "微信小程序系列",
-      "collapsible": true,
-      "children": [
-        "/xiaochengxu/renshi.md",
-        "/xiaochengxu/suzhu.md",
-        "/xiaochengxu/jichu.md",
-        "/xiaochengxu/jinjie.md",
-        "/xiaochengxu/qingqiu.md",
-        "/xiaochengxu/yemiandaohang.md",
-        "/xiaochengxu/yemianshijian.md",
-        "/xiaochengxu/shengmingzhouqi.md",
-        "/xiaochengxu/xiaoxiangmu.md",
-        "/xiaochengxu/zidingyizujian.md",
-        "/xiaochengxu/zujianshengming.md",
-        "/xiaochengxu/tongxin.md",
-        "/xiaochengxu/npm.md",
-        "/xiaochengxu/shujugongxiang.md"
-      ]
-    },
-    {
-      "text": "微信小程序经验",
-      "collapsible": true,
-      "children": [
-        "/xiaochengxu2/shiwu.md",
-        "/xiaochengxu2/taolu.md"
-      ]
-    },
-    {
       "text": "旅途项目",
       "collapsible": true,
       "children": [

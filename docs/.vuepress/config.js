@@ -166,20 +166,27 @@ module.exports = {
                 
             //     ]
             // },
-            {
-                text: 'Webpack系列',
-                collapsible: true,
-                children: [
-                    '/webpack/start1.md',
-                    '/webpack/start2.md',
-                    '/webpack/plugin1.md',
-                    '/webpack/sourcemap.md',
-                    '/webpack/babel2.md',
-                    '/webpack/devServerHMR.md',
-                    '/webpack/fenli.md'
+            // {
+            //     text: 'Webpack系列',
+            //     collapsible: true,
+            //     children: [
+            //         '/webpack/start1.md',
+            //         '/webpack/start2.md',
+            //         '/webpack/plugin1.md',
+            //         '/webpack/sourcemap.md',
+            //         '/webpack/babel2.md',
+            //         '/webpack/devServerHMR.md',
+            //         '/webpack/fenli.md'
                 
-                ]
-            },
+            //     ]
+            // },
+            // {
+            //     text: '工程化',
+            //     collapsible: true,
+            //     children: [
+            //         '/gongcheng/mokuaihua.md',
+            //     ]
+            // },
             {
                 text: 'JS系列',
                 collapsible: true,
@@ -235,58 +242,58 @@ module.exports = {
                     // '/TS/Vue3.md'
                 ]
             },
-            {
-                text: 'Node系列',
-                collapsible: true,
-                children: [
-                    '/node/start.md',
-                    '/node/mokuaihua.md',
-                    '/node/neizhimokuai.md',
-                    '/node/baoguanli.md',
-                    '/node/buffer.md',
-                    '/node/stream.md',
-                    '/node/http.md',
-                    '/node/express.md',
-                    '/node/zhongjianjian.md',
-                    '/node/jiekou.md',
+            // {
+            //     text: 'Node系列',
+            //     collapsible: true,
+            //     children: [
+            //         '/node/start.md',
+            //         '/node/mokuaihua.md',
+            //         '/node/neizhimokuai.md',
+            //         '/node/baoguanli.md',
+            //         '/node/buffer.md',
+            //         '/node/stream.md',
+            //         '/node/http.md',
+            //         '/node/express.md',
+            //         '/node/zhongjianjian.md',
+            //         '/node/jiekou.md',
 
-                ]
-            },
-            {
-                text: 'Git系列',
-                collapsible: true,
-                children: [
-                    '/git/start.md'
-                ]
-            },
-            {
-                text: '微信小程序系列',
-                collapsible: true,
-                children: [
-                    '/xiaochengxu/renshi.md',   
-                    '/xiaochengxu/suzhu.md',
-                    '/xiaochengxu/jichu.md',
-                    '/xiaochengxu/jinjie.md',
-                    '/xiaochengxu/qingqiu.md',
-                    '/xiaochengxu/yemiandaohang.md',
-                    '/xiaochengxu/yemianshijian.md',
-                    '/xiaochengxu/shengmingzhouqi.md',
-                    '/xiaochengxu/xiaoxiangmu.md',
-                    '/xiaochengxu/zidingyizujian.md',
-                    '/xiaochengxu/zujianshengming.md',
-                    '/xiaochengxu/tongxin.md',
-                    '/xiaochengxu/npm.md',
-                    '/xiaochengxu/shujugongxiang.md',
-                    ]
-            },
-            {
-                text: '微信小程序经验',
-                collapsible: true,
-                children: [
-                    '/xiaochengxu2/shiwu.md',
-                    '/xiaochengxu2/taolu.md'
-                    ]
-            },
+            //     ]
+            // },
+            // {
+            //     text: 'Git系列',
+            //     collapsible: true,
+            //     children: [
+            //         '/git/start.md'
+            //     ]
+            // },
+            // {
+            //     text: '微信小程序系列',
+            //     collapsible: true,
+            //     children: [
+            //         '/xiaochengxu/renshi.md',   
+            //         '/xiaochengxu/suzhu.md',
+            //         '/xiaochengxu/jichu.md',
+            //         '/xiaochengxu/jinjie.md',
+            //         '/xiaochengxu/qingqiu.md',
+            //         '/xiaochengxu/yemiandaohang.md',
+            //         '/xiaochengxu/yemianshijian.md',
+            //         '/xiaochengxu/shengmingzhouqi.md',
+            //         '/xiaochengxu/xiaoxiangmu.md',
+            //         '/xiaochengxu/zidingyizujian.md',
+            //         '/xiaochengxu/zujianshengming.md',
+            //         '/xiaochengxu/tongxin.md',
+            //         '/xiaochengxu/npm.md',
+            //         '/xiaochengxu/shujugongxiang.md',
+            //         ]
+            // },
+            // {
+            //     text: '微信小程序经验',
+            //     collapsible: true,
+            //     children: [
+            //         '/xiaochengxu2/shiwu.md',
+            //         '/xiaochengxu2/taolu.md'
+            //         ]
+            // },
             // {
             //     text: '小程序音乐开发项目',
             //     collapsible: true,
@@ -352,15 +359,6 @@ module.exports = {
             //     children: [
             //         '/uniapp/start.md',
             //         '/uniapp/tabbar.md',
-            //         ]
-            // },
-            // {
-            //     text: '商城后台管理',
-            //     collapsible: true,
-            //     children: [
-            //         '/shop-admin-vue3/dajian.md',
-            //         '/shop-admin-vue3/dajian2.md',
-
             //         ]
             // },
             // {
