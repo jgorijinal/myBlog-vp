@@ -111,6 +111,10 @@ export const pagesComponents = {
   "v-ec0589b6": defineAsyncComponent(() => import(/* webpackChunkName: "v-ec0589b6" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/fengzhuang/dajian.html.vue")),
   // path: /fengzhuang/zhongshang.html
   "v-1ba55b3a": defineAsyncComponent(() => import(/* webpackChunkName: "v-1ba55b3a" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/fengzhuang/zhongshang.html.vue")),
+  // path: /front/start.html
+  "v-20eb0b54": defineAsyncComponent(() => import(/* webpackChunkName: "v-20eb0b54" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/front/start.html.vue")),
+  // path: /front/zujian.html
+  "v-14b58d13": defineAsyncComponent(() => import(/* webpackChunkName: "v-14b58d13" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/front/zujian.html.vue")),
   // path: /git/start.html
   "v-5e7f3f4d": defineAsyncComponent(() => import(/* webpackChunkName: "v-5e7f3f4d" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/git/start.html.vue")),
   // path: /gongcheng/mokuaihua.html
@@ -233,6 +237,10 @@ export const pagesComponents = {
   "v-2773c739": defineAsyncComponent(() => import(/* webpackChunkName: "v-2773c739" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/yuanxing.html.vue")),
   // path: /json-server%E4%B8%8Emock/
   "v-5b635b6e": defineAsyncComponent(() => import(/* webpackChunkName: "v-5b635b6e" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/json-server与mock/index.html.vue")),
+  // path: /keshihua/echarts.html
+  "v-3d5e2dca": defineAsyncComponent(() => import(/* webpackChunkName: "v-3d5e2dca" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/keshihua/echarts.html.vue")),
+  // path: /keshihua/rumen.html
+  "v-7b3dc7fc": defineAsyncComponent(() => import(/* webpackChunkName: "v-7b3dc7fc" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/keshihua/rumen.html.vue")),
   // path: /node/baoguanli.html
   "v-482a8985": defineAsyncComponent(() => import(/* webpackChunkName: "v-482a8985" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/node/baoguanli.html.vue")),
   // path: /node/buffer.html

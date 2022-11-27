@@ -243,6 +243,14 @@ module.exports = {
                 ]
             },
             // {
+            //     text: '可视化',
+            //     collapsible: true,
+            //     children: [
+            //         '/keshihua/rumen.md',
+            //         '/keshihua/echarts.md',
+            //     ]
+            // },
+            // {
             //     text: 'Node系列',
             //     collapsible: true,
             //     children: [
@@ -270,7 +278,7 @@ module.exports = {
             //     text: '微信小程序系列',
             //     collapsible: true,
             //     children: [
-            //         '/xiaochengxu/renshi.md',   
+            //         '/xiaochengxu/renshi.md',
             //         '/xiaochengxu/suzhu.md',
             //         '/xiaochengxu/jichu.md',
             //         '/xiaochengxu/jinjie.md',
@@ -302,6 +310,14 @@ module.exports = {
             //         '/xiaochengxuyinyue/shouye.md'
             //         ]
             // },
+            {
+                text: '前台项目',
+                collapsible: true,
+                children: [
+                    '/front/start.md',
+                    '/front/zujian.md',
+                ]
+            },
             {
                 text: '旅途项目',
                 collapsible: true,

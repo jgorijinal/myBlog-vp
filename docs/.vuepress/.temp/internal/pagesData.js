@@ -109,6 +109,10 @@ export const pagesData = {
   "v-ec0589b6": () => import(/* webpackChunkName: "v-ec0589b6" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/fengzhuang/dajian.html.js").then(({ data }) => data),
   // path: /fengzhuang/zhongshang.html
   "v-1ba55b3a": () => import(/* webpackChunkName: "v-1ba55b3a" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/fengzhuang/zhongshang.html.js").then(({ data }) => data),
+  // path: /front/start.html
+  "v-20eb0b54": () => import(/* webpackChunkName: "v-20eb0b54" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/front/start.html.js").then(({ data }) => data),
+  // path: /front/zujian.html
+  "v-14b58d13": () => import(/* webpackChunkName: "v-14b58d13" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/front/zujian.html.js").then(({ data }) => data),
   // path: /git/start.html
   "v-5e7f3f4d": () => import(/* webpackChunkName: "v-5e7f3f4d" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/git/start.html.js").then(({ data }) => data),
   // path: /gongcheng/mokuaihua.html
@@ -231,6 +235,10 @@ export const pagesData = {
   "v-2773c739": () => import(/* webpackChunkName: "v-2773c739" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/JS/yuanxing.html.js").then(({ data }) => data),
   // path: /json-server%E4%B8%8Emock/
   "v-5b635b6e": () => import(/* webpackChunkName: "v-5b635b6e" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/json-server与mock/index.html.js").then(({ data }) => data),
+  // path: /keshihua/echarts.html
+  "v-3d5e2dca": () => import(/* webpackChunkName: "v-3d5e2dca" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/keshihua/echarts.html.js").then(({ data }) => data),
+  // path: /keshihua/rumen.html
+  "v-7b3dc7fc": () => import(/* webpackChunkName: "v-7b3dc7fc" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/keshihua/rumen.html.js").then(({ data }) => data),
   // path: /node/baoguanli.html
   "v-482a8985": () => import(/* webpackChunkName: "v-482a8985" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/node/baoguanli.html.js").then(({ data }) => data),
   // path: /node/buffer.html

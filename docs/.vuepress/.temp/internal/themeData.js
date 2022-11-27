@@ -83,19 +83,6 @@ export const themeData = {
       ]
     },
     {
-      "text": "Webpack系列",
-      "collapsible": true,
-      "children": [
-        "/webpack/start1.md",
-        "/webpack/start2.md",
-        "/webpack/plugin1.md",
-        "/webpack/sourcemap.md",
-        "/webpack/babel2.md",
-        "/webpack/devServerHMR.md",
-        "/webpack/fenli.md"
-      ]
-    },
-    {
       "text": "JS系列",
       "collapsible": true,
       "children": [
@@ -144,26 +131,11 @@ export const themeData = {
       ]
     },
     {
-      "text": "Node系列",
+      "text": "前台项目",
       "collapsible": true,
       "children": [
-        "/node/start.md",
-        "/node/mokuaihua.md",
-        "/node/neizhimokuai.md",
-        "/node/baoguanli.md",
-        "/node/buffer.md",
-        "/node/stream.md",
-        "/node/http.md",
-        "/node/express.md",
-        "/node/zhongjianjian.md",
-        "/node/jiekou.md"
-      ]
-    },
-    {
-      "text": "Git系列",
-      "collapsible": true,
-      "children": [
-        "/git/start.md"
+        "/front/start.md",
+        "/front/zujian.md"
       ]
     },
     {
