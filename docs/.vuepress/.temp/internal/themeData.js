@@ -135,7 +135,8 @@ export const themeData = {
       "collapsible": true,
       "children": [
         "/front/start.md",
-        "/front/zujian.md"
+        "/front/zujian.md",
+        "/front/header.md"
       ]
     },
     {

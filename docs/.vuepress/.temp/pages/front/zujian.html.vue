@@ -1,6 +1,6 @@
 <template><h1 id="构建自己的组件库-实现前端设计" tabindex="-1"><a class="header-anchor" href="#构建自己的组件库-实现前端设计" aria-hidden="true">#</a> 构建自己的组件库 - 实现前端设计</h1>
 <p>因为 <strong>前台系统</strong> 和 <strong>后台系统</strong> 的这种 <strong>根本性的设计区别（前台讲究个性化，后台偏同质化）</strong> ，所以这就导致了目前市面上的 <strong>通用组件库</strong> 更多的是 后台 PC 系统组件库（比如 element 或者 antd） 。</p>
-<p>这就导致，如果你想要开发一个前台系统，那么就需要拥有你自己的 <strong>组件库</strong> ！</p>
+<p>这就导致，如果想要开发一个前台系统，那么就需要拥有自己的 <strong>组件库</strong></p>
 <p>这也是为什么必须要开发一个组件库的原因</p>
 <h2 id="业务组件-移动端-navigationbar" tabindex="-1"><a class="header-anchor" href="#业务组件-移动端-navigationbar" aria-hidden="true">#</a> 业务组件：移动端 navigationBar</h2>
 <p>截止到现在已经可以成功的拿到简洁的服务端返回的数据，那么接下来就可以利用这个数据构建 <strong>移动端 <code>navigationBar</code> 部分</strong></p>
@@ -223,7 +223,7 @@
 </code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br></div></div><p>重新运行项目</p>
 <p><img src="@source/.vuepress/public/images/navi01.png" alt="图片"></p>
 <h2 id="移动端-slider-处理" tabindex="-1"><a class="header-anchor" href="#移动端-slider-处理" aria-hidden="true">#</a> 移动端 slider 处理</h2>
-<p><img src="@source/.vuepress/public/images/slider.png" alt="图片"></p>
+<p><img src="@source/.vuepress/public/images/slider1.png" alt="图片"></p>
 <p>接下来我们来处理对应的 <code>slider</code> 选中滑块。</p>
 <p>对于选中滑块而言，我们想要处理分为两部分：</p>
 <ol>
@@ -332,4 +332,211 @@
 <span class="token punctuation">></span></span>
   {{ item.name }}
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
-</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div></template>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><h2 id="补全-category-数据-全部" tabindex="-1"><a class="header-anchor" href="#补全-category-数据-全部" aria-hidden="true">#</a> 补全 category 数据 ('全部')</h2>
+<p>对于 <code>category</code> 的数据而言，服务端返回的数据之中，还缺少一个 <strong>全部</strong> 的数据源，这个在实际开发中是非常常见的一个情况，服务端仅会返回 <strong>具体分类</strong> 而不包含 <strong>全部概念</strong></p>
+<p>如果实际开发中也遇到了这样的情况的话，那么就需要 <strong>自定义数据</strong>，以补全缺失的展示数据</p>
+<ol>
+<li>在 <code>src/constants/index.js</code> 定义</li>
+</ol>
+<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token comment">// category 的本地构建数据</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token constant">ALL_CATEGORY_ITEM</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token string">'all'</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'全部'</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><ol start="2">
+<li>在 <code>src/views/main/components/navigation/index.vue</code> 进行数据补全</li>
+</ol>
+<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token keyword">const</span> <span class="token function-variable function">getCategoryData</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token operator">...</span>
+  categoryData<span class="token punctuation">.</span>value<span class="token punctuation">.</span><span class="token function">unshift</span><span class="token punctuation">(</span><span class="token constant">ALL_CATEGORY_ITEM</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><ol start="3">
+<li>修改 <code>src/views/main/components/navigation/mobile/index.vue</code> 中的 <code>sliderStyle</code> 初始宽度</li>
+</ol>
+<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token comment">// 滑块</span>
+<span class="token keyword">const</span> sliderStyle <span class="token operator">=</span> <span class="token function">ref</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token literal-property property">transform</span><span class="token operator">:</span> <span class="token string">'translateX(0px)'</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">width</span><span class="token operator">:</span> <span class="token string">'52px'</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><h2 id="通用组件-弹出窗口-popup-能力分析" tabindex="-1"><a class="header-anchor" href="#通用组件-弹出窗口-popup-能力分析" aria-hidden="true">#</a> 通用组件：弹出窗口 - popup 能力分析</h2>
+<p><img src="@source/.vuepress/public/images/popup1.png" alt="图片"></p>
+<p>当点击 <strong>面包屑按钮</strong> 时，会有一个 弹出窗口 <code>popup</code> 自低而上弹出，那么这样的一个功能，一样可以把它处理为项目的 通用组件</p>
+<p>那么想要处理 <code>popup</code> 的话，首先就需要先搞清楚 <code>popup</code> 的能力。</p>
+<ol>
+<li>当 <code>popup</code> 展开时，内容视图应该不属于任何一个 <strong>组件内部</strong> ，而应该直接被插入到 <code>body</code> 下面</li>
+<li><code>popup</code> 应该包含两部分内容，一部分为背景蒙版，一部分为内容的包裹容器</li>
+<li><code>popup</code> 应该通过一个双向绑定进行控制展示和隐藏</li>
+<li><code>popup</code> 展示时，页面滚动应该被锁定(不让页面滚动)</li>
+<li>内容区域应该接收所有的 <code>attrs</code>，并且应该通过插槽让调用方指定其内容</li>
+</ol>
+<h3 id="弹出窗口-popup-实现" tabindex="-1"><a class="header-anchor" href="#弹出窗口-popup-实现" aria-hidden="true">#</a> 弹出窗口-popup 实现</h3>
+<ol>
+<li>新建 <code>src/libs/popup/index.vue</code> 文件</li>
+</ol>
+<details class="custom-container details">
+<div class="language-vue ext-vue line-numbers-mode"><pre v-pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>teleport</span> <span class="token attr-name">to</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">'</span>body<span class="token punctuation">'</span></span><span class="token punctuation">></span></span>
+      <span class="token comment">&lt;!--蒙版--></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>transition</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>fade<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">v-if</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>modelValue<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>w-screen h-screen fixed z-40 left-0 top-0 bg-zinc-900/80<span class="token punctuation">"</span></span>
+          <span class="token attr-name">@click</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>emits(<span class="token punctuation">'</span>update:modelValue<span class="token punctuation">'</span>, false)<span class="token punctuation">"</span></span>
+        <span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>transition</span><span class="token punctuation">></span></span>
+      <span class="token comment">&lt;!--弹出框--></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>transition</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>downToUp<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">v-if</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>modelValue<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>w-screen fixed  bottom-0 z-50 bg-white<span class="token punctuation">"</span></span> <span class="token attr-name">v-bind</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>$attrs<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>slot</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>slot</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>transition</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>teleport</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">setup</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+<span class="token keyword">import</span> <span class="token punctuation">{</span> watch <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> useScrollLock <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@vueuse/core'</span>
+<span class="token keyword">const</span> props <span class="token operator">=</span> <span class="token function">defineProps</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token literal-property property">modelValue</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">type</span><span class="token operator">:</span> Boolean<span class="token punctuation">,</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> emits <span class="token operator">=</span> <span class="token function">defineEmits</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'update:modelValue'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 当popup 显示时 , 页面禁止滚动</span>
+<span class="token keyword">const</span> isLocked <span class="token operator">=</span> <span class="token function">useScrollLock</span><span class="token punctuation">(</span>document<span class="token punctuation">.</span>body<span class="token punctuation">)</span>
+<span class="token function">watch</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> props<span class="token punctuation">.</span>modelValue<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">val</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>val<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    isLocked<span class="token punctuation">.</span>value <span class="token operator">=</span> val
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    isLocked<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token boolean">false</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+  <span class="token literal-property property">immediate</span><span class="token operator">:</span> <span class="token boolean">true</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>scss<span class="token punctuation">"</span></span> <span class="token attr-name">scoped</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
+  <span class="token selector">.fade-enter-active,.fade-leave-active</span> <span class="token punctuation">{</span>
+    <span class="token property">transition</span><span class="token punctuation">:</span> all 0.25s ease<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token selector">.fade-enter-from,.fade-leave-to</span> <span class="token punctuation">{</span>
+    <span class="token property">opacity</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token selector">.downToUp-enter-active,.downToUp-leave-active</span> <span class="token punctuation">{</span>
+    <span class="token property">transition</span><span class="token punctuation">:</span> all 0.25s ease<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token selector">.downToUp-enter-from,.downToUp-leave-to</span> <span class="token punctuation">{</span>
+    <span class="token property">transform</span><span class="token punctuation">:</span> <span class="token function">translateY</span><span class="token punctuation">(</span>100%<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br></div></div></details>
+<ol start="2">
+<li>在 src/libs/index.js 中注册该组件</li>
+</ol>
+<details class="custom-container details">
+<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token keyword">import</span> svgIcon <span class="token keyword">from</span> <span class="token string">'./svg-icon/index.vue'</span>
+<span class="token keyword">import</span> popup <span class="token keyword">from</span> <span class="token string">'./popup/index.vue'</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  <span class="token function">install</span><span class="token punctuation">(</span><span class="token parameter">app</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">'m-svg-icon'</span><span class="token punctuation">,</span> svgIcon<span class="token punctuation">)</span>
+    app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">'m-popup'</span><span class="token punctuation">,</span> popup<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span> 
+<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div></details>
+<ol start="3">
+<li>在 <code>src/views/main/components/navigation/mobile/index.vue</code> 中使用该组件</li>
+</ol>
+<div class="language-vue ext-vue line-numbers-mode"><pre v-pre class="language-vue"><code><span class="token comment">&lt;!-- 汉堡按钮 --></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span>
+        <span class="token attr-name">...</span>
+        <span class="token attr-name">@click</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>isOpenPopup = !isOpenPopup<span class="token punctuation">"</span></span>
+      <span class="token punctuation">></span></span>
+        ...
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>m-popup</span> <span class="token attr-name">v-model</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>isOpenPopup<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>测试内容<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>m-popup</span><span class="token punctuation">></span></span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token comment">// popup 展示</span>
+<span class="token keyword">const</span> isOpenPopup <span class="token operator">=</span> <span class="token function">ref</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h2 id="vite-通用组件自动化注册" tabindex="-1"><a class="header-anchor" href="#vite-通用组件自动化注册" aria-hidden="true">#</a> vite 通用组件自动化注册</h2>
+<p>目前在项目中已经完成了两个通用组件，将来还会完成更多的通用组件开发。那么如果每次开发完成一个通用组件之后，都去手动进行注册，未免有些过于麻烦了，所以我们期望通过 <strong><code>vite</code> 提供的功能，进行通用组件的自动化注册</strong></p>
+<p>如果想要完成这个功能的话，就需要使用到两个关键的知识点：</p>
+<ol>
+<li><a href="https://cn.vitejs.dev/guide/features.html#glob-import" target="_blank" rel="noopener noreferrer">vite 的 Glob 导入 功能<ExternalLinkIcon/></a>：该功能可以帮助我们在 <strong>文件系统中导入多个模块</strong></li>
+<li><a href="https://v3.cn.vuejs.org/api/global-api.html#defineasynccomponent" target="_blank" rel="noopener noreferrer">vue 的 defineAsyncComponent 方法<ExternalLinkIcon/></a>：该方法可以创建一个 <strong>按需加载的异步组件</strong></li>
+</ol>
+<p>基于以上两个方法，实现 <strong>组件自动注册</strong></p>
+<p>在 <code>src/libs/index.js</code> 中：</p>
+<details class="custom-container details">
+<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> defineAsyncComponent <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue'</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  <span class="token function">install</span><span class="token punctuation">(</span><span class="token parameter">app</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 获取当前路径任意文件夹下的 index.vue 文件</span>
+    <span class="token keyword">const</span> components <span class="token operator">=</span> <span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span><span class="token function">glob</span><span class="token punctuation">(</span><span class="token string">'./*/index.vue'</span><span class="token punctuation">)</span>
+    <span class="token comment">// 遍历获取到的组件模块</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token punctuation">[</span>key<span class="token punctuation">,</span> value<span class="token punctuation">]</span> <span class="token keyword">of</span> Object<span class="token punctuation">.</span><span class="token function">entries</span><span class="token punctuation">(</span>components<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// 拼接组件注册的 name</span>
+      <span class="token keyword">const</span> componentName <span class="token operator">=</span> <span class="token string">'m-'</span> <span class="token operator">+</span> key<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token string">'./'</span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+      <span class="token comment">// 通过 defineAsyncComponent 异步导入指定路径下的组件</span>
+      app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span>componentName<span class="token punctuation">,</span> <span class="token function">defineAsyncComponent</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div></details>
+<h2 id="业务组件-移动端弹层-menu" tabindex="-1"><a class="header-anchor" href="#业务组件-移动端弹层-menu" aria-hidden="true">#</a> 业务组件：移动端弹层 menu</h2>
+<p><img src="@source/.vuepress/public/images/popmenu.png" alt="图片"></p>
+<p>当 <code>popup</code> 弹出时，期望在内部展示一个对应的 列表 <code>menu</code>，这一块就是一个标准的业务组件，可以直接去进行渲染</p>
+<p>创建 <code>src/views/main/components/menu/index.vue</code></p>
+<div class="language-vue ext-vue line-numbers-mode"><pre v-pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>h-[80vh] py-1 flex flex-col<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>px-1 pb-1 font-bold text-xl<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>所有分类<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>overflow-y-scroll<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span> <span class="token attr-name">v-for</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>item,index in categorys<span class="token punctuation">"</span></span> <span class="token attr-name">:key</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>index<span class="token punctuation">"</span></span>
+        <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>px-1 py-1 text-lg active:bg-zinc-200 duration-200<span class="token punctuation">"</span></span>
+        <span class="token attr-name">@click</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>onItemClick(index)<span class="token punctuation">"</span></span>
+      <span class="token punctuation">></span></span>
+        {{item.name}}
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">setup</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+<span class="token keyword">const</span> props <span class="token operator">=</span> <span class="token function">defineProps</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token literal-property property">categorys</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">type</span><span class="token operator">:</span> Array<span class="token punctuation">,</span>
+    <span class="token literal-property property">required</span><span class="token operator">:</span> <span class="token boolean">true</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> emits <span class="token operator">=</span> <span class="token function">defineEmits</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'itemClick'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token comment">// 点击 item 时 触发事件</span>
+<span class="token keyword">const</span> <span class="token function-variable function">onItemClick</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">index</span><span class="token punctuation">)</span><span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token function">emits</span><span class="token punctuation">(</span><span class="token string">'itemClick'</span><span class="token punctuation">,</span> index<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br></div></div><p>在 <code>src/views/main/components/navigation/mobile/index.vue</code> 接受数据，并触发事件函数</p>
+<div class="language-vue ext-vue line-numbers-mode"><pre v-pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>m-popup</span> <span class="token attr-name">v-model</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>isOpenPopup<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>menu-vue</span> <span class="token attr-name">:categorys</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>data<span class="token punctuation">"</span></span> <span class="token attr-name">@itemClick</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>itemClick<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>menu-vue</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>m-popup</span><span class="token punctuation">></span></span>
+
+// item 点击事件
+const itemClick = (index) => {
+  currentCategoryIndex.value = index
+  isVisible.value = false
+}
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><h2 id="总结" tabindex="-1"><a class="header-anchor" href="#总结" aria-hidden="true">#</a> 总结</h2>
+<p>在这里处理了 <strong>移动端的 navgationBar 模块</strong>，在处理该模块的过程中，做了：</p>
+<ol>
+<li>自定义了两个通用组件，这两个组件都是将来可以被随意放入到 <strong>中台组件库/物料库</strong> 中：</li>
+</ol>
+<ul>
+<li><code>svg-icon</code></li>
+<li><code>popup</code></li>
+</ul>
+<ol start="2">
+<li>修正了 <code>rem</code> 值，对于移动端的 <code>rem</code> 处理目前可以根据设备的不同来自动修正</li>
+<li>基于 <code>vite</code> 的 <code>svg</code> 矢量图导入和自动组件注册</li>
+<li>使用了 <code>vueuse</code> 中更多的功能方法</li>
+</ol>
+</template>

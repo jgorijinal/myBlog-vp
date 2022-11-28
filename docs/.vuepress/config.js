@@ -316,6 +316,7 @@ module.exports = {
                 children: [
                     '/front/start.md',
                     '/front/zujian.md',
+                    '/front/header.md',
                 ]
             },
             {

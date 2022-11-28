@@ -35,10 +35,53 @@ export const data = {
       "title": "移动端 slider 处理",
       "slug": "移动端-slider-处理",
       "children": []
+    },
+    {
+      "level": 2,
+      "title": "补全 category 数据 ('全部')",
+      "slug": "补全-category-数据-全部",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "通用组件：弹出窗口 - popup 能力分析",
+      "slug": "通用组件-弹出窗口-popup-能力分析",
+      "children": [
+        {
+          "level": 3,
+          "title": "弹出窗口-popup 实现",
+          "slug": "弹出窗口-popup-实现",
+          "children": []
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "title": "vite 通用组件自动化注册",
+      "slug": "vite-通用组件自动化注册",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "业务组件：移动端弹层 menu",
+      "slug": "业务组件-移动端弹层-menu",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "总结",
+      "slug": "总结",
+      "children": []
     }
   ],
   "git": {
-    "contributors": []
+    "contributors": [
+      {
+        "name": "jgoriginal",
+        "email": "932274204@qq.com",
+        "commits": 1
+      }
+    ]
   },
   "filePathRelative": "front/zujian.md"
 }
