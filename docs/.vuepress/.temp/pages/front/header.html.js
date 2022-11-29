@@ -43,10 +43,41 @@ export const data = {
           "children": []
         }
       ]
+    },
+    {
+      "level": 2,
+      "title": "完善 search 的 基本功能",
+      "slug": "完善-search-的-基本功能",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "通用组件：popover 气泡卡片能力分析",
+      "slug": "通用组件-popover-气泡卡片能力分析",
+      "children": [
+        {
+          "level": 3,
+          "title": "popover 基础功能实现",
+          "slug": "popover-基础功能实现",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "popover 功能延伸，控制气泡展示位置",
+          "slug": "popover-功能延伸-控制气泡展示位置",
+          "children": []
+        }
+      ]
     }
   ],
   "git": {
-    "contributors": []
+    "contributors": [
+      {
+        "name": "jgoriginal",
+        "email": "932274204@qq.com",
+        "commits": 1
+      }
+    ]
   },
   "filePathRelative": "front/header.md"
 }

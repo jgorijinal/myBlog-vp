@@ -216,8 +216,16 @@ const onToHome = () => {
 5. 当指定的风格或大小不符合预设时，需要给开发者以提示消息
 
 ### 通用组件：button 按钮功能实现
-![图片](../.vuepress/public/images/bbtt1.png)
+要实现这种效果 : ![图片](../.vuepress/public/images/bbtt1.png)
 
+具体如下步骤: 
+1. 构建 `type` 风格可选项 和 `size` 大小可选项
+2. 通过 `props` 让开发者控制按钮
+3. 区分 `icon` 的button  和 `text` button
+4. 依据当前的处理实现视图
+5. 处理 `点击事件`
+
+#### 开始实现
 1. 创建 `src/libs/button/index.vue` 通用按钮组件
 
 2. 构建 `type` 风格可选项与 `size` 大小可选项
@@ -397,3 +405,504 @@ const onBtnClick = () => {
   emits(EMITS_CLICK)
 }
 ```
+## 完善 search 的 基本功能
+那么此时 `search` 组件展示所需要的组件已经全部完成，接下来就可以继续处理 `search` 尚未完成的能力：
+
+1. 输入内容实现双向数据绑定
+```html
+  <input
+        ...
+        :value="modelValue" @input="listenInput"
+      />
+```
+```vue
+<script>
+const EMITS_MODEL_VALUE = 'update:modelValue'
+</script>
+<script setup>
+const props = defineProps({
+  modelValue: {
+    type: String,
+    required: true
+  }
+})
+const emits = defineEmits([EMITS_MODEL_VALUE])
+// 监听表单的input 事件, 向外触发 update:modelValue
+const listenInput = ($event) => {
+  emits(EMITS_MODEL_VALUE, $event.target.value)
+}
+// 点击 搜索按钮
+const clickSearchBtn = () => {
+  console.log('点击')
+}
+</script>
+```
+2. 搜索按钮在 `hover` 时展示，并为圆角：   `opacity-0 group-hover:opacity-100`
+```html
+  <!--TODO: 搜索按钮(通用组件)-->
+      <m-button
+        class="absolute translate-y-[-50%] top-[50%] right-1 rounded-lg opacity-0 group-hover:opacity-100"
+        icon="search"
+        iconColor="#ffffff"
+        type="main"
+        @click="clickSearchBtn"
+      ></m-button>
+```
+
+3. 一键清空文本功能
+* 文本存在是展示
+```html
+ <!--删除按钮-->
+      <m-svg-icon
+        v-show="modelValue"
+       ...
+      ></m-svg-icon>
+```
+
+* 一键清空文本实现
+```html
+   <!--删除按钮-->
+      <m-svg-icon
+        v-show="modelValue"
+        ...
+        @click="onClearClick"
+      ></m-svg-icon>
+```
+```js
+// 一键清空文本
+const onClearClick = () => {
+  emits(EMITS_MODEL_VALUE, '')
+}
+```
+
+4. 搜索触发功能
+```html
+<m-button
+  ...
+  @click="clickSearchBtn"
+  @keyup.enter="clickSearchBtn" 
+  <!--还要处理 : 点击enter键是也触发搜索函数-->
+></m-button>
+```
+```js
+const EMITS_SEARCH = 'search'
+...
+const emits = defineEmits([EMITS_MODEL_VALUE,EMITS_SEARCH])
+
+// 点击搜索按钮, 触发事件
+const clickSearchBtn = () => {
+  console.log('点击')
+  emits(EMITS_SEARCH, props.modelValue)
+}
+```
+
+
+5. 可控制，可填充的下拉展示区
+* input输入框获取焦点时 , 展示 下拉区
+```html
+  <!--下拉区-->
+    <transition name="slide">
+      <div
+        ...
+        v-if="$slots.dropdown && isInputFocus"
+      >
+        <slot name="dropdown" />
+      </div>
+    </transition>
+```
+```html
+      <!--input输入框-->
+      <input
+        ...
+        ...
+        @focus="onFocusInput"
+```
+```js
+// input 是否获取焦点 : 判断显示/隐藏下拉区
+const isInputFocus = ref(false)
+// input 获取焦点
+const onFocusInput = () =>{
+  isInputFocus.value = true
+}
+```
+
+* 点击整个 search 组件**外部**时, 隐藏 下拉区
+
+使用了 `vueuse` 里的 `onClickOutside` 函数
+```html
+<div ref="containerRef"  .... ></div>
+```
+```js
+import { onClickOutside } from '@vueuse/core'; 
+
+...
+// input 是否获取焦点 : 判断显示/隐藏下拉区
+const isInputFocus = ref(false)
+const containerRef = ref(null)
+// 点击 search 组件外部区域, 隐藏下拉区
+onClickOutside(containerRef, () => {
+  isInputFocus.value = false
+})
+```
+
+6. 处理所有关于表单的事件通知
+```vue
+<script>
+// modelValue 改变
+const EMITS_MODEL_VALUE = 'update:modelValue'
+// 搜索
+const EMITS_SEARCH = 'search'
+// focus
+const EMITS_FOCUS = 'focus'
+// input
+const EMITS_INPUT = 'input'
+// blur
+const EMITS_BLUR = 'blur'
+// 清空文本
+const EMITS_CLEAR = 'clear'
+</script>
+```
+```html
+<!-- 输入框 -->
+<input
+  ...
+  @focus="onFocusHandler"
+  @blur="onBlurHandler"
+  @keyup.enter="onSearchHandlder"
+/>
+```
+
+```js
+const emits = defineEmits([
+  EMIT_CLEAR,
+  EMIT_INPUT,
+  EMIT_FOCUS,
+  EMIT_BLUR,
+  EMIT_SEARCH
+])
+
+/**
+ * 清空文本
+ */
+const onClearClick = () => {
+  ...
+  emits(EMIT_CLEAR, '')
+}
+
+/**
+ * 触发搜索
+ */
+const onSearchHandler = () => {
+  emits(EMIT_SEARCH, inputValue.value)
+}
+
+/**
+ * 监听焦点行为
+ */
+const isFocus = ref(false)
+const onFocusHandler = () => {
+  ...
+  emits(EMIT_FOCUS)
+}
+
+/**
+ * 失去焦点
+ */
+const onBlurHandler = () => {
+  emits(EMIT_BLUR)
+}
+
+/**
+ * 监听输入行为
+ */
+watch(inputValue, (val) => {
+  emits(EMIT_INPUT, val)
+})
+```
+
+7. 在 `src/views/layout/components/header/header-search/index.vue` 中使用该组件
+
+```vue
+<template>
+  <div class="w-full">
+    <m-search v-model="inputValue">
+      <template #dropdown>
+        <div>dropdown</div>
+      </template>
+    </m-search>
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+
+const inputValue = ref('')
+</script>
+```
+
+## 通用组件：popover 气泡卡片能力分析
+**鼠标移入之后，展示一个弹出层**
+
+那么这样的一个弹出层逻辑，通常使用 `popover` 进行表示
+
+对于 `popover` 而言，他应该具备以下能力
+
+1. 具有两个插槽
+* **具名插槽** reference : 触发弹出层的视图
+* **默认插槽** : 弹出层中需要展示的内容
+
+2. 控制弹出层的位置，期望可以在以下位置弹出
+* 左上
+* 右上
+* 左下
+* 右下
+### popover 基础功能实现
+1. 创建 `src/libs/popover/index.vue` 气泡卡片
+```vue
+<template>
+  <div class="relative" @mouseenter="onMouseenter" @mouseleave="onMouseleave">  
+    <!--具名插槽: 静态的内容-->
+    <div>
+      <slot name="reference" />
+    </div>
+    <!--需要展示的气泡框 transition 过度动画 -->
+    <transition name="slide">
+      <div v-if="isVisible" class="absolute z-20 bg-white p-1 border rounded-md">
+        <!--默认插槽-->
+        <slot></slot>
+      </div>
+    </transition>
+  </div>
+</template>
+<script setup>
+import { ref } from 'vue'
+// 气泡框的显示/隐藏
+const isVisible = ref(false)
+// 鼠标进入事件
+const onMouseenter = () => {
+  isVisible.value = true
+}
+// 鼠标离开事件
+const onMouseleave = () => { 
+  isVisible.value = false
+}
+</script>
+<style lang="scss" scoped>
+.slide-enter-active,.slide-leave-active {
+  transition:all 0.25s ease
+}
+.slide-enter-from,.slide-leave-to {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+</style>
+```
+
+
+2. 在 `src/views/layout/components/header/header-theme.vue `使用 `popover`
+![图片](../.vuepress/public/images/popover1.png)
+
+```vue
+<template>
+  <m-popover>
+    <!--#reference-->
+    <template #reference>
+      <div class="p-1 cursor-pointer bg-white rounded-md hover:bg-zinc-100">
+        <m-svg-icon class="w-2 h-2" name="theme-light"></m-svg-icon>
+      </div>
+    </template>
+    <!--气泡框内容: 默认插槽-->
+    <ul class="w-[140px]">
+      <template v-for="item in themeArr" :key="item.id">
+        <li class="flex items-center p-1 hover:bg-zinc-100 rounded-md cursor-pointer duration-200" >
+          <m-svg-icon class="w-1.5 h-1.5 mr-1" :name="item.icon" />
+          <span class="text-sm">{{item.name}}</span>
+        </li>
+      </template>
+    </ul>
+  </m-popover>
+</template>
+<script setup>
+import { THEME_LIGHT,THEME_DARK,THEME_SYSTEM } from  '@/constants'
+const themeArr = [
+  {
+    id: 0,
+    type: THEME_LIGHT,
+    name: '极简白',
+    icon: 'theme-light',
+  },
+  {
+    id: 1,
+    type: THEME_DARK,
+    name: '极夜黑',
+    icon: 'theme-dark',
+  },
+  {
+    id: 2,
+    type: THEME_SYSTEM,
+    name: '跟随系统',
+    icon: 'theme-system',
+  },
+]
+</script>
+```
+3. 在 `src/constants/index.js` 中定义色值常量
+```js
+// 浅色主题
+export const THEME_LIGHT = 'light'
+// 深色主题
+export const THEME_DARK = 'light'
+// 跟随系统
+export const THEME_SYSTEM = 'light'
+```
+`popover` 气泡卡片已经展示成功
+
+### popover 功能延伸，控制气泡展示位置
+`popover` 气泡卡片展示成功，但是 **气泡弹出的位置** 无法控制
+
+气泡至少应该做到**4 个位置**的可控展示：
+
+1. 左上
+2. 右上
+3. 左下
+4. 右下
+
+1. 指定所有的可选位置常量，并生成 `enum：`
+```vue
+<script>
+const PROP_TOP_LEFT = 'top-left'
+const PROP_TOP_RIGHT = 'top-right'
+const PROP_BOTTOM_LEFT = 'bottom-left'
+const PROP_BOTTOM_RIGHT = 'bottom-right'
+
+// 定义指定位置的 Enum
+const placementEnum = [
+  PROP_TOP_LEFT,
+  PROP_TOP_RIGHT,
+  PROP_BOTTOM_LEFT,
+  PROP_BOTTOM_RIGHT
+]
+</script>
+```
+
+2. 创建 `prop`，控制气泡位置：
+```js
+const props = defineProps({
+  // 控制气泡弹出位置，并给出开发者错误的提示
+  placement: {
+    type: String,
+    default: 'bottom-left',
+    validator(val) {
+      const result = placementEnum.includes(val)
+      if (!result) {
+        throw new Error(
+          `你的 placement 必须是 ${placementEnum.join('、')} 中的一个`
+        )
+      }
+      return result
+    }
+  }
+})
+```
+
+3. 获取元素的 `DOM`，创建读取元素尺寸的方法：
+```html
+<template>
+  ...
+    <div ref="referenceTarget">
+      <!-- 具名插槽 -->
+      ...
+    </div>
+    <!-- 气泡展示动画 -->
+    <transition ...>
+      <div
+        ref="contentTarget"
+        ...
+      >
+        <!-- 匿名插槽 -->
+        <slot />
+      </div>
+    </transition>
+  </div>
+</template>
+```
+
+```js
+/**
+ * 计算元素尺寸
+ */
+const referenceTarget = ref(null)
+const contentTarget = ref(null)
+const useElementSize = (target) => {
+  if (!target) return {}
+  return {
+    width: target.offsetWidth,
+    height: target.offsetHeight
+  }
+}
+```
+
+4. 生成气泡的样式对象，用来控制每个位置的对应样式：
+```js
+/**
+ * 计算弹层位置
+ */
+const contentStyle = ref({
+  top: 0,
+  left: 0
+})
+```
+```html
+<div
+  ...
+  :style="contentStyle"
+>
+	<!-- 匿名插槽 -->
+	<slot />
+</div>
+```
+
+5. 监听展示的变化，计算 `contentStyle：`
+
+```js
+/**
+ * 监听展示的变化，在展示时计算气泡位置
+ */
+watch(isVisible, (val) => {
+  if (!val) {
+    return
+  }
+  // 等待渲染成功之后
+  nextTick(() => {
+    switch (props.placement) {
+      // 左上
+      case PROP_TOP_LEFT:
+        contentStyle.value.top = 0
+        contentStyle.value.left =
+          -useElementSize(contentTarget.value).width + 'px'
+        break
+      // 右上
+      case PROP_TOP_RIGHT:
+        contentStyle.value.top = 0
+        contentStyle.value.left =
+          useElementSize(referenceTarget.value).width + 'px'
+        break
+      // 左下
+      case PROP_BOTTOM_LEFT:
+        contentStyle.value.top =
+          useElementSize(referenceTarget.value).height + 'px'
+        contentStyle.value.left =
+          -useElementSize(contentTarget.value).width + 'px'
+        break
+      // 右下
+      case PROP_BOTTOM_RIGHT:
+        contentStyle.value.top =
+          useElementSize(referenceTarget.value).height + 'px'
+        contentStyle.value.left =
+          useElementSize(referenceTarget.value).width + 'px'
+        break
+    }
+  })
+})
+```
+
