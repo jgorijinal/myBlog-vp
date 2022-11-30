@@ -66,8 +66,20 @@ export const data = {
           "title": "popover 功能延伸，控制气泡展示位置",
           "slug": "popover-功能延伸-控制气泡展示位置",
           "children": []
+        },
+        {
+          "level": 3,
+          "title": "处理慢速移动时，气泡消失闪动问题",
+          "slug": "处理慢速移动时-气泡消失闪动问题",
+          "children": []
         }
       ]
+    },
+    {
+      "level": 2,
+      "title": "基于 popover 处理用户(my)模块",
+      "slug": "基于-popover-处理用户-my-模块",
+      "children": []
     }
   ],
   "git": {
@@ -75,7 +87,7 @@ export const data = {
       {
         "name": "jgoriginal",
         "email": "932274204@qq.com",
-        "commits": 1
+        "commits": 2
       }
     ]
   },

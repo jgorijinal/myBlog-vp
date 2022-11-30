@@ -317,6 +317,8 @@ module.exports = {
                     '/front/start.md',
                     '/front/zujian.md',
                     '/front/header.md',
+                    '/front/xiangyingshi.md',
+                    '/front/zhuti.md',
                 ]
             },
             {

@@ -761,12 +761,18 @@ export const THEME_SYSTEM = 'light'
 `popover` 气泡卡片展示成功，但是 **气泡弹出的位置** 无法控制
 
 气泡至少应该做到**4 个位置**的可控展示：
+* 左上 `top-left`
+* 右上 `top-right`
+* 左下 `bottom-left`
+* 右下 `bottom-right`
 
-1. 左上
-2. 右上
-3. 左下
-4. 右下
+尝试分析...:
 
+* 气泡框它本身是**绝对定位**, 所以就可以改变`left`和`top`改变它本身的位置
+* 而这些位置信息可以定义成一个**响应式数据 ref**, 绑定到气泡框元素的 `:style` 样式上面
+* 那么这样可以根据用户通过 `props` 传递的四个方向之一, 去定义`left` 和 `top`
+* 这个时候可以使用 `watch` 监听 `isVisible` 的变化, 当`isVisible` 等于 `true` 即 气泡框显示时
+* 在 `nextTick` 里面去定义当前情况时的 `left` 和 `top` 就 ok , 基本流程是这样
 1. 指定所有的可选位置常量，并生成 `enum：`
 ```vue
 <script>
@@ -905,4 +911,120 @@ watch(isVisible, (val) => {
   })
 })
 ```
+### 处理慢速移动时，气泡消失闪动问题
 
+其实这个问题非常简单，因为在 `reference` 与 **气泡之间存在间隙** ，当鼠标移动到这个间隙处时，就会触发 `mouseleave` 鼠标移出事件，那么此时 `isVisible` 就会变为 `false`
+
+想要解决这个问题，我们可以利用 **类似于防抖（debounce）** 的概念。
+
+也就是：**鼠标刚离开时，不去立刻修改 isVisible，而是延迟一段时间，如果在这段时间之内，再次触发了鼠标移入事件，则不再修改 isVisible**
+
+1. 定义延迟关闭时长：
+```js
+// 延迟关闭时长
+const DELAY_TIME = 100
+```
+
+2. 通过定时器，处理延迟关闭：
+```js
+// 控制延迟关闭
+let timeout = null
+/**
+ * 鼠标移入的触发行为
+ */
+const onMouseenter = () => {
+  isVisible.value = true
+  // 再次触发时，清理延时装置
+  if (timeout) {
+    clearTimeout(timeout)
+  }
+}
+/**
+ * 鼠标移出的触发行为
+ */
+const onMouseleave = () => {
+  // 延时装置
+  timeout = setTimeout(() => {
+    isVisible.value = false
+    timeout = null
+  }, DELAY_TIME)
+}
+```
+## 基于 popover 处理用户(my)模块
+![图片](../.vuepress/public/images/my01.png)
+
+
+在 `src/views/layout/components/header/header-my.vue` 中写入以下代码：
+
+1. 定义气泡数据源：
+
+```vue
+<script setup>
+// 构建 menu 数据源
+const menuArr = [
+  {
+    id: 0,
+    title: '个人资料',
+    icon: 'profile',
+    path: '/profile'
+  },
+  {
+    id: 1,
+    title: '升级 VIP',
+    icon: 'vip-profile',
+    path: '/member'
+  },
+  {
+    id: 2,
+    title: '退出登录',
+    icon: 'logout',
+    path: ''
+  }
+]
+</script>
+```
+
+2. 渲染视图：
+```vue
+<template>
+  <m-popover class="flex items-center" placement="bottom-left">
+    <template #reference>
+      <div
+        class="guide-my relative flex items-center p-0.5 rounded-sm cursor-pointer duration-200 outline-none hover:bg-zinc-100"
+      >
+        <!-- 头像 -->
+        <img
+          class="w-3 h-3 rounded-sm"
+          src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fup.enterdesk.com%2Fedpic_source%2F0c%2Fef%2Fa0%2F0cefa0f17b83255217eddc20b15395f9.jpg&refer=http%3A%2F%2Fup.enterdesk.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1651074011&t=ba5d64079381425813e4c269bcac1a1b"
+        />
+        <!-- 下箭头 -->
+        <m-svg-icon
+          class="h-1.5 w-1.5 ml-0.5"
+          name="down-arrow"
+          fillClass="fill-zinc-900 "
+        ></m-svg-icon>
+        <!-- vip 标记 -->
+        <m-svg-icon
+          name="vip"
+          class="w-1.5 h-1.5 absolute right-[16px] bottom-0"
+        ></m-svg-icon>
+      </div>
+    </template>
+
+    <div class="w-[140px] overflow-hidden">
+      <div
+        class="flex items-center p-1 cursor-pointer rounded hover:bg-zinc-100/60"
+        v-for="item in menuArr"
+        :key="item.id"
+      >
+        <m-svg-icon
+          :name="item.icon"
+          class="w-1.5 h-1.5 mr-1"
+          fillClass="fill-zinc-900 "
+        ></m-svg-icon>
+        <span class="text-zinc-800 text-sm">{{ item.title }}</span>
+      </div>
+    </div>
+  </m-popover>
+</template>
+```
