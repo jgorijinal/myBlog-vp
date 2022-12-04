@@ -426,4 +426,221 @@ const deleteAllItems = () => {
   </div>
 </template>
 ```
+## 通用组件 : confirm 应用场景
+目前当点击 **删除全部** 历史记录时，会直接删除，这样体验并不好，目前期望的是能够给用户一个 **提示** ，也就是 `confirm`
 
+所以期望能够构建出一个对应的 `confirm` 组件
+
+但是对于 `confirm` 这种组件而言，不希望它通过标签的形式进行使用，而是期望可以像 `element-plus` 中的 [confirm](https://element-plus.org/zh-CN/component/message-box.html#%E7%A1%AE%E8%AE%A4%E6%B6%88%E6%81%AF)一样，可以直接通过**方法的形式**进行调用，这样就太爽了
+
+那么如果想要通过一个**方法**来进行一个**组件的展示**，并与其进行交互的话, 那应该怎么做呢....
+
+### vNode + h函数 + render函数 明确 confirm 构建思路
+
+[渲染函数](https://v3.cn.vuejs.org/guide/render-function.html#dom-%E6%A0%91), 在渲染函数中，需要了解如下概念：
+
+1. 虚拟 `dom`：通过 `js` 来描述 `dom`
+2. `vnode` 虚拟节点：告诉 `vue` 页面上需要渲染什么样子的节点
+3. `h` 函数：用来创建 `vnode` 的函数，接受三个参数 `(要渲染的 dom，attrs 对象，子元素)`
+4. `render` 函数：可以根据 `vnode` 来渲染 `dom`
+
+**通过 `h` 函数可以生成一个 `vnode`，该 `vnode` 可以通过 `render` 函数被渲染**
+
+
+所以据此就可以得出 `confirm` 组件的实现思路：
+
+1. 创建一个 `confirm` 组件
+2. 创建一个 `confirm.js` 模块，在该模块中 **返回一个 promise**
+3. 同时利用 `h` 函数生成 `confirm.vue` 的 `vnode`
+4. 最后利用 `render` 函数，渲染 `vnode` 到 `body` 中
+### 构建 confirm 组件
+![图片](../.vuepress/public/images/sousuolishi1.png)
+
+1. 创建 `src/libs/confirm/index.vue` 组件，并创建对应的 `props`:
+```js
+const props = defineProps({
+  // 标题
+  title: {
+    type: String
+  },
+  // 描述
+  content: {
+    type: String,
+    required: true
+  },
+  // 取消按钮文本
+  cancelText: {
+    type: String,
+    default: '取消'
+  },
+  // 确定按钮文本
+  confirmText: {
+    type: String,
+    default: '确定'
+  },
+  // 取消按钮事件
+  cancelHandler: {
+    type: Function
+  },
+  // 确定按钮事件
+  confirmHandler: {
+    type: Function
+  },
+  // 关闭 confirm 的回调
+  close: {
+    type: Function
+  }
+})
+```
+2. 因为最终期望通过方法进行调用，这会导致 **自动导入的组件无法使用**，所以我们需要手动导入需要使用到的通用组件：
+```js
+// 在方法调用的组件中，需要主动导入组件
+import mButton from '../button/index.vue'
+```
+
+3. 创建对应的模板样式
+```vue
+<template>
+  <div>
+    <!-- 蒙版 -->
+    <transition name="fade">
+      <div
+        v-if="isVisible"
+        @click="close"
+        class="w-screen h-screen bg-zinc-900/80 z-40 fixed top-0 left-0"
+      ></div>
+    </transition>
+    <!-- 内容 -->
+    <transition name="up">
+      <div
+        v-if="isVisible"
+        class="w-[80%] fixed top-1/3 left-[50%] translate-x-[-50%] z-50 px-2 py-1.5 rounded-sm border dark:border-zinc-600 cursor-pointer bg-white dark:bg-zinc-800 xl:w-[35%]"
+      >
+        <!-- 标题 -->
+        <div class="text-lg font-bold text-zinc-900 dark:text-zinc-200 mb-2">
+          {{ title }}
+        </div>
+        <!-- 内容 -->
+        <div class="text-base text-zinc-900 dark:text-zinc-200 mb-2">
+          {{ content }}
+        </div>
+        <!-- 按钮 -->
+        <div class="flex justify-end">
+          <m-button type="info" class="mr-2" @click="onCancelClick">{{
+            cancelText
+          }}</m-button>
+          <m-button type="primary" @click="onConfirmClick">{{
+            confirmText
+          }}</m-button>
+        </div>
+      </div>
+    </transition>
+  </div>
+</template>
+
+<style lang="scss" scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.5s;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.up-enter-active,
+.up-leave-active {
+  transition: all 0.5s;
+}
+
+.up-enter-from,
+.up-leave-to {
+  opacity: 0;
+  transform: translate3d(-50%, 100px, 0);
+}
+</style>
+```
+
+4. 创建展示控制方法，因为需要保留执行动画，所以我们在 `mounted` 时，让内容展示：
+```js
+// 控制显示处理
+const isVisible = ref(false)
+
+/**
+ * confirm 展示
+ */
+const show = () => {
+  isVisible.value = true
+}
+
+/**
+ * 页面构建完成之后，执行。保留动画
+ */
+onMounted(() => {
+  show()
+})
+```
+
+5. 处理关闭控制方法，同样因为动画需要展示，所以我们需要预留动画执行时间：
+```js
+// 过渡动画时长
+const duration = '0.5s'
+
+// confirm 关闭, 需保留动画执行时长
+const close = () => {
+  isVisible.value = false
+  // ????? 为啥这样做 ???????????????
+  // 延迟一段时间进行关闭回调 , 因为要等待动画完全关闭之后, 在去触发 props.close()
+  setTimeout(() => {
+    if (props.close) {
+      props.close()
+    }
+  }, parseInt(duration.replace('0.','').replace('s','')) * 100 )
+}
+```
+6. 利用 [状态驱动 css 概念](https://v3.cn.vuejs.org/api/sfc-style.html#%E7%8A%B6%E6%80%81%E9%A9%B1%E5%8A%A8%E7%9A%84%E5%8A%A8%E6%80%81-css) 绑定响应式数据到 `css` 中：
+```vue
+<style lang="scss" scoped>
+.fade-enter-active , .fade-leave-active {
+  transition: all v-bind(duration);
+}
+.fade-enter-from , .fade-leave-to {
+  opacity: 0;
+}
+.up-enter-active , .up-leave-active {
+  transition: all v-bind(duration);
+}
+.up-enter-from , .up-leave-to {
+  opacity: 0;
+  // transform: translate3d(-50%, 100px, 0);
+  transform: translate(-50%,100px);
+}
+</style>
+```
+
+7. 处理取消按钮和确定按钮的点击行为：
+```js
+/**
+ * 取消按钮点击事件
+ */
+const onCancelClick = () => {
+  if (props.cancelHandler) {
+    props.cancelHandler()
+  }
+  close()
+}
+
+/**
+ * 确定按钮点击事件
+ */
+const onConfirmClick = () => {
+  if (props.confirmHandler) {
+    props.confirmHandler()
+  }
+  close()
+}
+```
+
+
+`confirm` 组件本身，构建完成

@@ -407,4 +407,29 @@
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>m-search</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
-</code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><br><br><br><br><br></div><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br></div></div></template>
+</code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><br><br><br><br><br></div><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br></div></div><h2 id="通用组件-confirm-应用场景" tabindex="-1"><a class="header-anchor" href="#通用组件-confirm-应用场景" aria-hidden="true">#</a> 通用组件 : confirm 应用场景</h2>
+<p>目前当点击 <strong>删除全部</strong> 历史记录时，会直接删除，这样体验并不好，目前期望的是能够给用户一个 <strong>提示</strong> ，也就是 <code>confirm</code></p>
+<p>所以期望能够构建出一个对应的 <code>confirm</code> 组件</p>
+<p>但是对于 <code>confirm</code> 这种组件而言，不希望它通过标签的形式进行使用，而是期望可以像 <code>element-plus</code> 中的 <a href="https://element-plus.org/zh-CN/component/message-box.html#%E7%A1%AE%E8%AE%A4%E6%B6%88%E6%81%AF" target="_blank" rel="noopener noreferrer">confirm<ExternalLinkIcon/></a>一样，可以直接通过<strong>方法的形式</strong>进行调用，这样就太爽了</p>
+<p>那么如果想要通过一个<strong>方法</strong>来进行一个<strong>组件的展示</strong>，并与其进行交互的话, 那应该怎么做呢....</p>
+<h3 id="vnode-h函数-render函数-明确-confirm-构建思路" tabindex="-1"><a class="header-anchor" href="#vnode-h函数-render函数-明确-confirm-构建思路" aria-hidden="true">#</a> vNode + h函数 + render函数 明确 confirm 构建思路</h3>
+<p><a href="https://v3.cn.vuejs.org/guide/render-function.html#dom-%E6%A0%91" target="_blank" rel="noopener noreferrer">渲染函数<ExternalLinkIcon/></a>, 在渲染函数中，需要了解如下概念：</p>
+<ol>
+<li>虚拟 <code>dom</code>：通过 <code>js</code> 来描述 <code>dom</code></li>
+<li><code>vnode</code> 虚拟节点：告诉 <code>vue</code> 页面上需要渲染什么样子的节点</li>
+<li><code>h</code> 函数：用来创建 <code>vnode</code> 的函数，接受三个参数 <code>(要渲染的 dom，attrs 对象，子元素)</code></li>
+<li><code>render</code> 函数：可以根据 <code>vnode</code> 来渲染 <code>dom</code></li>
+</ol>
+<p><strong>通过 <code>h</code> 函数可以生成一个 <code>vnode</code>，该 <code>vnode</code> 可以通过 <code>render</code> 函数被渲染</strong></p>
+<p>所以据此就可以得出 <code>confirm</code> 组件的实现思路：</p>
+<ol>
+<li>创建一个 <code>confirm</code> 组件</li>
+<li>创建一个 <code>confirm.js</code> 模块，在该模块中 <strong>返回一个 promise</strong></li>
+<li>同时利用 <code>h</code> 函数生成 <code>confirm.vue</code> 的 <code>vnode</code></li>
+<li>最后利用 <code>render</code> 函数，渲染 <code>vnode</code> 到 <code>body</code> 中</li>
+</ol>
+<h3 id="构建-confirm-组件" tabindex="-1"><a class="header-anchor" href="#构建-confirm-组件" aria-hidden="true">#</a> 构建 confirm 组件</h3>
+<ol>
+<li>创建 <code>src/libs/confirm/index.vue</code> 组件，并创建对应的 <code>props</code>:</li>
+</ol>
+</template>

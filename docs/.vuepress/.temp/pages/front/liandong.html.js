@@ -48,10 +48,35 @@ export const data = {
           "children": []
         }
       ]
+    },
+    {
+      "level": 2,
+      "title": "通用组件 : confirm 应用场景",
+      "slug": "通用组件-confirm-应用场景",
+      "children": [
+        {
+          "level": 3,
+          "title": "vNode + h函数 + render函数 明确 confirm 构建思路",
+          "slug": "vnode-h函数-render函数-明确-confirm-构建思路",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "构建 confirm 组件",
+          "slug": "构建-confirm-组件",
+          "children": []
+        }
+      ]
     }
   ],
   "git": {
-    "contributors": []
+    "contributors": [
+      {
+        "name": "jgoriginal",
+        "email": "932274204@qq.com",
+        "commits": 1
+      }
+    ]
   },
   "filePathRelative": "front/liandong.md"
 }
