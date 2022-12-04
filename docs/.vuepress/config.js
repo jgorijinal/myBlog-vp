@@ -319,6 +319,9 @@ module.exports = {
                     '/front/header.md',
                     '/front/xiangyingshi.md',
                     '/front/zhuti.md',
+                    '/front/lanjiazai.md',
+                    '/front/changliebiao.md',
+                    '/front/liandong.md',
                 ]
             },
             {

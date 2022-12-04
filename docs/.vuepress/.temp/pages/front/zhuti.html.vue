@@ -243,4 +243,66 @@
 </code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><ol start="10">
 <li>如果感觉替换过于生硬，可以给 <code>hearder</code> 和 <code>navigationBar</code> 增加 <code>duration-500</code> 过渡动画时长</li>
 </ol>
+<h2 id="跟随系统的主题变更" tabindex="-1"><a class="header-anchor" href="#跟随系统的主题变更" aria-hidden="true">#</a> 跟随系统的主题变更</h2>
+<p>想要生成跟随系统的主题变更，那么就需要 <strong>监听系统的主题变化</strong></p>
+<p>想要做到这一点，可以利用 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Window/matchMedia" target="_blank" rel="noopener noreferrer">Window.matchMedia()<ExternalLinkIcon/></a> 方法，该方法接收一个 <code>mediaQueryString（媒体查询解析的字符串）</code> ，该字符串可以传递 <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/@media/prefers-color-scheme" target="_blank" rel="noopener noreferrer">prefers-color-scheme<ExternalLinkIcon/></a> ，即 <code>window.matchMedia('(prefers-color-scheme: dark)')</code> 方法</p>
+<p>该方法可以返回一个 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/MediaQueryList" target="_blank" rel="noopener noreferrer">MediaQueryList<ExternalLinkIcon/></a> 对象：</p>
+<ol>
+<li>该对象存在一个 <code>change</code> 事件，可以监听 主题发生变更 的行为</li>
+<li>同时存在一个 <code>matches</code> 属性，该属性为 <code>boolean</code> 性的值</li>
+</ol>
+<p>可生成以下代码。在 <code>src/utils/theme.js</code> 中：</p>
+<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token keyword">import</span> store <span class="token keyword">from</span> <span class="token string">'@/store'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> watch <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">THEME_LIGHT</span><span class="token punctuation">,</span> <span class="token constant">THEME_DARK</span><span class="token punctuation">,</span> <span class="token constant">THEME_SYSTEM</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/constants'</span>
+
+<span class="token doc-comment comment">/**
+ * 监听系统主题变更
+ */</span>
+<span class="token comment">// MediaQueryList 对象</span>
+<span class="token keyword">let</span> matchMedia
+<span class="token keyword">const</span> <span class="token function-variable function">watchSystemThemeChange</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token comment">// 仅需初始化一次即可</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>matchMedia<span class="token punctuation">)</span> <span class="token keyword">return</span>
+  matchMedia <span class="token operator">=</span> window<span class="token punctuation">.</span><span class="token function">matchMedia</span><span class="token punctuation">(</span><span class="token string">'(prefers-color-scheme: dark)'</span><span class="token punctuation">)</span>
+  <span class="token comment">// 监听主题变更</span>
+  matchMedia<span class="token punctuation">.</span><span class="token function-variable function">onchange</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">changeTheme</span><span class="token punctuation">(</span><span class="token constant">THEME_SYSTEM</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token doc-comment comment">/**
+ * 变更主题
+ * <span class="token keyword">@param</span> <span class="token class-name"><span class="token punctuation">{</span><span class="token operator">*</span><span class="token punctuation">}</span></span> <span class="token parameter">theme</span> 主题的标记常量
+ */</span>
+<span class="token keyword">const</span> <span class="token function-variable function">changeTheme</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">theme</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token comment">// html 的 class</span>
+  <span class="token keyword">let</span> themeClassName <span class="token operator">=</span> <span class="token string">''</span>
+  <span class="token keyword">switch</span> <span class="token punctuation">(</span>theme<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token operator">...</span>
+    <span class="token keyword">case</span> <span class="token constant">THEME_SYSTEM</span><span class="token operator">:</span>
+      <span class="token function">watchSystemThemeChange</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      themeClassName <span class="token operator">=</span> matchMedia<span class="token punctuation">.</span>matches <span class="token operator">?</span> <span class="token string">'dark'</span> <span class="token operator">:</span> <span class="token string">'light'</span>
+      <span class="token keyword">break</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">// 修改 html 的 class</span>
+  document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'html'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>className <span class="token operator">=</span> themeClassName
+<span class="token punctuation">}</span>
+
+<span class="token doc-comment comment">/**
+ * 初始化主题
+ */</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token function">watch</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> store<span class="token punctuation">.</span>getters<span class="token punctuation">.</span>themeType<span class="token punctuation">,</span> changeTheme<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 初始执行一次</span>
+    <span class="token literal-property property">immediate</span><span class="token operator">:</span> <span class="token boolean">true</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br></div></div><h2 id="总结" tabindex="-1"><a class="header-anchor" href="#总结" aria-hidden="true">#</a> 总结</h2>
+<ol>
+<li>主题替换原理</li>
+<li><code>tailwind</code> 主题替换原理</li>
+<li>复杂应用中的实现方案</li>
+<li>跟随系统的主题变更</li>
+</ol>
 </template>

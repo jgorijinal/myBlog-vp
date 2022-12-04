@@ -251,3 +251,69 @@ useTheme()
 
 10. 如果感觉替换过于生硬，可以给 `hearder` 和 `navigationBar` 增加 `duration-500` 过渡动画时长
 
+## 跟随系统的主题变更
+想要生成跟随系统的主题变更，那么就需要 **监听系统的主题变化**
+
+想要做到这一点，可以利用 [Window.matchMedia()](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/matchMedia) 方法，该方法接收一个 `mediaQueryString（媒体查询解析的字符串）` ，该字符串可以传递 [prefers-color-scheme](https://developer.mozilla.org/zh-CN/docs/Web/CSS/@media/prefers-color-scheme) ，即 `window.matchMedia('(prefers-color-scheme: dark)')` 方法
+
+该方法可以返回一个 [MediaQueryList](https://developer.mozilla.org/zh-CN/docs/Web/API/MediaQueryList) 对象：
+
+1. 该对象存在一个 `change` 事件，可以监听 主题发生变更 的行为
+2. 同时存在一个 `matches` 属性，该属性为 `boolean` 性的值
+
+
+可生成以下代码。在 `src/utils/theme.js` 中：
+```js
+import store from '@/store'
+import { watch } from 'vue'
+import { THEME_LIGHT, THEME_DARK, THEME_SYSTEM } from '@/constants'
+
+/**
+ * 监听系统主题变更
+ */
+// MediaQueryList 对象
+let matchMedia
+const watchSystemThemeChange = () => {
+  // 仅需初始化一次即可
+  if (matchMedia) return
+  matchMedia = window.matchMedia('(prefers-color-scheme: dark)')
+  // 监听主题变更
+  matchMedia.onchange = function () {
+    changeTheme(THEME_SYSTEM)
+  }
+}
+
+/**
+ * 变更主题
+ * @param {*} theme 主题的标记常量
+ */
+const changeTheme = (theme) => {
+  // html 的 class
+  let themeClassName = ''
+  switch (theme) {
+    ...
+    case THEME_SYSTEM:
+      watchSystemThemeChange()
+      themeClassName = matchMedia.matches ? 'dark' : 'light'
+      break
+  }
+  // 修改 html 的 class
+  document.querySelector('html').className = themeClassName
+}
+
+/**
+ * 初始化主题
+ */
+export default () => {
+  watch(() => store.getters.themeType, changeTheme, {
+    // 初始执行一次
+    immediate: true
+  })
+}
+```
+## 总结
+1. 主题替换原理
+2. `tailwind` 主题替换原理
+3. 复杂应用中的实现方案
+4. 跟随系统的主题变更
+
