@@ -73,6 +73,24 @@ export const data = {
           "children": []
         }
       ]
+    },
+    {
+      "level": 2,
+      "title": "searchBar : 推荐精选主题模块构建",
+      "slug": "searchbar-推荐精选主题模块构建",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "searchBar 联动 list",
+      "slug": "searchbar-联动-list",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "总结",
+      "slug": "总结",
+      "children": []
     }
   ],
   "git": {
@@ -80,7 +98,7 @@ export const data = {
       {
         "name": "jgoriginal",
         "email": "932274204@qq.com",
-        "commits": 2
+        "commits": 3
       }
     ]
   },

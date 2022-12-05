@@ -63,6 +63,7 @@ const routeItems = [
   ["v-6a147738","/front/pubuliu.html",{"title":"瀑布流展示"},["/front/pubuliu","/front/pubuliu.md"]],
   ["v-20eb0b54","/front/start.html",{"title":"搭建"},["/front/start","/front/start.md"]],
   ["v-fd421290","/front/xiangyingshi.html",{"title":"前中台响应式处理方案"},["/front/xiangyingshi","/front/xiangyingshi.md"]],
+  ["v-1e7eb2c8","/front/xiazai.html",{"title":"前台常见功能解决方案：下载+全屏+引导"},["/front/xiazai","/front/xiazai.md"]],
   ["v-1ef6073c","/front/zhuti.html",{"title":"主题替换解决方案"},["/front/zhuti","/front/zhuti.md"]],
   ["v-14b58d13","/front/zujian.html",{"title":"构建自己的组件库 - 实现前端设计"},["/front/zujian","/front/zujian.md"]],
   ["v-5e7f3f4d","/git/start.html",{"title":"Git"},["/git/start","/git/start.md"]],

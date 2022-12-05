@@ -644,7 +644,6 @@ const onConfirmClick = () => {
 
 `confirm` 组件本身，构建完成
 ### 函数调用 confirm 组件
-
 1. 创建 `src/libs/confirm/index.js` 文件
 
 2. 创建 `confirm` 方法，接收四个参数：
@@ -664,7 +663,7 @@ export const confirm = (
   confirmText = '确定'
 ) => {}
 ```
-3. 该方法应该 `return promise` （只有这样才可以通过 `.then` 监听到确定按钮事件）
+3. 该方法应该 `return promise`（只有这样才可以通过 `.then` 监听到确定按钮事件）
 
 4. 该方法允许只传递 `content`
 ```js
@@ -702,7 +701,7 @@ export const confirm = (
       resolve()
     }
 
-    // 1. vnode
+    // 1. h 函数 生成 vNode
     const vNode = h(confirmComponent, {
       title,
       content,
@@ -712,12 +711,10 @@ export const confirm = (
       cancelHandler,
       close
     })
-    // 2. render
+    // 2. 使用 render() 函数渲染 vNode 到 body下面
     render(vNode, document.body)
   })
 }
-
-
 ```
 6. 在 `src/libs/index.js` 中执行导入并导出：
 ```js
@@ -735,5 +732,161 @@ const deleteAllItems = () => {
     store.commit('search/deleteAllHistory')
   })
 }
-
 ```
+
+## searchBar : 推荐精选主题模块构建
+![图片](../.vuepress/public/images/jingxuan1.png)
+
+热门精选的渲染相对而言就比较干脆了，直接获取数据，进行渲染即可
+
+1. 在 `src/api/pexels.js` 中，生成对应的接口：
+```js
+/**
+ * 获取推荐主题
+ */
+export const getThemes = () => {
+  return request({
+    url: '/pexels/themes'
+  })
+}
+```
+
+2. 创建 `src/views/layout/components/header/header-search/theme.vue` 组件：
+
+```vue
+<template>
+  <div class="">
+    <div class="text-xs mb-1 text-zinc-400">热门精选</div>
+    <div class="flex h-[140px]" v-if="themeData.list.length">
+      <div
+        class="relative rounded w-[260px] cursor-pointer"
+        :style="{
+          backgroundColor: randomRGB()
+        }"
+      >
+        <img
+          class="h-full w-full object-cover rounded"
+          v-lazy
+          :src="themeData.big.photo"
+          alt=""
+        />
+        <p
+          class="absolute bottom-0 left-0 w-full h-full flex items-center backdrop-blur 
+            rounded px-1 text-white text-xs duration-300 hover:backdrop-blur-none"
+        >
+          # {{ themeData.big.title }}
+        </p>
+      </div>
+      <div class="flex flex-wrap flex-1 max-w-[860px]">
+        <div
+          v-for="item in themeData.list"
+          :key="item.id"
+          class="h-[45%] w-[260px] text-white text-xs relative ml-1.5 mb-1.5 rounded"
+          :style="{
+            backgroundColor: randomRGB()
+          }"
+        >
+          <img
+            class="w-full h-full object-cover rounded"
+            v-lazy
+            :src="item.photo"
+          />
+          <p
+            class="backdrop-blur absolute top-0 left-0 w-full h-full flex items-center px-1 rounded cursor-pointer duration-300 hover:backdrop-blur-none"
+          >
+            # {{ item.title }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+<script setup>
+import { ref } from 'vue'
+import { getThemes } from '@/api/pexels'
+import { randomRGB } from '@/utils/color'
+
+// 处理主题数据
+const themeData = ref({
+  big: {},
+  list: []
+})
+const getThemeData = async () => {
+  const { themes } = await getThemes()
+  themeData.value = {
+    big: themes[0],
+    list: themes.splice(1, themes.length)
+  }
+}
+getThemeData()
+</script>
+```
+## searchBar 联动 list
+至此的 `searchBar` 模块就已经全部处理完成了，那么最后就只需要处理对应的联动效果即可
+
+联动策略：**通过一个共享数据的变化，执行对应的逻辑**
+
+所以说对于 `searchBar` 和 `list` 而言，同样需要有一个 **共享数据**，那么这个数据就是在 `searchHandler` 被回调时，得到的 **搜索文本**
+
+
+1. 在 `src/store/modules/app.js` 中，创建对应的共享数据：
+```js
+export default {
+  namespaced: true,
+  state: () => ({
+    ...
+    // 搜索的文本
+    searchText: ''
+  }),
+  mutations: {
+    ...
+    /**
+     * 修改 searchText
+     */
+    changeSearchText(state, newSearchText) {
+      state.searchText = newSearchText
+    }
+  }
+}
+```
+2. 在 `getters` 中创建对应的快捷访问
+
+3. 在 `src/views/layout/components/header/header-search/index.vue` 中触发 `mutation`
+```js
+// 搜索的回调事件
+const onSearchHandler = (val) => {
+  ...
+  if (val) {
+    ...
+    // 触发 searchText 变化
+    store.commit('app/changeSearchText', val)
+  }
+}
+```
+
+4. 在 `src/views/main/components/list/index.vue` 中，监听 `searchText` 的变化
+```js
+/**
+ * 监听搜索内容项的变化
+ */
+watch(
+  () => store.getters.searchText,
+  (val) => {
+    // 重置请求参数
+    resetQuery({
+      page: 1,
+      searchText: val
+    })
+  }
+)
+```
+
+## 总结 
+主要实现了 : 
+1. 多组件联动逻辑
+2. `confirm` 通用组件
+* `vnode`
+* `h` 函数
+* `render` 函数
+
+首页总算是能看了...
