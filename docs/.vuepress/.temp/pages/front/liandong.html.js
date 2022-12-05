@@ -65,6 +65,12 @@ export const data = {
           "title": "构建 confirm 组件",
           "slug": "构建-confirm-组件",
           "children": []
+        },
+        {
+          "level": 3,
+          "title": "函数调用 confirm 组件",
+          "slug": "函数调用-confirm-组件",
+          "children": []
         }
       ]
     }
@@ -74,7 +80,7 @@ export const data = {
       {
         "name": "jgoriginal",
         "email": "932274204@qq.com",
-        "commits": 1
+        "commits": 2
       }
     ]
   },

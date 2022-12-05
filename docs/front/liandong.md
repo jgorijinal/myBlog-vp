@@ -454,7 +454,7 @@ const deleteAllItems = () => {
 3. 同时利用 `h` 函数生成 `confirm.vue` 的 `vnode`
 4. 最后利用 `render` 函数，渲染 `vnode` 到 `body` 中
 ### 构建 confirm 组件
-![图片](../.vuepress/public/images/sousuolishi1.png)
+![图片](../.vuepress/public/images/confirm1.png)
 
 1. 创建 `src/libs/confirm/index.vue` 组件，并创建对应的 `props`:
 ```js
@@ -642,5 +642,98 @@ const onConfirmClick = () => {
 }
 ```
 
-
 `confirm` 组件本身，构建完成
+### 函数调用 confirm 组件
+
+1. 创建 `src/libs/confirm/index.js` 文件
+
+2. 创建 `confirm` 方法，接收四个参数：
+```js
+/**
+ *
+ * @param {*} title 标题
+ * @param {*} content 文本
+ * @param {*} cancelText 取消按钮文本
+ * @param {*} confirmText 确定按钮文本
+ * @returns
+ */
+export const confirm = (
+  title,
+  content,
+  cancelText = '取消',
+  confirmText = '确定'
+) => {}
+```
+3. 该方法应该 `return promise` （只有这样才可以通过 `.then` 监听到确定按钮事件）
+
+4. 该方法允许只传递 `content`
+```js
+return new Promise((resolve, reject) => {
+    // 允许只传递 content
+    if (title && !content) {
+      content = title
+      title = ''
+    }
+  })
+```
+
+5. 利用 `h` 函数生成 `vNode`，并利用 `render` 函数进行渲染：
+```js
+import { h, render } from 'vue'
+import confirmComponent from './index.vue'
+export const confirm = (
+  ...
+) => {
+  return new Promise((resolve, reject) => {
+    ...
+
+    // 关闭弹层事件
+    const close = () => {
+      render(null, document.body)
+    }
+
+    // 取消按钮事件
+    const cancelHandler = () => {
+      reject(new Error('取消按钮点击'))
+    }
+
+    // 确定按钮事件
+    const confirmHandler = () => {
+      resolve()
+    }
+
+    // 1. vnode
+    const vNode = h(confirmComponent, {
+      title,
+      content,
+      cancelText,
+      confirmText,
+      confirmHandler,
+      cancelHandler,
+      close
+    })
+    // 2. render
+    render(vNode, document.body)
+  })
+}
+
+
+```
+6. 在 `src/libs/index.js` 中执行导入并导出：
+```js
+export { confirm } from './confirm'
+```
+
+7. 在 `src/views/layout/components/header/header-search/history.vue` 中进行触发：
+
+```js
+/**
+ * 删除所有记录
+ */
+const deleteAllItems = () => {
+  confirm('要删除所有历史记录吗？').then(() => {
+    store.commit('search/deleteAllHistory')
+  })
+}
+
+```
