@@ -197,3 +197,236 @@ window.addEventListener('popstate', () => {
   isPinsVisible.value = false
 })
 ```
+
+## 通用组件：navbar 构建方案分析
+移动端中，则会展示对应的 `navbar` 的内容，所以我们首先先构建出 `navbar` 通用组件，然后在基于 `navbar` 构建对应的 `pins` 样式
+
+那么对于 `navbar` 而言：
+
+1. 它分为 **左、中、右** 三个大的部分，三个部分都可以通过插槽进行指定
+2. **左、右** 两边的插槽可以 **自定义点击事件**
+3. 同时 `navbar` 有时候会存在**吸顶**的效果，所以最好还可以通过一个 `prop` 指定对应的吸顶展示
+### 构建 navbar
+![图片](../.vuepress/public/images/nb123.png)
+
+1. 创建 `src/libs/navbar/index.vue`通用组件，并构建对应的 `props：``
+```js
+const props = defineProps({
+  // 是否吸顶
+  sticky: {
+    type:Boolean
+  }
+})
+```
+
+2. 创建 `template：`
+```vue
+<template>
+  <div 
+    class="flex items-center h-5 w-full bg-white dark:bg-zinc-800 border-b border-b-zinc-200 dark:border-b-zinc-700"
+    :class="[sticky ? 'sticky left-0 top-0' : 'relative']"
+    >
+    <!--左-->
+    <div class="absolute left-0 top-0 h-full w-5 flex items-center justify-center text-base"
+      @click="onClickLeft"  
+    >
+      <slot name="left">
+        <m-svg-icon
+          name="back"
+          class="w-2 h-2"
+          fillClass="fill-zinc-900 dark:fill-zinc-200"
+        />
+      </slot>
+    </div>
+    <!--中-->
+    <div class="h-full flex items-center justify-center m-auto font-bold text-base text-zinc-900 dark:text-zinc-200">
+      <slot name="center"></slot>
+    </div>
+    <!--右-->
+    <div class="absolute right-0 top-0 h-full flex items-center w-5 justify-center text-base"
+      @click="onClickRight"
+    >
+      <slot name="right"></slot>
+    </div>
+  </div>
+</template>
+<script setup>
+import { useRouter } from 'vue-router'
+const props = defineProps({
+  // 是否吸顶
+  sticky: {
+    type:Boolean
+  }
+})
+const emits = defineEmits(['clickLeft', 'clickRight'])
+const router = useRouter()
+const onClickLeft = () => {
+  console.log('点击了 左测区域')
+  emits('clickLeft')
+  // 后退
+  router.back()
+}
+
+const onClickRight = () => {
+  console.log('点击了 右测区域')
+  emits('clickRight')
+}
+</script>
+```
+## 基于 navbar 处理响应式的 pins 页面
+1. 在 `src/api/pexels.js` 中定义对应接口：
+```js
+/**
+ * 获取指定图片数据
+ */
+export const getPexelsFromId = (id) => {
+  return request({
+    url: `/pexels/${id}`
+  })
+}
+```
+
+2. 在 `src/views/pins/components/pins.vue` 中，获取 `pexel` 详细数据：
+```js
+import { ref } from 'vue'
+import { getPexelsFromId } from '@/api/pexels'
+
+const pexelData = ref({})
+/**
+ * 获取详情数据
+ */
+const getPexelData = async () => {
+  const data = await getPexelsFromId(props.id)
+  pexelData.value = data
+}
+getPexelData()
+```
+
+3. 构建对应的 `template`：
+```vue
+<template>
+  <div
+    class="fixed left-0 top-0 w-screen h-screen z-20 backdrop-blur-4xl bg-transparent pb-2 overflow-y-auto xl:p-2"
+  >
+    <!-- 移动端下展示 navbar -->
+    <m-navbar v-if="isMobileTerminal" @clickLeft="onPop" @clickRight="onPop">
+      {{ pexelData.title }}
+      <template #right>
+        <m-svg-icon
+          name="share"
+          class="w-3 h-3"
+          fillClass="fill-zinc-900 dark:fill-zinc-200"
+        ></m-svg-icon>
+      </template>
+    </m-navbar>
+    <!-- pc 端下展示关闭图标 -->
+    <m-svg-icon
+      v-else
+      name="close"
+      class="w-3 h-3 ml-1 p-0.5 cursor-pointer duration-200 rounded-sm hover:bg-zinc-100 absolute right-2 top-2"
+      fillClass="fill-zinc-400"
+      @click="onPop"
+    ></m-svg-icon>
+
+    <div class="xl:w-[80%] xl:h-full xl:mx-auto xl:rounded-lg xl:flex">
+      <img
+        class="w-screen mb-2 xl:w-3/5 xl:h-full xl:rounded-tl-lg xl:rounded-bl-lg"
+        :src="pexelData.photo"
+      />
+      <div
+        class="xl:w-2/5 xl:h-full xl:bg-white xl:dark:bg-zinc-900 xl:rounded-tr-lg xl:rounded-br-lg xl:p-3"
+      >
+        <div v-if="!isMobileTerminal" class="flex justify-between mb-2">
+          <m-svg-icon
+            name="share"
+            class="w-4 h-4 p-1 cursor-pointer hover:bg-zinc-200 dark:hover:bg-zinc-800 duration-300 rounded"
+            fillClass="fill-zinc-900 dark:fill-zinc-200"
+          ></m-svg-icon>
+
+          <m-button
+            class=""
+            type="info"
+            icon="heart"
+            iconClass="fill-zinc-900 dark:fill-zinc-200"
+          />
+        </div>
+        <!-- 标题 -->
+        <p
+          class="text-base text-zinc-900 dark:text-zinc-200 ml-1 font-bold xl:text-xl xl:mb-5"
+        >
+          {{ pexelData.title }}
+        </p>
+        <!-- 作者 -->
+        <div class="flex items-center mt-1 px-1">
+          <img
+            v-lazy
+            class="h-3 w-3 rounded-full"
+            :src="pexelData.avatar"
+            alt=""
+          />
+          <span class="text-base text-zinc-900 dark:text-zinc-200 ml-1">{{
+            pexelData.author
+          }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+```
+
+4. 在 `tailwind.config.js` 中指定更大的毛玻璃效果
+```js
+backdropBlur: {
+  '4xl': '240px'
+}
+```
+
+5.  处理对应的关闭事件：
+```js
+/**
+ * 关闭按钮处理事件
+ */
+const router = useRouter()
+const onPop = () => {
+  router.back()
+}
+```
+此时整个的 `pins` 展示无论是在 `移动端` 还是 `PC 端` 均已完成
+## 处理刷新空白问题
+通过 `pushState` 跳转到了一个新的 `url`，并且通过 `transition` 进行了 `pins` 展示的动画处理。但是我们发现了一个问题，那就是只要在 pins 展示的时候，刷新页面，那么整个页面会变成空白, 同时控制台会抛出一个警告那就是 `No match found for location with path` ，表示 **路由无法被找到**
+
+(如果使用了 `hash` 模式 , 就没有这样的问题, 这个项目使用的是 `history` 模式)
+
+愿意就是现在还没有对应的 `/pins/:id` 的路由
+
+1. 在 `src/router/modules/pc-terminal-routes.js` 中新增路由
+```js
+{
+  path: '/pins/:id',
+  name: 'pins',
+  component: () => import('@/views/pins/index.vue')
+},
+```
+
+2. 在 `src/router/modules/mobile-terminal-routes.js` 中新增路由：
+```js
+{
+  path: '/pins/:id',
+  name: 'pins',
+  component: () => import('@/views/pins/index.vue')
+},
+```
+3. 在 `src/views/pins/index.vue` 中，渲染 `pins` 组件 ：
+```vue
+<template>
+  <div class="w-full h-full bg-zinc-200 dark:bg-zinc-800">
+    <pins-vue :id="$route.params.id" />
+  </div>
+</template>
+
+<script setup>
+import pinsVue from './components/pins.vue'
+</script>
+```
+
+即可解决刷新空白的问题
