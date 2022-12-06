@@ -192,7 +192,7 @@ onMounted(() => {
 ```
 
 
-## 用方法触发 message 展示
+### 用方法触发 message 展示
 1. 创建 `src/libs/message/index.js` 模块：
 ```js
 import { h, render } from 'vue'
@@ -241,5 +241,251 @@ const onDownload = () => {
     )
   }, 1000)
 }
+```
+
+## 模块全屏解决方案
+让页面中的指定区域进行全屏展示也是非常常见的一个功能
+
+想要让页面的指定区域进行全屏展示，我们通常可以使用 [全屏 API](https://developer.mozilla.org/zh-CN/docs/Web/API/Fullscreen_API) ，该 API 中提供了两个方法
+1. [Element.requestFullscreen()](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/requestFullScreen)：让指定元素进行全屏
+```js
+document.getElementById('app').requestFullscreen()
+```
+2. [Document.exitFullscreen()](https://developer.mozilla.org/zh-CN/docs/Web/API/Document/exitFullscreen)：退出全屏
+
+但是这个 API 比较原始，使用起来没有那么方便，所以可以使用一个 `vueuse` 中的更加简便的 API：[useFullScreen](https://vueuse.org/core/useFullscreen/#usefullscreen)
+
+1. 利用 useFullScreen 生成 img 图片的全屏方法：
+```js
+/**
+ * 生成全屏方法
+ */
+const imgTarget = ref(null)
+const { enter: onImgFullScreen } = useFullscreen(imgTarget)
+```
+2. 将 `onImgFullScreen` 绑定至全屏按钮点击事件：
+```html
+<!--全屏按钮-->
+<m-button
+  ...
+  ...
+  icon="full"
+  @click="onImgFullScreen"
+/>
+```
+
+## 构建 floating 基础布局
+```vue
+<template>
+  <div class="fixed bottom-10 right-2">
+    <!-- 引导页 -->
+    <div
+      class="guide-start w-4 h-4 mb-1 bg-white dark:bg-zinc-900 border dark:border-0 border-zinc-200 rounded-full flex justify-center items-center cursor-pointer duration-200 group hover:shadow-lg"
+    >
+      <m-svg-icon
+        name="guide"
+        class="w-2 h-2"
+        fillClass="fill-zinc-900 dark:fill-zinc-200 group-hover:fill-main "
+      ></m-svg-icon>
+    </div>
+    <!-- 反馈 -->
+    <m-popover class="flex items-center guide-feedback" placement="top-left">
+      <template #reference>
+        <div
+          class=" w-4 h-4 bg-white dark:bg-zinc-900 border dark:border-0 border-zinc-200 rounded-full flex justify-center items-center cursor-pointer duration-200 group hover:shadow-lg"
+        >
+          <m-svg-icon
+            name="feedback"
+            class="w-2 h-2"
+            fillClass="fill-zinc-900 dark:fill-zinc-200 group-hover:fill-main "
+          ></m-svg-icon>
+        </div>
+      </template>
+
+      <div class="w-[140px] overflow-hidden">
+        <div
+          class="flex items-center p-1 cursor-pointer rounded hover:bg-zinc-100/60 dark:hover:bg-zinc-800"
+        >
+          <m-svg-icon
+            name="feedback"
+            class="w-1.5 h-1.5 mr-1"
+            fillClass="fill-zinc-900 dark:fill-zinc-300"
+          ></m-svg-icon>
+          <span class="text-zinc-800 dark:text-zinc-300 text-sm">立即吐槽</span>
+        </div>
+      </div>
+    </m-popover>
+  </div>
+</template>
+```
+## 样式修正：处理难看的 scrollBar
+对于 `tailwind` 而言，默认并没有提供 `scrollBar` 的样式类名，想要处理 `scrollBar` 的样式，那么需要安装单独的插件：[tailwind-scrollbar](https://www.npmjs.com/package/tailwind-scrollbar)
+
+
+1. 安装插件：
+```npm
+npm install --save-dev tailwind-scrollbar@1.3.1
+```
+
+2. 在 `tailwind.config.js` 中注册该插件：
+```js
+plugins: [require('tailwind-scrollbar')]
+```
+
+3. 在 `tailwind.config.js` 中，让 `scrollBar` 支持 `dark` 模式：
+```js
+theme: {
+    extend: {
+      ...
+      variants: {
+        scrollbar: ['dark']
+      }
+    }
+  }
+```
+
+4. 在 `src/views/main/index.vue` 使用 `scrollbar`
+```html
+<div
+    class="h-full overflow-auto bg-white dark:bg-zinc-800 duration-500 scrollbar-thin scrollbar-thumb-transparent xl:scrollbar-thumb-zinc-200 xl:dark:scrollbar-thumb-zinc-900 scrollbar-track-transparent"
+  >
+  ...
+```
+5. 在 `src/libs/search/index.vue` 中，为下拉区指定 `scrollBar`
+```html
+<div
+        v-if="$slots.dropdown"
+        v-show="isFocus"
+        class="... scrollbar-thin scrollbar-thumb-zinc-200 dark:scrollbar-thumb-zinc-900 scrollbar-track-transparent"
+      >
 
 ```
+6. 最后在 `src/styles/index.scss` 中，为 `scrollBar` 指定弧度`（1.3.1 通过属性指定弧度无效）`
+```css
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+}
+```
+
+## 功能引导解决方案
+想要完成功能引导的实现，那么需要借助一个第三方的包：[driver.js](https://www.npmjs.com/package/driver.js)
+
+1. 安装 `driver.js`：
+```shell
+npm install --save driver.js@0.9.8
+```
+
+2. 在 `src/views/layout/components/floating/index.vue` 中导入对应模块
+```js
+import Driver from 'driver.js'
+import 'driver.js/dist/driver.min.css'
+```
+
+3. 初始化 `Driver：`
+```js
+/**
+ * 引导页处理
+ */
+let driver = null
+onMounted(() => {
+  driver = new Driver({
+    // 禁止点击蒙版关闭
+    allowClose: false,
+    closeBtnText: '关闭',
+    nextBtnText: '下一个',
+    prevBtnText: '上一个'
+  })
+})
+```
+
+4. `driver.js` 的运行主要依赖于 [defineSteps](https://kamranahmed.info/driver.js/) ，该方法接收一个数组，表示引导的步骤和机制
+
+5. 所以需要先构建出这样的数组，创建 `src/views/layout/components/floating/steps.js` 模块：
+```js
+export default [
+  {
+    // 在哪个元素中高亮
+    element: '.guide-home',
+    // 配置对象
+    popover: {
+      // 标题
+      title: 'logo',
+      // 描述
+      description: '点击可返回首页'
+    }
+  },
+  {
+    element: '.guide-search',
+    popover: {
+      title: '搜索',
+      description: '搜索您期望的图片'
+    }
+  },
+  {
+    element: '.guide-theme',
+    popover: {
+      title: '风格',
+      description: '选择一个您喜欢的风格',
+      // 弹出的位置
+      position: 'left'
+    }
+  },
+  {
+    element: '.guide-my',
+    popover: {
+      title: '账户',
+      description: '这里标记了您的账户信息',
+      position: 'left'
+    }
+  },
+  {
+    element: '.guide-start',
+    popover: {
+      title: '引导',
+      description: '这里可再次查看引导信息',
+      position: 'left'
+    }
+  },
+  {
+    element: '.guide-feedback',
+    popover: {
+      title: '反馈',
+      description: '您的任何不满都可以在这里告诉我们',
+      position: 'left'
+    }
+  }
+]
+```
+6. 一一为其中的 `element` 指定对应的类名 `class`
+7. 在 `src/views/layout/components/floating/index.vue` 导入数组，并执行 `defineSteps` 方法
+```js
+/**
+ * 开始引导
+ */
+const onGuideClick = () => {
+  driver.defineSteps(steps)
+  driver.start()
+}
+```
+
+但是此时的引导存在一个问题，那就是 **白色背景会遮挡住已有的图标** ，这个问题咱们如何处理呢...
+
+![图片](../.vuepress/public/images/yindao1.png)
+
+### 解决功能引导图标不显示的问题
+`styles/index.scss` 加上属性
+```css
+div#driver-highlighted-element-stage, div#driver-page-overlay {
+  background: transparent !important;
+  outline: 5000px solid rgba(0, 0, 0, .75) !important;
+}
+```
+## 总结 
+处理了 `4` 个核心功能：
+
+1. 文件下载
+2. 通用组件：`message `构建
+3. 全屏处理
+4. 引导处理
+
+
