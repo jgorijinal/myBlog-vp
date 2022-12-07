@@ -402,4 +402,7 @@
 <span class="token keyword">import</span> pinsVue <span class="token keyword">from</span> <span class="token string">'./components/pins.vue'</span>
 </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
 </code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><p>即可解决刷新空白的问题</p>
+<h2 id="总结" tabindex="-1"><a class="header-anchor" href="#总结" aria-hidden="true">#</a> 总结</h2>
+<p>这次处理了详情页面，在详情页面的处理中，通过了另外一种方式来完成了 <strong>路由的过渡行为</strong> 。同时也用到了 <code>GSAP</code> 这样的动画库，可以使动画处理变得更加方便。</p>
+<p>那么首页中的内容基本上就处理完成了，接下来就需要处理的 <strong>登录、注册</strong> 了</p>
 </template>

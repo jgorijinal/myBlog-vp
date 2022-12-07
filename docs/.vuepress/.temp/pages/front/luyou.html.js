@@ -49,6 +49,12 @@ export const data = {
       "title": "处理刷新空白问题",
       "slug": "处理刷新空白问题",
       "children": []
+    },
+    {
+      "level": 2,
+      "title": "总结",
+      "slug": "总结",
+      "children": []
     }
   ],
   "git": {
@@ -56,7 +62,7 @@ export const data = {
       {
         "name": "jgoriginal",
         "email": "932274204@qq.com",
-        "commits": 1
+        "commits": 2
       }
     ]
   },

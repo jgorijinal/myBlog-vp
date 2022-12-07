@@ -143,7 +143,8 @@ export const themeData = {
         "/front/changliebiao.md",
         "/front/liandong.md",
         "/front/xiazai.md",
-        "/front/luyou.md"
+        "/front/luyou.md",
+        "/front/biaodan.md"
       ]
     },
     {
