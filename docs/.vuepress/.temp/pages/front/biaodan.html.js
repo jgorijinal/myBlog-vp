@@ -30,10 +30,52 @@ export const data = {
           "children": []
         }
       ]
+    },
+    {
+      "level": 2,
+      "title": "用户登录行为处理",
+      "slug": "用户登录行为处理",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "用户信息获取行为",
+      "slug": "用户信息获取行为",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "退出登录操作",
+      "slug": "退出登录操作",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "token 超时处理",
+      "slug": "token-超时处理",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "注册 : '确认密码' 校验",
+      "slug": "注册-确认密码-校验",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "处理真正注册操作",
+      "slug": "处理真正注册操作",
+      "children": []
     }
   ],
   "git": {
-    "contributors": []
+    "contributors": [
+      {
+        "name": "jgoriginal",
+        "email": "932274204@qq.com",
+        "commits": 1
+      }
+    ]
   },
   "filePathRelative": "front/biaodan.md"
 }

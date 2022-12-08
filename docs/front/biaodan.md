@@ -414,3 +414,588 @@ const onClose = () => {
 }
 </script
 ```
+**注意：** `SliderCaptcha` 中所有图标均被放入该路径下：
+```html
+<!-- iconfont 在线图标，主要用于 sliderCaptcha -->
+  <link rel="stylesheet"
+    href="https://at.alicdn.com/t/font_3042963_nv614canpao.css?spm=a313x.7781069.1998910419.47&file=font_3042963_nv614canpao.css" />
+```
+
+## 用户登录行为处理
+1. 在 `src/api/sys.js` 定义用户登录接口
+```js
+/**
+ * 登录
+ */
+export const loginUser = (data) => {
+  return request({
+    url: '/sys/login',
+    method: 'POST',
+    data
+  })
+}
+```
+
+2. 在 `src/views/login-register/login/index.vue` 中，当用户进行登录时，处理 `loading` 展示
+```js
+<m-button
+  class="w-full dark:bg-zinc-900 xl:dark:bg-zinc-800"
+  :loading="loading"
+  :isActiveAnim="false"
+>
+  登录
+</m-button>
+
+// 登录时的 loading
+const loading = ref(false)
+```
+
+3. 定义用户登录方法
+```js
+/**
+ * 人类行为验证通过
+ */
+const onCaptchaSuccess = async () => {
+  ...
+  // 登录操作
+  onLogin()
+}
+
+/**
+ * 用户登录行为
+ */
+const onLogin = () => {
+  loading.value = true
+
+  // TODO: 登陆请求
+}
+```
+4. **所有用户登录行为将被放入到 `vuex` 中**
+
+5. 创建 `src/store/modules/user.js` 模块（需要安装 `md5` 加密模块）
+```js
+import { loginUser } from '@/api/sys'
+import md5 from 'md5'
+export default {
+  namespaced: true,
+  state() {
+    return {
+      token:''
+    }
+  },
+  mutations: {
+    setToken(state, newToken) {
+      state.token = newToken
+    }
+  },
+  actions: {
+    // 登录
+    async loginAction(context, data) {
+      const { password } = data 
+      
+      const res = await loginUser({
+        ...data,
+        password: password ? md5(password) : ''
+      })
+      const token = res.token
+      context.commit('setToken', token)
+    }
+  }
+}
+```
+染好不能忘记**注册 和 持久化**
+6. 注册该模块，并提供 `token` 的 `getters`
+
+7. 在 `src/views/login-register/login/index.vue` 中触发该模块，此时需要处理两个变量：
+* `loginForm`：记录用户输入的用户名和密码
+```js
+// 用户输入的用户名和密码
+const loginForm = ref({
+  username: '',
+  password: ''
+})
+```
+* `loginType`：标记当前的登录模式为 **用户名密码登录，区分后面的 QQ、微信扫码登录**
+
+`src/constants/index.js`
+```js
+// 登录方式
+export const LOGIN_TYPE_USERNAME = 'username'
+```
+
+8. 最后触发模块：
+```js
+const router = useRouter()
+/**
+ * 用户登录行为
+ */
+const onLogin = async () => {
+  loading.value = true
+  // 执行登录操作
+  try {
+    await store.dispatch('user/login', {
+      ...loginForm.value,
+      loginType: LOGIN_TYPE_USERNAME
+    })
+  } finally {
+    loading.value = false
+  }
+  router.push('/')
+}
+```
+
+## 用户信息获取行为
+用户登录成功之后，接下来就需要处理登录后行为，登录后行为分为三部分：
+
+1. 登录成功之后，获取用户信息，并进行展示
+2. 退出登录的操作
+3. `token` 超时处理的操作
+
+现在处理第一个 **获取用户信息操作**
+
+
+1. 在 `src/api/sys.js` 中，定义获取用户信息接口
+```js
+/**
+ * 获取用户信息
+ */
+export const getProfile = () => {
+  return request({
+    url: '/user/profile'
+  })
+}
+```
+
+2. 在 `src/utils/request.js` 定义请求拦截器，设置 `token：`
+```js{3-6}
+// 请求拦截器
+service.interceptors.request.use(
+  (config) => {
+    if (store.getters.token) {
+      // 如果token存在 注入token
+      config.headers.Authorization = `Bearer ${store.getters.token}`
+    }
+    return config // 必须返回配置
+  },
+  (error) => {
+    return Promise.reject(error)
+  }
+)
+```
+3. 在 `src/store/modules/user.js` 中定义获取用户信息的 `action` ，并在用户登录成功之后获取用户信息：
+```js
+import { loginUser, getProfile } from '@/api/sys'
+import md5 from 'md5'
+import { message } from '@/libs'
+export default {
+  namespaced: true,
+  state() {
+    return {
+      token: '',
+      userInfo:{}
+    }
+  },
+  mutations: {
+    ...
+    setProfile(state, newUserInfo) {
+      state.userInfo = newUserInfo
+    }
+  },
+  actions: {
+    // 登录 action
+    async loginAction(context, data) {
+      ...
+      
+      // 调登录请求之后 , 直接调了下面的获取用户信息 action
+      context.dispatch('getProfileAction')
+    },
+    // 获取用户信息 action
+    async getProfileAction(context,) {
+      const res = await getProfile()
+      context.commit('setProfile', res)
+      // 登录提示
+      message('success', `欢迎你, ${ res.username }`)
+    }
+  }
+}
+```
+
+4. 指定对应 `userInfo` 的 `getters`:
+```js
+  /**
+ * 获取用户信息
+ */
+userInfo: (state) => state.user.userInfo
+```
+
+5. 在 `src/views/layout/components/header/header-my.vue` 中，根据用户信息进行展示判定：
+```html
+<m-popover ...>
+  <template #reference>
+    <div
+      v-if="$store.getters.token"
+      ...
+    >
+      <!-- 头像 -->
+      <img
+        ...
+        :src="$store.getters.userInfo.avatar"
+      />
+      <!-- 下箭头 -->
+      ...
+      <!-- vip 标记 -->
+      <m-svg-icon
+        v-if="$store.getters.userInfo.vipLevel"
+        ...
+      ></m-svg-icon>
+    </div>
+    <div v-else>
+      ...
+    </div>
+  </template>
+
+  <div v-if="$store.getters.token" ...>
+    ...
+  </div>
+</m-popover>
+```
+用户登录后的数据获取成功
+## 退出登录操作
+用户退出登录只需要删除 `token` 和 `userInfo`
+
+1. 在 `src/store/modules/user.js` 中，定义对应的 `action`
+
+```js
+/**
+ * 退出登录
+ */
+logoutAction(context) {
+  context.commit('setToken', '')
+  context.commit('setUserInfo', {})
+  // 退出登录之后，重新刷新下页面，因为对于前台项目而言，用户是否登录（是否为 VIP）看到的数据可能不同
+  location.reload()
+}
+```
+
+2. 在 `src/views/layout/components/header/header-my.vue` 中为退出登录设定点击事件
+```js
+/**
+ * menu Item 点击事件，也可以根据其他的 key 作为判定，比如 name
+ */
+const onItemClick = (item) => {
+  // 有路径则进行路径跳转
+  if (item.path) {
+    router.push(item.path)
+    return   // 返回了 ,下面代码不执行 
+  }
+
+  // 无路径则为退出登录
+  confirm('您确定要退出登录吗？').then(() => {
+    // 退出登录不存在跳转路径
+    store.dispatch('user/logout')
+  })
+}
+```
+## token 超时处理
+通常情况下 `token` 均具备时效性，在本课程中，`token` 失效后，服务端会返回 401。
+
+当服务端返回 `401` 时，表示 `token` 超时，则需要重新登录。
+
+那么对应的操作可以在 **`axios` 的响应拦截器**中进行
+
+
+在 `src/utils/request.js` 中：
+```js
+// 响应拦截器
+service.interceptors.response.use(
+  (response) => {
+    ...
+  },
+  (error) => {
+    // 处理 token 超时问题
+    if (
+      error.response &&
+      error.response.data &&
+      error.response.data.code === 401
+    ) {
+      store.dispatch('user/logout')
+    }
+    // TODO: 提示错误消息
+    return Promise.reject(error)
+  }
+)
+```
+
+
+## 注册 : '确认密码' 校验
+登录操作就已经处理完成了，接下来就处理**注册模块**
+
+1. 创建 `src/views/login-register/register/index.vue`
+
+2. 它的基本视图与 `login` 页面相差无几：
+```vue
+<template>
+  <div
+    class="relative h-screen bg-white dark:bg-zinc-700 text-center xl:bg-zinc-200"
+  >
+    <header-vue></header-vue>
+    <!--表单区-->
+    <div
+      class="block px-3 mt-4 dark:bg-zinc-800 xl:bg-white xl:w-[388px] xl:dark:bg-zinc-900 xl:m-auto xl:mt-8 xl:py-4 xl:rounded-sm xl:shadow-lg"
+    >
+      <h3
+        class="mb-2 font-semibold text-base text-main dark:text-zinc-300 hidden xl:block"
+      >
+        注册账号
+      </h3>
+      <!-- 表单 -->
+      <vee-form>
+        <!-- 用户名 -->
+        <vee-field
+          class="dark:bg-zinc-800 dark:text-zinc-400 border-b-zinc-400 border-b-[1px] w-full outline-0 pb-1 px-1 text-base focus:border-b-main dark:focus:border-b-zinc-200 xl:dark:bg-zinc-900"
+          name="username"
+          type="text"
+          placeholder="用户名"
+          autocomplete="on"
+          :rules="validateUsername"
+        />
+        <vee-error-message
+          class="text-sm text-red-600 block mt-0.5 text-left"
+          name="username"
+        >
+        </vee-error-message>
+        <!-- 密码 -->
+        <vee-field
+          class="dark:bg-zinc-800 dark:text-zinc-400 border-b-zinc-400 border-b-[1px] w-full outline-0 pb-1 px-1 text-base focus:border-b-main dark:focus:border-b-zinc-200 xl:dark:bg-zinc-900"
+          name="password"
+          type="password"
+          placeholder="密码"
+          autocomplete="on"
+          :rules="validatePassword"
+        />
+        <vee-error-message
+          class="text-sm text-red-600 block mt-0.5 text-left"
+          name="password"
+        >
+        </vee-error-message>
+        <!-- 确认密码 -->
+        <vee-field
+          class="dark:bg-zinc-800 dark:text-zinc-400 border-b-zinc-400 border-b-[1px] w-full outline-0 pb-1 px-1 text-base focus:border-b-main dark:focus:border-b-zinc-200 xl:dark:bg-zinc-900"
+          name="confirmPassword"
+          type="password"
+          placeholder="确认密码"
+          autocomplete="on"
+          rules="validateConfirmPassword:@password"
+        />
+        <vee-error-message
+          class="text-sm text-red-600 block mt-0.5 text-left"
+          name="confirmPassword"
+        >
+        </vee-error-message>
+
+        <div class="pt-1 pb-3 leading-[0px] text-right">
+          <div class="mb-2">
+            <router-link
+              class="inline-block p-1 text-zinc-400 text-right dark:text-zinc-600 hover:text-zinc-600 dark:hover:text-zinc-400 text-sm duration-400 cursor-pointer"
+              to="/login"
+            >
+              去登录
+            </router-link>
+          </div>
+          <!-- <div class="text-center">
+            <a
+              class="text-zinc-400 dark:text-zinc-600 hover:text-zinc-600 dark:hover:text-zinc-400 text-sm duration-400"
+              href="https://m.imooc.com/newfaq?id=89"
+              target="__black"
+            >
+              注册即同意《慕课网注册协议》
+            </a>
+          </div> -->
+        </div>
+
+        <m-button
+          type="main"
+          class="w-full dark:bg-zinc-900 xl:dark:bg-zinc-800"
+        >
+          立即注册
+        </m-button>
+      </vee-form>
+    </div>
+  </div>
+</template>
+```
+
+3. 处理对应的表单验证
+
+4. 在 `src/views/login-register/validate.js` 中，新增 **确认密码表单验证**
+
+```js
+/**
+ * 确认密码的表单校验
+ */
+export const validateConfirmPassword = (value, arr) => {
+  if (value !== arr[0]) {
+    return '两次密码输入必须一致'
+  }
+  return true
+}
+```
+5. 在 `src/views/login-register/register.vue` 中指定表单验证
+```html
+<vee-form>
+  <!-- 用户名 -->
+  <vee-field
+    ...
+    :rules="validateUsername"
+  />
+  <vee-error-message
+    ...
+  >
+  </vee-error-message>
+  <!-- 密码 -->
+  <vee-field
+    ...
+    :rules="validatePassword"
+  />
+  ...
+  </vee-error-message>
+  <!-- 确认密码 -->
+  <vee-field
+    ...
+    rules="validateConfirmPassword:@password"
+  />
+  ...
+...
+</vee-form>
+
+import {
+  validateUsername,
+  validatePassword,
+  validateConfirmPassword
+} from '../validate'
+```
+
+6. 此时查看项目，会得到该错误：
+![图片](../.vuepress/public/images/vor1.png)
+
+7. 该错误的原因是因为 `validateConfirmPassword` 这个接收 `password` 为参数的表单校验，需要进行注册
+```js
+import {
+  ...
+  defineRule
+} from 'vee-validate'
+import {
+  validateUsername,
+  validatePassword,
+  validateConfirmPassword
+} from '../validate'
+/**
+ * defineRule 注册新的规则
+ */
+defineRule('validateConfirmPassword', validateConfirmPassword)
+```
+
+## 处理真正注册操作
+用户的所有注册行为也同样在 `vuex` 中进行处理
+
+1. 在 `src/api/sys.js` 中定义注册接口
+```js
+/**
+ * 注册
+ */
+export const registerUser = (data) => {
+  return request({
+    url: '/sys/register',
+    method: 'POST',
+    data
+  })
+}
+```
+
+2. 在 `src/store/modules/user.js` 中，新增注册的 `action`
+```js
+/**
+ * 注册
+ */
+async registerAction(context, payload) {
+  const { password } = payload
+  // 注册
+  return await registerUser({
+    ...payload,
+    password: password ? md5(password) : ''
+  })
+}
+```
+
+
+3. 在 `src/views/login-register/register/index.vue` 中处理对应数据源和方法
+```js
+// 注册表单
+const registerForm = ref({
+  username: '',
+  password: '',
+  confirmPassword: ''
+})
+const loading = ref(false) 
+const store = useStore()
+const router = useRouter()
+
+// 点击注册
+const onRegister = async () => {
+  loading.value = true
+
+  const payload = {
+    username: registerForm.value.username,
+    password: registerForm.value.password,
+  }
+
+  try {
+    await store.dispatch('user/registerAction', payload)
+
+    // 注册成功 , 那么久直接登录
+    await store.dispatch('user/loginAction', {
+      ...payload,
+      loginType: LOGIN_TYPE_USERNAME
+    })
+    router.push('/')
+  }  finally {
+    loading.value = false
+  }
+}
+```
+4. 不要忘记 , 数据源 `v-model` 双向绑定  , `vee-form`绑定 `@submit` 注册事件
+```html
+<template>
+  ...
+      <!-- 表单 -->
+      <vee-form @submit="onRegister">
+        <!-- 用户名 -->
+        <vee-field
+          ...
+          v-model="regForm.username"
+        />
+       ...
+        <!-- 密码 -->
+        <vee-field
+          ...
+          v-model="regForm.password"
+        />
+       
+        <!-- 确认密码 -->
+        <vee-field
+          ...
+          v-model="regForm.confirmPassword"
+        />
+        ...
+        <m-button
+          ...
+          :isActiveAnim="false"
+          :loading="loading"
+        >
+          立即注册
+        </m-button>
+      </vee-form>
+    </div>
+  </div>
+</template>
+```
