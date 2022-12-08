@@ -1,6 +1,7 @@
 # 人类行为验证处理方案 - 脱离UI组件库实现登录、注册+表单校验
 
 1. 在 `src/views/layout/components/header/header-my.vue` 中新增一个 **登录按钮**
+
 ![图片](../.vuepress/public/images/dengluanniu1.png)
 
 2.  分别构建 `PC 端` 下和 `移动端` 下对应的路由：
@@ -14,6 +15,8 @@
 
 3. 创建 `src/views/login-register/login/index.vue` 组件，为登录组件
 4. 构建对应基础样式：
+
+![图片](../.vuepress/public/images/dengluyemian1.png)
 ```vue
 <template>
   <div
@@ -90,17 +93,17 @@
 ```
 
 ## 表单校验实现原理与方案分析
-在绝大多数情况下, 进行登录的时, 都会通过 `UI组件库` 实现表单校验功能, 但是在没有这种UI组件库的情况下, 应该如何实现表单校验呢? 
+&nbsp;&nbsp;&nbsp;&nbsp;在绝大多数情况下, 进行登录的时, 都会通过 `UI组件库` 实现表单校验功能, 但是在没有这种UI组件库的情况下, 应该如何实现表单校验呢? 
 
 首先就需要搞明白表单校验的 **实现原理**
 
 #### 表单校验的实现原理
-所谓表单校验，指的是：
+&nbsp;&nbsp;&nbsp;&nbsp;所谓表单校验，指的是：
 * 在某个特定的时机(输入框失去焦点, 或者 内容变化)
 * 检查表单元素中的内容是否满足某个条件 (校验规则)
 * 如果不符合, 则展示对应的提示
 
-根据以上描述，所需要关注的，其实就是三点内容：
+&nbsp;&nbsp;&nbsp;&nbsp;根据以上描述，所需要关注的，其实就是三点内容：
 1. 监听表单元素的对应时机
 2. 检查内容是否匹配校验条件
 3. 根据检查结果，展示对应提示
@@ -114,7 +117,7 @@
 5. 如果不满足，则展示 `span` 标签，表示错误提示消息
 
 
-确实可以实现一个基础的表单校验，但是这样的表单校验组件，很难具有 **普适** 性，因为实际开发中，表单校验的场景多种多样，比如：国际化处理。
+&nbsp;&nbsp;&nbsp;&nbsp;确实可以实现一个基础的表单校验，但是这样的表单校验组件，很难具有 **普适** 性，因为实际开发中，表单校验的场景多种多样，比如：国际化处理。
 
 所以说，把它抽离成一个 **通用组件** 意义并不大
 
@@ -122,7 +125,7 @@
 
 这个方式就是：[vee-validata](https://vee-validate.logaretm.com/v4/)
 
-`vee-validata `是一个 `vue` 中专门做表单校验的库，该库更加具有 **普适** 性，也更加适合大家在实际开发中的使用。
+&nbsp;&nbsp;&nbsp;&nbsp;`vee-validata `是一个 `vue` 中专门做表单校验的库，该库更加具有 **普适** 性，也更加适合大家在实际开发中的使用。
 
 ## 基于 vee-validata 实现普适的表单校验
 现在用 `vee-validate`来实现登录的表单校验逻辑
@@ -264,6 +267,7 @@ const onLoginHandler = () => {
 2. 创建 `src/views/login-register/login/slider-captcha.vue` ，作为人类行为验证组件
 
 3. 在该组件中，完成对应 `UI` 样式：
+
 ![图片](../.vuepress/public/images/xingwei1.png)
 
 ```vue
@@ -919,7 +923,7 @@ export const registerUser = (data) => {
  */
 async registerAction(context, payload) {
   const { password } = payload
-  // 注册
+  // 注册 , 这里就直接返回结果
   return await registerUser({
     ...payload,
     password: password ? md5(password) : ''
@@ -950,9 +954,10 @@ const onRegister = async () => {
   }
 
   try {
+    // 注册 action
     await store.dispatch('user/registerAction', payload)
 
-    // 注册成功 , 那么久直接登录
+    // 注册成功 , 那么就直接登录
     await store.dispatch('user/loginAction', {
       ...payload,
       loginType: LOGIN_TYPE_USERNAME

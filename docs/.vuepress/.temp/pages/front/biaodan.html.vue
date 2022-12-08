@@ -1,12 +1,10 @@
 <template><h1 id="人类行为验证处理方案-脱离ui组件库实现登录、注册-表单校验" tabindex="-1"><a class="header-anchor" href="#人类行为验证处理方案-脱离ui组件库实现登录、注册-表单校验" aria-hidden="true">#</a> 人类行为验证处理方案 - 脱离UI组件库实现登录、注册+表单校验</h1>
 <ol>
-<li>
-<p>在 <code>src/views/layout/components/header/header-my.vue</code> 中新增一个 <strong>登录按钮</strong>
-<img src="@source/.vuepress/public/images/dengluanniu1.png" alt="图片"></p>
-</li>
-<li>
-<p>分别构建 <code>PC 端</code> 下和 <code>移动端</code> 下对应的路由：</p>
-</li>
+<li>在 <code>src/views/layout/components/header/header-my.vue</code> 中新增一个 <strong>登录按钮</strong></li>
+</ol>
+<p><img src="@source/.vuepress/public/images/dengluanniu1.png" alt="图片"></p>
+<ol start="2">
+<li>分别构建 <code>PC 端</code> 下和 <code>移动端</code> 下对应的路由：</li>
 </ol>
 <div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token punctuation">{</span>
   <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'/login'</span><span class="token punctuation">,</span>
@@ -17,6 +15,7 @@
 <li>创建 <code>src/views/login-register/login/index.vue</code> 组件，为登录组件</li>
 <li>构建对应基础样式：</li>
 </ol>
+<p><img src="@source/.vuepress/public/images/dengluyemian1.png" alt="图片"></p>
 <div class="language-vue ext-vue line-numbers-mode"><pre v-pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span>
     <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>relative h-screen bg-white dark:bg-zinc-700 text-center xl:bg-zinc-200<span class="token punctuation">"</span></span>
@@ -90,16 +89,16 @@
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
 </code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br></div></div><h2 id="表单校验实现原理与方案分析" tabindex="-1"><a class="header-anchor" href="#表单校验实现原理与方案分析" aria-hidden="true">#</a> 表单校验实现原理与方案分析</h2>
-<p>在绝大多数情况下, 进行登录的时, 都会通过 <code>UI组件库</code> 实现表单校验功能, 但是在没有这种UI组件库的情况下, 应该如何实现表单校验呢?</p>
+<p>    在绝大多数情况下, 进行登录的时, 都会通过 <code>UI组件库</code> 实现表单校验功能, 但是在没有这种UI组件库的情况下, 应该如何实现表单校验呢?</p>
 <p>首先就需要搞明白表单校验的 <strong>实现原理</strong></p>
 <h4 id="表单校验的实现原理" tabindex="-1"><a class="header-anchor" href="#表单校验的实现原理" aria-hidden="true">#</a> 表单校验的实现原理</h4>
-<p>所谓表单校验，指的是：</p>
+<p>    所谓表单校验，指的是：</p>
 <ul>
 <li>在某个特定的时机(输入框失去焦点, 或者 内容变化)</li>
 <li>检查表单元素中的内容是否满足某个条件 (校验规则)</li>
 <li>如果不符合, 则展示对应的提示</li>
 </ul>
-<p>根据以上描述，所需要关注的，其实就是三点内容：</p>
+<p>    根据以上描述，所需要关注的，其实就是三点内容：</p>
 <ol>
 <li>监听表单元素的对应时机</li>
 <li>检查内容是否匹配校验条件</li>
@@ -118,11 +117,11 @@
 <li>根据 <code>input</code> 的 <code>value</code> 判断是否满足一个或多个指定的条件（比如：是否为空）</li>
 <li>如果不满足，则展示 <code>span</code> 标签，表示错误提示消息</li>
 </ol>
-<p>确实可以实现一个基础的表单校验，但是这样的表单校验组件，很难具有 <strong>普适</strong> 性，因为实际开发中，表单校验的场景多种多样，比如：国际化处理。</p>
+<p>    确实可以实现一个基础的表单校验，但是这样的表单校验组件，很难具有 <strong>普适</strong> 性，因为实际开发中，表单校验的场景多种多样，比如：国际化处理。</p>
 <p>所以说，把它抽离成一个 <strong>通用组件</strong> 意义并不大</p>
 <p>这里采用一种更加普适的方式...</p>
 <p>这个方式就是：<a href="https://vee-validate.logaretm.com/v4/" target="_blank" rel="noopener noreferrer">vee-validata<ExternalLinkIcon/></a></p>
-<p><code>vee-validata </code>是一个 <code>vue</code> 中专门做表单校验的库，该库更加具有 <strong>普适</strong> 性，也更加适合大家在实际开发中的使用。</p>
+<p>    <code>vee-validata </code>是一个 <code>vue</code> 中专门做表单校验的库，该库更加具有 <strong>普适</strong> 性，也更加适合大家在实际开发中的使用。</p>
 <h2 id="基于-vee-validata-实现普适的表单校验" tabindex="-1"><a class="header-anchor" href="#基于-vee-validata-实现普适的表单校验" aria-hidden="true">#</a> 基于 vee-validata 实现普适的表单校验</h2>
 <p>现在用 <code>vee-validate</code>来实现登录的表单校验逻辑</p>
 <ol>
@@ -275,10 +274,10 @@
 <p>创建 <code>src/views/login-register/login/slider-captcha.vue</code> ，作为人类行为验证组件</p>
 </li>
 <li>
-<p>在该组件中，完成对应 <code>UI</code> 样式：
-<img src="@source/.vuepress/public/images/xingwei1.png" alt="图片"></p>
+<p>在该组件中，完成对应 <code>UI</code> 样式：</p>
 </li>
 </ol>
+<p><img src="@source/.vuepress/public/images/xingwei1.png" alt="图片"></p>
 <div class="language-vue ext-vue line-numbers-mode"><pre v-pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span>
     <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>fixed top-[20%] left-[50%] translate-x-[-50%] w-[340px] h-[270px] text-sm bg-white dark:bg-zinc-800 rounded border border-zinc-200 dark:border-zinc-900 shadow-3xl<span class="token punctuation">"</span></span>
@@ -910,7 +909,7 @@ import {
  */</span>
 <span class="token keyword">async</span> <span class="token function">registerAction</span><span class="token punctuation">(</span><span class="token parameter">context<span class="token punctuation">,</span> payload</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">const</span> <span class="token punctuation">{</span> password <span class="token punctuation">}</span> <span class="token operator">=</span> payload
-  <span class="token comment">// 注册</span>
+  <span class="token comment">// 注册 , 这里就直接返回结果</span>
   <span class="token keyword">return</span> <span class="token keyword">await</span> <span class="token function">registerUser</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
     <span class="token operator">...</span>payload<span class="token punctuation">,</span>
     <span class="token literal-property property">password</span><span class="token operator">:</span> password <span class="token operator">?</span> <span class="token function">md5</span><span class="token punctuation">(</span>password<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token string">''</span>
@@ -939,9 +938,10 @@ import {
   <span class="token punctuation">}</span>
 
   <span class="token keyword">try</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 注册 action</span>
     <span class="token keyword">await</span> store<span class="token punctuation">.</span><span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token string">'user/registerAction'</span><span class="token punctuation">,</span> payload<span class="token punctuation">)</span>
 
-    <span class="token comment">// 注册成功 , 那么久直接登录</span>
+    <span class="token comment">// 注册成功 , 那么就直接登录</span>
     <span class="token keyword">await</span> store<span class="token punctuation">.</span><span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token string">'user/loginAction'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
       <span class="token operator">...</span>payload<span class="token punctuation">,</span>
       <span class="token literal-property property">loginType</span><span class="token operator">:</span> <span class="token constant">LOGIN_TYPE_USERNAME</span>
@@ -951,7 +951,7 @@ import {
     loading<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token boolean">false</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br></div></div><ol start="4">
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br></div></div><ol start="4">
 <li>不要忘记 , 数据源 <code>v-model</code> 双向绑定  , <code>vee-form</code>绑定 <code>@submit</code> 注册事件</li>
 </ol>
 <div class="language-html ext-html line-numbers-mode"><pre v-pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
