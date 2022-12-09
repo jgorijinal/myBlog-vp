@@ -48,10 +48,22 @@ export const data = {
       "title": "通用组件 : Dialog 构建实现",
       "slug": "通用组件-dialog-构建实现",
       "children": []
+    },
+    {
+      "level": 2,
+      "title": "应用 Dialog 展示头像",
+      "slug": "应用-dialog-展示头像",
+      "children": []
     }
   ],
   "git": {
-    "contributors": []
+    "contributors": [
+      {
+        "name": "jgoriginal",
+        "email": "932274204@qq.com",
+        "commits": 1
+      }
+    ]
   },
   "filePathRelative": "front/tupian.md"
 }

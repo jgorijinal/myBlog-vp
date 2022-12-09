@@ -472,7 +472,6 @@ PC 端：
 * `Dialog` 的内容区可以渲染任意的内容(默认插槽)
 * `footer` 区域也可以渲染任意的内容(具名插槽 `footer`)
 
-排除这两点之后，其余与 `confirm` 组件完全相同
 ## 通用组件 : Dialog 构建实现
 ![图片](../.vuepress/public/images/dialogzujian1.png)
 
@@ -554,6 +553,152 @@ const close = () => {
         footer 插槽
       </template>
     </m-dialog>
+```
+
+## 应用 Dialog 展示头像
+有了通用组件 `Dialog` 之后，就可以利用 `Dialog` 处理选中头像的展示
+
+1. **选择图片** 代码
+```html
+<!-- 隐藏域 -->
+<input
+  v-show="false"
+  ref="inputFileTarget"
+  type="file"
+  accept=".png, .jpeg, .jpg, .gif"
+  @change="onSelectImgHandler"
+/>
+```
+```js
+// 隐藏域
+const inputFileTarget = ref(null)
+/**
+ * 更换头像点击事件
+ */
+const onAvatarClick = () => {
+  inputFileTarget.value.click()
+}
+```
+2. 在 `src/views/profile/index.vue` 中，选中的图片会回调至 `onSelectImgHandler` 方法，可以利用 [URL.createObjectURL()](https://developer.mozilla.org/zh-CN/docs/Web/API/URL/createObjectURL) 获取到对应的 `blob` 对象
+```js
+/**
+ * 头像图片选择之后的回调
+ */
+const onSelectImgHandler = () => {
+  // 获取选中的文件
+  const imgFile = inputFileTarget.value.files[0]
+  // 生成 blob 对象
+  const blob = URL.createObjectURL(imgFile)
+  console.log(blob)
+}
+```
+3. 打印该 `blob` 可在浏览器地址栏按回车会展示选中的图片
+
+4. 那么想要在 `Dialog` 中展示选中的图片，也只需要使用 `img` 标签的 `src` 属性即可：
+```html
+ <!-- dialog 组件-->
+    <m-dialog v-model="isDialogVisible" title="标题">
+      <img :src="currentBlob" alt="">
+    </m-dialog>
+```
+```js
+// 当前选中图片的 blob 对象
+const currentBlob = ref('')
+// dialog 显示/隐藏
+const isDialogVisible = ref(false)
+/**
+ * 头像图片选择之后的回调
+ */
+const onSelectImgHandler = () => {
+  // 获取选中的文件
+  const imgFile = inputFileTarget.value.files[0]
+  // 生成 blob 对象
+  const blob = URL.createObjectURL(imgFile)
+  // 赋值
+  currentBlob.value = blob
+  // 再打开 dialog 显示
+  isDialogVisible.value = true
+}
+```
+
+5. 但是现在的 `Dialog` 展示出来的内容有点难看，所以现在期望创建一个单独的业务组件，美化下样式，并且处理后续的裁剪、上传功能
+
+6. 创建 `src/views/profile/components/change-avatar.vue` 组件：
+```vue
+<template>
+  <div class="overflow-auto flex flex-col items-center">
+    <m-svg-icon
+      v-if="isMobileTerminal"
+      name="close"
+      class="w-3 h-3 p-0.5 m-1 ml-auto"
+      fillClass="fill-zinc-900 dark:fill-zinc-200 "
+      @click="close"
+    ></m-svg-icon>
+
+    <img class="" ref="imageTarget" :src="blob" />
+
+    <m-button class="mt-4 w-[80%] xl:w-1/2" @click="onConfirmClick"
+      >确定</m-button
+    >
+  </div>
+</template>
+
+<script>
+const EMITS_CLOSE = 'close'
+</script>
+
+<script setup>
+import { isMobileTerminal } from '@/utils/flexible'
+
+defineProps({
+  blob: {
+    type: String,
+    required: true
+  }
+})
+
+const emits = defineEmits([EMITS_CLOSE])
+
+/**
+ * 确定按钮点击事件
+ */
+const onConfirmClick = () => {}
+
+/**
+ * 关闭事件
+ */
+const close = () => {
+  emits(EMITS_CLOSE)
+}
+</script>
+```
+7. 在 `src/views/profile/index.vue` 中处理对应展示：
+```html
+<!-- 图片展示-->
+<!-- PC 端 -->
+<m-dialog v-if="!isMobileTerminal" v-model="isDialogVisible">
+  <change-avatar-vue
+    :blob="currentBlob"
+    @close="isDialogVisible = false"
+  ></change-avatar-vue>
+</m-dialog>
+<!-- 移动端：在展示时指定高度 -->
+<m-popup v-else :class="{ 'h-screen': isDialogVisible }" v-model="isDialogVisible">
+  <change-avatar-vue
+    :blob="currentBlob"
+    @close="isDialogVisible = false"
+  ></change-avatar-vue>
+</m-popup>
+```
+8. `file-input` 如果处理同一个图片文件就不会触发 `@change` 事件 , 所以解决办法就是: 每次使用完毕就把他的 `value` 置空
+```js
+// file-input 如果处理同一个图片文件就不会触发 change 事件
+// 所以解决办法就是: 每次使用完毕就把他的 value 置空
+watch(isDialogVisible, (val) => {
+  if (!val) {
+    inputFileTarget.value.value = null
+  }
+})
 ```
 
 
