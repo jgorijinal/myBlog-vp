@@ -61,7 +61,7 @@ const routeItems = [
   ["v-1429a57c","/front/luyou.html",{"title":"高阶路由过渡处理方案 - 浏览器堆栈主动介入"},["/front/luyou","/front/luyou.md"]],
   ["v-6a147738","/front/pubuliu.html",{"title":"瀑布流展示"},["/front/pubuliu","/front/pubuliu.md"]],
   ["v-20eb0b54","/front/start.html",{"title":"搭建"},["/front/start","/front/start.md"]],
-  ["v-10f3f693","/front/tupian.html",{"title":"图片裁剪与上传处理方案 - 基于阿里云 OSS 处理用户资料"},["/front/tupian","/front/tupian.md"]],
+  ["v-10f3f693","/front/tupian.html",{"title":""},["/front/tupian","/front/tupian.md"]],
   ["v-fd421290","/front/xiangyingshi.html",{"title":"前中台响应式处理方案"},["/front/xiangyingshi","/front/xiangyingshi.md"]],
   ["v-1e7eb2c8","/front/xiazai.html",{"title":"前台常见功能解决方案：下载+全屏+引导"},["/front/xiazai","/front/xiazai.md"]],
   ["v-1ef6073c","/front/zhuti.html",{"title":"主题替换解决方案"},["/front/zhuti","/front/zhuti.md"]],

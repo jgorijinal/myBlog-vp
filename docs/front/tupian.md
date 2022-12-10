@@ -177,7 +177,7 @@ const onInput = ($event) => {
       class="relative max-w-screen-lg mx-auto bg-white dark:bg-zinc-900 duration-400 xl:rounded-sm xl:border-zinc-200 xl:dark:border-zinc-600 xl:border-[1px] xl:px-4 xl:py-2"
     >
       <!-- 移动端 navbar -->
-      <m-navbar sticky v-if="isMobileTerminal" :clickLeft="onNavbarLeftClick">
+      <m-navbar sticky v-if="isMobileTerminal" @clickLeft="onNavbarLeftClick">
         个人资料
       </m-navbar>
       <!-- pc 端 -->
@@ -700,7 +700,297 @@ watch(isDialogVisible, (val) => {
   }
 })
 ```
+## 头像裁剪构建方案
+现在需要在 `src/views/profile/components/change-avatar.vue` 中处理对应的图片裁剪功能
 
+想要处理图片裁剪需要使用到 [cropperjs](https://github.com/fengyuanchen/cropperjs) ，它是一个 `JavaScript` 的库，同时支持 `PC 端` 和 `移动端`
+
+目前 `cropperjs` 的最新发布版本为 `1.5.12` ，`V2` 级别的版本还是 `alpha` 阶段，所以还是使用它的 V`1` 版本\
+
+1. 安装 `cropperjs`
+```shell
+npm install cropperjs@1.5.12 --save
+```
+
+2. 在 `src/views/profile/components/change-avatar.vue`中进行导入
+```js
+import Cropper from 'cropperjs'
+import 'cropperjs/dist/cropper.css'
+```
+
+3. 使用 `new Cropper` 进行初始化，区分 `PC端` 和 `移动端`：[所有配置项](https://github.com/fengyuanchen/cropperjs#options)
+```js
+<img class="" ref="imageTarget" :src="blob" />
+
+// 移动端配置对象
+const mobileOptions = {
+  // 将裁剪框限制在画布的大小
+  viewMode: 1,
+  // 移动画布，裁剪框不动
+  dragMode: 'move',
+  // 裁剪框固定纵横比：1:1
+  aspectRatio: 1,
+  // 裁剪框不可移动
+  cropBoxMovable: false,
+  // 不可调整裁剪框大小
+  cropBoxResizable: false
+}
+
+// PC 端配置对象
+const pcOptions = {
+  // 裁剪框固定纵横比：1:1
+  aspectRatio: 1
+}
+
+/**
+ * 图片裁剪处理
+ */
+const imageTarget = ref(null)
+let cropper = null
+onMounted(() => {
+  /**
+   * 接收两个参数：
+   * 1. 需要裁剪的图片 DOM
+   * 2. options 配置对象
+   */
+  cropper = new Cropper(
+    imageTarget.value,
+    isMobileTerminal.value ? mobileOptions : pcOptions
+  )
+})
+```
+4. 此时，图片可裁剪
+
+5. 监听确定按钮点击事件，拿到裁剪后的图片：
+![图片](../.vuepress/public/images/dengluyemian1.png)
+
+```js
+const loading = ref(false)
+/**
+ * 确定按钮点击事件
+ */
+const onConfirmClick = () => {
+  // 开启 loading
+  loading.value = true
+  // 获取裁剪后的图片
+  cropper.getCroppedCanvas().toBlob((blob) => {
+    // 裁剪后的 blob 地址
+    console.log(URL.createObjectURL(blob))
+  })
+}
+```
+
+## 上传图片到 Bucket 的流程分析
+1. 想要上传文件到 `Bucket` 那么需要使用 `ali-sdk` [ali-oss](https://github.com/ali-sdk/ali-oss?spm=a2c4g.11186623.0.0.59451cd5m9aTAc)
+2. 利用 `ali-oss` 生成 `OSS` 对象
+3. 但是在生成 `OSS` 对象时，需要传递 **文件上传凭证** ：
+   * `accessKeyId`
+   * `accessKeySecret`
+   * `stsToken`
+4. 所以需要通过接口 `/user/sts` 获取 **文件上传凭证**
+
+所以整体的文件上传流程为：
+
+1. 通过接口 `/user/sts` 获取 **文件上传凭证**
+2. 通过 `npm i ali-oss` 安装依赖包
+3. 利用凭证中的数据构建 `OSS` 对象 [点击这里查看文档](https://www.alibabacloud.com/help/zh/doc-detail/64041.htm#concept-64041-zh)
+
+### 使用临时凭证，上传裁剪图片到阿里云 OSS
+将裁剪后的图片上传至阿里云 `OSS`
+
+1. 安装 `ali-oss` 依赖
+2. 通过接口获取临时访问凭证，生成 `OSS` 实例
+3. 利用 `ossClient.put` 方法，完成对应上传
+
+接下来就一步一步来去做：
+1.  安装 `ali-oss` 依赖
+```shell
+npm i --save ali-oss@6.17.0
+```
+2. 创建 `src/utils/sts.js` 模块，用来**生成 `OSS` 实例**
+```js
+import OSS from 'ali-oss'
+import { REGION, BUCKET } from '@/constants'
+import { getSts } from '@/api/sys'
+
+export const getOSSClient = async () => {
+  const res = await getSts()
+  return new OSS({
+    // yourRegion填写Bucket所在地域。以华东1（杭州）为例，Region填写为oss-cn-hangzhou。
+    region: REGION,
+    // 从STS服务获取的临时访问密钥（AccessKey ID和AccessKey Secret）。
+    accessKeyId: res.Credentials.AccessKeyId,
+    accessKeySecret: res.Credentials.AccessKeySecret,
+    // 从STS服务获取的安全令牌（SecurityToken）。
+    stsToken: res.Credentials.SecurityToken,
+    // 填写Bucket名称。
+    bucket: BUCKET,
+    // 刷新 token，在 token 过期后自动调用（但是并不生效，可能会在后续的版本中修复）
+    refreshSTSToken: async () => {
+      // 向您搭建的STS服务获取临时访问凭证。
+      const res = await getSts()
+      return {
+        accessKeyId: res.Credentials.AccessKeyId,
+        accessKeySecret: res.Credentials.AccessKeySecret,
+        stsToken: res.Credentials.SecurityToken
+      }
+    },
+    // 刷新临时访问凭证的时间间隔，单位为毫秒。
+    refreshSTSTokenInterval: 5 * 1000
+  })
+}
+```
+
+3. 在 `constants` 中定义 `REGION, BUCKET`'
+```js
+// STS 上传数据
+export const REGION = 'oss-cn-beijing'
+export const BUCKET = 'imooc-front'
+```
+
+4. 在 `src/api/sys.js` 定义接口，获取 `accessKeyId、accessKeySecret`
+```js
+/**
+ * 获取 OSS 上传凭证
+ */
+export const getSts = () => {
+  return request({
+    url: '/user/sts'
+  })
+}
+```
+
+5. 在 `src/views/profile/components/change-avatar.vue` 中，定义 `putObjectToOSS `方法，上传图片到 `OSS：`
+```js
+import { getOSSClient } from '@/utils/sts'
+import { message } from '@/libs'
+import {useStore} from 'vuex'
+
+/**
+ * 进行 OSS 上传
+ */
+let ossClient = null
+let store = useStore()
+const putObjectToOSS = async (file) => {
+  if (!ossClient) {
+    ossClient = await getOSSClient()
+  }
+  try {
+    // 因为当前凭证只具备 images 文件夹下的访问权限，所以图片需要上传到 images/xxx.xx 。否则你将得到一个 《AccessDeniedError: You have no right to access this object because of bucket acl.》 的错误
+    const fileTypeArr = file.type.split('/')
+    const fileName = `${store.getters.userInfo.username}/${Date.now()}.${fileTypeArr[fileTypeArr.length - 1]}`
+		// ossClient.put 的参数: 文件存放路径，文件
+    const res = await ossClient.put(`images/${fileName}`, file)
+    console.log(res)
+    // TODO：图片上传成功
+  } catch (e) {
+    message('error', e)
+  }
+}
+```
+
+6. 当图片裁剪完成之后，触发该方法：
+```js
+/**
+ * 确定按钮点击事件
+ */
+const onConfirmClick = () => {
+  cropper.getCroppedCanvas().toBlob((blob) => {
+    // console.log(URL.createObjectURL(blob))
+    putObjectToOSS(blob)
+  })
+}
+```
+
+### 完成头像更新操作
+头像上传成功之后，只需要调用对应 **更新用户信息** 接口，即可完成头像的更新
+
+1. 在 `src/views/profile/components/change-avatar.vue` 中, 调 **更新用户信息** `action`
+```js{20-25}
+...
+const EMITS_UPLOAD_SUCCESS= 'upload-success'
+...
+/** 
+ * 进行 OSS 上传
+ */
+let ossClient = null
+let store = useStore()
+const putObjectToOSS = async (file) => {
+  if (!ossClient) {
+    ossClient = await getOSSClient()
+  }
+  try {
+    // 因为当前凭证只具备 images 文件夹下的访问权限，所以图片需要上传到 images/xxx.xx 。否则你将得到一个 《AccessDeniedError: You have no right to access this object because of bucket acl.》 的错误
+    const fileTypeArr = file.type.split('/')
+    const fileName = `${store.getters.userInfo.username}/${Date.now()}.${
+      fileTypeArr[fileTypeArr.length - 1]
+    }`
+		// 文件存放路径，文件
+    const res = await ossClient.put(`images/${fileName}`, file)
+    console.log(res.url)
+    // TODO：图片上传到服务器, 更新用户信息
+    // 调接口: 更新用户信息
+    await store.dispatch('user/changeProfileAction', { ...store.getters.userInfo, avatar: res.url })
+    // 通知外面, 改下数据, 实现页面的同步
+    emits(EMITS_UPLOAD_SUCCESS, res.url)
+    // 提示
+    message('success', '头像修改成功')
+  } catch (e) {
+    message('error', e)
+  }
+}
+```
+```js
+/**
+ * 确定按钮点击事件
+ */
+const onConfirmClick = () => {
+  // 开启 loading
+  loading.value = true
+  // 获取裁剪后的图片
+  cropper.getCroppedCanvas().toBlob(async (blob) => {
+    // 裁剪后的 blob
+    // console.log(blob)
+    // console.log(URL.createObjectURL(blob))
+    await putObjectToOSS(blob)
+    // 关闭 loading
+    loading.value = false
+    // 关闭 dialog
+    close()
+  })
+}
+```
+
+2. 在 `src/views/profile/index.vue` 监听图片更新成功事件, 更新图片地址到视图
+```js{5,13}
+<!-- PC 端 -->
+<m-dialog v-if="!isMobileTerminal" v-model="isDialogVisible">
+  <change-avatar-vue
+    :blob="currentBlob"
+    @close="isDialogVisible = false"
+    @upload-success="userInfo.avatar = $event"
+  ></change-avatar-vue>
+</m-dialog>
+<!-- 移动端：在展示时指定高度 -->
+<m-popup v-else :class="{ 'h-screen': isDialogVisible }" v-model="isDialogVisible">
+  <change-avatar-vue
+    :blob="currentBlob" 
+    @close="isDialogVisible = false"
+    @upload-success="userInfo.avatar = $event"
+  ></change-avatar-vue>
+</m-popup>
+....
+....
+// 用户的信息
+const userInfo = ref({
+  nickname: store.getters.userInfo.nickname,
+  title: store.getters.userInfo.title,
+  company:store.getters.userInfo.company,
+  homePage: store.getters.userInfo.homePage,
+  introduction: store.getters.userInfo.introduction,
+  avatar: store.getters.userInfo.avatar
+})
+```
 
 
 

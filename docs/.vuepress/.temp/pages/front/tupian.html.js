@@ -54,6 +54,31 @@ export const data = {
       "title": "应用 Dialog 展示头像",
       "slug": "应用-dialog-展示头像",
       "children": []
+    },
+    {
+      "level": 2,
+      "title": "头像裁剪构建方案",
+      "slug": "头像裁剪构建方案",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "上传图片到 Bucket 的流程分析",
+      "slug": "上传图片到-bucket-的流程分析",
+      "children": [
+        {
+          "level": 3,
+          "title": "使用临时凭证，上传裁剪图片到阿里云 OSS",
+          "slug": "使用临时凭证-上传裁剪图片到阿里云-oss",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "完成头像更新操作",
+          "slug": "完成头像更新操作",
+          "children": []
+        }
+      ]
     }
   ],
   "git": {
@@ -61,7 +86,7 @@ export const data = {
       {
         "name": "jgoriginal",
         "email": "932274204@qq.com",
-        "commits": 1
+        "commits": 2
       }
     ]
   },

@@ -176,7 +176,7 @@
       <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>relative max-w-screen-lg mx-auto bg-white dark:bg-zinc-900 duration-400 xl:rounded-sm xl:border-zinc-200 xl:dark:border-zinc-600 xl:border-[1px] xl:px-4 xl:py-2<span class="token punctuation">"</span></span>
     <span class="token punctuation">></span></span>
       <span class="token comment">&lt;!-- 移动端 navbar --></span>
-      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>m-navbar</span> <span class="token attr-name">sticky</span> <span class="token attr-name">v-if</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>isMobileTerminal<span class="token punctuation">"</span></span> <span class="token attr-name">:clickLeft</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>onNavbarLeftClick<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>m-navbar</span> <span class="token attr-name">sticky</span> <span class="token attr-name">v-if</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>isMobileTerminal<span class="token punctuation">"</span></span> <span class="token attr-name">@clickLeft</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>onNavbarLeftClick<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
         个人资料
       <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>m-navbar</span><span class="token punctuation">></span></span>
       <span class="token comment">&lt;!-- pc 端 --></span>
@@ -680,4 +680,286 @@
     inputFileTarget<span class="token punctuation">.</span>value<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token keyword">null</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span>
-</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div></template>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><h2 id="头像裁剪构建方案" tabindex="-1"><a class="header-anchor" href="#头像裁剪构建方案" aria-hidden="true">#</a> 头像裁剪构建方案</h2>
+<p>现在需要在 <code>src/views/profile/components/change-avatar.vue</code> 中处理对应的图片裁剪功能</p>
+<p>想要处理图片裁剪需要使用到 <a href="https://github.com/fengyuanchen/cropperjs" target="_blank" rel="noopener noreferrer">cropperjs<ExternalLinkIcon/></a> ，它是一个 <code>JavaScript</code> 的库，同时支持 <code>PC 端</code> 和 <code>移动端</code></p>
+<p>目前 <code>cropperjs</code> 的最新发布版本为 <code>1.5.12</code> ，<code>V2</code> 级别的版本还是 <code>alpha</code> 阶段，所以还是使用它的 V<code>1</code> 版本\</p>
+<ol>
+<li>安装 <code>cropperjs</code></li>
+</ol>
+<div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token function">npm</span> <span class="token function">install</span> cropperjs@1.5.12 --save
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br></div></div><ol start="2">
+<li>在 <code>src/views/profile/components/change-avatar.vue</code>中进行导入</li>
+</ol>
+<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token keyword">import</span> Cropper <span class="token keyword">from</span> <span class="token string">'cropperjs'</span>
+<span class="token keyword">import</span> <span class="token string">'cropperjs/dist/cropper.css'</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><ol start="3">
+<li>使用 <code>new Cropper</code> 进行初始化，区分 <code>PC端</code> 和 <code>移动端</code>：<a href="https://github.com/fengyuanchen/cropperjs#options" target="_blank" rel="noopener noreferrer">所有配置项<ExternalLinkIcon/></a></li>
+</ol>
+<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token operator">&lt;</span>img <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">""</span> ref<span class="token operator">=</span><span class="token string">"imageTarget"</span> <span class="token operator">:</span>src<span class="token operator">=</span><span class="token string">"blob"</span> <span class="token operator">/</span><span class="token operator">></span>
+
+<span class="token comment">// 移动端配置对象</span>
+<span class="token keyword">const</span> mobileOptions <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 将裁剪框限制在画布的大小</span>
+  <span class="token literal-property property">viewMode</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+  <span class="token comment">// 移动画布，裁剪框不动</span>
+  <span class="token literal-property property">dragMode</span><span class="token operator">:</span> <span class="token string">'move'</span><span class="token punctuation">,</span>
+  <span class="token comment">// 裁剪框固定纵横比：1:1</span>
+  <span class="token literal-property property">aspectRatio</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+  <span class="token comment">// 裁剪框不可移动</span>
+  <span class="token literal-property property">cropBoxMovable</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+  <span class="token comment">// 不可调整裁剪框大小</span>
+  <span class="token literal-property property">cropBoxResizable</span><span class="token operator">:</span> <span class="token boolean">false</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// PC 端配置对象</span>
+<span class="token keyword">const</span> pcOptions <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 裁剪框固定纵横比：1:1</span>
+  <span class="token literal-property property">aspectRatio</span><span class="token operator">:</span> <span class="token number">1</span>
+<span class="token punctuation">}</span>
+
+<span class="token doc-comment comment">/**
+ * 图片裁剪处理
+ */</span>
+<span class="token keyword">const</span> imageTarget <span class="token operator">=</span> <span class="token function">ref</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span>
+<span class="token keyword">let</span> cropper <span class="token operator">=</span> <span class="token keyword">null</span>
+<span class="token function">onMounted</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token doc-comment comment">/**
+   * 接收两个参数：
+   * 1. 需要裁剪的图片 DOM
+   * 2. options 配置对象
+   */</span>
+  cropper <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Cropper</span><span class="token punctuation">(</span>
+    imageTarget<span class="token punctuation">.</span>value<span class="token punctuation">,</span>
+    isMobileTerminal<span class="token punctuation">.</span>value <span class="token operator">?</span> mobileOptions <span class="token operator">:</span> pcOptions
+  <span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br></div></div><ol start="4">
+<li>
+<p>此时，图片可裁剪</p>
+</li>
+<li>
+<p>监听确定按钮点击事件，拿到裁剪后的图片：
+<img src="@source/.vuepress/public/images/dengluyemian1.png" alt="图片"></p>
+</li>
+</ol>
+<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token keyword">const</span> loading <span class="token operator">=</span> <span class="token function">ref</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span>
+<span class="token doc-comment comment">/**
+ * 确定按钮点击事件
+ */</span>
+<span class="token keyword">const</span> <span class="token function-variable function">onConfirmClick</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token comment">// 开启 loading</span>
+  loading<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token boolean">true</span>
+  <span class="token comment">// 获取裁剪后的图片</span>
+  cropper<span class="token punctuation">.</span><span class="token function">getCroppedCanvas</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBlob</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">blob</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+    <span class="token comment">// 裁剪后的 blob 地址</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token constant">URL</span><span class="token punctuation">.</span><span class="token function">createObjectURL</span><span class="token punctuation">(</span>blob<span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><h2 id="上传图片到-bucket-的流程分析" tabindex="-1"><a class="header-anchor" href="#上传图片到-bucket-的流程分析" aria-hidden="true">#</a> 上传图片到 Bucket 的流程分析</h2>
+<ol>
+<li>想要上传文件到 <code>Bucket</code> 那么需要使用 <code>ali-sdk</code> <a href="https://github.com/ali-sdk/ali-oss?spm=a2c4g.11186623.0.0.59451cd5m9aTAc" target="_blank" rel="noopener noreferrer">ali-oss<ExternalLinkIcon/></a></li>
+<li>利用 <code>ali-oss</code> 生成 <code>OSS</code> 对象</li>
+<li>但是在生成 <code>OSS</code> 对象时，需要传递 <strong>文件上传凭证</strong> ：
+<ul>
+<li><code>accessKeyId</code></li>
+<li><code>accessKeySecret</code></li>
+<li><code>stsToken</code></li>
+</ul>
+</li>
+<li>所以需要通过接口 <code>/user/sts</code> 获取 <strong>文件上传凭证</strong></li>
+</ol>
+<p>所以整体的文件上传流程为：</p>
+<ol>
+<li>通过接口 <code>/user/sts</code> 获取 <strong>文件上传凭证</strong></li>
+<li>通过 <code>npm i ali-oss</code> 安装依赖包</li>
+<li>利用凭证中的数据构建 <code>OSS</code> 对象 <a href="https://www.alibabacloud.com/help/zh/doc-detail/64041.htm#concept-64041-zh" target="_blank" rel="noopener noreferrer">点击这里查看文档<ExternalLinkIcon/></a></li>
+</ol>
+<h3 id="使用临时凭证-上传裁剪图片到阿里云-oss" tabindex="-1"><a class="header-anchor" href="#使用临时凭证-上传裁剪图片到阿里云-oss" aria-hidden="true">#</a> 使用临时凭证，上传裁剪图片到阿里云 OSS</h3>
+<p>将裁剪后的图片上传至阿里云 <code>OSS</code></p>
+<ol>
+<li>安装 <code>ali-oss</code> 依赖</li>
+<li>通过接口获取临时访问凭证，生成 <code>OSS</code> 实例</li>
+<li>利用 <code>ossClient.put</code> 方法，完成对应上传</li>
+</ol>
+<p>接下来就一步一步来去做：</p>
+<ol>
+<li>安装 <code>ali-oss</code> 依赖</li>
+</ol>
+<div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token function">npm</span> i --save ali-oss@6.17.0
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br></div></div><ol start="2">
+<li>创建 <code>src/utils/sts.js</code> 模块，用来<strong>生成 <code>OSS</code> 实例</strong></li>
+</ol>
+<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token keyword">import</span> <span class="token constant">OSS</span> <span class="token keyword">from</span> <span class="token string">'ali-oss'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">REGION</span><span class="token punctuation">,</span> <span class="token constant">BUCKET</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/constants'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> getSts <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/api/sys'</span>
+
+<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token function-variable function">getOSSClient</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> res <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">getSts</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">OSS</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token comment">// yourRegion填写Bucket所在地域。以华东1（杭州）为例，Region填写为oss-cn-hangzhou。</span>
+    <span class="token literal-property property">region</span><span class="token operator">:</span> <span class="token constant">REGION</span><span class="token punctuation">,</span>
+    <span class="token comment">// 从STS服务获取的临时访问密钥（AccessKey ID和AccessKey Secret）。</span>
+    <span class="token literal-property property">accessKeyId</span><span class="token operator">:</span> res<span class="token punctuation">.</span>Credentials<span class="token punctuation">.</span>AccessKeyId<span class="token punctuation">,</span>
+    <span class="token literal-property property">accessKeySecret</span><span class="token operator">:</span> res<span class="token punctuation">.</span>Credentials<span class="token punctuation">.</span>AccessKeySecret<span class="token punctuation">,</span>
+    <span class="token comment">// 从STS服务获取的安全令牌（SecurityToken）。</span>
+    <span class="token literal-property property">stsToken</span><span class="token operator">:</span> res<span class="token punctuation">.</span>Credentials<span class="token punctuation">.</span>SecurityToken<span class="token punctuation">,</span>
+    <span class="token comment">// 填写Bucket名称。</span>
+    <span class="token literal-property property">bucket</span><span class="token operator">:</span> <span class="token constant">BUCKET</span><span class="token punctuation">,</span>
+    <span class="token comment">// 刷新 token，在 token 过期后自动调用（但是并不生效，可能会在后续的版本中修复）</span>
+    <span class="token function-variable function">refreshSTSToken</span><span class="token operator">:</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+      <span class="token comment">// 向您搭建的STS服务获取临时访问凭证。</span>
+      <span class="token keyword">const</span> res <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">getSts</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token keyword">return</span> <span class="token punctuation">{</span>
+        <span class="token literal-property property">accessKeyId</span><span class="token operator">:</span> res<span class="token punctuation">.</span>Credentials<span class="token punctuation">.</span>AccessKeyId<span class="token punctuation">,</span>
+        <span class="token literal-property property">accessKeySecret</span><span class="token operator">:</span> res<span class="token punctuation">.</span>Credentials<span class="token punctuation">.</span>AccessKeySecret<span class="token punctuation">,</span>
+        <span class="token literal-property property">stsToken</span><span class="token operator">:</span> res<span class="token punctuation">.</span>Credentials<span class="token punctuation">.</span>SecurityToken
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token comment">// 刷新临时访问凭证的时间间隔，单位为毫秒。</span>
+    <span class="token literal-property property">refreshSTSTokenInterval</span><span class="token operator">:</span> <span class="token number">5</span> <span class="token operator">*</span> <span class="token number">1000</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br></div></div><ol start="3">
+<li>在 <code>constants</code> 中定义 <code>REGION, BUCKET</code>'</li>
+</ol>
+<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token comment">// STS 上传数据</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token constant">REGION</span> <span class="token operator">=</span> <span class="token string">'oss-cn-beijing'</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token constant">BUCKET</span> <span class="token operator">=</span> <span class="token string">'imooc-front'</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><ol start="4">
+<li>在 <code>src/api/sys.js</code> 定义接口，获取 <code>accessKeyId、accessKeySecret</code></li>
+</ol>
+<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token doc-comment comment">/**
+ * 获取 OSS 上传凭证
+ */</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token function-variable function">getSts</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token function">request</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token literal-property property">url</span><span class="token operator">:</span> <span class="token string">'/user/sts'</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><ol start="5">
+<li>在 <code>src/views/profile/components/change-avatar.vue</code> 中，定义 <code>putObjectToOSS </code>方法，上传图片到 <code>OSS：</code></li>
+</ol>
+<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> getOSSClient <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/utils/sts'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> message <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/libs'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>useStore<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vuex'</span>
+
+<span class="token doc-comment comment">/**
+ * 进行 OSS 上传
+ */</span>
+<span class="token keyword">let</span> ossClient <span class="token operator">=</span> <span class="token keyword">null</span>
+<span class="token keyword">let</span> store <span class="token operator">=</span> <span class="token function">useStore</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> <span class="token function-variable function">putObjectToOSS</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token parameter">file</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>ossClient<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    ossClient <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">getOSSClient</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">try</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 因为当前凭证只具备 images 文件夹下的访问权限，所以图片需要上传到 images/xxx.xx 。否则你将得到一个 《AccessDeniedError: You have no right to access this object because of bucket acl.》 的错误</span>
+    <span class="token keyword">const</span> fileTypeArr <span class="token operator">=</span> file<span class="token punctuation">.</span>type<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">)</span>
+    <span class="token keyword">const</span> fileName <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>store<span class="token punctuation">.</span>getters<span class="token punctuation">.</span>userInfo<span class="token punctuation">.</span>username<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>Date<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">.</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>fileTypeArr<span class="token punctuation">[</span>fileTypeArr<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span>
+		<span class="token comment">// ossClient.put 的参数: 文件存放路径，文件</span>
+    <span class="token keyword">const</span> res <span class="token operator">=</span> <span class="token keyword">await</span> ossClient<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">images/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>fileName<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span> file<span class="token punctuation">)</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span>
+    <span class="token comment">// TODO：图片上传成功</span>
+  <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">message</span><span class="token punctuation">(</span><span class="token string">'error'</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br></div></div><ol start="6">
+<li>当图片裁剪完成之后，触发该方法：</li>
+</ol>
+<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token doc-comment comment">/**
+ * 确定按钮点击事件
+ */</span>
+<span class="token keyword">const</span> <span class="token function-variable function">onConfirmClick</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  cropper<span class="token punctuation">.</span><span class="token function">getCroppedCanvas</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBlob</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">blob</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+    <span class="token comment">// console.log(URL.createObjectURL(blob))</span>
+    <span class="token function">putObjectToOSS</span><span class="token punctuation">(</span>blob<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><h3 id="完成头像更新操作" tabindex="-1"><a class="header-anchor" href="#完成头像更新操作" aria-hidden="true">#</a> 完成头像更新操作</h3>
+<p>头像上传成功之后，只需要调用对应 <strong>更新用户信息</strong> 接口，即可完成头像的更新</p>
+<ol>
+<li>在 <code>src/views/profile/components/change-avatar.vue</code> 中, 调 <strong>更新用户信息</strong> <code>action</code></li>
+</ol>
+<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token operator">...</span>
+<span class="token keyword">const</span> <span class="token constant">EMITS_UPLOAD_SUCCESS</span><span class="token operator">=</span> <span class="token string">'upload-success'</span>
+<span class="token operator">...</span>
+<span class="token doc-comment comment">/** 
+ * 进行 OSS 上传
+ */</span>
+<span class="token keyword">let</span> ossClient <span class="token operator">=</span> <span class="token keyword">null</span>
+<span class="token keyword">let</span> store <span class="token operator">=</span> <span class="token function">useStore</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> <span class="token function-variable function">putObjectToOSS</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token parameter">file</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>ossClient<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    ossClient <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">getOSSClient</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">try</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 因为当前凭证只具备 images 文件夹下的访问权限，所以图片需要上传到 images/xxx.xx 。否则你将得到一个 《AccessDeniedError: You have no right to access this object because of bucket acl.》 的错误</span>
+    <span class="token keyword">const</span> fileTypeArr <span class="token operator">=</span> file<span class="token punctuation">.</span>type<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">)</span>
+    <span class="token keyword">const</span> fileName <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>store<span class="token punctuation">.</span>getters<span class="token punctuation">.</span>userInfo<span class="token punctuation">.</span>username<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>Date<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">.</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>
+      fileTypeArr<span class="token punctuation">[</span>fileTypeArr<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span>
+    <span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span>
+		<span class="token comment">// 文件存放路径，文件</span>
+    <span class="token keyword">const</span> res <span class="token operator">=</span> <span class="token keyword">await</span> ossClient<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">images/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>fileName<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span> file<span class="token punctuation">)</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res<span class="token punctuation">.</span>url<span class="token punctuation">)</span>
+    <span class="token comment">// TODO：图片上传到服务器, 更新用户信息</span>
+    <span class="token comment">// 调接口: 更新用户信息</span>
+    <span class="token keyword">await</span> store<span class="token punctuation">.</span><span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token string">'user/changeProfileAction'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> <span class="token operator">...</span>store<span class="token punctuation">.</span>getters<span class="token punctuation">.</span>userInfo<span class="token punctuation">,</span> <span class="token literal-property property">avatar</span><span class="token operator">:</span> res<span class="token punctuation">.</span>url <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token comment">// 通知外面, 改下数据, 实现页面的同步</span>
+    <span class="token function">emits</span><span class="token punctuation">(</span><span class="token constant">EMITS_UPLOAD_SUCCESS</span><span class="token punctuation">,</span> res<span class="token punctuation">.</span>url<span class="token punctuation">)</span>
+    <span class="token comment">// 提示</span>
+    <span class="token function">message</span><span class="token punctuation">(</span><span class="token string">'success'</span><span class="token punctuation">,</span> <span class="token string">'头像修改成功'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">message</span><span class="token punctuation">(</span><span class="token string">'error'</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="highlight-lines"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br></div><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br></div></div><div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token doc-comment comment">/**
+ * 确定按钮点击事件
+ */</span>
+<span class="token keyword">const</span> <span class="token function-variable function">onConfirmClick</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token comment">// 开启 loading</span>
+  loading<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token boolean">true</span>
+  <span class="token comment">// 获取裁剪后的图片</span>
+  cropper<span class="token punctuation">.</span><span class="token function">getCroppedCanvas</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBlob</span><span class="token punctuation">(</span><span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token parameter">blob</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+    <span class="token comment">// 裁剪后的 blob</span>
+    <span class="token comment">// console.log(blob)</span>
+    <span class="token comment">// console.log(URL.createObjectURL(blob))</span>
+    <span class="token keyword">await</span> <span class="token function">putObjectToOSS</span><span class="token punctuation">(</span>blob<span class="token punctuation">)</span>
+    <span class="token comment">// 关闭 loading</span>
+    loading<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token boolean">false</span>
+    <span class="token comment">// 关闭 dialog</span>
+    <span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br></div></div><ol start="2">
+<li>在 <code>src/views/profile/index.vue</code> 监听图片更新成功事件, 更新图片地址到视图</li>
+</ol>
+<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> <span class="token constant">PC</span> 端 <span class="token operator">--</span><span class="token operator">></span>
+<span class="token operator">&lt;</span>m<span class="token operator">-</span>dialog v<span class="token operator">-</span><span class="token keyword">if</span><span class="token operator">=</span><span class="token string">"!isMobileTerminal"</span> v<span class="token operator">-</span>model<span class="token operator">=</span><span class="token string">"isDialogVisible"</span><span class="token operator">></span>
+  <span class="token operator">&lt;</span>change<span class="token operator">-</span>avatar<span class="token operator">-</span>vue
+    <span class="token operator">:</span>blob<span class="token operator">=</span><span class="token string">"currentBlob"</span>
+    @close<span class="token operator">=</span><span class="token string">"isDialogVisible = false"</span>
+    @upload<span class="token operator">-</span>success<span class="token operator">=</span><span class="token string">"userInfo.avatar = $event"</span>
+  <span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>change<span class="token operator">-</span>avatar<span class="token operator">-</span>vue<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>m<span class="token operator">-</span>dialog<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> 移动端：在展示时指定高度 <span class="token operator">--</span><span class="token operator">></span>
+<span class="token operator">&lt;</span>m<span class="token operator">-</span>popup v<span class="token operator">-</span><span class="token keyword">else</span> <span class="token operator">:</span><span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"{ 'h-screen': isDialogVisible }"</span> v<span class="token operator">-</span>model<span class="token operator">=</span><span class="token string">"isDialogVisible"</span><span class="token operator">></span>
+  <span class="token operator">&lt;</span>change<span class="token operator">-</span>avatar<span class="token operator">-</span>vue
+    <span class="token operator">:</span>blob<span class="token operator">=</span><span class="token string">"currentBlob"</span> 
+    @close<span class="token operator">=</span><span class="token string">"isDialogVisible = false"</span>
+    @upload<span class="token operator">-</span>success<span class="token operator">=</span><span class="token string">"userInfo.avatar = $event"</span>
+  <span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>change<span class="token operator">-</span>avatar<span class="token operator">-</span>vue<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>m<span class="token operator">-</span>popup<span class="token operator">></span>
+<span class="token operator">...</span><span class="token punctuation">.</span>
+<span class="token operator">...</span><span class="token punctuation">.</span>
+<span class="token comment">// 用户的信息</span>
+<span class="token keyword">const</span> userInfo <span class="token operator">=</span> <span class="token function">ref</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token literal-property property">nickname</span><span class="token operator">:</span> store<span class="token punctuation">.</span>getters<span class="token punctuation">.</span>userInfo<span class="token punctuation">.</span>nickname<span class="token punctuation">,</span>
+  <span class="token literal-property property">title</span><span class="token operator">:</span> store<span class="token punctuation">.</span>getters<span class="token punctuation">.</span>userInfo<span class="token punctuation">.</span>title<span class="token punctuation">,</span>
+  <span class="token literal-property property">company</span><span class="token operator">:</span>store<span class="token punctuation">.</span>getters<span class="token punctuation">.</span>userInfo<span class="token punctuation">.</span>company<span class="token punctuation">,</span>
+  <span class="token literal-property property">homePage</span><span class="token operator">:</span> store<span class="token punctuation">.</span>getters<span class="token punctuation">.</span>userInfo<span class="token punctuation">.</span>homePage<span class="token punctuation">,</span>
+  <span class="token literal-property property">introduction</span><span class="token operator">:</span> store<span class="token punctuation">.</span>getters<span class="token punctuation">.</span>userInfo<span class="token punctuation">.</span>introduction<span class="token punctuation">,</span>
+  <span class="token literal-property property">avatar</span><span class="token operator">:</span> store<span class="token punctuation">.</span>getters<span class="token punctuation">.</span>userInfo<span class="token punctuation">.</span>avatar
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre><div class="highlight-lines"><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br></div></div></template>
