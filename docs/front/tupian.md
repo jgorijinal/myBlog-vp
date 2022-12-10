@@ -962,7 +962,7 @@ const onConfirmClick = () => {
 ```
 
 2. 在 `src/views/profile/index.vue` 监听图片更新成功事件, 更新图片地址到视图
-```js{5,13}
+```js{6,14}
 <!-- PC 端 -->
 <m-dialog v-if="!isMobileTerminal" v-model="isDialogVisible">
   <change-avatar-vue
@@ -992,5 +992,35 @@ const userInfo = ref({
 })
 ```
 
+## 登录鉴权解决方案
+目前退出登录之后，应用依然会停留在 `profile` 用户信息页面，这显然是不合理的，所以下面需要处理该问题
 
+针对于该问题可以通过 `vue-router` 的 `beforeEach` 路由守卫来进行实现
+
+`permission.js`文件: 
+```js
+import store from '@/store'
+import router from '@/router'
+import { message } from '@/libs';
+
+router.beforeEach((to,from) => {
+  if (store.getters.token) {
+    // 已登录
+    return true
+  } else {
+    // 没有登录
+    if (to.meta.user) { // 需要登录的页面
+      message('warn', '访问失败, 请先登录')
+      return '/login'
+    } else {
+      return true
+    }
+  }
+})
+```
+
+2. 在` main.js` 中触发该模块
+```js
+import './permission'
+```
 

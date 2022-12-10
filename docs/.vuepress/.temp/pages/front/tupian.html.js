@@ -79,6 +79,12 @@ export const data = {
           "children": []
         }
       ]
+    },
+    {
+      "level": 2,
+      "title": "登录鉴权解决方案",
+      "slug": "登录鉴权解决方案",
+      "children": []
     }
   ],
   "git": {
@@ -86,7 +92,7 @@ export const data = {
       {
         "name": "jgoriginal",
         "email": "932274204@qq.com",
-        "commits": 2
+        "commits": 3
       }
     ]
   },
