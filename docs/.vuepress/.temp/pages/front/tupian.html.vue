@@ -966,26 +966,36 @@
 <p>目前退出登录之后，应用依然会停留在 <code>profile</code> 用户信息页面，这显然是不合理的，所以下面需要处理该问题</p>
 <p>针对于该问题可以通过 <code>vue-router</code> 的 <code>beforeEach</code> 路由守卫来进行实现</p>
 <p><code>permission.js</code>文件:</p>
-<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token keyword">import</span> store <span class="token keyword">from</span> <span class="token string">'@/store'</span>
+<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code>iimport store <span class="token keyword">from</span> <span class="token string">'@/store'</span>
 <span class="token keyword">import</span> router <span class="token keyword">from</span> <span class="token string">'@/router'</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span> message <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/libs'</span><span class="token punctuation">;</span>
 
 router<span class="token punctuation">.</span><span class="token function">beforeEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">to<span class="token punctuation">,</span><span class="token keyword">from</span></span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
   <span class="token keyword">if</span> <span class="token punctuation">(</span>store<span class="token punctuation">.</span>getters<span class="token punctuation">.</span>token<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment">// 已登录</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>to<span class="token punctuation">.</span>name <span class="token operator">===</span> <span class="token string">'login'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> <span class="token string">'/'</span>
+    <span class="token punctuation">}</span>
     <span class="token keyword">return</span> <span class="token boolean">true</span>
   <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
     <span class="token comment">// 没有登录</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>to<span class="token punctuation">.</span>meta<span class="token punctuation">.</span>user<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// 需要登录的页面</span>
-      <span class="token function">message</span><span class="token punctuation">(</span><span class="token string">'warn'</span><span class="token punctuation">,</span> <span class="token string">'访问失败, 请先登录'</span><span class="token punctuation">)</span>
+      <span class="token comment">// message('warn', '请先登录后再试')</span>
       <span class="token keyword">return</span> <span class="token string">'/login'</span>
     <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
       <span class="token keyword">return</span> <span class="token boolean">true</span>
     <span class="token punctuation">}</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span>
-</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br></div></div><ol start="2">
+
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br></div></div><ol start="2">
 <li>在<code> main.js</code> 中触发该模块</li>
 </ol>
 <div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token keyword">import</span> <span class="token string">'./permission'</span>
-</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br></div></div></template>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br></div></div><h2 id="总结" tabindex="-1"><a class="header-anchor" href="#总结" aria-hidden="true">#</a> 总结</h2>
+<p>实现了两个新的通用组件：</p>
+<ol>
+<li><code>input</code></li>
+<li><code>dialog</code></li>
+</ol>
+<p>除此之外，还接触到了 头像裁剪, 图片上传 ...等功能</p>
+</template>

@@ -85,6 +85,12 @@ export const data = {
       "title": "登录鉴权解决方案",
       "slug": "登录鉴权解决方案",
       "children": []
+    },
+    {
+      "level": 2,
+      "title": "总结",
+      "slug": "总结",
+      "children": []
     }
   ],
   "git": {
@@ -92,22 +98,9 @@ export const data = {
       {
         "name": "jgoriginal",
         "email": "932274204@qq.com",
-        "commits": 3
+        "commits": 4
       }
     ]
   },
   "filePathRelative": "front/tupian.md"
-}
-
-if (import.meta.webpackHot) {
-  import.meta.webpackHot.accept()
-  if (__VUE_HMR_RUNTIME__.updatePageData) {
-    __VUE_HMR_RUNTIME__.updatePageData(data)
-  }
-}
-
-if (import.meta.hot) {
-  import.meta.hot.accept(({ data }) => {
-    __VUE_HMR_RUNTIME__.updatePageData(data)
-  })
 }

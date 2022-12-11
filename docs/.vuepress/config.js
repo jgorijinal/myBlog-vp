@@ -326,6 +326,7 @@ module.exports = {
                     '/front/luyou.md',
                     '/front/biaodan.md',
                     '/front/tupian.md',
+                    '/front/yidongduan.md',
                 ]
             },
             {

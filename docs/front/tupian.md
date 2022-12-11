@@ -999,28 +999,39 @@ const userInfo = ref({
 
 `permission.js`文件: 
 ```js
-import store from '@/store'
+iimport store from '@/store'
 import router from '@/router'
 import { message } from '@/libs';
 
 router.beforeEach((to,from) => {
   if (store.getters.token) {
-    // 已登录
+    if (to.name === 'login') {
+      return '/'
+    }
     return true
   } else {
     // 没有登录
     if (to.meta.user) { // 需要登录的页面
-      message('warn', '访问失败, 请先登录')
+      // message('warn', '请先登录后再试')
       return '/login'
     } else {
       return true
     }
   }
 })
+
 ```
 
 2. 在` main.js` 中触发该模块
 ```js
 import './permission'
 ```
+
+## 总结
+实现了两个新的通用组件：
+
+1. `input`
+2. `dialog`
+
+除此之外，还接触到了 头像裁剪, 图片上传 ...等功能
 
