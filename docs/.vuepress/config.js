@@ -327,6 +327,8 @@ module.exports = {
                     '/front/biaodan.md',
                     '/front/tupian.md',
                     '/front/yidongduan.md',
+                    // '/front/denglu.md',
+                    '/front/fankui.md',
                 ]
             },
             {

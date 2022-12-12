@@ -493,4 +493,37 @@ router<span class="token punctuation">.</span><span class="token function">befor
 <span class="token punctuation">}</span>
 </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
 </code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><p>此时，已经可以完成动态的数据缓存</p>
+<h3 id="记录页面滚动位置" tabindex="-1"><a class="header-anchor" href="#记录页面滚动位置" aria-hidden="true">#</a> 记录页面滚动位置</h3>
+<p><code>keep-alive</code> 组件只能够帮助<strong>缓存</strong>组件，但是<strong>不能</strong>够记录页面的滚动位置</p>
+<p>所以如果想要记录页面滚动位置的话，需要在 <strong>通用组件外</strong> 单独处理</p>
+<p>目前在当前项目中仅需要保存 <code>home</code> 页面的滚动位置即可</p>
+<ol>
+<li>在 <code>src/views/main/index.vue</code> 中，进行记录滚动位置，可以通过 <a href="https://vueuse.org/core/useScroll/" target="_blank" rel="noopener noreferrer">useScroll<ExternalLinkIcon/></a> 进行记录</li>
+</ol>
+<div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token comment">// 记录滚动位置</span>
+<span class="token keyword">const</span> containerRef <span class="token operator">=</span> <span class="token function">ref</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span>
+<span class="token comment">// 拿到滚动的距离</span>
+<span class="token keyword">const</span> <span class="token punctuation">{</span> y <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">useScroll</span><span class="token punctuation">(</span>containerRef<span class="token punctuation">)</span>
+<span class="token comment">// 被激活时</span>
+<span class="token function">onActivated</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>containerRef<span class="token punctuation">.</span>value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">// 赋值给 scrollTop</span>
+  containerRef<span class="token punctuation">.</span>value<span class="token punctuation">.</span>scrollTop <span class="token operator">=</span> y<span class="token punctuation">.</span>value
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div><p>至此 , 整个的 <code>transition-router-view</code> 已经完成</p>
+<h2 id="总结-1" tabindex="-1"><a class="header-anchor" href="#总结-1" aria-hidden="true">#</a> 总结</h2>
+<p>两个通用组件的构建：</p>
+<ol>
+<li><code>trigger-menu</code> &amp;&amp; <code>trigger-menu-item</code></li>
+<li><code>transition-router-view</code>：
+<ol>
+<li>动画效果</li>
+<li>组件缓存</li>
+<li>滚动位置缓存</li>
+</ol>
+</li>
+</ol>
+<p>对于整个应用而言，页面部分就只剩 <code>VIP服务</code> 页面了</p>
 </template>

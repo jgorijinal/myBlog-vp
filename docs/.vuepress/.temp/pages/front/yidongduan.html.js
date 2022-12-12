@@ -47,12 +47,30 @@ export const data = {
           "title": "虚拟任务栈处理",
           "slug": "虚拟任务栈处理",
           "children": []
+        },
+        {
+          "level": 3,
+          "title": "记录页面滚动位置",
+          "slug": "记录页面滚动位置",
+          "children": []
         }
       ]
+    },
+    {
+      "level": 2,
+      "title": "总结",
+      "slug": "总结-1",
+      "children": []
     }
   ],
   "git": {
-    "contributors": []
+    "contributors": [
+      {
+        "name": "jgoriginal",
+        "email": "932274204@qq.com",
+        "commits": 1
+      }
+    ]
   },
   "filePathRelative": "front/yidongduan.md"
 }

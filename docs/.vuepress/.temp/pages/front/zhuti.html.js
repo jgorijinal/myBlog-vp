@@ -38,6 +38,12 @@ export const data = {
     },
     {
       "level": 2,
+      "title": "通用组件 : 开关 Switch 组件",
+      "slug": "通用组件-开关-switch-组件",
+      "children": []
+    },
+    {
+      "level": 2,
       "title": "总结",
       "slug": "总结",
       "children": []
@@ -53,4 +59,17 @@ export const data = {
     ]
   },
   "filePathRelative": "front/zhuti.md"
+}
+
+if (import.meta.webpackHot) {
+  import.meta.webpackHot.accept()
+  if (__VUE_HMR_RUNTIME__.updatePageData) {
+    __VUE_HMR_RUNTIME__.updatePageData(data)
+  }
+}
+
+if (import.meta.hot) {
+  import.meta.hot.accept(({ data }) => {
+    __VUE_HMR_RUNTIME__.updatePageData(data)
+  })
 }

@@ -545,3 +545,38 @@ export default {
 ```
 
 此时，已经可以完成动态的数据缓存
+### 记录页面滚动位置
+`keep-alive` 组件只能够帮助**缓存**组件，但是**不能**够记录页面的滚动位置
+
+所以如果想要记录页面滚动位置的话，需要在 **通用组件外** 单独处理
+
+目前在当前项目中仅需要保存 `home` 页面的滚动位置即可
+
+1. 在 `src/views/main/index.vue` 中，进行记录滚动位置，可以通过 [useScroll](https://vueuse.org/core/useScroll/) 进行记录
+```js
+// 记录滚动位置
+const containerRef = ref(null)
+// 拿到滚动的距离
+const { y } = useScroll(containerRef)
+// 被激活时
+onActivated(() => {
+  if (!containerRef.value) {
+    return
+  }
+  // 赋值给 scrollTop
+  containerRef.value.scrollTop = y.value
+})
+```
+
+至此 , 整个的 `transition-router-view` 已经完成
+## 总结
+两个通用组件的构建：
+
+1. `trigger-menu` && `trigger-menu-item`
+2. `transition-router-view`：
+   1. 动画效果
+   2. 组件缓存
+   3. 滚动位置缓存
+
+对于整个应用而言，页面部分就只剩 `VIP服务` 页面了
+
