@@ -83,9 +83,19 @@ export const themeData = {
       ]
     },
     {
+      "text": "Webpack",
+      "collapsible": true,
+      "children": [
+        "/gongcheng/start.md",
+        "/gongcheng/gaoji.md"
+      ]
+    },
+    {
       "text": "JS系列",
       "collapsible": true,
       "children": [
+        "/JS/xuanranyuanli.md",
+        "/JS/yunxing.md",
         "/JS/neicun.md",
         "/JS/this.md",
         "/JS/hanshu.md",
@@ -139,7 +149,6 @@ export const themeData = {
         "/front/header.md",
         "/front/xiangyingshi.md",
         "/front/zhuti.md",
-        "/front/lanjiazai.md",
         "/front/changliebiao.md",
         "/front/liandong.md",
         "/front/xiazai.md",

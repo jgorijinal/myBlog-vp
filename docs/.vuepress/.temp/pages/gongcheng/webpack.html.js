@@ -11,6 +11,18 @@ export const data = {
       "title": "核心概念",
       "slug": "核心概念",
       "children": []
+    },
+    {
+      "level": 2,
+      "title": "loader 入门",
+      "slug": "loader-入门",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "plugin 入门",
+      "slug": "plugin-入门",
+      "children": []
     }
   ],
   "git": {

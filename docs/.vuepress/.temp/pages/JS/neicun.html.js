@@ -1,35 +1,28 @@
 export const data = {
   "key": "v-f87371bc",
   "path": "/JS/neicun.html",
-  "title": "JS 的内存管理",
+  "title": "JS 的内存管理 , 闭包",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
   "headers": [
     {
       "level": 2,
-      "title": "JS 的内存管理",
-      "slug": "js-的内存管理-1",
+      "title": "常见的 GC 算法 – 引用计数（Reference counting）了解",
+      "slug": "常见的-gc-算法-–-引用计数-reference-counting-了解",
       "children": []
     },
     {
       "level": 2,
-      "title": "JS 的垃圾回收",
-      "slug": "js-的垃圾回收",
-      "children": [
-        {
-          "level": 3,
-          "title": "常见的 GC 算法 - 引用计数",
-          "slug": "常见的-gc-算法-引用计数",
-          "children": []
-        },
-        {
-          "level": 3,
-          "title": "常见的 GC 算法 – 标记清除",
-          "slug": "常见的-gc-算法-–-标记清除",
-          "children": []
-        }
-      ]
+      "title": "常见的GC算法 – 标记清除（mark-Sweep）",
+      "slug": "常见的gc算法-–-标记清除-mark-sweep",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "闭包的定义",
+      "slug": "闭包的定义",
+      "children": []
     }
   ],
   "git": {

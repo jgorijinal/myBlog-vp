@@ -125,7 +125,7 @@ npm install core-js regenerator-runtime --save
 ```
 ![图片](../.vuepress/public/images/pf2.png)
 ### 配置 babel.config.js
-我们需要在babel.config.js文件中进行配置，给preset-env配置一些属性：
+我们需要在 babel.config.js 文件中进行配置，给 preset-env 配置一些属性：
 * `useBuiltIns`：设置以什么样的方式来使用 polyfill；
 * `corejs`：设置corejs的版本，目前使用较多的是 3.x 的版本，比如我使用的是 3.8.x 的版本；
    * 另外 corejs 可以设置是否对提议阶段的特性进行支持；

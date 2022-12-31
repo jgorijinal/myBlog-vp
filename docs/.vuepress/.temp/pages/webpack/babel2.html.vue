@@ -121,7 +121,7 @@ babel7.4.0之后，可以通过单独引入core-js和regenerator-runtime来完�
 <div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token function">npm</span> <span class="token function">install</span> core-js regenerator-runtime --save
 </code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br></div></div><p><img src="@source/.vuepress/public/images/pf2.png" alt="图片"></p>
 <h3 id="配置-babel-config-js" tabindex="-1"><a class="header-anchor" href="#配置-babel-config-js" aria-hidden="true">#</a> 配置 babel.config.js</h3>
-<p>我们需要在babel.config.js文件中进行配置，给preset-env配置一些属性：</p>
+<p>我们需要在 babel.config.js 文件中进行配置，给 preset-env 配置一些属性：</p>
 <ul>
 <li><code>useBuiltIns</code>：设置以什么样的方式来使用 polyfill；</li>
 <li><code>corejs</code>：设置corejs的版本，目前使用较多的是 3.x 的版本，比如我使用的是 3.8.x 的版本；

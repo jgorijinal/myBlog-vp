@@ -73,7 +73,7 @@
 </ul>
 <p><img src="@source/.vuepress/public/images/ede1.png" alt="图片"></p>
 <h3 id="splitchunks" tabindex="-1"><a class="header-anchor" href="#splitchunks" aria-hidden="true">#</a> SplitChunks</h3>
-<p>另外一种分包的模式是 splitChunk，它是使用SplitChunksPlugin来实现的：</p>
+<p>另外一种分包的模式是 splitChunk，它是使用 SplitChunksPlugin 来实现的：</p>
 <ul>
 <li>因为该插件 webpack 已经默认安装和集成，所以我们并不需要单独安装和直接使用该插件；</li>
 <li>只需要提供 SplitChunksPlugin 相关的配置信息即可；</li>
