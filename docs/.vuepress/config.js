@@ -6,6 +6,11 @@ module.exports = {
     description: '这是我的第一个 VuePress 站点',
     // 主题和它的配置
     theme: '@vuepress/theme-default',
+    head: [
+        [
+            'link', {rel:'stylesheet',href:'/css/index.css'}
+        ]
+    ],
     themeConfig: {
         logo: 'https://vuejs.org/images/logo.png',
         displayAllHeaders: true,// 默认值：false
