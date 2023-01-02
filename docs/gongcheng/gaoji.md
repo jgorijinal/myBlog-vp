@@ -571,7 +571,7 @@ module.exports = {
 }
 ```
 
-打包生成 ![图片](../.vuepress/public/images/chch11.png)
+打包生成 ![图片](../.vuepress/public/images/chch1.png)
 
 `src/index.js` 文件会走的时候 `filename` 这个配置参数, 像 `lodash` 是通过异步加载的方式引入对应的代码, 如果是间接引用了这种模块, 
 那么打包生成的文件名就会走 `chunkFilename` 这块的配置内容
@@ -1001,7 +1001,7 @@ module.exports={
 
 
 ## 通过 webpack 构建去除代码中的调试日志 - terser-webpack-plugin
-作用: 删除代码中的 `console.log`
+作用: 删除代码中的 `console.log`, **压缩并丑化 js 代码**
 
 [terser-webpack-plugin 官方文档](https://webpack.docschina.org/plugins/terser-webpack-plugin/#root)
 

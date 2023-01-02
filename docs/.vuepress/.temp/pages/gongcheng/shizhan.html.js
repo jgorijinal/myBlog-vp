@@ -1,7 +1,7 @@
 export const data = {
   "key": "v-3fbc4f8c",
   "path": "/gongcheng/shizhan.html",
-  "title": "webpack 实战",
+  "title": "",
   "lang": "zh-CN",
   "frontmatter": {},
   "excerpt": "",
@@ -13,8 +13,20 @@ export const data = {
       "children": [
         {
           "level": 3,
-          "title": "提升 webpack 打包速度",
-          "slug": "提升-webpack-打包速度",
+          "title": "",
+          "slug": "",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "构建速度优化 - 利用计算机多核优化构建",
+          "slug": "构建速度优化-利用计算机多核优化构建",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "构建速度优化 - 使用缓存提升二次构建速度",
+          "slug": "构建速度优化-使用缓存提升二次构建速度",
           "children": []
         }
       ]
@@ -30,17 +42,4 @@ export const data = {
     ]
   },
   "filePathRelative": "gongcheng/shizhan.md"
-}
-
-if (import.meta.webpackHot) {
-  import.meta.webpackHot.accept()
-  if (__VUE_HMR_RUNTIME__.updatePageData) {
-    __VUE_HMR_RUNTIME__.updatePageData(data)
-  }
-}
-
-if (import.meta.hot) {
-  import.meta.hot.accept(({ data }) => {
-    __VUE_HMR_RUNTIME__.updatePageData(data)
-  })
 }

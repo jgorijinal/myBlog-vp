@@ -193,6 +193,7 @@ module.exports = {
                     // '/gongcheng/webpack.md',
                     '/gongcheng/start.md',
                     '/gongcheng/gaoji.md',
+                    '/gongcheng/fuxi.md',
                 ]
             },
             {

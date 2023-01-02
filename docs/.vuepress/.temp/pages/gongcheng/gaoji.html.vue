@@ -472,7 +472,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
     <span class="token literal-property property">chunkFIlename</span><span class="token operator">:</span> <span class="token string">'[name].chunk.js'</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</code></pre><div class="highlight-lines"><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br></div><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><p>打包生成 <img src="@source/.vuepress/public/images/chch11.png" alt="图片"></p>
+</code></pre><div class="highlight-lines"><br><br><br><br><br><div class="highlight-line">&nbsp;</div><br><br></div><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><p>打包生成 <img src="@source/.vuepress/public/images/chch1.png" alt="图片"></p>
 <p><code>src/index.js</code> 文件会走的时候 <code>filename</code> 这个配置参数, 像 <code>lodash</code> 是通过异步加载的方式引入对应的代码, 如果是间接引用了这种模块,
 那么打包生成的文件名就会走 <code>chunkFilename</code> 这块的配置内容</p>
 <h3 id="minicssextractplugin" tabindex="-1"><a class="header-anchor" href="#minicssextractplugin" aria-hidden="true">#</a> MiniCssExtractPlugin</h3>
@@ -819,7 +819,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <li>图片, 字体: asset | asset-inline or url-loader</li>
 </ol>
 <h2 id="通过-webpack-构建去除代码中的调试日志-terser-webpack-plugin" tabindex="-1"><a class="header-anchor" href="#通过-webpack-构建去除代码中的调试日志-terser-webpack-plugin" aria-hidden="true">#</a> 通过 webpack 构建去除代码中的调试日志 - terser-webpack-plugin</h2>
-<p>作用: 删除代码中的 <code>console.log</code></p>
+<p>作用: 删除代码中的 <code>console.log</code>, <strong>压缩并丑化 js 代码</strong></p>
 <p><a href="https://webpack.docschina.org/plugins/terser-webpack-plugin/#root" target="_blank" rel="noopener noreferrer">terser-webpack-plugin 官方文档<ExternalLinkIcon/></a></p>
 <p>使用 <code>terser-webpack-plugin</code>, <code>webpack5</code> 是开箱即用, <code>webpack4</code> 需要下载安装</p>
 <div class="language-javascript ext-js line-numbers-mode"><pre v-pre class="language-javascript"><code><span class="token operator">...</span>
