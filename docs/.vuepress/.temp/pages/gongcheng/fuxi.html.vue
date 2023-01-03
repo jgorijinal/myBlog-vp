@@ -1040,7 +1040,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <ul>
 <li>拆分配置和 <code>merge</code></li>
 <li>启动本地服务</li>
-<li>处理 ES6</li>
+<li>处理 <code>ES6</code></li>
 <li>处理样式</li>
 <li>处理图片</li>
 </ul>
@@ -1049,8 +1049,8 @@ console<span class="token punctuation">.</span><span class="token function">log<
 </ol>
 <ul>
 <li>多入口</li>
-<li>抽离 Css 代码, 压缩</li>
-<li>抽离公共代码 splitChunk</li>
+<li>抽离 <code>CSS</code> 代码, 压缩</li>
+<li>抽离公共代码 <code>splitChunk</code></li>
 <li>懒加载</li>
 </ul>
 <ol start="3">
@@ -1061,7 +1061,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <h2 id="前端为何要进行打包和构建" tabindex="-1"><a class="header-anchor" href="#前端为何要进行打包和构建" aria-hidden="true">#</a> 前端为何要进行打包和构建</h2>
 <p>代码层面:</p>
 <ol>
-<li>打包出来的代码体积更小( tree-shaking, 压缩, 合并), 加载更快</li>
+<li>打包出来的代码体积更小( <code>tree-shaking</code>, 压缩, 合并), 加载更快</li>
 <li>编译高级语言和语法( TS, ES6+ ,模块化, scss..)</li>
 <li>兼容性错误和检查(Polyfill, postcss, eslint)</li>
 </ol>
