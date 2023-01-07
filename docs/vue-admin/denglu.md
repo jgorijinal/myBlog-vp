@@ -179,6 +179,183 @@ $cursor: #fff;
 }
 </style>
 ```
+## Icon 图标处理方案：SvgIcon
+* `element-plus` 的图标
+* 项目中自定义的 `svg` 图标
+
+对于 `element-plus` 的图标我们可以直接通过 `el-icon` 来进行显示，但是自定义图标的话，暂时还缺少显示的方式，所以说需要一个自定义的组件，来显示咱们项目内的自定义的 `svg` 图标
+
+那么对于这个组件的话，它就需要拥有两种能力：
+
+1. 显示外部资源的 `svg` 图标
+* 比如 `https://res.lgdsunday.club/user.svg` , 这样的地址
+2. 显示项目内部的 `svg` 图标
+
+创建 `components/SvgIcon/index.vue`
+```vue
+<template>
+  <!--外部的 svg 资源-->
+  <div
+    v-if="isExternal"
+    :class="className"
+    :style="styleExternalIcon"
+    class="svg-external-icon svg-icon"
+
+  />  
+  <!--项目内部的 svg 资源-->
+  <svg :aria-hidden="true" v-else>
+    <use :xlink:href="iconName" :class="className" class="svg-icon"></use>
+  </svg>
+</template>
+<script setup>
+import { defineProps, computed } from 'vue';
+import { isExternal as external } from '@/utils/validate';
+const props = defineProps({
+  icon: {  // icon 图标
+    type: String,
+    required: true
+  },
+  className: { // 图标类名
+    type: String,
+    
+  }
+})
+// 判断是否是外部的 svg 资源
+const isExternal = computed(() => {
+  return external(props.icon)
+})
+// 外部图标样式: 使用了 mask 属性
+const styleExternalIcon = computed(() => ({
+  mask: `url(${props.icon}) no-repeat 50% 50%`,
+  '-webkit-mask': `url(${props.icon}) no-repeat 50% 50%`
+}))
+// 项目内部的 svg 资源名称
+const iconName = computed(() => {
+  return `#icon-${props.icon}`
+})
+</script>
+<style lang="scss" scoped>
+  .svg-icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+.svg-external-icon {
+  background-color: currentColor;
+  mask-size: cover !important;
+  display: inline-block;
+}
+</style>
+```
+
+创建 `utils/validate.js`
+```js
+/**
+ * 判断是否为外部资源 ,  比如 `https://res.lgdsunday.club/user.svg` 这样的外部的 svg 资源
+ */
+export function isExternal(path) {
+  return /^(https?:|mailto:|tel:)/.test(path)
+}
+```
+
+在外部试着使用一下
+```html
+<span class="svg-container">
+	<svg-icon icon="https://res.lgdsunday.club/user.svg"></svg-icon>
+</span>
+```
+外部图标可正常展示
+
+这里创建了 `SvgIcon` 组件，用来处理了 **外部资源图标** 的展示，但是对于内部图标而言，此时依然无法进行展示。所以需要看一下，如何处理内部的 `svg` 图标
+
+### 处理内部 svg 图标显示
+上面封装的 `SvgIcon` 组件目前只能显示外部资源的 `svg` 图标, 内部的图标还无法展示
+
+首先导入项目中被使用到的所有的 `svg` 图标, icons 目录下的 `svg` 文件夹里存放所有的 `xxx.svg` 图标
+
+在 `icons` 目录下创建 `index.js` 文件，该文件中需要完成两件事情：
+
+1. 导入所有的 `svg` 图标
+2. 完成 `SvgIcon` 的全局注册
+
+```js
+import SvgIcon from '@/components/SvgIcon'
+
+// https://webpack.docschina.org/guides/dependency-management/#requirecontext
+// 通过 require.context() 函数来创建自己的 context
+const svgRequire = require.context('./svg', false, /\.svg$/)
+// 此时返回一个 require 的函数，可以接受一个 request 的参数，用于 require 的导入。
+// 该函数提供了三个属性，可以通过 require.keys() 获取到所有的 svg 图标
+// 遍历图标，把图标作为 request 传入到 require 导入函数中，完成本地 svg 图标的导入
+svgRequire.keys().forEach(svgIcon => svgRequire(svgIcon))
+
+export default app => {
+  app.component('svg-icon', SvgIcon)
+}
+```
+
+然后在 `main.js` 中引入该文件
+```js
+...
+// 导入 svgIcon
+import installIcons from '@/icons'
+...
+installIcons(app)
+...
+```
+
+然后用组件在试一下, 图标依然无法展示
+### 使用 svg-sprite-loader 处理 svg 图标
+[svg-sprite-loader](https://www.npmjs.com/package/svg-sprite-loader) 是 `webpack` 中专门用来处理 `svg` 图标的一个 `loader` ，在上面图标之所有没有展示，就是因为缺少该 `loader`
+
+1. 安装 loader : `npm i --save-dev svg-sprite-loader@6.0.9`
+
+2. 创建 `vue.config.js` 文件，新增如下配置：
+```js{6-9,21-38}
+const { defineConfig } = require("@vue/cli-service");
+// Element Plus 按需引入使用的插件
+const AutoImport = require('unplugin-auto-import/webpack')
+const Components = require('unplugin-vue-components/webpack')
+const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
+const path = require('path')
+function resolve(dir) {
+  return path.join(__dirname, dir)
+}
+module.exports = defineConfig({
+  transpileDependencies: true,
+  configureWebpack: {
+    plugins: [
+      AutoImport({
+        resolvers: [ElementPlusResolver()],
+      }),
+      Components({
+        resolvers: [ElementPlusResolver()],
+      }),
+    ]
+  },
+  chainWebpack(config) {
+    // 设置 svg-sprite-loader
+    config.module
+      .rule('svg')
+      .exclude.add(resolve('src/icons'))
+      .end()
+    config.module
+      .rule('icons')
+      .test(/\.svg$/)
+      .include.add(resolve('src/icons'))
+      .end()
+      .use('svg-sprite-loader')
+      .loader('svg-sprite-loader')
+      .options({
+        symbolId: 'icon-[name]'
+      })
+      .end()
+  }
+});
+```
+修改完 `vue.config.js` 配置文件完以上配置之后，重新启动项目, 最终图标终于可以显示了
 ## 完善登录表单校验
 为表单进行表单校验那么我们需要关注以下三点：
 

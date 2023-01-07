@@ -32,6 +32,7 @@ export const themeData = {
       "text": "Vue3系列",
       "collapsible": true,
       "children": [
+        "/vue3/xiangyingshi.md",
         "/vue3/vue3.md",
         "/vue3/life.md",
         "/vue3/communication.md",

@@ -242,6 +242,7 @@ const routeItems = [
   ["v-a561730a","/vue3/transition.html",{"title":"Transition 过度动画"},["/vue3/transition","/vue3/transition.md"]],
   ["v-4f57be90","/vue3/v-model.html",{"title":"v-model"},["/vue3/v-model","/vue3/v-model.md"]],
   ["v-26626eba","/vue3/vue3.html",{"title":"Vue2到Vue3的变化"},["/vue3/vue3","/vue3/vue3.md"]],
+  ["v-12181764","/vue3/xiangyingshi.html",{"title":"响应式"},["/vue3/xiangyingshi","/vue3/xiangyingshi.md"]],
   ["v-2650fd40","/vue3UI/build.html",{"title":"部署"},["/vue3UI/build","/vue3UI/build.md"]],
   ["v-663f64fc","/vue3UI/dialog.html",{"title":"Dialog 对话框组件"},["/vue3UI/dialog","/vue3UI/dialog.md"]],
   ["v-a9c5c828","/vue3UI/start.html",{"title":"使用 vite 搭建官网"},["/vue3UI/start","/vue3UI/start.md"]],

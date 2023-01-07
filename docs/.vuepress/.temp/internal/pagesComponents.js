@@ -483,6 +483,8 @@ export const pagesComponents = {
   "v-4f57be90": defineAsyncComponent(() => import(/* webpackChunkName: "v-4f57be90" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue3/v-model.html.vue")),
   // path: /vue3/vue3.html
   "v-26626eba": defineAsyncComponent(() => import(/* webpackChunkName: "v-26626eba" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue3/vue3.html.vue")),
+  // path: /vue3/xiangyingshi.html
+  "v-12181764": defineAsyncComponent(() => import(/* webpackChunkName: "v-12181764" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue3/xiangyingshi.html.vue")),
   // path: /vue3UI/build.html
   "v-2650fd40": defineAsyncComponent(() => import(/* webpackChunkName: "v-2650fd40" */"C:/Users/86188/Desktop/vuepress-starter/docs/.vuepress/.temp/pages/vue3UI/build.html.vue")),
   // path: /vue3UI/dialog.html
