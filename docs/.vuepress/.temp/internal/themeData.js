@@ -32,7 +32,6 @@ export const themeData = {
       "text": "Vue3系列",
       "collapsible": true,
       "children": [
-        "/vue3/xiangyingshi.md",
         "/vue3/vue3.md",
         "/vue3/life.md",
         "/vue3/communication.md",
@@ -141,6 +140,31 @@ export const themeData = {
         "/TS/interface.md",
         "/TS/generics.md",
         "/TS/module.md"
+      ]
+    },
+    {
+      "text": "小程序",
+      "collapsible": true,
+      "children": [
+        "/xiaochengxutixi/start.md",
+        "/xiaochengxutixi/yufa.md",
+        "/xiaochengxutixi/jinjie.md"
+      ]
+    },
+    {
+      "text": "Git系列",
+      "collapsible": true,
+      "children": [
+        "/ggit/start.md"
+      ]
+    },
+    {
+      "text": "uni-app",
+      "collapsible": true,
+      "children": [
+        "/uni-app/start.md",
+        "/uni-app/yufa.md",
+        "/uni-app/gouwujie.md"
       ]
     },
     {

@@ -255,6 +255,22 @@ module.exports = {
                     // '/TS/Vue3.md'
                 ]
             },
+                {
+                text: '小程序',
+                collapsible: true,
+                children: [
+                    '/xiaochengxutixi/start.md',
+                    '/xiaochengxutixi/yufa.md',
+                    '/xiaochengxutixi/jinjie.md',
+                ]
+            },
+            {
+                text: 'Git系列',
+                collapsible: true,
+                children: [
+                    '/ggit/start.md',
+                ]
+            },
             // {
             //     text: '可视化',
             //     collapsible: true,
@@ -277,7 +293,6 @@ module.exports = {
             //         '/node/express.md',
             //         '/node/zhongjianjian.md',
             //         '/node/jiekou.md',
-
             //     ]
             // },
             // {
@@ -315,6 +330,15 @@ module.exports = {
             //         '/xiaochengxu2/taolu.md'
             //         ]
             // },
+            {
+                text: 'uni-app',
+                collapsible: true,
+                children: [
+                    '/uni-app/start.md',
+                    '/uni-app/yufa.md',
+                    '/uni-app/gouwujie.md',
+                    ]
+            },
             // {
             //     text: '小程序音乐开发项目',
             //     collapsible: true,
@@ -344,6 +368,13 @@ module.exports = {
                     '/front/fankui.md',
                 ]
             },
+            // {
+            //     text: '电商项目',
+            //     collapsible: true,
+            //     children: [
+            //         '/chaqi/start.md',
+            //     ]
+            // },
             {
                 text: '旅途项目',
                 collapsible: true,

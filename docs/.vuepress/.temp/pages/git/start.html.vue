@@ -150,4 +150,91 @@
 <div class="language-text ext-text line-numbers-mode"><pre v-pre class="language-text"><code>git pull
 </code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br></div></div><h3 id="删除远程分支" tabindex="-1"><a class="header-anchor" href="#删除远程分支" aria-hidden="true">#</a> 删除远程分支</h3>
 <p><img src="@source/.vuepress/public/images/fz3.png" alt="图片"></p>
+<h2 id="git的远程分支" tabindex="-1"><a class="header-anchor" href="#git的远程分支" aria-hidden="true">#</a> Git的远程分支 !!!</h2>
+<p><strong>远程分支是也是一种分支结构：</strong></p>
+<ul>
+<li>以 <code>&lt;remote&gt;/&lt;branch&gt;</code> 的形式命名的；</li>
+</ul>
+<p><strong>操作一：推送分支到远程</strong></p>
+<ul>
+<li>当你想要公开分享一个分支时，需要将其推送到有写入权限的远程仓库上；</li>
+<li>运行 <code>git push &lt;remote&gt; &lt;branch&gt;</code>；</li>
+</ul>
+<div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token function">git</span> push origin <span class="token operator">&lt;</span>branch<span class="token operator">></span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br></div></div><p><strong>操作二：跟踪远程分支</strong></p>
+<ul>
+<li>当克隆一个仓库时，它通常会自动地创建一个跟踪 origin/main 的 main 分支；</li>
+<li>如果你愿意的话可以设置其他的跟踪分支，可以通过运行 <code>git checkout --track &lt;remote&gt;/&lt;branch&gt;</code></li>
+<li>如果你尝试检出的分支 (a) 不存在且 (b) 刚好只有一个名字与之匹配的远程分支，那么 Git 就会为你创建一个跟踪分支</li>
+</ul>
+<div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token function">git</span> checkout --track <span class="token operator">&lt;</span>remote<span class="token operator">></span>/<span class="token operator">&lt;</span>branch<span class="token operator">></span>
+<span class="token function">git</span> checkout <span class="token operator">&lt;</span>branch<span class="token operator">></span>  <span class="token comment">#简写</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p><strong>操作三：删除远程分支</strong></p>
+<ul>
+<li>如果某一个远程分支不再使用，我们想要删除掉，可以运行带有 --delete 选项的 git push 命令来删除一个远程分支。</li>
+</ul>
+<div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token function">git</span> push origin --delete <span class="token operator">&lt;</span>branch<span class="token operator">></span>
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br></div></div><p><strong>将本地仓库和远程仓库建立连接</strong></p>
+<div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token function">git</span> init 创建本地仓库
+创建一些文件之后
+<span class="token function">git</span> <span class="token function">add</span> <span class="token builtin class-name">.</span>
+<span class="token function">git</span> commit -m <span class="token string">'初始化项目'</span>
+
+目前跟远程仓库没有建立过关系, 所以先需要把本地仓库跟远程仓库建立关系
+<span class="token function">git</span> remote <span class="token function">add</span> origin xxxxxxxxxxxxxxxxx 跟远程仓库建立关系
+
+<span class="token function">git</span> fetch origin main  把远程仓库的 main 分支拿到本地去了 , 在本地叫做 origin/main
+
+<span class="token function">git</span> branch --set-upstream-to<span class="token operator">=</span>origin/main  设置上游分支
+
+本地的分支和远程的分支没有共同的祖先<span class="token punctuation">(</span>common base<span class="token punctuation">)</span>, 所以不能 <span class="token function">git</span> merge<span class="token punctuation">(</span>完整写法是 <span class="token function">git</span> merge origin main, 但上面已经设置了上游分支, 所以默认可以省略<span class="token punctuation">)</span> 
+所以要执行 <span class="token function">git</span> merge --allow-unrelated-histories
+
+但 <span class="token function">git</span> push 的时候又不行
+<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> 需要执行 <span class="token function">git</span> config push.default upstream
+
+因为 <span class="token function">git</span> push 的默认是 <span class="token function">git</span> config push.default simple  , simple 的时候会去找本地的 master 分支, 而不是上游分支, 所以不行
+
+再 <span class="token function">git</span> push
+
+<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>或者 
+<span class="token function">git</span> checkout --track origin/main
+
+因为本地的分支叫做 master ,  远程的分支叫做 main, 两个名字不一样的情况下不行
+<span class="token variable"><span class="token variable">`</span><span class="token function">git</span> checkout --track origin/main<span class="token variable">`</span></span> 表示要跟踪 origin/main
+
+再 <span class="token function">git</span> push
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br></div></div><p>在本地新创建一个 <code>develop</code> 分支</p>
+<div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token function">git</span> checkout -b develop <span class="token comment">#在本地创建了一个 develop 分支 </span>
+
+要把本地的 develop 分支推送到远程
+<span class="token function">git</span> push origin develop 
+那么远程也多了一个叫 develop 的分支
+
+在 develop 分支上提交一些文件之后, 但这个时候还不能执行 <span class="token function">git</span> push 推送到远程, 还需要指定上游分支
+<span class="token function">git</span> branch --set-upstream-to<span class="token operator">=</span>origin/develop
+
+然后才可以执行 <span class="token function">git</span> push
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><p>比如项新增特性, 在本地创建了一个叫做 <code>feature</code> 分支(步骤同上)</p>
+<div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token function">git</span> checkout -b feature
+
+<span class="token function">git</span> push origin feature
+
+<span class="token function">git</span> branch --set-upstream-to<span class="token operator">=</span>origin/feature
+
+然后把一些新的文件推送到远程, <span class="token function">git</span> push
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p>作为 <strong>组员</strong>的操作:</p>
+<div class="language-bash ext-sh line-numbers-mode"><pre v-pre class="language-bash"><code><span class="token function">git</span> clone xxxxxxxxxxxxxxxx
+
+但默认 clone 下来的分支只有 main 主分支, 没有 develop 分支<span class="token punctuation">(</span>需要知道开发需要都在 develop 分支上进行开发嘛<span class="token punctuation">)</span>
+
+那么在组员的本地怎么去跟踪 develop 分支 ?
+需要执行 <span class="token function">git</span> checkout --track origin/develop
+或者直接 <span class="token function">git</span> checkout develop <span class="token punctuation">(</span>简写<span class="token punctuation">)</span>
+
+
+<span class="token function">git</span> pull 拉下其他人写的代码
+然后进行开发, 再 <span class="token function">git</span> push
+</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><h2 id="git-命令速查表" tabindex="-1"><a class="header-anchor" href="#git-命令速查表" aria-hidden="true">#</a> Git 命令速查表</h2>
+<p><img src="@source/.vuepress/public/images/gitsu1.png" alt="图片"></p>
 </template>

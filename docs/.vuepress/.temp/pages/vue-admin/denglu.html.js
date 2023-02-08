@@ -26,6 +26,25 @@ export const data = {
     },
     {
       "level": 2,
+      "title": "Icon 图标处理方案：SvgIcon",
+      "slug": "icon-图标处理方案-svgicon",
+      "children": [
+        {
+          "level": 3,
+          "title": "处理内部 svg 图标显示",
+          "slug": "处理内部-svg-图标显示",
+          "children": []
+        },
+        {
+          "level": 3,
+          "title": "使用 svg-sprite-loader 处理 svg 图标",
+          "slug": "使用-svg-sprite-loader-处理-svg-图标",
+          "children": []
+        }
+      ]
+    },
+    {
+      "level": 2,
       "title": "完善登录表单校验",
       "slug": "完善登录表单校验",
       "children": []
@@ -85,7 +104,7 @@ export const data = {
       {
         "name": "jgoriginal",
         "email": "932274204@qq.com",
-        "commits": 1
+        "commits": 2
       }
     ]
   },

@@ -217,6 +217,110 @@ git pull
 ```
 ### 删除远程分支
 ![图片](../.vuepress/public/images/fz3.png)
+## Git的远程分支 !!!
+**远程分支是也是一种分支结构：**
+* 以 `<remote>/<branch>` 的形式命名的；
+
+**操作一：推送分支到远程**
+* 当你想要公开分享一个分支时，需要将其推送到有写入权限的远程仓库上；
+* 运行 `git push <remote> <branch>`；
+```shell
+git push origin <branch>
+```
+**操作二：跟踪远程分支**
+* 当克隆一个仓库时，它通常会自动地创建一个跟踪 origin/main 的 main 分支；
+* 如果你愿意的话可以设置其他的跟踪分支，可以通过运行 `git checkout --track <remote>/<branch>`
+* 如果你尝试检出的分支 (a) 不存在且 (b) 刚好只有一个名字与之匹配的远程分支，那么 Git 就会为你创建一个跟踪分支
+```shell
+git checkout --track <remote>/<branch>
+git checkout <branch>  #简写
+```
+**操作三：删除远程分支**
+* 如果某一个远程分支不再使用，我们想要删除掉，可以运行带有 --delete 选项的 git push 命令来删除一个远程分支。
+```shell
+git push origin --delete <branch>
+```
+
+
+**将本地仓库和远程仓库建立连接**
+```shell
+git init 创建本地仓库
+创建一些文件之后
+git add .
+git commit -m '初始化项目'
+
+目前跟远程仓库没有建立过关系, 所以先需要把本地仓库跟远程仓库建立关系
+git remote add origin xxxxxxxxxxxxxxxxx 跟远程仓库建立关系
+
+git fetch origin main  把远程仓库的 main 分支拿到本地去了 , 在本地叫做 origin/main
+
+git branch --set-upstream-to=origin/main  设置上游分支
+
+本地的分支和远程的分支没有共同的祖先(common base), 所以不能 git merge(完整写法是 git merge origin main, 但上面已经设置了上游分支, 所以默认可以省略) 
+所以要执行 git merge --allow-unrelated-histories
+
+但 git push 的时候又不行
+(1) 需要执行 git config push.default upstream
+
+因为 git push 的默认是 git config push.default simple  , simple 的时候会去找本地的 master 分支, 而不是上游分支, 所以不行
+
+再 git push
+
+(2)或者 
+git checkout --track origin/main
+
+因为本地的分支叫做 master ,  远程的分支叫做 main, 两个名字不一样的情况下不行
+`git checkout --track origin/main` 表示要跟踪 origin/main
+
+再 git push
+```
+
+在本地新创建一个 `develop` 分支
+```shell
+git checkout -b develop #在本地创建了一个 develop 分支 
+
+要把本地的 develop 分支推送到远程
+git push origin develop 
+那么远程也多了一个叫 develop 的分支
+
+在 develop 分支上提交一些文件之后, 但这个时候还不能执行 git push 推送到远程, 还需要指定上游分支
+git branch --set-upstream-to=origin/develop
+
+然后才可以执行 git push
+```
+比如项新增特性, 在本地创建了一个叫做 `feature` 分支(步骤同上)
+```shell
+git checkout -b feature
+
+git push origin feature
+
+git branch --set-upstream-to=origin/feature
+
+然后把一些新的文件推送到远程, git push
+```
+
+作为 **组员**的操作: 
+```shell
+git clone xxxxxxxxxxxxxxxx
+
+但默认 clone 下来的分支只有 main 主分支, 没有 develop 分支(需要知道开发需要都在 develop 分支上进行开发嘛)
+
+那么在组员的本地怎么去跟踪 develop 分支 ?
+需要执行 git checkout --track origin/develop
+或者直接 git checkout develop (简写)
+
+
+git pull 拉下其他人写的代码
+然后进行开发, 再 git push
+```
+
+## Git 命令速查表
+
+![图片](../.vuepress/public/images/gitsu1.png)
+
+
+
+
 
 
 

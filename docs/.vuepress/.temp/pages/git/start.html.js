@@ -231,6 +231,18 @@ export const data = {
           "children": []
         }
       ]
+    },
+    {
+      "level": 2,
+      "title": "Git的远程分支 !!!",
+      "slug": "git的远程分支",
+      "children": []
+    },
+    {
+      "level": 2,
+      "title": "Git 命令速查表",
+      "slug": "git-命令速查表",
+      "children": []
     }
   ],
   "git": {
