@@ -1,0 +1,1 @@
+const e={key:"v-571ee6a4",path:"/vue-router/router-view-name.html",title:"<router-view>\u7684\u547D\u540D\u89C6\u56FE",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[],git:{contributors:[{name:"jgoriginal",email:"932274204@qq.com",commits:2}]},filePathRelative:"vue-router/router-view-name.md"};export{e as data};

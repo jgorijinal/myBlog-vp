@@ -1,0 +1,1 @@
+const t={key:"v-d1398964",path:"/front/fankui.html",title:"\u7528\u6237\u53CD\u9988\u89E3\u51B3\u65B9\u6848 -- \u5154\u5C0F\u5DE2\u6784\u5EFA\u53CD\u9988\u529F\u80FD",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[],git:{contributors:[{name:"jgoriginal",email:"932274204@qq.com",commits:1}]},filePathRelative:"front/fankui.md"};export{t as data};

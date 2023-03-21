@@ -1,0 +1,1 @@
+const e={key:"v-3d73b3c8",path:"/banlu/fenbao.html",title:"\u5206\u5305",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[{level:2,title:"uni-app \u5206\u5305\u6B65\u9AA4",slug:"uni-app-\u5206\u5305\u6B65\u9AA4",children:[]}],git:{contributors:[{name:"jgoriginal",email:"932274204@qq.com",commits:1}]},filePathRelative:"banlu/fenbao.md"};export{e as data};

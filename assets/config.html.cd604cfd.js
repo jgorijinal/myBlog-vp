@@ -1,0 +1,1 @@
+const t={key:"v-11b7e280",path:"/TS/config.html",title:"tsconfig.json \u6587\u4EF6",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[],git:{contributors:[{name:"jgoriginal",email:"932274204@qq.com",commits:1}]},filePathRelative:"TS/config.md"};export{t as data};

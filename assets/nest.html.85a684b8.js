@@ -1,0 +1,1 @@
+const t={key:"v-070b0fca",path:"/vue-router/nest.html",title:"\u5D4C\u5957\u8DEF\u7531",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[],git:{contributors:[{name:"jgoriginal",email:"932274204@qq.com",commits:2}]},filePathRelative:"vue-router/nest.md"};export{t as data};

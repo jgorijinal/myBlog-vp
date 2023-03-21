@@ -1,0 +1,1 @@
+const t={key:"v-0150a664",path:"/admin-project/routerAutoload.html",title:"\u6839\u636E\u914D\u7F6E\u9879\u81EA\u5B9A\u4E49\u8DEF\u7531\u81EA\u52A8\u6CE8\u518C",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[],git:{contributors:[{name:"jgoriginal",email:"932274204@qq.com",commits:2}]},filePathRelative:"admin-project/routerAutoload.md"};export{t as data};

@@ -1,0 +1,1 @@
+const t={key:"v-229e49e4",path:"/banlu/qita.html",title:"\u989D\u5916\u529F\u80FD",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[{level:2,title:"\u5BA2\u670D",slug:"\u5BA2\u670D",children:[]}],git:{contributors:[{name:"jgoriginal",email:"932274204@qq.com",commits:1}]},filePathRelative:"banlu/qita.md"};export{t as data};

@@ -1,0 +1,1 @@
+const t={key:"v-1fba55ae",path:"/JS/reg2.html",title:"\u6B63\u5219\u8868\u8FBE\u5F0F",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[],git:{contributors:[{name:"jgoriginal",email:"932274204@qq.com",commits:1}]},filePathRelative:"JS/reg2.md"};export{t as data};

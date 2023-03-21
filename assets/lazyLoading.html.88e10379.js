@@ -1,0 +1,1 @@
+const t={key:"v-2bcc5a52",path:"/vue-router/lazyLoading.html",title:"\u61D2\u52A0\u8F7D",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[],git:{contributors:[{name:"jgoriginal",email:"932274204@qq.com",commits:1}]},filePathRelative:"vue-router/lazyLoading.md"};export{t as data};

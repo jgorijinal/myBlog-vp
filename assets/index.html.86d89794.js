@@ -1,0 +1,1 @@
+import{_ as e,o as t,c as a,a as o,b as c}from"./app.fcb85f29.js";const r={},s={id:"category-2",tabindex:"-1"},_=o("a",{class:"header-anchor",href:"#category-2","aria-hidden":"true"},"#",-1),n=c(" category_2"),d=[_,n];function i(h,f){return t(),a("h1",s,d)}var x=e(r,[["render",i],["__file","index.html.vue"]]);export{x as default};

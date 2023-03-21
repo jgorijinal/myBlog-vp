@@ -1,0 +1,1 @@
+import{_ as e,o as t,c as s,a,b as n}from"./app.fcb85f29.js";const o={},c={id:"events-\u6A21\u5757",tabindex:"-1"},_=a("a",{class:"header-anchor",href:"#events-\u6A21\u5757","aria-hidden":"true"},"#",-1),r=n(" events \u6A21\u5757"),d=[_,r];function h(i,f){return t(),s("h1",c,d)}var v=e(o,[["render",h],["__file","events.html.vue"]]);export{v as default};

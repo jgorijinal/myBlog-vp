@@ -1,0 +1,1 @@
+const t={key:"v-46d2f20c",path:"/vue-admin/bushu.html",title:"\u90E8\u7F72",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[],git:{contributors:[{name:"jgoriginal",email:"932274204@qq.com",commits:1}]},filePathRelative:"vue-admin/bushu.md"};export{t as data};

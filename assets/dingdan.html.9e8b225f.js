@@ -1,0 +1,1 @@
+const t={key:"v-57943476",path:"/banlu/dingdan.html",title:"\u8BA2\u5355\u7BA1\u7406",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[{level:2,title:"\u8BA2\u5355\u5217\u8868",slug:"\u8BA2\u5355\u5217\u8868",children:[]}],git:{contributors:[{name:"jgoriginal",email:"932274204@qq.com",commits:1}]},filePathRelative:"banlu/dingdan.md"};export{t as data};

@@ -1,0 +1,1 @@
+import{_ as e,o as a,c as t,a as o,b as s}from"./app.fcb85f29.js";const c={},_={id:"\u6253\u5305",tabindex:"-1"},r=o("a",{class:"header-anchor",href:"#\u6253\u5305","aria-hidden":"true"},"#",-1),d=s(" \u6253\u5305"),n=[r,d];function h(i,f){return a(),t("h1",_,n)}var m=e(c,[["render",h],["__file","dabao.html.vue"]]);export{m as default};

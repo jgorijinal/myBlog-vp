@@ -1,0 +1,1 @@
+import{_ as e,o,c as t,a as s,b as c}from"./app.fcb85f29.js";const n={},a={id:"tsconfig-json-\u6587\u4EF6",tabindex:"-1"},_=s("a",{class:"header-anchor",href:"#tsconfig-json-\u6587\u4EF6","aria-hidden":"true"},"#",-1),r=c(" tsconfig.json \u6587\u4EF6"),i=[_,r];function d(f,h){return o(),t("h1",a,i)}var m=e(n,[["render",d],["__file","config.html.vue"]]);export{m as default};

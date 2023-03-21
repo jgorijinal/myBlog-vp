@@ -1,0 +1,1 @@
+import{_ as e,o as t,c as s,a,b as o}from"./app.fcb85f29.js";const c={},_={id:"\u90E8\u7F72",tabindex:"-1"},r=a("a",{class:"header-anchor",href:"#\u90E8\u7F72","aria-hidden":"true"},"#",-1),n=o(" \u90E8\u7F72"),d=[r,n];function h(i,u){return t(),s("h1",_,d)}var l=e(c,[["render",h],["__file","bushu.html.vue"]]);export{l as default};

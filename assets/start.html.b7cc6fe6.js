@@ -1,0 +1,1 @@
+const t={key:"v-53774d15",path:"/hrsass/start.html",title:"\u9879\u76EE\u642D\u5EFA",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[],git:{contributors:[{name:"jgoriginal",email:"932274204@qq.com",commits:2}]},filePathRelative:"hrsass/start.md"};export{t as data};
